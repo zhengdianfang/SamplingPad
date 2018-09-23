@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/navigationBackgroundColor"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingVertical="32dp"
+        tools:context=".main.fragments.NavigationFragment">
+
+        <ImageView
+            android:id="@+id/headImageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            tools:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/userNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/super_large"
+            tools:text="郑殿芳" />
+
+        <TextView
+            android:id="@+id/positionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="@dimen/middle"
+            tools:text="CEO" />
+
+        <TextView
+            android:id="@+id/accountCodeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="@dimen/small"
+            tools:text="12123123123123" />
+
+        <TextView
+            android:id="@+id/organizationNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="@dimen/small"
+            tools:text="12123123123123" />
+
+        <Button
+            android:id="@+id/myTaskListButton"
+            style="@style/AppTheme.Navigation.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:drawableLeft="@drawable/ic_meter"
+            android:text="@string/my_task_text" />
+
+        <Button
+            android:id="@+id/myVerifyButton"
+            style="@style/AppTheme.Navigation.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_edit"
+            android:text="@string/my_verifiy_text" />
+
+        <Button
+            android:id="@+id/upgradeAppButton"
+            style="@style/AppTheme.Navigation.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_warn"
+            android:text="@string/upgrade_app_text" />
+    </LinearLayout>
+</ScrollView>

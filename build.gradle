@@ -1,0 +1,111 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlin_version = '1.2.61'
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+ext {
+    // Android
+    androidArchLifecycleVersion = '1.1.1'
+    androidSupportLibVersion = '27.1.1'
+    constraintLayoutVersion = '1.1.2'
+
+    // Rx
+    rxJavaVersion = '2.2.0'
+    rxKotlinVersion = '2.2.0'
+    rxAndroidVersion = '2.1.0'
+
+    // DI
+    daggerVersion = '2.14.1'
+
+    // Utils
+    debugDrawerVersion = '0.8.0'
+    timberVersion = '4.7.0'
+    scalpelVersion = '1.1.2'
+    glideVersion = '4.7.1'
+
+    // Network
+    okhttpVersion = '3.10.0'
+    retrofitVersion = '2.4.0'
+
+    // Testing
+    junitVersion = '4.12'
+    kluentVersion = '1.23'
+
+    depsWithVersion = [
+            // Android
+            "android.arch.lifecycle:common-java8"               : androidArchLifecycleVersion,
+            "com.android.support:appcompat-v7"                  : androidSupportLibVersion,
+            "com.android.support.constraint:constraint-layout"  : constraintLayoutVersion,
+            "com.android.support:design"                        : androidSupportLibVersion,
+
+            // Rx
+            "io.reactivex.rxjava2:rxjava"                       : rxJavaVersion,
+            "io.reactivex.rxjava2:rxkotlin"                     : rxKotlinVersion,
+            "io.reactivex.rxjava2:rxandroid"                    : rxAndroidVersion,
+
+            // DI
+            "com.google.dagger:dagger"                          : daggerVersion,
+            "com.google.dagger:dagger-android"                  : daggerVersion,
+            "com.google.dagger:dagger-android-support"          : daggerVersion,
+            "com.google.dagger:dagger-compiler"                 : daggerVersion,
+            "com.google.dagger:dagger-android-processor"        : daggerVersion,
+
+            // DebugDrawer
+            "io.palaima.debugdrawer:debugdrawer"                : debugDrawerVersion,
+            "io.palaima.debugdrawer:debugdrawer-view"           : debugDrawerVersion,
+            "io.palaima.debugdrawer:debugdrawer-no-op"          : debugDrawerVersion,
+            "io.palaima.debugdrawer:debugdrawer-view-no-op"     : debugDrawerVersion,
+            "io.palaima.debugdrawer:debugdrawer-commons"        : debugDrawerVersion,
+            "io.palaima.debugdrawer:debugdrawer-actions"        : debugDrawerVersion,
+            "io.palaima.debugdrawer:debugdrawer-scalpel"        : debugDrawerVersion,
+            "io.palaima.debugdrawer:debugdrawer-timber"         : debugDrawerVersion,
+            "io.palaima.debugdrawer:debugdrawer-network-quality": debugDrawerVersion,
+
+            // Utils
+            "com.jakewharton.timber:timber"                     : timberVersion,
+            "com.jakewharton.scalpel:scalpel"                   : scalpelVersion,
+            "com.github.bumptech.glide:glide"                   : glideVersion,
+            "com.github.bumptech.glide:compiler"                : glideVersion,
+
+            // Network
+            "com.squareup.okhttp3:okhttp"                       : okhttpVersion,
+            "com.squareup.retrofit2:retrofit"                   : retrofitVersion,
+            "com.squareup.retrofit2:adapter-rxjava2"            : retrofitVersion,
+            "com.squareup.retrofit2:converter-simplexml"        : retrofitVersion,
+            "com.squareup.retrofit2:converter-gson"        : retrofitVersion,
+
+            // Testing
+            "junit:junit"                                       : junitVersion,
+            "org.jetbrains.kotlin:kotlin-test-junit"            : kotlin_version,
+            "org.amshove.kluent:kluent"                         : kluentVersion,
+    ]
+
+    deps = { String key ->
+        def version = depsWithVersion[key]
+        if (version == null) throw new IllegalDependencyNotation("Version for library '$key' unknown. Update root build.gradle")
+        "$key:${version}"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

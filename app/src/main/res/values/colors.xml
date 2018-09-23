@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1890FF</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorGray">#D9D9D9</color>
+    <color name="colorDarkGray">#999999</color>
+    <color name="colorLightGray">#f8f8f8</color>
+    <color name="colorEditTextHint">#40000000</color>
+    <color name="navigationBackgroundColor">#001529</color>
+    <color name="transparent">#00000000</color>
+
+    <drawable name="window_background_color">#ffffff</drawable>
+    <drawable name="transparent">#00000000</drawable>
+    <drawable name="colorPrimary">@color/colorPrimary</drawable>
+</resources>
