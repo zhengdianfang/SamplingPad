@@ -18,4 +18,16 @@
     <string name="upgrade_app_text">软件更新</string>
     <string name="verify_text">校验</string>
     <string name="task_list_text">任务</string>
+    <string name="plan_name_label">计划名称：</string>
+    <string name="please_input_plan_name_hint">请输入计划名称</string>
+    <string name="food_category_label">食品大类：</string>
+    <string name="market_name_text">超市门店：</string>
+    <string name="business_liscense_code_text">营业执照信用代码：</string>
+    <string name="please_input_produce_date">请输入生产日期</string>
+    <string name="produce_date_label">生产日期：</string>
+    <string name="sample_product_name_label">样品名称：</string>
+    <string name="enterprise_name_label">企业名称：</string>
+    <string name="verify_begin_text">开始检验</string>
+    <string name="can_not_verify_button">无法抽检</string>
+    <string name="start_verify_button">开始抽检</string>
 </resources>
