@@ -12,6 +12,7 @@ import android.widget.TextView
 
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.tintDrawable
+import kotlinx.android.synthetic.main.toolbar_layout.*
 import me.yokeyword.fragmentation.SupportFragment
 
 class MyTaskListFragment : SupportFragment() {
@@ -57,6 +58,7 @@ class MyTaskListFragment : SupportFragment() {
     }
 
     private fun setupViews() {
+        toolBarTitleView.setText(R.string.my_task_text)
         this.renderSections()
         this.renderItems()
     }
