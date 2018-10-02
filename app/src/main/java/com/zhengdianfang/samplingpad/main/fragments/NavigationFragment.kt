@@ -1,12 +1,15 @@
 package com.zhengdianfang.samplingpad.main.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import com.zhengdianfang.samplingpad.R
+import com.zhengdianfang.samplingpad.task.MyTaskListActivity
+import kotlinx.android.synthetic.main.fragment_navigation.*
 import me.yokeyword.fragmentation.SupportFragment
 
 class NavigationFragment : SupportFragment() {
@@ -23,6 +26,8 @@ class NavigationFragment : SupportFragment() {
     }
 
     private fun setupViews() {
-
+        myTaskListButton.setOnClickListener {
+            startActivity(Intent(context, MyTaskListActivity::class.java))
+        }
     }
 }

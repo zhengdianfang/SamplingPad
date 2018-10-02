@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingVertical="16dp"
+    android:background="@drawable/my_task_status_item_background"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/statusNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="@dimen/large_18"
+        tools:text="合格"
+        android:drawableLeft="@drawable/my_task_item_left_drawable"
+        android:drawablePadding="8dp"
+        android:textColor="@color/colorDarkGray"/>
+
+
+    <TextView
+        android:id="@+id/taskCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/large_18"
+        tools:text="6"
+        android:drawableRight="@drawable/ic_arrow_right"
+        android:textColor="@color/colorDarkGray"/>
+
+</LinearLayout>

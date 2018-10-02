@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="my_task_status_array">
+        <item>合格</item>
+        <item>不合格</item>
+        <item>待完成</item>
+        <item>已提交</item>
+        <item>正在校验</item>
+        <item>被拒收</item>
+        <item>无法检验</item>
+    </string-array>
+
+    <string-array name="my_task_status_sections">
+        <item>已完成</item>
+        <item>未完成</item>
+    </string-array>
+</resources>

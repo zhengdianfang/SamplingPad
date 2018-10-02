@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="super_super_large">20sp</dimen>
+    <dimen name="large_22">22sp</dimen>
+    <dimen name="large_18">18sp</dimen>
     <dimen name="large">16sp</dimen>
     <dimen name="middle">14sp</dimen>
     <dimen name="navigation_width">176dp</dimen>

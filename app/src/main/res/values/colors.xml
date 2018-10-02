@@ -9,6 +9,11 @@
     <color name="colorEditTextHint">#40000000</color>
     <color name="navigationBackgroundColor">#001529</color>
     <color name="transparent">#00000000</color>
+    <color name="green">#52C41A</color>
+    <color name="red">#F5222D</color>
+    <color name="yellow">#FFCE3D</color>
+    <color name="blue">#1890FF</color>
+    <color name="line">#e8e8e8</color>
 
     <drawable name="window_background_color">#ffffff</drawable>
     <drawable name="transparent">#00000000</drawable>
