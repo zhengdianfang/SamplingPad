@@ -3,8 +3,6 @@ package com.zhengdianfang.samplingpad.task.fragments
 
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.support.v4.graphics.drawable.DrawableCompat
-import android.support.v7.widget.DrawableUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +13,7 @@ import com.zhengdianfang.samplingpad.common.tintDrawable
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import me.yokeyword.fragmentation.SupportFragment
 
-class MyTaskListFragment : SupportFragment() {
+class MyTaskStatusListFragment : SupportFragment() {
 
     private val itemIds = arrayOf(
         R.id.qualifiedItem,
@@ -44,12 +42,12 @@ class MyTaskListFragment : SupportFragment() {
 
     companion object {
 
-        fun newInstance() = MyTaskListFragment()
+        fun newInstance() = MyTaskStatusListFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_my_task_list, container, false)
+        return inflater.inflate(R.layout.fragment_my_task_status_list, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -82,7 +80,9 @@ class MyTaskListFragment : SupportFragment() {
                 ContextCompat.getDrawable(context!!, R.drawable.my_task_item_left_drawable)!!.tintDrawable(color)
             statusNameTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(leftDrawable, null, null, null)
 
-
+            itemView.setOnClickListener {
+               start(TaskListWithStatusFragment.newInstance(it.context, statusNames[index]))
+            }
             // TODO setup task count
         }
     }

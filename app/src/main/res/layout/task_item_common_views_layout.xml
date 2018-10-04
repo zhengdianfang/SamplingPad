@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/markImageView"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fragmentation_ic_stack" />
+
+    <TextView
+        android:id="@+id/taskCodetextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/super_super_large"
+        app:layout_constraintBottom_toBottomOf="@+id/markImageView"
+        app:layout_constraintEnd_toStartOf="@+id/dateTextView"
+        app:layout_constraintStart_toEndOf="@+id/markImageView"
+        tools:text="单号： 123123123123123123" />
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/middle"
+        app:layout_constraintBaseline_toBaselineOf="@+id/taskCodetextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/taskCodetextView"
+        tools:text="更新时间 ： 2018-03-22 21:22:11" />
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/middle"
+        app:layout_constraintEnd_toStartOf="@+id/secondCategoryTextView"
+        app:layout_constraintStart_toEndOf="@+id/markImageView"
+        app:layout_constraintTop_toBottomOf="@+id/taskCodetextView"
+        tools:text="样品名称：屈臣氏燕窝蚕丝面膜" />
+
+    <TextView
+        android:id="@+id/secondCategoryTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/middle"
+        app:layout_constraintBaseline_toBaselineOf="@+id/nameTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/nameTextView"
+        tools:text="食品亚类：化妆品" />
+
+    <TextView
+        android:id="@+id/compareSecondCategoryTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/middle"
+        app:layout_constraintEnd_toStartOf="@+id/moreCategoryTextView"
+        app:layout_constraintStart_toStartOf="@+id/nameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/nameTextView"
+        tools:text="食品比亚类：化妆品" />
+
+    <TextView
+        android:id="@+id/moreCategoryTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/middle"
+        app:layout_constraintBaseline_toBaselineOf="@+id/compareSecondCategoryTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/compareSecondCategoryTextView"
+        tools:text="食品细类：" />
+
+    <TextView
+        android:id="@+id/addressTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/middle"
+        app:layout_constraintEnd_toStartOf="@+id/spaceNameTextView"
+        app:layout_constraintStart_toStartOf="@+id/compareSecondCategoryTextView"
+        app:layout_constraintTop_toBottomOf="@+id/compareSecondCategoryTextView"
+        tools:text="抽样地点：北京市海淀区中关村" />
+
+    <TextView
+        android:id="@+id/spaceNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/middle"
+        app:layout_constraintBaseline_toBaselineOf="@+id/addressTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/addressTextView"
+        tools:text="场所名称：沃尔玛超市" />
+</android.support.constraint.ConstraintLayout>
