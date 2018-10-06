@@ -26,6 +26,7 @@ class NavigationFragment : SupportFragment() {
     }
 
     private fun setupViews() {
+        appVersionTextView.text = context?.packageManager?.getPackageInfo(context?.packageName, 0)?.versionName
         myTaskListButton.setOnClickListener {
             startActivity(Intent(context, MyTaskListActivity::class.java))
         }

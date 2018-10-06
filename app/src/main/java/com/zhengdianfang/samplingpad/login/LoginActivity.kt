@@ -15,21 +15,5 @@ class LoginActivity : SupportActivity(){
         setupViews()
     }
 
-    private fun setupViews() {
-        switchLoginRadioGroup.setOnCheckedChangeListener { _, buttonId ->
-            when(buttonId) {
-                R.id.userNameRadioButton -> {
-                    userNameRadioButton.active(R.drawable.login_tab_active_background, R.color.colorPrimary)
-                    phoneNumberRadioButton.active(R.drawable.transparent, android.R.color.black)
-                    showHideFragment(userNameLoginFragment as SupportFragment, phoneNumberLoginFragment as SupportFragment)
-                }
-                R.id.phoneNumberRadioButton-> {
-                    phoneNumberRadioButton.active(R.drawable.login_tab_active_background, R.color.colorPrimary)
-                    userNameRadioButton.active(R.drawable.transparent, android.R.color.black)
-                    showHideFragment(phoneNumberLoginFragment as SupportFragment, userNameLoginFragment as SupportFragment)
-                }
-            }
-        }
-        switchLoginRadioGroup.check(R.id.userNameRadioButton)
-    }
+    private fun setupViews() {}
 }

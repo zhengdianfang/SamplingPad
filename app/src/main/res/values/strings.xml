@@ -30,4 +30,5 @@
     <string name="verify_begin_text">开始检验</string>
     <string name="can_not_verify_button">无法抽检</string>
     <string name="start_verify_button">开始抽检</string>
+    <string name="remember_account_text">记住账户</string>
 </resources>

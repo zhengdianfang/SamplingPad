@@ -4,10 +4,13 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="editTextStyle">@style/AppTheme.EditText</item>
         <item name="buttonStyle">@style/AppTheme.Button</item>
         <item name="android:windowBackground">@drawable/window_background_color</item>
+        <item name="android:radioButtonStyle">@style/AppTheme.RadioButton</item>
     </style>
 
     <style name="AppTheme.EditText" parent="@style/Base.Widget.AppCompat.EditText">
@@ -25,6 +28,12 @@
         <item name="android:textSize">@dimen/large</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:minHeight">40dp</item>
+    </style>
+
+    <style name="AppTheme.RadioButton" parent="@style/Base.Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/radio_button</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
     <style name="AppTheme.Login"></style>

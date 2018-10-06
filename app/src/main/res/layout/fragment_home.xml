@@ -1,15 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.fragments.HomeFragment">
+    android:orientation="vertical"
+    tools:context=".main.MainActivity">
+
+    <RadioGroup
+        android:id="@+id/homeTabBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="16dp"
+        android:background="@drawable/home_tab_bar_background">
+
+        <RadioButton
+            android:id="@+id/verifyTab"
+            style="@style/AppTheme.Home.TabItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/verify_text"
+            />
+        <RadioButton
+            android:id="@+id/taskTab"
+            style="@style/AppTheme.Home.TabItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/task_list_text"
+            />
+    </RadioGroup>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:background="@color/colorLightGray"/>
 
     <fragment
-        android:id="@+id/verifyFragment"
+        android:id="@+id/homeFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout="@layout/fragment_verfiy_layout"
-        android:name="com.zhengdianfang.samplingpad.main.fragments.VerfiyFragment"/>
+        android:name="com.zhengdianfang.samplingpad.main.fragments.VerfiyFragment"
+        tools:layout="@layout/fragment_verfiy_layout"/>
 
-</FrameLayout>
+    <fragment
+        android:id="@+id/taskListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.zhengdianfang.samplingpad.main.fragments.TaskListFragment"
+        tools:layout="@layout/fragment_task_list"/>
+
+
+</LinearLayout>

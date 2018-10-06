@@ -8,48 +8,20 @@
     android:padding="72dp"
     tools:context=".login.LoginActivity">
 
-
-    <RadioGroup
-        android:id="@+id/switchLoginRadioGroup"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:text="@string/login_text"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/large_24"
+        android:layout_marginBottom="64dp"/>
 
-        <RadioButton
-            android:id="@+id/userNameRadioButton"
-            style="@style/AppTheme.Login.Tab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/usename_login_tab_text" />
-
-        <RadioButton
-            android:id="@+id/phoneNumberRadioButton"
-            style="@style/AppTheme.Login.Tab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
-            android:background="@drawable/login_tab_active_background"
-            android:text="@string/phone_number_tab_text" />
-    </RadioGroup>
-
-    <FrameLayout
+    <fragment
+        android:id="@+id/userNameLoginFragment"
+        android:name="com.zhengdianfang.samplingpad.login.fragments.UserNameLoginFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp">
-
-        <fragment
-            android:id="@+id/userNameLoginFragment"
-            android:name="com.zhengdianfang.samplingpad.login.fragments.UserNameLoginFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout="@layout/fragment_user_name_login" />
-
-        <fragment
-            android:id="@+id/phoneNumberLoginFragment"
-            android:name="com.zhengdianfang.samplingpad.login.fragments.PhoneNumberLoginFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout="@layout/fragment_user_name_login" />
-    </FrameLayout>
+        tools:layout="@layout/fragment_user_name_login" />
 
 </LinearLayout>
