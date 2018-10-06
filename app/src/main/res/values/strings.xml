@@ -31,4 +31,11 @@
     <string name="can_not_verify_button">无法抽检</string>
     <string name="start_verify_button">开始抽检</string>
     <string name="remember_account_text">记住账户</string>
+    <string name="save_and_submit_text">保存并提交</string>
+    <string name="reason_text">原因：</string>
+    <string name="reason_detail_text">具体原因：</string>
+    <string name="please_input_reason_detail_hint">请输入具体原因描述</string>
+    <string name="region_type_text">区域类型：</string>
+    <string name="region_space_text">地区：</string>
+    <string name="address_label">详细地址：</string>
 </resources>

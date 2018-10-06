@@ -1,7 +1,7 @@
-package com.zhengdianfang.samplingpad.task
+package com.zhengdianfang.samplingpad.task.tasklist
 
 import android.os.Bundle
-import com.zhengdianfang.samplingpad.task.fragments.MyTaskStatusListFragment
+import com.zhengdianfang.samplingpad.task.tasklist.fragments.MyTaskStatusListFragment
 import me.yokeyword.fragmentation.SupportActivity
 
 class MyTaskListActivity : SupportActivity() {

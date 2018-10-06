@@ -1,4 +1,4 @@
-package com.zhengdianfang.samplingpad.task.fragments
+package com.zhengdianfang.samplingpad.task.tasklist.fragments
 
 import android.content.Context
 import android.os.Bundle

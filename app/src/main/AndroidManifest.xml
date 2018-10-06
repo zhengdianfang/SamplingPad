@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".main.MainActivity" android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity android:name=".task.MyTaskListActivity"></activity>
+        <activity android:name=".task.tasklist.MyTaskListActivity"></activity>
+        <activity android:name=".task.canotverify.CanotVerifyReasonActivity"></activity>
     </application>
 
 </manifest>

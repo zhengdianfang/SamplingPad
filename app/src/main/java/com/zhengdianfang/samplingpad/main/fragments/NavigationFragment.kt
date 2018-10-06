@@ -8,7 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.zhengdianfang.samplingpad.R
-import com.zhengdianfang.samplingpad.task.MyTaskListActivity
+import com.zhengdianfang.samplingpad.task.canotverify.CanotVerifyReasonActivity
+import com.zhengdianfang.samplingpad.task.tasklist.MyTaskListActivity
 import kotlinx.android.synthetic.main.fragment_navigation.*
 import me.yokeyword.fragmentation.SupportFragment
 
@@ -29,6 +30,9 @@ class NavigationFragment : SupportFragment() {
         appVersionTextView.text = context?.packageManager?.getPackageInfo(context?.packageName, 0)?.versionName
         myTaskListButton.setOnClickListener {
             startActivity(Intent(context, MyTaskListActivity::class.java))
+        }
+        upgradeAppButton.setOnClickListener {
+            startActivity(Intent(context, CanotVerifyReasonActivity::class.java))
         }
     }
 }
