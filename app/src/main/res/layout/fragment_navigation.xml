@@ -11,7 +11,8 @@
         android:background="@color/colorPrimary"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:paddingVertical="32dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="32dp"
         tools:context=".main.fragments.NavigationFragment">
 
         <ImageView
@@ -37,26 +38,6 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/middle"
             tools:text="CEO" />
-
-        <TextView
-            android:id="@+id/accountCodeTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:paddingHorizontal="16dp"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/small"
-            tools:text="12123123123123" />
-
-        <TextView
-            android:id="@+id/organizationNameTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:paddingHorizontal="16dp"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/small"
-            tools:text="12123123123123" />
 
         <Button
             android:id="@+id/myTaskListButton"

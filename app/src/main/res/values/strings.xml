@@ -6,7 +6,6 @@
     <string name="account_text">账户</string>
     <string name="password_text">密码</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="phone_number_text">手机号</string>
     <string name="sms_code_text">验证码</string>
@@ -38,4 +37,27 @@
     <string name="region_type_text">区域类型：</string>
     <string name="region_space_text">地区：</string>
     <string name="address_label">详细地址：</string>
+    <string name="sampling_basic_info_title">抽样基础信息</string>
+    <string name="task_resource_label">任务来源：</string>
+    <string name="verify_org_label">检验机构：</string>
+    <string name="sampling_code_label">抽样单编号：</string>
+    <string name="main_category_label">*食品大类：</string>
+    <string name="second_category_label">*食品亚类：</string>
+    <string name="third_category_label">*食品次亚类：</string>
+    <string name="forth_category_label">*食品细类：</string>
+    <string name="verify_category_label">检验类别：</string>
+    <string name="verify_category_1">执法抽检</string>
+    <string name="verify_category_2">监督抽检</string>
+    <string name="verify_category_3">卫生监测</string>
+    <string name="verify_category_4">风险监测</string>
+    <string name="verify_category_5">监督复查</string>
+    <string name="sampling_unit_info_label">抽样单位信息</string>
+    <string name="unit_name_label">单位名称：</string>
+    <string name="unit_address_label">单位地址：</string>
+    <string name="region_label">所属区域：</string>
+    <string name="contact_label">联系人：</string>
+    <string name="email_label">电子邮箱：</string>
+    <string name="phone_label">电话：</string>
+    <string name="reset_text">重置</string>
+    <string name="next_step_text">下一步</string>
 </resources>

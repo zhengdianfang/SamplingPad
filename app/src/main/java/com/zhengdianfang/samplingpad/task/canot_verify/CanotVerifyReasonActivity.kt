@@ -1,4 +1,4 @@
-package com.zhengdianfang.samplingpad.task.canotverify
+package com.zhengdianfang.samplingpad.task.canot_verify
 
 import android.os.Bundle
 import com.zhengdianfang.samplingpad.R

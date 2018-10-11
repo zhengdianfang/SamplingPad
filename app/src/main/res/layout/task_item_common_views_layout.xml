@@ -53,13 +53,13 @@
         android:maxLines="1"
         android:textColor="@android:color/black"
         android:textSize="@dimen/middle"
-        app:layout_constraintEnd_toStartOf="@+id/secondCategoryTextView"
+        app:layout_constraintEnd_toStartOf="@+id/secondCategorySpinner"
         app:layout_constraintStart_toEndOf="@+id/markImageView"
         app:layout_constraintTop_toBottomOf="@+id/taskCodetextView"
         tools:text="样品名称：屈臣氏燕窝蚕丝面膜" />
 
     <TextView
-        android:id="@+id/secondCategoryTextView"
+        android:id="@+id/secondCategorySpinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"

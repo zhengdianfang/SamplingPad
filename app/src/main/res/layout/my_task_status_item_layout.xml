@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:paddingVertical="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
     android:background="@drawable/my_task_status_item_background"
     android:orientation="horizontal">
 

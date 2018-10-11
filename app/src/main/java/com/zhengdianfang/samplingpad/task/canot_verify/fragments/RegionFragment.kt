@@ -1,4 +1,4 @@
-package com.zhengdianfang.samplingpad.task.canotverify.fragments
+package com.zhengdianfang.samplingpad.task.canot_verify.fragments
 
 
 import android.os.Bundle

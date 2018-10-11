@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:layout_marginTop="16dp"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/unitTitleView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/sampling_unit_info_label"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/large_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/unitNameLabel"
+            style="@style/AppTheme.Table.StaticText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/unit_name_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/unitTitleView" />
+
+        <TextView
+            android:id="@+id/unitNameTextView"
+            style="@style/AppTheme.Table.StaticText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/unitNameLabel"
+            app:layout_constraintTop_toTopOf="@+id/unitNameLabel"
+            tools:text="深圳市市场和质量监督管理委员会XXX食品药品监督管理局" />
+
+        <TextView
+            android:id="@+id/unitAddressLabel"
+            style="@style/AppTheme.Table.StaticText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/unit_address_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/unitNameTextView" />
+
+
+        <TextView
+            android:id="@+id/unitAddressTextView"
+            style="@style/AppTheme.Table.StaticText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/unitAddressLabel"
+            app:layout_constraintTop_toTopOf="@+id/unitAddressLabel"
+            tools:text="深圳市市南区十字路基清华大厦同方编号11-23号" />
+
+        <TextView
+            android:id="@+id/regionLabel"
+            style="@style/AppTheme.Table.StaticText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/region_label"
+            app:layout_constraintEnd_toStartOf="@+id/regionTextView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/unitAddressTextView" />
+
+        <TextView
+            android:id="@+id/regionTextView"
+            style="@style/AppTheme.Table.StaticText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/contactLabel"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/regionLabel"
+            app:layout_constraintTop_toTopOf="@+id/regionLabel"
+            tools:text="质量监督管理委员粮食加工品" />
+
+        <TextView
+            android:id="@+id/contactLabel"
+            style="@style/AppTheme.Table.StaticText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/contact_label"
+            app:layout_constraintBaseline_toBaselineOf="@+id/regionLabel"
+            app:layout_constraintEnd_toStartOf="@+id/contactTextView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/regionTextView" />
+
+        <TextView
+            android:id="@+id/contactTextView"
+            style="@style/AppTheme.Table.StaticText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/contactLabel"
+            app:layout_constraintTop_toTopOf="@+id/contactLabel"
+            tools:text="农产品及农产品加工品" />
+
+        <TextView
+            android:id="@+id/emailLabel"
+            style="@style/AppTheme.Table.StaticText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/email_label"
+            app:layout_constraintEnd_toStartOf="@+id/emailTextView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/regionTextView" />
+
+        <TextView
+            android:id="@+id/emailTextView"
+            style="@style/AppTheme.Table.StaticText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/phoneNumberLabel"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/emailLabel"
+            app:layout_constraintTop_toTopOf="@+id/emailLabel"
+            tools:text="核果类食品及加工品" />
+
+        <TextView
+            android:id="@+id/phoneNumberLabel"
+            style="@style/AppTheme.Table.StaticText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/phone_label"
+            app:layout_constraintEnd_toStartOf="@+id/phoneNumberTextView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/emailTextView"
+            app:layout_constraintTop_toTopOf="@+id/emailTextView" />
+
+        <TextView
+            android:id="@+id/phoneNumberTextView"
+            style="@style/AppTheme.Table.StaticText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/phoneNumberLabel"
+            app:layout_constraintTop_toTopOf="@+id/phoneNumberLabel"
+            tools:text="花生及花生制品" />
+
+    </android.support.constraint.ConstraintLayout>
+</merge>

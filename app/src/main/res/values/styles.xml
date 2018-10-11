@@ -10,7 +10,6 @@
         <item name="editTextStyle">@style/AppTheme.EditText</item>
         <item name="buttonStyle">@style/AppTheme.Button</item>
         <item name="android:windowBackground">@drawable/window_background_color</item>
-        <item name="android:radioButtonStyle">@style/AppTheme.RadioButton</item>
     </style>
 
     <style name="AppTheme.EditText" parent="@style/Base.Widget.AppCompat.EditText">
@@ -66,8 +65,10 @@
         <item name="android:button">@null</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">@dimen/middle</item>
-        <item name="android:paddingVertical" tools:ignore="NewApi">4dp</item>
-        <item name="android:paddingHorizontal" tools:ignore="NewApi">64dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:paddingRight">64dp</item>
+        <item name="android:paddingLeft">64dp</item>
     </style>
 
     <style name="AppTheme.Verify"></style>
@@ -78,5 +79,12 @@
         <item name="android:layout_height">@dimen/edit_height</item>
         <item name="android:gravity">center_vertical|right</item>
         <item name="android:layout_width">@dimen/verify_label_width</item>
+    </style>
+
+    <style name="AppTheme.Table"></style>
+
+    <style name="AppTheme.Table.StaticText">
+        <item name="android:textColor">@color/color_666666</item>
+        <item name="android:textSize">@dimen/large_18</item>
     </style>
 </resources>

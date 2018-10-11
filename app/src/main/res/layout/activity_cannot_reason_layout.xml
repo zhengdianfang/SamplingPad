@@ -25,7 +25,7 @@
             android:id="@+id/reasonFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:name="com.zhengdianfang.samplingpad.task.canotverify.fragments.ReasonFragment"
+            android:name="com.zhengdianfang.samplingpad.task.canot_verify.fragments.ReasonFragment"
             android:layout_margin="16dp"
             tools:layout="@layout/fragment_reason"/>
 
@@ -33,7 +33,7 @@
             android:id="@+id/regionFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:name="com.zhengdianfang.samplingpad.task.canotverify.fragments.RegionFragment"
+            android:name="com.zhengdianfang.samplingpad.task.canot_verify.fragments.RegionFragment"
             android:layout_margin="16dp"
             tools:layout="@layout/fragment_region"/>
 
@@ -41,7 +41,7 @@
             android:id="@+id/taskInfoFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:name="com.zhengdianfang.samplingpad.task.canotverify.fragments.TaskInfoFragment"
+            android:name="com.zhengdianfang.samplingpad.task.canot_verify.fragments.TaskInfoFragment"
             android:layout_margin="16dp"
             tools:layout="@layout/fragment_task_info"/>
 
@@ -57,7 +57,8 @@
                 android:id="@+id/saveAndSubmitButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="32dp"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
                 android:layout_marginRight="16dp"
                 android:text="@string/save_and_submit_text"/>
 
@@ -66,7 +67,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:paddingHorizontal="32dp"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
                 android:background="@drawable/stoke_button_background"
                 android:textColor="@color/colorPrimary"
                 android:text="@string/save_and_submit_text"/>

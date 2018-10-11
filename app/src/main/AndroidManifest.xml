@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".main.MainActivity" android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name=".task.tasklist.MyTaskListActivity"></activity>
-        <activity android:name=".task.canotverify.CanotVerifyReasonActivity"></activity>
+        <activity android:name=".task.canot_verify.CanotVerifyReasonActivity"></activity>
+        <activity android:name=".normal_product.NormalProductSamplingTableActivity"></activity>
     </application>
 
 </manifest>

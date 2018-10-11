@@ -8,7 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.zhengdianfang.samplingpad.R
-import com.zhengdianfang.samplingpad.task.canotverify.CanotVerifyReasonActivity
+import com.zhengdianfang.samplingpad.normal_product.NormalProductSamplingTableActivity
+import com.zhengdianfang.samplingpad.task.canot_verify.CanotVerifyReasonActivity
 import com.zhengdianfang.samplingpad.task.tasklist.MyTaskListActivity
 import kotlinx.android.synthetic.main.fragment_navigation.*
 import me.yokeyword.fragmentation.SupportFragment
@@ -32,7 +33,7 @@ class NavigationFragment : SupportFragment() {
             startActivity(Intent(context, MyTaskListActivity::class.java))
         }
         upgradeAppButton.setOnClickListener {
-            startActivity(Intent(context, CanotVerifyReasonActivity::class.java))
+            startActivity(Intent(context, NormalProductSamplingTableActivity::class.java))
         }
     }
 }

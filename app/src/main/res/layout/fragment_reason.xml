@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:padding="16dp"
-    tools:context=".task.canotverify.fragments.ReasonFragment">
+    tools:context=".task.canot_verify.fragments.ReasonFragment">
 
     <TextView
         android:id="@+id/reasonLabel"

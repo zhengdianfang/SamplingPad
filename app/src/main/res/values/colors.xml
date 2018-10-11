@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#1890FF</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#1890FF</color>
     <color name="colorGray">#D9D9D9</color>
     <color name="colorDarkGray">#999999</color>
     <color name="colorLightGray">#f8f8f8</color>
@@ -13,6 +13,7 @@
     <color name="yellow">#FFCE3D</color>
     <color name="blue">#1890FF</color>
     <color name="line">#e8e8e8</color>
+    <color name="color_666666">#666666</color>
 
     <drawable name="window_background_color">#ffffff</drawable>
     <drawable name="transparent">#00000000</drawable>
