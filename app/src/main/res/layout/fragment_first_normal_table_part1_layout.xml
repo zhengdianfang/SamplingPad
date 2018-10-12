@@ -10,6 +10,7 @@
         android:padding="16dp">
 
         <TextView
+            style="@style/AppTheme.Table.Section"
             android:id="@+id/basicTitleView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
