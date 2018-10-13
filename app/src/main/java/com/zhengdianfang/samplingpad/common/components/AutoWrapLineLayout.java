@@ -106,14 +106,14 @@ public class AutoWrapLineLayout extends ViewGroup {
                 childOfLine.remove(i);
             }
         }
-        totalHeight += (mVerticalGap * (childOfLine.size() - 1) + maxHeight);
+        totalHeight += (mVerticalGap * (childOfLine.size() - 1) + maxHeight) + getPaddingBottom() + getPaddingTop();
         setMeasuredDimension(totalWidth, totalHeight);
     }
 
     private void layoutModeFillParent() {
         int index = 0;
         int width = getMeasuredWidth();
-        int curHeight = 0;
+        int curHeight = 0 + getPaddingTop();
         for (int i = 0; i < childOfLine.size(); i++) {
             int childCount = childOfLine.get(i);
             int maxHeight = 0;

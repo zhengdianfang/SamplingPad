@@ -60,4 +60,8 @@
     <string name="phone_label">电话：</string>
     <string name="reset_text">重置</string>
     <string name="next_step_text">下一步</string>
+    <string name="upload_pic_text">上传照片</string>
+    <string name="upload_video_text">上传视频</string>
+    <string name="pervious_step_text">上一步</string>
+    <string name="normal_product_title">普通食品抽样单</string>
 </resources>
