@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AppTheme.EditComponent">
+        <attr name="edit_label" format="string" />
+        <attr name="edit_hint" format="string" />
+        <attr name="edit_label_min_width" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="AppTheme.RadioGroupComponent">
+        <attr name="radio_buttons" format="reference" />
+        <attr name="radio_label" format="string" />
+        <attr name="radio_label_min_width" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="AppTheme.SpinnerGroupComponent">
+        <attr name="spinner_buttons" format="reference" />
+        <attr name="spinner_label" format="string" />
+        <attr name="spinner_label_min_width" format="dimension" />
+    </declare-styleable>
+</resources>
