@@ -29,4 +29,64 @@
     <string-array name="resource_spinner_array">
         <item>选择原产地</item>
     </string-array>
+
+    <string-array name="sample_type_array">
+        <item>食用农产品</item>
+        <item>工业加工食品</item>
+    </string-array>
+
+    <string-array name="sample_field_array">
+        <item>普通食品</item>
+        <item>节令食品</item>
+        <item>特殊膳食食品</item>
+        <item>重大活动保障食品</item>
+    </string-array>
+
+    <string-array name="sample_resource_array">
+        <item>加工/自制</item>
+        <item>委托生产</item>
+        <item>外购</item>
+        <item>其他</item>
+    </string-array>
+
+    <string-array name="pack_type_array">
+        <item>预包装</item>
+        <item>散装</item>
+    </string-array>
+
+    <string-array name="sample_pack_type_array">
+        <item>玻璃瓶</item>
+        <item>塑料瓶</item>
+        <item>塑料袋</item>
+        <item>无菌袋</item>
+        <item>其他</item>
+    </string-array>
+
+    <string-array name="verify_function_array">
+        <item>无菌采样</item>
+        <item>非无菌采样</item>
+    </string-array>
+    
+    <string-array name="sample_shape_array">
+        <item>固体</item>
+        <item>半固体</item>
+        <item>液体</item>
+        <item>半液体</item>
+        <item>气体</item>
+    </string-array>
+
+    <string-array name="save_function_array">
+        <item>常温</item>
+        <item>冷藏</item>
+        <item>冷冻</item>
+        <item>避光</item>
+        <item>密闭</item>
+        <item>其他</item>
+    </string-array>
+
+    <string-array name="save_copy_sample_address_array">
+        <item>受检单位</item>
+        <item>检验机构</item>
+        <item>食品监管部门</item>
+    </string-array>
 </resources>

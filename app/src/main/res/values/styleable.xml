@@ -17,4 +17,16 @@
         <attr name="spinner_label" format="string" />
         <attr name="spinner_label_min_width" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="AppTheme.DateComponent">
+        <attr name="date_label" format="string" />
+        <attr name="date_label_min_width" format="dimension" />
+        <attr name="date_hint" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="autoWrapLineLayout">
+        <attr name="verticalGap" format="dimension" />
+        <attr name="horizontalGap" format="dimension" />
+        <attr name="fillMode" format="integer" />
+    </declare-styleable>
 </resources>

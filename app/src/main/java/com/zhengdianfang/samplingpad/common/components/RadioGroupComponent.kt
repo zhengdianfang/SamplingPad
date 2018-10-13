@@ -11,7 +11,7 @@ import com.zhengdianfang.samplingpad.common.LabelView
 class RadioGroupComponent: LinearLayout {
 
     private lateinit var labelTextView: LabelView
-    private lateinit var radioGroup: RadioGroup
+    private lateinit var radioGroup: AutoWrapLineLayout
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
         this.setupViews(context, attributeSet)
@@ -28,7 +28,7 @@ class RadioGroupComponent: LinearLayout {
     }
 
     private fun initRadioGroupView(context: Context, attrs: TypedArray) {
-        radioGroup = RadioGroup(context).apply {
+        radioGroup = AutoWrapLineLayout(context).apply {
             orientation = RadioGroup.HORIZONTAL
             val buttons = attrs.getTextArray(R.styleable.AppTheme_RadioGroupComponent_radio_buttons)
             buttons.forEachIndexed { index, text ->
