@@ -65,4 +65,5 @@
     <string name="pervious_step_text">上一步</string>
     <string name="normal_product_title">普通食品抽样单</string>
     <string name="network_product_title">网购食品抽样单</string>
+    <string name="food_product_title">食用农产品抽样单</string>
 </resources>

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.zhengdianfang.samplingpad.R
+import com.zhengdianfang.samplingpad.food_product.FoodProductSamplingTableActivity
 import com.zhengdianfang.samplingpad.network_product.NetworkProductSamplingTableActivity
 import com.zhengdianfang.samplingpad.normal_product.NormalProductSamplingTableActivity
 import com.zhengdianfang.samplingpad.task.canot_verify.CanotVerifyReasonActivity
@@ -34,7 +35,7 @@ class NavigationFragment : SupportFragment() {
             startActivity(Intent(context, MyTaskListActivity::class.java))
         }
         upgradeAppButton.setOnClickListener {
-            startActivity(Intent(context, NetworkProductSamplingTableActivity::class.java))
+            startActivity(Intent(context, FoodProductSamplingTableActivity::class.java))
         }
     }
 }

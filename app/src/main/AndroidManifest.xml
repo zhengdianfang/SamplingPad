@@ -23,6 +23,7 @@
         <activity android:name=".task.canot_verify.CanotVerifyReasonActivity"></activity>
         <activity android:name=".normal_product.NormalProductSamplingTableActivity"></activity>
         <activity android:name=".network_product.NetworkProductSamplingTableActivity"></activity>
+        <activity android:name=".food_product.FoodProductSamplingTableActivity"></activity>
     </application>
 
 </manifest>

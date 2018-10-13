@@ -20,6 +20,27 @@
         <item>否</item>
     </string-array>
 
+    <string-array name="region_type_array">
+        <item>城市</item>
+        <item>乡村</item>
+        <item>景点</item>
+    </string-array>
+    
+    <string-array name="verify_step_array">
+        <item>生产环节</item>
+        <item>流通环节</item>
+        <item>餐饮环节</item>
+    </string-array>
+    
+    <string-array name="grovment_region_array">
+        <item>区</item>
+        <item>街道</item>
+    </string-array>
+
+    <string-array name="verify_location_array">
+        <item>选择抽样地点</item>
+    </string-array>
+
     <string-array name="area_spinner_array">
         <item>省</item>
         <item>市</item>
@@ -96,5 +117,22 @@
         <item>卫生监测</item>
         <item>风险监测</item>
         <item>监督复查</item>
+    </string-array>
+    
+    <string-array name="licence_type_array">
+        <item>经营许可证</item>
+        <item>生产许可证</item>
+    </string-array>
+
+    <string-array name="special_region_array">
+        <item>城中村</item>
+        <item>插花地</item>
+        <item>深惠交界区</item>
+        <item>深莞交界区</item>
+    </string-array>
+    
+    <string-array name="verify_unit_array">
+        <item>连锁企业</item>
+        <item>非连锁企业</item>
     </string-array>
 </resources>
