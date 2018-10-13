@@ -89,4 +89,12 @@
         <item>检验机构</item>
         <item>食品监管部门</item>
     </string-array>
+    
+    <string-array name="verify_category_array">
+        <item>执法抽检</item>
+        <item>监督抽检</item>
+        <item>卫生监测</item>
+        <item>风险监测</item>
+        <item>监督复查</item>
+    </string-array>
 </resources>

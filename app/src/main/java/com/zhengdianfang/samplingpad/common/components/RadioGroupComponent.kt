@@ -52,7 +52,6 @@ class RadioGroupComponent: LinearLayout {
             text = attrs.getString(R.styleable.AppTheme_RadioGroupComponent_radio_label)
             gravity = Gravity.RIGHT
             layoutParams = LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply{
-                gravity = Gravity.CENTER_VERTICAL
                 rightMargin = (8 * resources.displayMetrics.density).toInt()
             }
             minWidth = attrs.getDimension(R.styleable.AppTheme_RadioGroupComponent_radio_label_min_width, 0F).toInt()

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorLightGray"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="64dp"
+            android:background="@android:color/white">
+
+            <TextView
+                android:id="@+id/uploadPicButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableTop="@drawable/ic_cloud_upload"
+                android:background="@drawable/transparent"
+                android:drawablePadding="8dp"
+                android:textSize="@dimen/large_18"
+                android:textColor="@android:color/black"
+                android:text="@string/upload_pic_text"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="64dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/white">
+
+            <TextView
+                android:id="@+id/uploadVideoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableTop="@drawable/ic_cloud_upload"
+                android:background="@drawable/transparent"
+                android:drawablePadding="8dp"
+                android:textSize="@dimen/large_18"
+                android:textColor="@android:color/black"
+                android:text="@string/upload_video_text"/>
+
+        </FrameLayout>
+
+        <com.zhengdianfang.samplingpad.common.components.AutoWrapLineLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_pdf"
+                android:drawablePadding="8dp"
+                android:textColor="@android:color/black"
+                android:text="sdfdsfsdfsdsfs.pdf"
+                android:gravity="center"/>
+
+        </com.zhengdianfang.samplingpad.common.components.AutoWrapLineLayout>
+
+        <com.zhengdianfang.samplingpad.common.components.AutoWrapLineLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_pdf"
+                android:drawablePadding="8dp"
+                android:textColor="@android:color/black"
+                android:text="sdfdsfsdfsdsfs.pdf"
+                android:gravity="center"/>
+
+        </com.zhengdianfang.samplingpad.common.components.AutoWrapLineLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <Button
+                android:id="@+id/resetButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/stoke_button_background"
+                android:paddingLeft="64dp"
+                android:paddingRight="64dp"
+                android:text="@string/pervious_step_text"
+                android:textColor="@color/colorPrimary" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

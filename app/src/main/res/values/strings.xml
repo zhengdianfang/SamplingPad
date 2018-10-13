@@ -64,4 +64,5 @@
     <string name="upload_video_text">上传视频</string>
     <string name="pervious_step_text">上一步</string>
     <string name="normal_product_title">普通食品抽样单</string>
+    <string name="network_product_title">网购食品抽样单</string>
 </resources>
