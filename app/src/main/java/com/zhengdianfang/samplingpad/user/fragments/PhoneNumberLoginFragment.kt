@@ -1,4 +1,4 @@
-package com.zhengdianfang.samplingpad.login.fragments
+package com.zhengdianfang.samplingpad.user.fragments
 
 
 import android.os.Bundle

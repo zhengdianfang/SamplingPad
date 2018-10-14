@@ -1,13 +1,14 @@
 package com.zhengdianfang.samplingpad.api
 
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    val INSTANCE = Retrofit.Builder()
-        .baseUrl("http://")
+
+    const val HOST = "http://39.104.56.18:8080/inspection/"
+
+    val INSTANCE: Retrofit = Retrofit.Builder()
+        .baseUrl(HOST)
         .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()
 }

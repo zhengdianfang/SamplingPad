@@ -32,24 +32,20 @@ androidExtensions {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.github.badoo.mvicore:mvicore:1.0.0'
-    implementation 'com.github.badoo.mvicore:mvicore-android:1.0.0'
     // Android
     implementation deps('com.android.support:appcompat-v7')
     implementation deps('com.android.support.constraint:constraint-layout')
     implementation deps('com.android.support:design')
+    implementation deps('android.arch.lifecycle:extensions')
 
-    // Rx
-    implementation deps('io.reactivex.rxjava2:rxjava')
-    implementation deps('io.reactivex.rxjava2:rxandroid')
+    //anko
+    implementation deps('org.jetbrains.anko:anko-commons')
 
     // Utils
     implementation deps('com.jakewharton.timber:timber')
-    implementation deps('com.jakewharton.scalpel:scalpel')
     implementation deps('com.squareup.okhttp3:okhttp')
     implementation deps('com.github.bumptech.glide:glide')
     implementation deps('com.squareup.retrofit2:retrofit')
-    implementation deps('com.squareup.retrofit2:adapter-rxjava2')
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation deps('com.squareup.retrofit2:converter-gson')
 
@@ -57,5 +53,5 @@ dependencies {
     implementation 'com.android.support:support-v4:27.1.1'
     kapt deps('com.github.bumptech.glide:compiler')
     implementation 'me.yokeyword:fragmentation:1.3.6'
-    implementation 'com.google.android:flexbox:1.1.0'
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
 }

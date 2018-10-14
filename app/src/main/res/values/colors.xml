@@ -18,4 +18,5 @@
     <drawable name="window_background_color">#ffffff</drawable>
     <drawable name="transparent">#00000000</drawable>
     <drawable name="colorPrimary">@color/colorPrimary</drawable>
+    <drawable name="verify_code_default_pic">#999999</drawable>
 </resources>

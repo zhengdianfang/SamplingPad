@@ -6,7 +6,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="72dp"
-    tools:context=".login.LoginActivity">
+    tools:context=".user.LoginActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/userNameLoginFragment"
-        android:name="com.zhengdianfang.samplingpad.login.fragments.UserNameLoginFragment"
+        android:name="com.zhengdianfang.samplingpad.user.fragments.UserNameLoginFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout="@layout/fragment_user_name_login" />
