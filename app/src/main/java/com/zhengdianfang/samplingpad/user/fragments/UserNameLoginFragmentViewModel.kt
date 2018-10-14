@@ -3,6 +3,7 @@ package com.zhengdianfang.samplingpad.user.fragments
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
+import android.util.Log
 import com.zhengdianfang.samplingpad.App
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.api.ApiClient
@@ -17,6 +18,7 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
 
     val errorLiveData = MutableLiveData<String>()
     val userLiveData = MutableLiveData<User>()
+    val isLoadingLiveData = MutableLiveData<Boolean>()
 
     fun login(username: String, password: String, code: String, rememberMe: Boolean) {
         val context = getApplication<App>()
@@ -25,13 +27,14 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
             password.isNullOrEmpty() -> errorLiveData.postValue(context.resources.getString(R.string.please_input_password_hint))
             code.isNullOrEmpty() -> errorLiveData.postValue(context.resources.getString(R.string.please_input_verify_code_hint))
             else -> doAsync {
-                Timber.tag("Login").d("password encode : %s", password.md5())
+                isLoadingLiveData.postValue(true)
                 val response  = ApiClient.INSTANCE
                     .create(UserApi::class.java)
                     .login(username, password.md5(), code, rememberMe)
                     .execute()
 
                 uiThread {
+                    isLoadingLiveData.postValue(false)
                     if (response.isSuccessful) {
                         if (response.body() != null) {
                             userLiveData.postValue(response.body())

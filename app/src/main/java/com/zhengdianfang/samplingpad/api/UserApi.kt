@@ -2,8 +2,9 @@ package com.zhengdianfang.samplingpad.api
 
 import com.zhengdianfang.samplingpad.user.entities.User
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.POST
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 
 interface UserApi {
 
@@ -11,11 +12,12 @@ interface UserApi {
         const val VERIFY_CODE_URL = "${ApiClient.HOST}gifCode"
     }
 
-    @GET("login")
+    @FormUrlEncoded
+    @POST("login")
     fun login(
-        @Query("username") username: String,
-        @Query("password")password: String,
-        @Query("code")code: String,
-        @Query("rememberMe")rememberMe: Boolean): Call<User>
+        @Field("username") username: String,
+        @Field("password")password: String,
+        @Field("code")code: String,
+        @Field("rememberMe")rememberMe: Boolean): Call<User>
 
 }

@@ -11,8 +11,12 @@ class App: Application() {
     }
 
     private fun timber() {
-        Timber.plant(Timber.DebugTree())
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        } else {
+            Timber.plant(ReleaseTree())
+        }
     }
 
-
+    inner class ReleaseTree : Timber.DebugTree()
 }

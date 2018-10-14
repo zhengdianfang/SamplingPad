@@ -1,0 +1,30 @@
+package com.zhengdianfang.samplingpad.api
+
+import okhttp3.*
+import okhttp3.Response
+import timber.log.Timber
+
+class LoggingInterceptor: Interceptor {
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val request = chain.request()
+        if (request.body() is FormBody) {
+            val body = request.body() as FormBody
+            val sb = StringBuffer()
+            for(index in 0 until body.size()) {
+                val name = body.encodedName(index)
+                val value = body.encodedValue(index)
+                sb.append("&").append(name).append("=").append(value)
+            }
+            Timber.tag("LoggingInterceptor")
+                .d("${request.url()}, body: $sb")
+        }
+
+        val response = chain.proceed(request)
+
+        val responseText = response.body()?.string()
+        Timber.tag("LoggingInterceptor")
+            .d("${request.url().url().path}, response: $responseText")
+
+        return response.newBuilder().body(ResponseBody.create(MediaType.parse("application/json"), responseText)).build()
+    }
+}

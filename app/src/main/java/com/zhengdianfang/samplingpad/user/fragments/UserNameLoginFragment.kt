@@ -39,7 +39,15 @@ class UserNameLoginFragment : BaseFragment() {
         })
 
         userNameLoginFragmentViewModel.userLiveData.observe(this, Observer { loginUser ->
-            Timber.tag("Login").d("login user : %s", loginUser.toString())
+            Timber.d("login user : %s", loginUser.toString())
+        })
+
+        userNameLoginFragmentViewModel.isLoadingLiveData.observe(this, Observer { isLoading ->
+            if (isLoading == true) {
+                startLoading()
+            } else {
+                stopLoading()
+            }
         })
     }
 

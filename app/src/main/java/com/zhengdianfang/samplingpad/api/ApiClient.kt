@@ -1,5 +1,6 @@
 package com.zhengdianfang.samplingpad.api
 
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -9,6 +10,15 @@ object ApiClient {
 
     val INSTANCE: Retrofit = Retrofit.Builder()
         .baseUrl(HOST)
+        .client(createOkHttpClient())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
+
+    private fun createOkHttpClient(): OkHttpClient {
+        return OkHttpClient
+            .Builder()
+            .addInterceptor(LoggingInterceptor())
+            .addNetworkInterceptor(AppResponeInterceptor())
+            .build()
+    }
 }
