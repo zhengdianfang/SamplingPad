@@ -20,11 +20,13 @@ class LoggingInterceptor: Interceptor {
         }
 
         val response = chain.proceed(request)
+        if (response.header("Content-Type").equals("application/json")) {
+            val responseText = response.body()?.string()
+            Timber.tag("LoggingInterceptor")
+                .d("${request.url().url().path}, response: $responseText")
 
-        val responseText = response.body()?.string()
-        Timber.tag("LoggingInterceptor")
-            .d("${request.url().url().path}, response: $responseText")
-
-        return response.newBuilder().body(ResponseBody.create(MediaType.parse("application/json"), responseText)).build()
+            return response.newBuilder().body(ResponseBody.create(MediaType.parse("application/json"), responseText)).build()
+        }
+        return response
     }
 }

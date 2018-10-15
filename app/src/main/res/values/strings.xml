@@ -69,4 +69,5 @@
     <string name="please_input_username_hint">请输入用户名</string>
     <string name="please_input_password_hint">请输入密码</string>
     <string name="please_input_verify_code_hint">请输入验证码</string>
+    <string name="login_successful">登录成功</string>
 </resources>

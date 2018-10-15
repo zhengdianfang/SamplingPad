@@ -46,7 +46,7 @@ fun String.md5(): String {
             }
             sb.append(hexString)
         }
-        return sb.toString()
+        return sb.toString().toUpperCase()
 
     } catch (e: NoSuchAlgorithmException) {
         e.printStackTrace()

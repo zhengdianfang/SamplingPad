@@ -54,4 +54,5 @@ dependencies {
     kapt deps('com.github.bumptech.glide:compiler')
     implementation 'me.yokeyword:fragmentation:1.3.6'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+    implementation 'com.github.bumptech.glide:okhttp3-integration:4.8.0'
 }
