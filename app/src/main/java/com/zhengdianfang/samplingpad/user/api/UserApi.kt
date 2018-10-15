@@ -1,5 +1,7 @@
-package com.zhengdianfang.samplingpad.api
+package com.zhengdianfang.samplingpad.user.api
 
+import com.zhengdianfang.samplingpad.api.ApiClient
+import com.zhengdianfang.samplingpad.api.Response
 import com.zhengdianfang.samplingpad.user.entities.User
 import retrofit2.Call
 import retrofit2.http.POST
@@ -18,6 +20,6 @@ interface UserApi {
         @Field("username") username: String,
         @Field("password")password: String,
         @Field("code")code: String,
-        @Field("rememberMe")rememberMe: Boolean): Call<User>
+        @Field("rememberMe")rememberMe: Boolean): Call<Response<User>>
 
 }

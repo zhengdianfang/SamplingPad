@@ -13,7 +13,7 @@ object ApiClient {
 
     const val HOST = "http://39.104.56.18:8080/inspection/"
 
-    val okHttpClient by lazy {
+    val okHttpClient: OkHttpClient by lazy {
         OkHttpClient
             .Builder()
             .addInterceptor(LoggingInterceptor())
@@ -22,7 +22,7 @@ object ApiClient {
             .build()
     }
 
-    val INSTANCE by lazy {
+    val INSTANCE: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(HOST)
             .client(okHttpClient)

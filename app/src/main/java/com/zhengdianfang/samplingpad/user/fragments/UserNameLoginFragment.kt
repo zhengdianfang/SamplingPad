@@ -12,14 +12,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.zhengdianfang.samplingpad.R
-import com.zhengdianfang.samplingpad.api.ApiClient
-import com.zhengdianfang.samplingpad.api.UserApi
+import com.zhengdianfang.samplingpad.user.api.UserApi
 import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_user_name_login.*
 import timber.log.Timber
-import okhttp3.OkHttpClient
-import java.net.CookieManager
 
 
 class UserNameLoginFragment : BaseFragment() {
@@ -44,11 +41,14 @@ class UserNameLoginFragment : BaseFragment() {
            }
         })
 
-        userNameLoginFragmentViewModel.userLiveData.observe(this, Observer { loginUser ->
-            Timber.d("login user : %s", loginUser.toString())
-            if (loginUser != null) {
+        userNameLoginFragmentViewModel.tokenLiveData.observe(this, Observer { loginToken ->
+            Timber.d("login token: %s", loginToken)
+            if (loginToken.isNullOrEmpty().not()) {
                 startActivity(Intent(context, MainActivity::class.java))
                 Toast.makeText(context, getString(R.string.login_successful), Toast.LENGTH_SHORT).show()
+                activity?.finish()
+            } else {
+                Toast.makeText(context, getString(R.string.login_failure), Toast.LENGTH_SHORT).show()
             }
         })
 

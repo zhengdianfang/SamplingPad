@@ -2,16 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zhengdianfang.samplingpad">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".App"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".user.LoginActivity"
+            android:name=".LoadingActivity"
             android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,14 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.MainActivity" android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity android:name=".task.tasklist.MyTaskListActivity"></activity>
-        <activity android:name=".task.canot_verify.CanotVerifyReasonActivity"></activity>
-        <activity android:name=".normal_product.NormalProductSamplingTableActivity"></activity>
-        <activity android:name=".network_product.NetworkProductSamplingTableActivity"></activity>
-        <activity android:name=".food_product.FoodProductSamplingTableActivity"></activity>
+        <activity
+            android:name=".main.MainActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".task.tasklist.MyTaskListActivity" />
+        <activity android:name=".task.canot_verify.CanotVerifyReasonActivity" />
+        <activity android:name=".normal_product.NormalProductSamplingTableActivity" />
+        <activity android:name=".network_product.NetworkProductSamplingTableActivity" />
+        <activity android:name=".food_product.FoodProductSamplingTableActivity" />
+        <activity android:name=".user.LoginActivity"></activity>
     </application>
 
-
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

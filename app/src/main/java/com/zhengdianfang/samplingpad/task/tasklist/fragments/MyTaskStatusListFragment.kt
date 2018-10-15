@@ -1,6 +1,9 @@
 package com.zhengdianfang.samplingpad.task.tasklist.fragments
 
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
@@ -9,11 +12,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import com.zhengdianfang.samplingpad.R
+import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.common.tintDrawable
+import com.zhengdianfang.samplingpad.food_product.FoodProductSamplingTableActivity
+import com.zhengdianfang.samplingpad.network_product.NetworkProductSamplingTableActivity
+import com.zhengdianfang.samplingpad.normal_product.NormalProductSamplingTableActivity
+import kotlinx.android.synthetic.main.fragment_my_task_status_list.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import me.yokeyword.fragmentation.SupportFragment
+import timber.log.Timber
 
-class MyTaskStatusListFragment : SupportFragment() {
+class MyTaskStatusListFragment : BaseFragment() {
+
+    private val taskStatusListFragmentViewModel by lazy { ViewModelProviders.of(this).get(MyTaskStatusListFragmentViewModel::class.java) }
 
     private val itemIds = arrayOf(
         R.id.qualifiedItem,
@@ -53,6 +64,25 @@ class MyTaskStatusListFragment : SupportFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         this.setupViews()
+        this.bindViewModel()
+    }
+
+    private fun bindViewModel() {
+        taskStatusListFragmentViewModel.fetchStatusCount()
+        taskStatusListFragmentViewModel.isLoadingLiveData.observe(this, Observer { isLoading ->
+            if (isLoading == true) {
+                startLoading()
+            } else {
+                stopLoading()
+            }
+        })
+
+        taskStatusListFragmentViewModel.countLiveData.observe(this, Observer { statusCount ->
+            Timber.d("statusCount : %s", statusCount.toString())
+            commitItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countSubmit ?: ""}"
+            refusesItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countRefuse?: ""}"
+            cannotVerifyItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countAbnormal?: ""}"
+        })
     }
 
     private fun setupViews() {
@@ -80,10 +110,31 @@ class MyTaskStatusListFragment : SupportFragment() {
                 ContextCompat.getDrawable(context!!, R.drawable.my_task_item_left_drawable)!!.tintDrawable(color)
             statusNameTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(leftDrawable, null, null, null)
 
-            itemView.setOnClickListener {
-               start(TaskListWithStatusFragment.newInstance(it.context, statusNames[index]))
+            val taskCountTextView = itemView.findViewById<TextView>(R.id.taskCountTextView)
+            when(index) {
+                0 -> {
+                    taskCountTextView.text = "普通食品抽样单"
+                    itemView.setOnClickListener {
+                        startActivity(Intent(context, NormalProductSamplingTableActivity::class.java))
+                    }
+                }
+                1 -> {
+                    taskCountTextView.text = "网购食品抽样单"
+                    itemView.setOnClickListener {
+                        startActivity(Intent(context, NetworkProductSamplingTableActivity::class.java))
+                    }
+                }
+                2 -> {
+                    taskCountTextView.text = "食用农产品抽样单"
+                    itemView.setOnClickListener {
+                        startActivity(Intent(context, FoodProductSamplingTableActivity::class.java))
+                    }
+                }
             }
-            // TODO setup task count
+
+//            itemView.setOnClickListener {
+//               start(TaskListWithStatusFragment.newInstance(it.context, statusNames[index]))
+//            }
         }
     }
 
