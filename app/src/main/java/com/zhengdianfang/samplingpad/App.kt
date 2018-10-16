@@ -25,6 +25,7 @@ class App: Application() {
             return field
         }
         set(value) {
+            Timber.d("set new token: %s", value)
             defaultSharedPreferences.edit().putString("token", value).apply()
         }
 
