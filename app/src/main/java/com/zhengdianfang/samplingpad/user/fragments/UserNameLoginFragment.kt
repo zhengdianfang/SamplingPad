@@ -16,6 +16,7 @@ import com.zhengdianfang.samplingpad.user.api.UserApi
 import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_user_name_login.*
+import kotlinx.android.synthetic.main.toolbar_layout.*
 import timber.log.Timber
 
 
@@ -69,6 +70,10 @@ class UserNameLoginFragment : BaseFragment() {
             val code = imageCodeEditText.text.toString()
             val rememberMe =  rememberMeRadioButton.isChecked
             userNameLoginFragmentViewModel.login(username, password, code, rememberMe)
+        }
+
+        toolBarTitleView.setOnClickListener {
+            activity?.finish()
         }
     }
 

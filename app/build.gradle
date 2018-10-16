@@ -37,6 +37,7 @@ dependencies {
     implementation deps('com.android.support.constraint:constraint-layout')
     implementation deps('com.android.support:design')
     implementation deps('android.arch.lifecycle:extensions')
+    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42"
 
     //anko
     implementation deps('org.jetbrains.anko:anko-commons')

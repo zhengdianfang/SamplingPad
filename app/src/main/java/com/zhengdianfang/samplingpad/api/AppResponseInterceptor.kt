@@ -16,23 +16,20 @@ class AppResponseInterceptor: Interceptor {
             .addHeader("Authorization", App.INSTANCE.token)
             .build()
         var response = chain.proceed(newRequest)
-        if (BuildConfig.DEBUG) {
-            if (response.isSuccessful && response.header("Content-Type").equals("application/json")) {
-                val responseText = response.body()?.string()
-                if (responseText.isNullOrEmpty().not()) {
-                    val gson = Gson()
-                    val responseBean = gson.fromJson<com.zhengdianfang.samplingpad.api.Response<Any>>(
-                        responseText, com.zhengdianfang.samplingpad.api.Response::class.java)
-                    response = response
-                        .newBuilder()
-                        .code(responseBean.code)
-                        .message(responseBean.msg)
-                        .body(ResponseBody.create(MediaType.parse("application/json"), responseText))
-                        .build()
-                }
+        if (response.isSuccessful && response.header("Content-Type").equals("application/json")) {
+            val responseText = response.body()?.string()
+            if (responseText.isNullOrEmpty().not()) {
+                val gson = Gson()
+                val responseBean = gson.fromJson<com.zhengdianfang.samplingpad.api.Response<Any>>(
+                    responseText, com.zhengdianfang.samplingpad.api.Response::class.java)
+                response = response
+                    .newBuilder()
+                    .code(responseBean.code)
+                    .message(responseBean.msg)
+                    .body(ResponseBody.create(MediaType.parse("application/json"), responseText))
+                    .build()
             }
         }
-
         return response
     }
 }

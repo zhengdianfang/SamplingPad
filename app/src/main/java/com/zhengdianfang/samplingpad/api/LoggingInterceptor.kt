@@ -17,6 +17,8 @@ class LoggingInterceptor: Interceptor {
             }
             Timber.tag("LoggingInterceptor")
                 .d("${request.url()}, body: $sb")
+        } else {
+            Timber.tag("LoggingInterceptor").d("${request.url()}")
         }
 
         val response = chain.proceed(request)
