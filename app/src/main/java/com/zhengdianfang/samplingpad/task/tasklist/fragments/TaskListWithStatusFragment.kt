@@ -1,26 +1,34 @@
 package com.zhengdianfang.samplingpad.task.tasklist.fragments
 
-import android.content.Context
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.R
+import com.zhengdianfang.samplingpad.common.BaseFragment
+import com.zhengdianfang.samplingpad.common.ItemDecoration
+import com.zhengdianfang.samplingpad.main.fragments.AllTaskItemAdapter
+import com.zhengdianfang.samplingpad.task.entities.TaskItem
+import com.zhengdianfang.samplingpad.task.entities.Task_Status
+import kotlinx.android.synthetic.main.fragment_task_list_with_status_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
-import me.yokeyword.fragmentation.SupportFragment
 
-class TaskListWithStatusFragment: SupportFragment() {
+class TaskListWithStatusFragment: BaseFragment() {
+
+    private val taskListWithStatusFragmentViewModel by lazy { ViewModelProviders.of(this).get(TaskListWithStatusFragmentViewModel::class.java) }
+    private val taskData = mutableListOf<TaskItem>()
+    var statusName = ""
+    var status = Task_Status.WAIT_VERIFY
 
     companion object {
 
-        const val BUNDLE_ARGUMENT_STATUS_NAME = "statusName"
-
-        fun newInstance(context: Context, statusName: String): TaskListWithStatusFragment {
-            val bundle = Bundle()
-            bundle.putString(BUNDLE_ARGUMENT_STATUS_NAME, statusName)
-            return Fragment.instantiate(context, TaskListWithStatusFragment::class.java.name, bundle)
-                as TaskListWithStatusFragment
+        fun newInstance(statusName: String, status: Task_Status): TaskListWithStatusFragment {
+            val fragment = TaskListWithStatusFragment()
+            fragment.statusName = statusName
+            fragment.status = status
+            return fragment
         }
     }
 
@@ -31,12 +39,34 @@ class TaskListWithStatusFragment: SupportFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         this.setupViews()
+        this.bindViewModel()
+        this.autoRefresh()
+    }
+
+    private fun autoRefresh() {
+        refreshFrame.isRefreshing = true
+        taskListWithStatusFragmentViewModel.loadTaskDataByStatus(this.status)
+    }
+
+    private fun bindViewModel() {
+        taskListWithStatusFragmentViewModel.taskListLiveData.observe(this, Observer { data ->
+            taskRecyclerView.adapter.notifyDataSetChanged()
+            taskData.clear()
+            taskData.addAll(data!!)
+            refreshFrame.isRefreshing = false
+        })
     }
 
     private fun setupViews() {
         backButton.setOnClickListener {
             pop()
         }
-        toolBarTitleView.text = arguments?.getString(BUNDLE_ARGUMENT_STATUS_NAME)
+        toolBarTitleView.text = this.statusName
+        refreshFrame.setOnRefreshListener {
+            taskListWithStatusFragmentViewModel.loadTaskDataByStatus(this.status)
+        }
+        taskRecyclerView.addItemDecoration(ItemDecoration())
+        val allTaskItemAdapter = AllTaskItemAdapter(taskData)
+        taskRecyclerView.adapter = allTaskItemAdapter
     }
 }

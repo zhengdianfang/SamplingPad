@@ -17,6 +17,7 @@ import com.zhengdianfang.samplingpad.common.tintDrawable
 import com.zhengdianfang.samplingpad.food_product.FoodProductSamplingTableActivity
 import com.zhengdianfang.samplingpad.network_product.NetworkProductSamplingTableActivity
 import com.zhengdianfang.samplingpad.normal_product.NormalProductSamplingTableActivity
+import com.zhengdianfang.samplingpad.task.entities.Task_Status
 import kotlinx.android.synthetic.main.fragment_my_task_status_list.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import me.yokeyword.fragmentation.SupportFragment
@@ -39,7 +40,7 @@ class MyTaskStatusListFragment : BaseFragment() {
         R.color.red,
         R.color.green,
         R.color.blue,
-        R.color.colorLightGray
+        R.color.colorDarkGray
     )
 
     companion object {
@@ -70,6 +71,7 @@ class MyTaskStatusListFragment : BaseFragment() {
 
         taskStatusListFragmentViewModel.countLiveData.observe(this, Observer { statusCount ->
             Timber.d("statusCount : %s", statusCount.toString())
+            waitVerifyItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countAll ?: ""}"
             refusesItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countRefuse ?: ""}"
             cannotVerifyItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countAbnormal ?: ""}"
             completeItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countEnd ?: ""}"
@@ -80,12 +82,15 @@ class MyTaskStatusListFragment : BaseFragment() {
     private fun setupViews() {
         toolBarTitleView.setText(R.string.my_task_text)
         this.renderItems()
+        backButton.setOnClickListener {
+            activity?.finish()
+        }
     }
 
     private fun renderItems() {
         val statusNames = resources.getStringArray(R.array.my_task_status_array)
-        itemIds.forEachIndexed { index, frameId ->
-            val itemView = view?.findViewById<View>(frameId)!!
+        Task_Status.values().forEachIndexed { index, task_Status ->
+            val itemView = view?.findViewById<View>(itemIds[index])!!
             val statusNameTextView = itemView.findViewById<TextView>(R.id.statusNameTextView)
             statusNameTextView.text = statusNames[index]
             val color = ContextCompat.getColor(context!!, itemLeftDrawableColors[index])
@@ -93,7 +98,7 @@ class MyTaskStatusListFragment : BaseFragment() {
                 ContextCompat.getDrawable(context!!, R.drawable.my_task_item_left_drawable)!!.tintDrawable(color)
             statusNameTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(leftDrawable, null, null, null)
             itemView.setOnClickListener {
-               start(TaskListWithStatusFragment.newInstance(it.context, statusNames[index]))
+               start(TaskListWithStatusFragment.newInstance(statusNames[index], task_Status))
             }
         }
     }

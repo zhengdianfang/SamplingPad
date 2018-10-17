@@ -8,11 +8,18 @@
 
     <include layout="@layout/toolbar_layout" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/taskRecyclerView"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refreshFrame"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        tools:listitem="@layout/task_item_common_views_layout"/>
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/taskRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/colorLightGray"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            tools:listitem="@layout/task_item_common_views_layout"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

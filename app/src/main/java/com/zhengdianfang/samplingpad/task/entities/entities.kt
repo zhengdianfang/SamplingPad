@@ -8,7 +8,7 @@ data class StatusCount (
     var countAll: Int = 0
 )
 
-enum class Task_Status(val status: Int) {
+enum class Task_Status(val value: Int) {
     WAIT_VERIFY(1),
     CANCEL(3),
     COMPLETE(7),

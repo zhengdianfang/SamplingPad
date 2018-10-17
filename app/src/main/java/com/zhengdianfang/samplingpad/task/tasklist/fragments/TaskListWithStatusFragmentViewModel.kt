@@ -1,4 +1,4 @@
-package com.zhengdianfang.samplingpad.main.fragments
+package com.zhengdianfang.samplingpad.task.tasklist.fragments
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
@@ -10,15 +10,15 @@ import com.zhengdianfang.samplingpad.task.entities.Task_Status
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class TaskListFragmentViewModel(application: Application): AndroidViewModel(application) {
+class TaskListWithStatusFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
     val taskListLiveData = MutableLiveData<MutableList<TaskItem>>()
 
-    fun loadTaskData() {
+    fun loadTaskDataByStatus(task_Status: Task_Status) {
         doAsync {
             val response = ApiClient.INSTANCE
                 .create(TaskApi::class.java)
-                .fetchTaskListGroupByStatus(Task_Status.WAIT_VERIFY.value)
+                .fetchTaskListGroupByStatus(task_Status.value)
                 .execute()
             val data = response.body()?.data
             if (data != null) {
