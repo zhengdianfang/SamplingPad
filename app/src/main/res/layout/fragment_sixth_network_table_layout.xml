@@ -184,6 +184,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                app:radio_buttons="@array/yes_or_no"
+                app:radio_label="*是否进口：" />
+
+            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 app:radio_buttons="@array/save_function_array"
                 app:radio_label="*存储条件：" />
 

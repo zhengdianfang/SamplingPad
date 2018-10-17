@@ -133,17 +133,6 @@
                 app:spinner_label="*生产所在地：" />
 
 
-            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
-                android:id="@+id/isImportRadioGroup2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/areaSpinnerGroupView"
-                app:radio_buttons="@array/yes_or_no"
-                app:radio_label="*是否进口："
-                app:radio_label_min_width="110dp" />
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout

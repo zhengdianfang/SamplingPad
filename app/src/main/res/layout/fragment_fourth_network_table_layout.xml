@@ -26,6 +26,14 @@
                 android:layout_marginEnd="8dp"
                 android:text="标称生产者信息" />
 
+            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:radio_label_min_width="120dp"
+                app:radio_label="*是否进口："
+                app:radio_buttons="@array/yes_or_no"/>
+
             <com.zhengdianfang.samplingpad.common.components.EditComponent
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

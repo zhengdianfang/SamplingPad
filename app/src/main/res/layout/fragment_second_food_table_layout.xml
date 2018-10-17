@@ -116,14 +116,14 @@
                android:layout_height="wrap_content"
                android:layout_marginTop="24dp"
                app:edit_hint="请输入传真号"
-               app:edit_label="传真：" />
+               app:edit_label="*传真：" />
 
            <com.zhengdianfang.samplingpad.common.components.EditComponent
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="24dp"
                app:edit_hint="请输入邮编"
-               app:edit_label="邮编：" />
+               app:edit_label="*邮编：" />
 
            <com.zhengdianfang.samplingpad.common.components.EditComponent
                android:layout_width="match_parent"

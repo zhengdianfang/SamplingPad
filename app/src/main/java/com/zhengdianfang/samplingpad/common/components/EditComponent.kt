@@ -32,6 +32,9 @@ class EditComponent: LinearLayout {
     private fun initEditTextView(context: Context, attrs: TypedArray) {
         editTextView = EditText(context, null, R.attr.editTextStyle, R.style.AppTheme_EditText).apply {
             hint = attrs.getString(R.styleable.AppTheme_EditComponent_edit_hint)
+            maxLines = 1
+            setLines(1)
+            setSingleLine(true)
             layoutParams = LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply{
                 weight = 1f
                 gravity = Gravity.CENTER_VERTICAL

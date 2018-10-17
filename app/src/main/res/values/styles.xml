@@ -100,6 +100,8 @@
     <style name="AppTheme.Table.StaticText">
         <item name="android:textColor">@color/color_666666</item>
         <item name="android:textSize">@dimen/large_18</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
     </style>
 
     <style name="AppTheme.Table.Section">

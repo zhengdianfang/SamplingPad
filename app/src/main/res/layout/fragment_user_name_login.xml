@@ -59,6 +59,8 @@
         android:layout_marginTop="32dp"
         android:hint="验证码"
         android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true"
         app:layout_constraintEnd_toStartOf="@+id/codeImageView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

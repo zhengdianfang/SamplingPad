@@ -18,74 +18,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="32dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/completedStatus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/large_22"
-                tools:text="已完成（12）" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:orientation="vertical"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp">
+            <include
+                android:id="@+id/waitVerifyItem"
+                layout="@layout/my_task_status_item_layout" />
 
-                <include
-                    android:id="@+id/qualifiedItem"
-                    layout="@layout/my_task_status_item_layout" />
+            <include
+                android:id="@+id/cancelItem"
+                layout="@layout/my_task_status_item_layout" />
+            <include
+                android:id="@+id/completeItem"
+                layout="@layout/my_task_status_item_layout" />
+            <include
+                android:id="@+id/refusesItem"
+                layout="@layout/my_task_status_item_layout" />
 
-                <include
-                    android:id="@+id/disqualifiedItem"
-                    layout="@layout/my_task_status_item_layout" />
+            <include
+                android:id="@+id/cannotVerifyItem"
+                layout="@layout/my_task_status_item_layout" />
 
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/unCompleteStatus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:padding="16dp"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/large_22"
-                tools:text="未完成（12）" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:orientation="vertical"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp">
-
-                <include
-                    android:id="@+id/toBeCompletedItem"
-                    layout="@layout/my_task_status_item_layout" />
-
-                <include
-                    android:id="@+id/commitItem"
-                    layout="@layout/my_task_status_item_layout" />
-
-                <include
-                    android:id="@+id/verifyItem"
-                    layout="@layout/my_task_status_item_layout" />
-
-                <include
-                    android:id="@+id/refusesItem"
-                    layout="@layout/my_task_status_item_layout" />
-
-                <include
-                    android:id="@+id/cannotVerifyItem"
-                    layout="@layout/my_task_status_item_layout" />
-
-            </LinearLayout>
 
         </LinearLayout>
 

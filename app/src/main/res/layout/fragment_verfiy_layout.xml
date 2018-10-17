@@ -1,178 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/planNameLabel"
-            style="@style/AppTheme.Verify.Label"
-            android:text="@string/plan_name_label"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/planNameEditText"
-            android:layout_width="0dp"
+        <com.zhengdianfang.samplingpad.common.components.EditComponent
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:hint="@string/please_input_plan_name_hint"
-            android:inputType="textPersonName"
-            app:layout_constraintBaseline_toBaselineOf="@+id/planNameLabel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/planNameLabel" />
+            app:edit_hint="请输入计划名称"
+            app:edit_label="计划名称："
+            app:edit_label_min_width="162dp" />
 
-        <TextView
-            android:id="@+id/foodCategoryLabel"
-            style="@style/AppTheme.Verify.Label"
-            android:layout_marginTop="16dp"
-            android:text="@string/food_category_label"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/planNameLabel" />
-
-        <EditText
-            android:id="@+id/foodCategoryEditText"
-            android:layout_width="0dp"
+        <com.zhengdianfang.samplingpad.common.components.EditComponent
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:hint="@string/please_input_plan_name_hint"
-            android:inputType="textPersonName"
-            app:layout_constraintBaseline_toBaselineOf="@+id/foodCategoryLabel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/foodCategoryLabel" />
-
-        <TextView
-            android:id="@+id/marketNameLabel"
-            style="@style/AppTheme.Verify.Label"
             android:layout_marginTop="16dp"
-            android:text="@string/market_name_text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/foodCategoryLabel" />
+            app:edit_hint="请输入方案名称"
+            app:edit_label="方案名称："
+            app:edit_label_min_width="162dp" />
 
-        <EditText
-            android:id="@+id/marketNameEditText"
-            android:layout_width="0dp"
+        <com.zhengdianfang.samplingpad.common.components.EditComponent
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:hint="@string/please_input_plan_name_hint"
-            android:inputType="textPersonName"
-            app:layout_constraintBaseline_toBaselineOf="@+id/marketNameLabel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/marketNameLabel" />
-
-        <TextView
-            android:id="@+id/businessLicenseLabel"
-            style="@style/AppTheme.Verify.Label"
             android:layout_marginTop="16dp"
-            android:text="@string/business_liscense_code_text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/marketNameLabel" />
+            app:edit_hint="请输入任务号名称"
+            app:edit_label="任务号："
+            app:edit_label_min_width="162dp" />
 
-        <EditText
-            android:id="@+id/businessLicenseEditText"
-            android:layout_width="0dp"
+        <com.zhengdianfang.samplingpad.common.components.EditComponent
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:hint="@string/please_input_plan_name_hint"
-            android:inputType="textPersonName"
-            app:layout_constraintBaseline_toBaselineOf="@+id/businessLicenseLabel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/businessLicenseLabel" />
-        <TextView
-            android:id="@+id/produceDateLabel"
-            style="@style/AppTheme.Verify.Label"
             android:layout_marginTop="16dp"
-            android:text="@string/produce_date_label"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/businessLicenseLabel" />
+            app:edit_hint="请输入计划名称"
+            app:edit_label="食品大类："
+            app:edit_label_min_width="162dp" />
 
-        <TextView
-            style="@style/AppTheme.Verify.Label"
-            android:id="@+id/produceDateTextView"
-            android:layout_width="0dp"
-            android:layout_marginStart="16dp"
-            android:gravity="center_vertical"
-            android:background="@drawable/edit_text_background"
-            android:hint="@string/please_input_produce_date"
-            android:drawableRight="@drawable/ic_calendar"
-            android:drawablePadding="8dp"
-            android:padding="8dp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/produceDateLabel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/produceDateLabel" />
-
-        <TextView
-            android:id="@+id/produceAllowCodeLabel"
-            style="@style/AppTheme.Verify.Label"
-            android:layout_marginTop="16dp"
-            android:text="@string/business_liscense_code_text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/produceDateLabel" />
-
-        <EditText
-            android:id="@+id/produceAllowCodeEditText"
-            android:layout_width="0dp"
+        <com.zhengdianfang.samplingpad.common.components.EditComponent
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:hint="@string/please_input_plan_name_hint"
-            android:inputType="textPersonName"
-            app:layout_constraintBaseline_toBaselineOf="@+id/produceAllowCodeLabel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/produceAllowCodeLabel" />
-
-        <TextView
-            android:id="@+id/sampleProductNameLabel"
-            style="@style/AppTheme.Verify.Label"
             android:layout_marginTop="16dp"
-            android:text="@string/sample_product_name_label"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/produceAllowCodeLabel" />
+            app:edit_hint="请输入受检单位名称"
+            app:edit_label="受检单位名称："
+            app:edit_label_min_width="162dp" />
 
-        <EditText
-            android:id="@+id/sampleProductNameEditText"
-            android:layout_width="0dp"
+        <com.zhengdianfang.samplingpad.common.components.EditComponent
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:hint="@string/please_input_plan_name_hint"
-            android:inputType="textPersonName"
-            app:layout_constraintBaseline_toBaselineOf="@+id/sampleProductNameLabel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/sampleProductNameLabel" />
-
-        <TextView
-            android:id="@+id/enterpriseNameLabel"
-            style="@style/AppTheme.Verify.Label"
             android:layout_marginTop="16dp"
-            android:text="@string/enterprise_name_label"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sampleProductNameLabel" />
+            app:edit_hint="请输入计划名称"
+            app:edit_label="受检单位统\n社会信用代码："
+            app:edit_label_min_width="162dp" />
 
-        <EditText
-            android:id="@+id/enterpriseNameEditText"
-            android:layout_width="0dp"
+        <com.zhengdianfang.samplingpad.common.components.EditComponent
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:hint="@string/please_input_plan_name_hint"
-            android:inputType="textPersonName"
-            app:layout_constraintBaseline_toBaselineOf="@+id/enterpriseNameLabel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/enterpriseNameLabel" />
+            android:layout_marginTop="16dp"
+            app:edit_hint="请输入生产企业名称"
+            app:edit_label="生产企业名称："
+            app:edit_label_min_width="162dp" />
+
+        <com.zhengdianfang.samplingpad.common.components.EditComponent
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:edit_hint="请输入生产许可证编号"
+            app:edit_label="生产许可证编\n(SC/QS)："
+            app:edit_label_min_width="162dp" />
+
+        <com.zhengdianfang.samplingpad.common.components.EditComponent
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:edit_hint="请输入样品名称"
+            app:edit_label="样品名称："
+            app:edit_label_min_width="162dp" />
+
+        <com.zhengdianfang.samplingpad.common.components.DateComponent
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:date_hint="请选择生产日期"
+            app:date_label="生产日期："
+            app:date_label_min_width="162dp" />
+
+        <com.zhengdianfang.samplingpad.common.components.EditComponent
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:edit_hint="请输入连锁品牌"
+            app:edit_label="连锁品牌："
+            app:edit_label_min_width="162dp" />
+
+        <com.zhengdianfang.samplingpad.common.components.DateComponent
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:date_hint="请选择抽样日期"
+            app:date_label="抽样日期："
+            app:date_label_min_width="162dp" />
 
         <Button
             android:id="@+id/verifyButton"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
-            android:text="@string/verify_begin_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/enterpriseNameLabel" />
-    </android.support.constraint.ConstraintLayout>
+            android:text="@string/verify_begin_text" />
+    </LinearLayout>
 </ScrollView>

@@ -18,5 +18,6 @@ class LoadingActivity : BaseActivity() {
         } else {
             startActivity(Intent(this, MainActivity::class.java))
         }
+        finish()
     }
 }

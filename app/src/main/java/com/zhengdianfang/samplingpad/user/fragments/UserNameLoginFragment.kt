@@ -71,10 +71,6 @@ class UserNameLoginFragment : BaseFragment() {
             val rememberMe =  rememberMeRadioButton.isChecked
             userNameLoginFragmentViewModel.login(username, password, code, rememberMe)
         }
-
-        toolBarTitleView.setOnClickListener {
-            activity?.finish()
-        }
     }
 
     private fun setupCodeImageView() {

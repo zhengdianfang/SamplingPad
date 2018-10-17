@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/startVerifyButton"
+        android:id="@+id/operationButton1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -25,11 +25,11 @@
         app:layout_constraintTop_toBottomOf="@+id/include" />
 
     <Button
-        android:id="@+id/cannotVerifyButton"
+        android:id="@+id/operationButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:text="@string/start_verify_button"
-        app:layout_constraintBaseline_toBaselineOf="@+id/startVerifyButton"
-        app:layout_constraintEnd_toStartOf="@+id/startVerifyButton" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/operationButton1"
+        app:layout_constraintEnd_toStartOf="@+id/operationButton1" />
 </android.support.constraint.ConstraintLayout>

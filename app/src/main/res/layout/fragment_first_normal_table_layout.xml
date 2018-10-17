@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,10 +11,193 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <include layout="@layout/fragment_first_normal_table_part1_layout" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:padding="16dp"
+            android:orientation="vertical">
 
-        <include layout="@layout/fragment_first_normal_table_part2_layout" />
+            <TextView
+                style="@style/AppTheme.Table.Section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="抽样基础信息" />
 
+
+            <com.zhengdianfang.samplingpad.common.components.TextComponent
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:text_label="任务来源："
+                app:text_content="深圳市市场和质量监督管理委员会XXX食品药品监督管理局"/>
+
+            <com.zhengdianfang.samplingpad.common.components.TextComponent
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:text_label="计划名称："
+                app:text_content="深圳市市场和质量监督管理委员会计划名称"/>
+
+            <com.zhengdianfang.samplingpad.common.components.TextComponent
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:text_label="任务名称："
+                app:text_content="深圳市市场和质量监督管理委员会计划名称"/>
+
+            <com.zhengdianfang.samplingpad.common.components.TextComponent
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:text_label="任务号/方案编号："
+                app:text_content="123123123123123"/>
+
+            <com.zhengdianfang.samplingpad.common.components.TextComponent
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:text_label="检验机构："
+                app:text_content="深圳市市场和质量监督管理委员会XXX食品药品监督管理局"/>
+
+            <com.zhengdianfang.samplingpad.common.components.TextComponent
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:text_label="抽样单编号："
+                app:text_content="9238247564382575"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.zhengdianfang.samplingpad.common.components.TextComponent
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="16dp"
+                    app:text_label="食品大类："
+                    app:text_content="质量监督管理委员粮食加工品"/>
+
+                <com.zhengdianfang.samplingpad.common.components.TextComponent
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="16dp"
+                    app:text_label="食品亚类："
+                    app:text_content="农产品及农产品加工品"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.zhengdianfang.samplingpad.common.components.TextComponent
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="16dp"
+                    app:text_label="食品次亚类："
+                    app:text_content="质量监督管理委员粮食加工品"/>
+
+                <com.zhengdianfang.samplingpad.common.components.TextComponent
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="16dp"
+                    app:text_label="食品细类："
+                    app:text_content="农产品及农产品加工品"/>
+            </LinearLayout>
+
+            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+                android:id="@+id/sampleTypeRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:radio_buttons="@array/verify_category_array"
+                app:radio_label="*检验类别：" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:layout_marginTop="16dp"
+            android:padding="16dp">
+
+            <TextView
+                style="@style/AppTheme.Table.Section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="抽样单位信息" />
+
+            <com.zhengdianfang.samplingpad.common.components.TextComponent
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:text_label="单位名称："
+                app:text_content="深圳市市场和质量监督管理委员会XXX食品药品监督管理局"/>
+
+            <com.zhengdianfang.samplingpad.common.components.TextComponent
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:text_label="单位地址："
+                app:text_content="深圳市市南区十字路基清华大厦同方编号11-23号"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.zhengdianfang.samplingpad.common.components.TextComponent
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="16dp"
+                    app:text_label="所属区域："
+                    app:text_content="深圳市市南区"/>
+
+                <com.zhengdianfang.samplingpad.common.components.TextComponent
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="16dp"
+                    app:text_label="联系人："
+                    app:text_content="陈一发儿"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.zhengdianfang.samplingpad.common.components.TextComponent
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="16dp"
+                    app:text_label="电子邮箱："
+                    app:text_content="isdoishdcsdfeosid@163.com"/>
+
+                <com.zhengdianfang.samplingpad.common.components.TextComponent
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="16dp"
+                    app:text_label="电话："
+                    app:text_content="400-2293-9203"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

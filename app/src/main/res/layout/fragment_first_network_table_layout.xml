@@ -25,25 +25,6 @@
                 android:layout_marginEnd="8dp"
                 android:text="抽样基础信息" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/AppTheme.Table.subTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="任务号/方案编号："/>
-
-                <TextView
-                    style="@style/AppTheme.Table.subTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="1123123123123123123123123"/>
-            </LinearLayout>
 
             <com.zhengdianfang.samplingpad.common.components.TextComponent
                 android:layout_width="match_parent"
@@ -65,6 +46,13 @@
                 android:layout_marginTop="16dp"
                 app:text_label="任务名称："
                 app:text_content="深圳市市场和质量监督管理委员会计划名称"/>
+
+            <com.zhengdianfang.samplingpad.common.components.TextComponent
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:text_label="任务号/方案编号："
+                app:text_content="12312312312312312312"/>
 
             <com.zhengdianfang.samplingpad.common.components.TextComponent
                 android:layout_width="match_parent"

@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="入网经营者信息" />
+                android:text="第三方平台提供者信息" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
                 android:layout_width="match_parent"

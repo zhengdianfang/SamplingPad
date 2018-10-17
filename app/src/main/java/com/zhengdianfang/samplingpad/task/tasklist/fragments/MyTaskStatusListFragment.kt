@@ -27,28 +27,19 @@ class MyTaskStatusListFragment : BaseFragment() {
     private val taskStatusListFragmentViewModel by lazy { ViewModelProviders.of(this).get(MyTaskStatusListFragmentViewModel::class.java) }
 
     private val itemIds = arrayOf(
-        R.id.qualifiedItem,
-        R.id.disqualifiedItem,
-        R.id.toBeCompletedItem,
-        R.id.commitItem,
-        R.id.verifyItem,
+        R.id.waitVerifyItem,
+        R.id.cancelItem,
+        R.id.completeItem,
         R.id.refusesItem,
         R.id.cannotVerifyItem
     )
 
     private val itemLeftDrawableColors = arrayOf(
-        R.color.green,
-        R.color.red,
         R.color.yellow,
-        R.color.blue,
-        R.color.blue,
         R.color.red,
+        R.color.green,
+        R.color.blue,
         R.color.colorLightGray
-    )
-
-    private val sectionIds = arrayOf(
-        R.id.completedStatus,
-        R.id.unCompleteStatus
     )
 
     companion object {
@@ -79,24 +70,16 @@ class MyTaskStatusListFragment : BaseFragment() {
 
         taskStatusListFragmentViewModel.countLiveData.observe(this, Observer { statusCount ->
             Timber.d("statusCount : %s", statusCount.toString())
-            commitItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countSubmit ?: ""}"
-            refusesItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countRefuse?: ""}"
-            cannotVerifyItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countAbnormal?: ""}"
+            refusesItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countRefuse ?: ""}"
+            cannotVerifyItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countAbnormal ?: ""}"
+            completeItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countEnd ?: ""}"
+            cancelItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countEnd ?: ""}"
         })
     }
 
     private fun setupViews() {
         toolBarTitleView.setText(R.string.my_task_text)
-        this.renderSections()
         this.renderItems()
-    }
-
-    private fun renderSections() {
-        val statusSectionNames = resources.getStringArray(R.array.my_task_status_sections)
-        sectionIds.forEachIndexed { index, viewId ->
-            val statusSectionView = view?.findViewById<TextView>(viewId)!!
-            statusSectionView.text = statusSectionNames[index]
-        }
     }
 
     private fun renderItems() {
@@ -109,32 +92,9 @@ class MyTaskStatusListFragment : BaseFragment() {
             val leftDrawable =
                 ContextCompat.getDrawable(context!!, R.drawable.my_task_item_left_drawable)!!.tintDrawable(color)
             statusNameTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(leftDrawable, null, null, null)
-
-            val taskCountTextView = itemView.findViewById<TextView>(R.id.taskCountTextView)
-            when(index) {
-                0 -> {
-                    taskCountTextView.text = "普通食品抽样单"
-                    itemView.setOnClickListener {
-                        startActivity(Intent(context, NormalProductSamplingTableActivity::class.java))
-                    }
-                }
-                1 -> {
-                    taskCountTextView.text = "网购食品抽样单"
-                    itemView.setOnClickListener {
-                        startActivity(Intent(context, NetworkProductSamplingTableActivity::class.java))
-                    }
-                }
-                2 -> {
-                    taskCountTextView.text = "食用农产品抽样单"
-                    itemView.setOnClickListener {
-                        startActivity(Intent(context, FoodProductSamplingTableActivity::class.java))
-                    }
-                }
+            itemView.setOnClickListener {
+               start(TaskListWithStatusFragment.newInstance(it.context, statusNames[index]))
             }
-
-//            itemView.setOnClickListener {
-//               start(TaskListWithStatusFragment.newInstance(it.context, statusNames[index]))
-//            }
         }
     }
 

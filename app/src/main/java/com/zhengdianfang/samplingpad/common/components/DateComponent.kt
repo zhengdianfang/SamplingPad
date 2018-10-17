@@ -1,5 +1,6 @@
 package com.zhengdianfang.samplingpad.common.components
 
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
@@ -9,10 +10,14 @@ import android.widget.TextView
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.LabelView
 
+
 class DateComponent : LinearLayout {
 
     private lateinit var labelTextView: LabelView
     private lateinit var dateTextView: TextView
+    private val datePickerDialog by lazy {
+        DatePickerDialog(context)
+    }
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
         this.setupViews(context, attributeSet)
@@ -33,11 +38,15 @@ class DateComponent : LinearLayout {
             setBackgroundResource(R.drawable.edit_text_background)
             text = attrs.getString(R.styleable.AppTheme_DateComponent_date_hint)
             setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_calendar, 0)
-            setPadding(16, 24, 16, 24)
+            setPadding(16, 16, 16, 16)
             layoutParams = LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT).apply{
                 weight = 1f
                 gravity = Gravity.CENTER_VERTICAL
             }
+        }
+
+        dateTextView.setOnClickListener {
+            datePickerDialog.show()
         }
         addView(dateTextView)
     }
