@@ -28,4 +28,19 @@ class TaskListWithStatusFragmentViewModel(application: Application) : AndroidVie
             }
         }
     }
+
+    fun loadErrorTaskDataByStatus() {
+        doAsync {
+            val response = ApiClient.INSTANCE
+                .create(TaskApi::class.java)
+                .fetchErrorTaskListGroupByStatus()
+                .execute()
+            val data = response.body()?.data
+            if (data != null) {
+                uiThread {
+                    taskListLiveData.postValue(data)
+                }
+            }
+        }
+    }
 }

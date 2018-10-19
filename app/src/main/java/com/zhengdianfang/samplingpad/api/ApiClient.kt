@@ -42,5 +42,9 @@ object ApiClient {
             return if (cookies != null) cookies!! else ArrayList()
 
         }
+
+        fun clearCookies() {
+            cookies = ArrayList()
+        }
     }
 }

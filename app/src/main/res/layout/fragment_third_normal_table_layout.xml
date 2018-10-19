@@ -129,7 +129,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText"
-                app:spinner_buttons="@array/area_spinner_array"
+                app:spinner_hints="@array/area_spinner_array"
                 app:spinner_label="*生产所在地：" />
 
 
@@ -211,7 +211,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText1"
                 app:spinner_label_min_width="115dp"
-                app:spinner_buttons="@array/resource_spinner_array"
+                app:spinner_hints="@array/resource_spinner_array"
                 app:spinner_label="*原产地：" />
 
         </android.support.constraint.ConstraintLayout>

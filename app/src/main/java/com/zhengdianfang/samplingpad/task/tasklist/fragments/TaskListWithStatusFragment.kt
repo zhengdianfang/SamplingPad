@@ -43,9 +43,17 @@ class TaskListWithStatusFragment: BaseFragment() {
         this.autoRefresh()
     }
 
+    private fun requestData() {
+        if (status == Task_Status.CAN_NOT_VERIFY) {
+            taskListWithStatusFragmentViewModel.loadErrorTaskDataByStatus()
+        } else {
+            taskListWithStatusFragmentViewModel.loadTaskDataByStatus(this.status)
+        }
+    }
+
     private fun autoRefresh() {
         refreshFrame.isRefreshing = true
-        taskListWithStatusFragmentViewModel.loadTaskDataByStatus(this.status)
+        this.requestData()
     }
 
     private fun bindViewModel() {
@@ -63,7 +71,7 @@ class TaskListWithStatusFragment: BaseFragment() {
         }
         toolBarTitleView.text = this.statusName
         refreshFrame.setOnRefreshListener {
-            taskListWithStatusFragmentViewModel.loadTaskDataByStatus(this.status)
+            this.requestData()
         }
         taskRecyclerView.addItemDecoration(ItemDecoration())
         val allTaskItemAdapter = AllTaskItemAdapter(taskData)

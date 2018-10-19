@@ -14,4 +14,7 @@ interface TaskApi {
 
     @GET("app/listtasks/{status}")
     fun fetchTaskListGroupByStatus(@Path("status") status: Int): Call<Response<MutableList<TaskItem>>>
+
+    @GET("app/listabnormaltasks")
+    fun fetchErrorTaskListGroupByStatus(): Call<Response<MutableList<TaskItem>>>
 }

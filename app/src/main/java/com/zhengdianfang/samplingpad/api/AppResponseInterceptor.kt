@@ -16,12 +16,15 @@ class AppResponseInterceptor: Interceptor {
             .addHeader("Authorization", App.INSTANCE.token)
             .build()
         var response = chain.proceed(newRequest)
-        if (response.isSuccessful && response.header("Content-Type").equals("application/json")) {
+        if (response.isSuccessful && response.header("Content-Type")!!.contains("application/json")) {
             val responseText = response.body()?.string()
             if (responseText.isNullOrEmpty().not()) {
                 val gson = Gson()
                 val responseBean = gson.fromJson<com.zhengdianfang.samplingpad.api.Response<Any>>(
                     responseText, com.zhengdianfang.samplingpad.api.Response::class.java)
+                if (responseBean.code == 403) {
+                   App.INSTANCE.logout()
+                }
                 response = response
                     .newBuilder()
                     .code(responseBean.code)

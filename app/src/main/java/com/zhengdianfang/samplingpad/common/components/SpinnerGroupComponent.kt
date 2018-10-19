@@ -11,6 +11,7 @@ import com.zhengdianfang.samplingpad.common.LabelView
 class SpinnerGroupComponent: LinearLayout {
 
     private lateinit var labelTextView: LabelView
+    private val spinnerViews = mutableListOf<TextView>()
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
         this.setupViews(context, attributeSet)
@@ -27,15 +28,21 @@ class SpinnerGroupComponent: LinearLayout {
     }
 
     private fun initSpinnerGroupView(context: Context, attrs: TypedArray) {
-        val buttons = attrs.getTextArray(R.styleable.AppTheme_SpinnerGroupComponent_spinner_buttons)
-        buttons.forEachIndexed { index, text ->
-            val spinner = Spinner(context, null, R.attr.spinnerStyle, R.style.AppTheme_SpinnerStyle).apply {
+        val hints = attrs.getTextArray(R.styleable.AppTheme_SpinnerGroupComponent_spinner_hints)
+        hints.forEachIndexed { index, text ->
+            val textView = TextView(context).apply {
+                setBackgroundResource(R.drawable.edit_text_background)
+                gravity = Gravity.CENTER_VERTICAL
+                setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0)
+                setPadding(16, 8, 16, 8)
+                setText(text)
                 layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
-                    rightMargin = if(index == buttons.count() - 1) 0 else  resources.getDimension(R.dimen.radio_button_margin_right).toInt()
+                    rightMargin = if (index == hints.count() - 1) 0 else resources.getDimension(R.dimen.radio_button_margin_right).toInt()
                     weight = 1F
                 }
             }
-            addView(spinner)
+            spinnerViews.add(textView)
+            addView(textView)
         }
     }
 
@@ -51,5 +58,9 @@ class SpinnerGroupComponent: LinearLayout {
         }
 
         addView(labelTextView)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
     }
 }
