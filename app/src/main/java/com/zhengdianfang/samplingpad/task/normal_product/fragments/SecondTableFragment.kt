@@ -24,4 +24,8 @@ class SecondTableFragment: SupportFragment() {
             start(ThirdTableFragment.newInstance())
         }
     }
+
+    private fun setupViews() {
+        enterpriseLicenseNumberTextView
+    }
 }
