@@ -26,6 +26,7 @@ enum class Task_Type(val value: Int) {
 
 @Parcelize
 data class TaskItem(
+    var id: String = "",
     var code: String? = "",
     var updateDate: String? = "",
     var sampleName: String? = "",
@@ -47,5 +48,6 @@ data class TaskItem(
     var createOrgContacts: String? = "",
     var creatorEmail: String? = "",
     var creatorPhone: String? = "",
-    var inspectionKindName: String? = ""
+    var inspectionKindName: String? = "",
+    var enterpriseLicenseNumber: String?
 ) : Parcelable

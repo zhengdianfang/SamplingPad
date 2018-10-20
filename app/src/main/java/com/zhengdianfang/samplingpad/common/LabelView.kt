@@ -25,4 +25,8 @@ class LabelView : TextView {
         }
     }
 
+    fun isRequired(): Boolean {
+        return text.startsWith("*")
+    }
+
 }

@@ -11,9 +11,8 @@ import com.google.android.flexbox.FlexboxLayout
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.LabelView
 
-class RadioGroupComponent: LinearLayout {
+class RadioGroupComponent: BaseComponent {
 
-    private lateinit var labelTextView: LabelView
     private lateinit var radioGroup: FlexboxLayout
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
@@ -28,16 +27,26 @@ class RadioGroupComponent: LinearLayout {
         for(index in 0 until radioGroup.childCount) {
             val radioButton = radioGroup.getChildAt(index) as RadioButton
             if (text == radioButton.text) {
-                radioButton.isChecked = false
+                radioButton.isChecked = true
             }
         }
     }
 
     fun clear() {
-         for(index in 0 until radioGroup.childCount) {
+        for(index in 0 until radioGroup.childCount) {
             val radioButton = radioGroup.getChildAt(index) as RadioButton
-             radioButton.isChecked = false
+            radioButton.isChecked = false
         }
+    }
+
+    fun getCheckedText(): String{
+        for(index in 0 until radioGroup.childCount) {
+            val radioButton = radioGroup.getChildAt(index) as RadioButton
+            if (radioButton.isChecked) {
+                return radioButton.text.toString()
+            }
+        }
+        return ""
     }
 
     private fun setupViews(context: Context, attributeSet: AttributeSet) {
@@ -69,18 +78,7 @@ class RadioGroupComponent: LinearLayout {
         addView(radioGroup)
     }
 
-    private fun initLabelTextView(context: Context, attrs: TypedArray) {
-        labelTextView = LabelView(context, null, R.attr.titleTextStyle, R.style.AppTheme_Table_Title).apply {
-            text = attrs.getString(R.styleable.AppTheme_RadioGroupComponent_radio_label)
-            gravity = Gravity.RIGHT
-            layoutParams = LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply{
-                rightMargin = (8 * resources.displayMetrics.density).toInt()
-            }
-            minWidth = attrs.getDimension(R.styleable.AppTheme_RadioGroupComponent_radio_label_min_width, 0F).toInt()
-        }
 
-        addView(labelTextView)
-    }
 
     private inner class RadioButtonCheckListener: CompoundButton.OnCheckedChangeListener {
         override fun onCheckedChanged(checkedButton: CompoundButton, checked: Boolean) {
