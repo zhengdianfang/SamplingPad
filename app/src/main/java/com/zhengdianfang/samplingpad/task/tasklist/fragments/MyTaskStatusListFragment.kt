@@ -3,7 +3,6 @@ package com.zhengdianfang.samplingpad.task.tasklist.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
@@ -14,13 +13,9 @@ import android.widget.TextView
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.common.tintDrawable
-import com.zhengdianfang.samplingpad.food_product.FoodProductSamplingTableActivity
-import com.zhengdianfang.samplingpad.network_product.NetworkProductSamplingTableActivity
-import com.zhengdianfang.samplingpad.normal_product.NormalProductSamplingTableActivity
 import com.zhengdianfang.samplingpad.task.entities.Task_Status
 import kotlinx.android.synthetic.main.fragment_my_task_status_list.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
-import me.yokeyword.fragmentation.SupportFragment
 import timber.log.Timber
 
 class MyTaskStatusListFragment : BaseFragment() {

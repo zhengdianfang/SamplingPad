@@ -24,6 +24,7 @@ class App: Application() {
         get() {
             if (field.isNullOrEmpty()) {
                 field = defaultSharedPreferences.getString("token", "")
+                Timber.d("get new token: %s", field)
             }
             return field
         }

@@ -12,7 +12,7 @@ import com.zhengdianfang.samplingpad.common.LabelView
 class TextComponent : LinearLayout {
 
     private lateinit var labelTextView: LabelView
-    private lateinit var dateTextView: TextView
+    private lateinit var contentTextView : TextView
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
         this.setupViews(context, attributeSet)
@@ -22,6 +22,10 @@ class TextComponent : LinearLayout {
         this.setupViews(context, attributeSet)
     }
 
+    fun setContentText(text: String?) {
+        this.contentTextView.text = text
+    }
+
     private fun setupViews(context: Context, attributeSet: AttributeSet) {
         val attrs = context.obtainStyledAttributes(attributeSet, R.styleable.AppTheme_TextComponent)
         initLabelTextView(context, attrs)
@@ -29,13 +33,13 @@ class TextComponent : LinearLayout {
     }
 
     private fun initContentTextView(context: Context, attrs: TypedArray) {
-        dateTextView = TextView(context, null, R.attr.titleTextStyle, R.style.AppTheme_Table_Title).apply {
+        contentTextView = TextView(context, null, R.attr.titleTextStyle, R.style.AppTheme_Table_Title).apply {
             text = attrs.getString(R.styleable.AppTheme_TextComponent_text_content)
             layoutParams = LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT).apply{
                 weight = 1f
             }
         }
-        addView(dateTextView)
+        addView(contentTextView)
     }
 
     private fun initLabelTextView(context: Context, attrs: TypedArray) {

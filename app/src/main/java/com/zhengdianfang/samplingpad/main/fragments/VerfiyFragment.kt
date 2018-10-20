@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.zhengdianfang.samplingpad.R
-import com.zhengdianfang.samplingpad.normal_product.NormalProductSamplingTableActivity
+import com.zhengdianfang.samplingpad.task.normal_product.NormalProductSamplingTableActivity
 import kotlinx.android.synthetic.main.fragment_verfiy_layout.*
 import me.yokeyword.fragmentation.SupportFragment
 

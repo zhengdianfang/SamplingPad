@@ -27,9 +27,9 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".task.tasklist.MyTaskListActivity" />
         <activity android:name=".task.canot_verify.CanotVerifyReasonActivity" />
-        <activity android:name=".normal_product.NormalProductSamplingTableActivity" />
-        <activity android:name=".network_product.NetworkProductSamplingTableActivity" />
-        <activity android:name=".food_product.FoodProductSamplingTableActivity" />
+        <activity android:name="com.zhengdianfang.samplingpad.task.normal_product.NormalProductSamplingTableActivity" />
+        <activity android:name="com.zhengdianfang.samplingpad.task.network_product.NetworkProductSamplingTableActivity" />
+        <activity android:name="com.zhengdianfang.samplingpad.task.food_product.FoodProductSamplingTableActivity" />
         <activity android:name=".user.LoginActivity"></activity>
     </application>
 

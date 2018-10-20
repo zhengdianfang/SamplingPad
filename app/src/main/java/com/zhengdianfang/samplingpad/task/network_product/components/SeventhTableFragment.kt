@@ -1,4 +1,4 @@
-package com.zhengdianfang.samplingpad.network_product.components
+package com.zhengdianfang.samplingpad.task.network_product.components
 
 import android.os.Bundle
 import android.view.LayoutInflater

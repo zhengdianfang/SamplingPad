@@ -1,8 +1,8 @@
-package com.zhengdianfang.samplingpad.network_product
+package com.zhengdianfang.samplingpad.task.network_product
 
 import android.os.Bundle
 import com.zhengdianfang.samplingpad.R
-import com.zhengdianfang.samplingpad.network_product.components.FirstTableFragment
+import com.zhengdianfang.samplingpad.task.network_product.components.FirstTableFragment
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import me.yokeyword.fragmentation.SupportActivity
 

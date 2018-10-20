@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import okhttp3.Cookie
 import okhttp3.HttpUrl
 import okhttp3.CookieJar
-
+import timber.log.Timber
 
 
 object ApiClient {
@@ -36,15 +36,17 @@ object ApiClient {
 
         override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
             this.cookies = cookies
+            Timber.d("save cookie: ${this.cookies.toString()}")
         }
 
         override fun loadForRequest(url: HttpUrl): List<Cookie> {
+            Timber.d("load cookie: ${this.cookies.toString()}")
             return if (cookies != null) cookies!! else ArrayList()
 
         }
 
         fun clearCookies() {
-            cookies = ArrayList()
+            cookies = null
         }
     }
 }

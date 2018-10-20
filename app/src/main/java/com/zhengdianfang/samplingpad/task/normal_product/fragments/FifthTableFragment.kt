@@ -1,4 +1,4 @@
-package com.zhengdianfang.samplingpad.normal_product.fragments
+package com.zhengdianfang.samplingpad.task.normal_product.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

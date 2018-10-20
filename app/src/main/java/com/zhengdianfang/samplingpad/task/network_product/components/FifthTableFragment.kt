@@ -1,4 +1,4 @@
-package com.zhengdianfang.samplingpad.network_product.components
+package com.zhengdianfang.samplingpad.task.network_product.components
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,19 +8,19 @@ import com.zhengdianfang.samplingpad.R
 import kotlinx.android.synthetic.main.fragment_first_normal_table_layout.*
 import me.yokeyword.fragmentation.SupportFragment
 
-class SecondTableFragment: SupportFragment() {
+class FifthTableFragment: SupportFragment() {
     companion object {
-        fun newInstance() = SecondTableFragment()
+        fun newInstance() = FifthTableFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_second_network_table_layout, container, false)
+        return inflater.inflate(R.layout.fragment_fifth_network_table_layout, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         nextButtonButton.setOnClickListener {
-            start(ThirdTableFragment.newInstance())
+            start(SixthTableFragment.newInstance())
         }
     }
 }
