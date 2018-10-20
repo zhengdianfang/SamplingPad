@@ -4,14 +4,18 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.Gravity
+import android.view.View
 import android.widget.*
+import com.afollestad.materialdialogs.MaterialDialog
 import com.zhengdianfang.samplingpad.R
+import com.zhengdianfang.samplingpad.api.ApiClient
 import com.zhengdianfang.samplingpad.common.LabelView
 
 class SpinnerGroupComponent: LinearLayout {
 
     private lateinit var labelTextView: LabelView
-    private val spinnerViews = mutableListOf<TextView>()
+    private val spinnerDialogList = mutableListOf<MaterialDialog>()
+    private val spinnerTextViews = mutableListOf<TextView>()
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
         this.setupViews(context, attributeSet)
@@ -29,6 +33,7 @@ class SpinnerGroupComponent: LinearLayout {
 
     private fun initSpinnerGroupView(context: Context, attrs: TypedArray) {
         val hints = attrs.getTextArray(R.styleable.AppTheme_SpinnerGroupComponent_spinner_hints)
+        val apiUrls = attrs.getTextArray(R.styleable.AppTheme_SpinnerGroupComponent_spinner_apis)
         hints.forEachIndexed { index, text ->
             val textView = TextView(context).apply {
                 setBackgroundResource(R.drawable.edit_text_background)
@@ -41,9 +46,21 @@ class SpinnerGroupComponent: LinearLayout {
                     weight = 1F
                 }
             }
-            spinnerViews.add(textView)
+
+            if (apiUrls != null && apiUrls.isNotEmpty()) {
+                spinnerDialogList.add(createSpinnerDataDialog("${ApiClient.HOST}${apiUrls[index]}", index))
+                textView.setOnClickListener {
+                    spinnerDialogList[index].show()
+                }
+            }
+            spinnerTextViews.add(textView)
             addView(textView)
         }
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        spinnerDialogList.clear()
     }
 
     private fun initLabelTextView(context: Context, attrs: TypedArray) {
@@ -54,13 +71,19 @@ class SpinnerGroupComponent: LinearLayout {
                 gravity = Gravity.CENTER_VERTICAL
                 rightMargin = (8 * resources.displayMetrics.density).toInt()
             }
-            minWidth = attrs.getDimension(R.styleable.AppTheme_EditComponent_edit_label_min_width, 0F).toInt()
+            minWidth = attrs.getDimension(R.styleable.AppTheme_SpinnerGroupComponent_spinner_label_min_width, 0F).toInt()
         }
 
         addView(labelTextView)
     }
 
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
+    private fun createSpinnerDataDialog(url: String, index: Int): SpinnerDialog {
+        val builder = MaterialDialog.Builder(context).items("").itemsCallback { dialog, _, position, text ->
+            if (dialog is SpinnerDialog) {
+                spinnerTextViews[dialog.index].text = text
+            }
+        }
+        return SpinnerDialog(builder, url, index)
     }
+
 }

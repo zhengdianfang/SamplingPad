@@ -68,6 +68,10 @@
         <item>散装</item>
     </string-array>
 
+    <string-array name="pack_type_request_url_array">
+        <item>/app/samplepackagelis</item>
+    </string-array>
+
     <string-array name="sample_pack_type_array">
         <item>玻璃瓶</item>
         <item>塑料瓶</item>
