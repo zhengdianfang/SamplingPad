@@ -32,7 +32,7 @@ class RadioGroupComponent: BaseComponent {
         }
     }
 
-    fun clear() {
+    override fun clear() {
         for(index in 0 until radioGroup.childCount) {
             val radioButton = radioGroup.getChildAt(index) as RadioButton
             radioButton.isChecked = false
@@ -78,6 +78,18 @@ class RadioGroupComponent: BaseComponent {
         addView(radioGroup)
     }
 
+    private fun initLabelTextView(context: Context, attrs: TypedArray) {
+        labelTextView = LabelView(context, null, R.attr.titleTextStyle, R.style.AppTheme_Table_Title).apply {
+            text = attrs.getString(R.styleable.AppTheme_RadioGroupComponent_radio_label)
+            gravity = Gravity.RIGHT
+            layoutParams = LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply{
+                rightMargin = (8 * resources.displayMetrics.density).toInt()
+            }
+            minWidth = attrs.getDimension(R.styleable.AppTheme_RadioGroupComponent_radio_label_min_width, 0F).toInt()
+        }
+
+        addView(labelTextView)
+    }
 
 
     private inner class RadioButtonCheckListener: CompoundButton.OnCheckedChangeListener {

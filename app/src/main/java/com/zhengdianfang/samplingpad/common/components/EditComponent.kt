@@ -10,9 +10,8 @@ import android.widget.TextView
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.LabelView
 
-class EditComponent: LinearLayout {
+class EditComponent: BaseComponent {
 
-    private lateinit var labelTextView: LabelView
     private lateinit var editTextView: EditText
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
@@ -21,6 +20,14 @@ class EditComponent: LinearLayout {
 
     constructor(context: Context, attributeSet: AttributeSet, style: Int): super(context, attributeSet, style) {
         this.setupViews(context, attributeSet)
+    }
+
+    fun setEditTextContent(text: String?) {
+        editTextView.setText(text)
+    }
+
+    override fun clear() {
+        editTextView.setText("")
     }
 
     private fun setupViews(context: Context, attributeSet: AttributeSet) {

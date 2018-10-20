@@ -49,5 +49,28 @@ data class TaskItem(
     var creatorEmail: String? = "",
     var creatorPhone: String? = "",
     var inspectionKindName: String? = "",
-    var enterpriseLicenseNumber: String?
-) : Parcelable
+    var enterpriseLicenseNumber: String?,
+    var enterpriseAreaType: String?,
+    var enterpriseLinkName: String?,
+    var enterpriseAddress: String?,
+    var enterpriseMOrP: Int?,
+    var enterpriseQsNo: String?,
+    var enterpriseLegalRep: String?,
+    var enterpriseContacts: String?,
+    var enterprisePhone: String?,
+    var enterpriseFax :String?,
+    var enterpriseZipCode: String?,
+    var enterpriseAnnualSales: String?,
+    var specialAreaName: String?,
+    var enterpriseChain: Int
+) : Parcelable {
+    companion object {
+
+        const val BUSINESS_CERTIFICATE = 1
+        const val PRODUCE_CERTIFICATE = 2
+
+        const val UN_CHAIN_ENTERPRISE = 0
+        const val CHAIN_ENTERPRISE = 1
+        const val CHAIN_BRAND = 2
+    }
+}

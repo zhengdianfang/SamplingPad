@@ -13,6 +13,7 @@
         android:padding="16dp">
 
        <LinearLayout
+           android:id="@+id/tableFrame"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:orientation="vertical"
@@ -27,7 +28,7 @@
                android:text="受检单位信息" />
 
            <com.zhengdianfang.samplingpad.common.components.EditComponent
-               android:id="@+id/enterpriseLicenseNumberTextView"
+               android:id="@+id/enterpriseLicenseNumberEditText"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="24dp"
@@ -35,6 +36,7 @@
                app:edit_label="*统一社会信用代码：" />
 
            <com.zhengdianfang.samplingpad.common.components.EditComponent
+               android:id="@+id/enterpriseNameEditText"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="24dp"
@@ -42,6 +44,7 @@
                app:edit_label="*受检单位：" />
 
            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+               android:id="@+id/enterpriseAreaTypeRadioGroup"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="16dp"
@@ -56,6 +59,7 @@
                app:spinner_hints="@array/grovment_region_array" />
 
            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+               android:id="@+id/enterpriseLinkNameRadioGroup"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="16dp"
@@ -72,14 +76,15 @@
                app:spinner_hints="@array/verify_location_array" />
 
            <com.zhengdianfang.samplingpad.common.components.EditComponent
+               android:id="@+id/enterpriseAddressEditText"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="24dp"
-               app:edit_label_min_width="155dp"
                app:edit_hint="请输入单位地址"
                app:edit_label="*单位地址：" />
 
            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+               android:id="@+id/enterpriseMOrPRadioGroup"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="16dp"
@@ -87,13 +92,15 @@
                app:radio_label="*许可证：" />
 
            <com.zhengdianfang.samplingpad.common.components.EditComponent
+               android:id="@+id/enterpriseQsNoEditText"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="24dp"
                app:edit_hint="请输入许可证号"
-               app:edit_label="*许可证：" />
+               app:edit_label="*许可证号：" />
 
            <com.zhengdianfang.samplingpad.common.components.EditComponent
+               android:id="@+id/enterpriseLegalRepEditText"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="24dp"
@@ -101,6 +108,7 @@
                app:edit_label="*法人代表：" />
 
            <com.zhengdianfang.samplingpad.common.components.EditComponent
+               android:id="@+id/enterpriseContactsEditText"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="24dp"
@@ -108,6 +116,7 @@
                app:edit_label="*联系人：" />
 
            <com.zhengdianfang.samplingpad.common.components.EditComponent
+               android:id="@+id/enterprisePhoneEditText"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="24dp"
@@ -115,6 +124,7 @@
                app:edit_label="*电话：" />
 
            <com.zhengdianfang.samplingpad.common.components.EditComponent
+               android:id="@+id/enterpriseFaxEditText"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="24dp"
@@ -122,6 +132,7 @@
                app:edit_label="*传真：" />
 
            <com.zhengdianfang.samplingpad.common.components.EditComponent
+               android:id="@+id/enterpriseZipCodeEditText"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="24dp"
@@ -129,6 +140,7 @@
                app:edit_label="*邮编：" />
 
            <com.zhengdianfang.samplingpad.common.components.EditComponent
+               android:id="@+id/enterpriseAnnualSalesEditText"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="24dp"
@@ -136,6 +148,7 @@
                app:edit_label="年销售额（￥）：" />
 
            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+               android:id="@+id/specialAreaNameRadioGroup"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="16dp"
@@ -149,6 +162,7 @@
                android:orientation="horizontal">
 
                <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+                   android:id="@+id/enterpriseChainRadioGroup"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"

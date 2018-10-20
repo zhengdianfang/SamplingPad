@@ -11,11 +11,11 @@ import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.api.ApiClient
 import com.zhengdianfang.samplingpad.common.LabelView
 
-class SpinnerGroupComponent: LinearLayout {
+class SpinnerGroupComponent: BaseComponent {
 
-    private lateinit var labelTextView: LabelView
     private val spinnerDialogList = mutableListOf<MaterialDialog>()
     private val spinnerTextViews = mutableListOf<TextView>()
+    private var hints = arrayOf<CharSequence>()
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
         this.setupViews(context, attributeSet)
@@ -25,6 +25,10 @@ class SpinnerGroupComponent: LinearLayout {
         this.setupViews(context, attributeSet)
     }
 
+    override fun clear() {
+       spinnerTextViews.forEachIndexed { index, view -> view.text = hints[index] }
+    }
+
     private fun setupViews(context: Context, attributeSet: AttributeSet) {
         val attrs = context.obtainStyledAttributes(attributeSet, R.styleable.AppTheme_SpinnerGroupComponent)
         initLabelTextView(context, attrs)
@@ -32,9 +36,9 @@ class SpinnerGroupComponent: LinearLayout {
     }
 
     private fun initSpinnerGroupView(context: Context, attrs: TypedArray) {
-        val hints = attrs.getTextArray(R.styleable.AppTheme_SpinnerGroupComponent_spinner_hints)
+        hints = attrs.getTextArray(R.styleable.AppTheme_SpinnerGroupComponent_spinner_hints)
         val apiUrls = attrs.getTextArray(R.styleable.AppTheme_SpinnerGroupComponent_spinner_apis)
-        hints.forEachIndexed { index, text ->
+        hints?.forEachIndexed { index, text ->
             val textView = TextView(context).apply {
                 setBackgroundResource(R.drawable.edit_text_background)
                 gravity = Gravity.CENTER_VERTICAL

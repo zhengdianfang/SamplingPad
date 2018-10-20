@@ -59,6 +59,6 @@ class FirstTableFragment: TableFragment() {
     }
 
     override fun submitSuccessful() {
-        start(SecondTableFragment.newInstance())
+        start(SecondTableFragment.newInstance(taskItem))
     }
 }
