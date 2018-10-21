@@ -27,52 +27,58 @@
                 android:text="入网经营者信息" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/producerLicenseNumberEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:edit_label_min_width="155dp"
                 app:edit_hint="请输入营业执照号"
-                app:edit_label="*营业执照号：" />
+                app:edit_label="*营业执照号："
+                app:edit_label_min_width="155dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/producerCsNoEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:edit_label_min_width="155dp"
                 app:edit_hint="请输入许可证号"
-                app:edit_label="*许可证号：" />
+                app:edit_label="*许可证号："
+                app:edit_label_min_width="155dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/producerAreaNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:edit_label_min_width="155dp"
                 app:edit_hint="请输入网点名称"
-                app:edit_label="*网点名称：" />
+                app:edit_label="*网点名称："
+                app:edit_label_min_width="155dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/enterpriseUrlEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:edit_label_min_width="155dp"
                 app:edit_hint="请输入样品网址"
-                app:edit_label="*样品网址：" />
+                app:edit_label="*样品网址："
+                app:edit_label_min_width="155dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/producerAddressEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:edit_label_min_width="155dp"
                 app:edit_hint="请输入单位地址"
-                app:edit_label="*单位地址：" />
+                app:edit_label="*单位地址："
+                app:edit_label_min_width="155dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/producerContactsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:edit_label_min_width="155dp"
                 app:edit_hint="请输入法人"
-                app:edit_label="*法人：" />
+                app:edit_label="*法人："
+                app:edit_label_min_width="155dp" />
 
             <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
                 android:id="@+id/sampleTypeRadioGroup"
@@ -84,12 +90,13 @@
                 app:radio_label="*单位名址\n信息来源：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/producerPhoneEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:edit_label_min_width="155dp"
                 app:edit_hint="请输入法人联系电话"
-                app:edit_label="*联系电话：" />
+                app:edit_label="*联系电话："
+                app:edit_label_min_width="155dp" />
 
         </LinearLayout>
 
