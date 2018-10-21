@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.common.ItemDecoration
+import com.zhengdianfang.samplingpad.task.canot_verify.CanotVerifyReasonActivity
 import com.zhengdianfang.samplingpad.task.food_product.FoodProductSamplingTableActivity
 import com.zhengdianfang.samplingpad.task.network_product.NetworkProductSamplingTableActivity
 import com.zhengdianfang.samplingpad.task.normal_product.NormalProductSamplingTableActivity
@@ -62,6 +63,11 @@ class TaskListFragment : BaseFragment() {
                 Task_Type.NORMAL_TASK.value -> startActivity(Intent(context, NormalProductSamplingTableActivity::class.java).putExtra("task", task))
                 Task_Type.FOOD_TASK.value -> startActivity(Intent(context, FoodProductSamplingTableActivity::class.java).putExtra("task", task))
                 Task_Type.NETWORK_TASK.value -> startActivity(Intent(context, NetworkProductSamplingTableActivity::class.java).putExtra("task", task))
+            }
+        }
+        allTaskItemAdapter.setOnItemChildClickListener { _, view, _ ->
+            if (view.id == R.id.operationButton2) {
+                startActivity(Intent(context, CanotVerifyReasonActivity::class.java))
             }
         }
         taskRecyclerView.adapter = allTaskItemAdapter

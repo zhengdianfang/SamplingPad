@@ -37,6 +37,8 @@ class AllTaskItemAdapter(data: MutableList<TaskItem>)
         helper.setText(R.id.level4CategoryTextView, "食品细类：${item.level4Name ?: ""}")
         helper.setText(R.id.addressTextView, "抽样地点：${item.sampleLinkName ?: ""}")
         helper.setText(R.id.spaceTextView, "场所名称：${item.enterpriseName ?: ""}")
+        helper.addOnClickListener(R.id.operationButton1)
+        helper.addOnClickListener(R.id.operationButton2)
     }
 
     private fun renderMarkImageView(helper: BaseViewHolder, item: TaskItem) {
