@@ -27,44 +27,49 @@
                 android:text="委托企业信息" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/entrustLicenseNumberEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:edit_label_min_width="120dp"
                 app:edit_hint="请输入生产许可证"
-                app:edit_label="*生产许可证：" />
+                app:edit_label="*生产许可证："
+                app:edit_label_min_width="120dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/entrustNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:edit_label_min_width="120dp"
                 app:edit_hint="请输入单位名称"
-                app:edit_label="*单位名称：" />
+                app:edit_label="*单位名称："
+                app:edit_label_min_width="120dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/entrustAddressEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:edit_label_min_width="120dp"
                 app:edit_hint="请输入单位地址"
-                app:edit_label="*单位地址：" />
+                app:edit_label="*单位地址："
+                app:edit_label_min_width="120dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/entrustContactsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:edit_label_min_width="120dp"
                 app:edit_hint="请输入联系人"
-                app:edit_label="*联系人：" />
+                app:edit_label="*联系人："
+                app:edit_label_min_width="120dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/entrustPhoneEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:edit_label_min_width="120dp"
                 app:edit_hint="请输入联系电话"
-                app:edit_label="*联系电话：" />
+                app:edit_label="*联系电话："
+                app:edit_label_min_width="120dp" />
 
         </LinearLayout>
 

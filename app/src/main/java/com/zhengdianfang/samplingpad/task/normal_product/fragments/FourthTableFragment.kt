@@ -10,7 +10,7 @@ import com.zhengdianfang.samplingpad.common.components.BaseComponent
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import kotlinx.android.synthetic.main.fragment_fourth_normal_table_layout.*
 
-class FourthTableFragment: TableFragment() {
+open class FourthTableFragment: TableFragment() {
 
     companion object {
         fun newInstance(taskItem: TaskItem?): FourthTableFragment {

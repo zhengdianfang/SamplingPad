@@ -44,9 +44,9 @@
         <item>选择原产地</item>
     </string-array>
 
-    <string-array name="sample_type_array">
-        <item>食用农产品</item>
-        <item>工业加工食品</item>
+    <string-array name="enterprise_address_sources_array">
+        <item>通过网店页面查询</item>
+        <item>无</item>
     </string-array>
 
     <string-array name="sample_field_array">

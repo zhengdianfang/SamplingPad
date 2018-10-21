@@ -66,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:radio_buttons="@array/sample_type_array"
+                app:radio_buttons="@array/enterprise_address_sources_array"
                 app:radio_label="*样品类型：" />
 
             <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent

@@ -27,7 +27,7 @@
                 android:text="入网经营者信息" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/producerLicenseNumberEditText"
+                android:id="@+id/enterpriseLicenseNumberNumberEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -36,7 +36,7 @@
                 app:edit_label_min_width="155dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/producerCsNoEditText"
+                android:id="@+id/enterpriseQsNoEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -45,7 +45,7 @@
                 app:edit_label_min_width="155dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/producerAreaNameEditText"
+                android:id="@+id/enterpriseAreaNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -63,7 +63,7 @@
                 app:edit_label_min_width="155dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/producerAddressEditText"
+                android:id="@+id/enterpriseAddressEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -72,7 +72,7 @@
                 app:edit_label_min_width="155dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/producerContactsEditText"
+                android:id="@+id/enterpriseContactsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -81,16 +81,16 @@
                 app:edit_label_min_width="155dp" />
 
             <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
-                android:id="@+id/sampleTypeRadioGroup"
+                android:id="@+id/enterpriseAddressSourcesRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:radio_label_min_width="155dp"
-                app:radio_buttons="@array/sample_type_array"
+                app:radio_buttons="@array/enterprise_address_sources_array"
                 app:radio_label="*单位名址\n信息来源：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/producerPhoneEditText"
+                android:id="@+id/enterprisePhoneEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"

@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.TableFragment
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
-import kotlinx.android.synthetic.main.fragment_first_normal_table_layout.*
 import kotlinx.android.synthetic.main.fragment_third_network_table_layout.*
-import me.yokeyword.fragmentation.SupportFragment
 
 class ThirdTableFragment: TableFragment() {
 
@@ -29,36 +27,45 @@ class ThirdTableFragment: TableFragment() {
 
     override fun setupViews() {
         super.setupViews()
-        producerLicenseNumberEditText.setEditTextContent(taskItem.producerLicenseNumber)
-        producerCsNoEditText.setEditTextContent(taskItem.producerCsNo)
-        producerAreaNameEditText.setEditTextContent(taskItem.producerAreaName)
+        enterpriseLicenseNumberNumberEditText.setEditTextContent(taskItem.enterpriseLicenseNumber)
+        enterpriseQsNoEditText.setEditTextContent(taskItem.enterpriseQsNo)
+        enterpriseAreaNameEditText.setEditTextContent(taskItem.enterpriseAreaName)
         enterpriseUrlEditText.setEditTextContent(taskItem.enterpriseUrl)
-        producerAddressEditText.setEditTextContent(taskItem.producerAddress)
-        producerContactsEditText.setEditTextContent(taskItem.producerContacts)
-        producerPhoneEditText.setEditTextContent(taskItem.producerPhone)
+        enterpriseAddressEditText.setEditTextContent(taskItem.enterpriseAddress)
+        enterpriseContactsEditText.setEditTextContent(taskItem.enterpriseContacts)
+        enterprisePhoneEditText.setEditTextContent(taskItem.enterprisePhone)
+
+        val sourceArray = resources.getStringArray(R.array.enterprise_address_sources_array)
+        if (taskItem.enterpriseAddressSources != null) {
+            enterpriseAddressSourcesRadioGroup.setDefaultCheckedRadioButton(sourceArray[taskItem.enterpriseAddressSources!! + 1])
+        }
     }
 
     override fun submitSuccessful() {
+        start(FourthTableFragment.newInstance(taskItem))
     }
 
     override fun assembleSubmitTaskData() {
-        taskItem.producerLicenseNumber = producerLicenseNumberEditText.getContent()
-        taskItem.producerCsNo = producerCsNoEditText.getContent()
-        taskItem.producerAreaName = producerAreaNameEditText.getContent()
+        taskItem.enterpriseLicenseNumber = enterpriseLicenseNumberNumberEditText.getContent()
+        taskItem.enterpriseQsNo = enterpriseQsNoEditText.getContent()
+        taskItem.enterpriseAreaName = enterpriseAreaNameEditText.getContent()
         taskItem.enterpriseUrl = enterpriseUrlEditText.getContent()
-        taskItem.producerAddress = producerAddressEditText.getContent()
-        taskItem.producerContacts = producerContactsEditText.getContent()
-        taskItem.producerPhone = producerPhoneEditText.getContent()
+        taskItem.enterpriseAddress = enterpriseAddressEditText.getContent()
+        taskItem.enterpriseContacts = enterpriseContactsEditText.getContent()
+        taskItem.enterprisePhone = enterprisePhoneEditText.getContent()
+
+        val sourceArray = resources.getStringArray(R.array.enterprise_address_sources_array)
+        taskItem.enterpriseAddressSources = sourceArray.indexOf(enterpriseAddressSourcesRadioGroup.getCheckedText()) + 1
     }
 
     override fun clearAllFilledData() {
-        producerLicenseNumberEditText.clear()
-        producerCsNoEditText.clear()
-        producerAreaNameEditText.clear()
+        enterpriseLicenseNumberNumberEditText.clear()
+        enterpriseQsNoEditText.clear()
+        enterpriseAreaNameEditText.clear()
         enterpriseUrlEditText.clear()
-        producerAddressEditText.clear()
-        producerContactsEditText.clear()
-        producerPhoneEditText.clear()
+        enterpriseAddressEditText.clear()
+        enterpriseContactsEditText.clear()
+        enterprisePhoneEditText.clear()
     }
 
 }
