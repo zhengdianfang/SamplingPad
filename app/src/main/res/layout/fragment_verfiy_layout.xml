@@ -112,5 +112,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
             android:text="@string/verify_begin_text" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/middle"
+            android:lineSpacingExtra="8dp"
+            android:text="@string/verify_detail_text"/>
     </LinearLayout>
 </ScrollView>

@@ -81,10 +81,21 @@
     <string name="province_hint">省</string>
     <string name="town_hint">市</string>
     <string name="county_hint">区/县</string>
+    <string name="verify_detail_text">
+        校验说明（校验项均以指定的计划为校验范围进行校验）\n
+1. 同一生产日期样品不重复校验项：任务号/方案名称+生产许可证编号（SC/QS）+样品名称+生产日期\n
+2. 同一样品不超过5批次校验项：任务号/方案名称+生产许可证编号（SC/QS）+样品名称\n
+3. 同一生产单位样品不能超过5批次校验项：任务号/方案名称+生产许可证编号（SC/QS）\n
+4. 同一受检单位抽取的样品不能超过5批次校验项：任务号/方案名称+受检单位统一社会信用代码\n
+5. 同一类别样品在同一连锁品牌的受检单位抽样批次不能超过5批次校验项：食品大类+连锁品牌\n
+6. 该月内同一受检单位的走访次数不能超过5次校验项：受检单位统一社会信用代码+抽样日期（默认）\n
+    </string>
 
 
 
     <!-- spinner apis -->
     <string name="sample_link_name_data_api">app/samplelinks/%d</string>
     <string name="logout_text">登出</string>
+    <string name="reason_label">原因：</string>
+    <string name="resson_hint">请选择无法抽检原因</string>
 </resources>
