@@ -64,7 +64,7 @@ class SpinnerComponent: BaseComponent {
         }
 
         if (TextUtils.isEmpty(apiUrl).not()) {
-            createSpinnerDataDialog( 0)
+            spinnerDialog = createSpinnerDataDialog( 0)
             spinnerTextView.setOnClickListener {
                 spinnerDialog.show()
             }
@@ -95,7 +95,7 @@ class SpinnerComponent: BaseComponent {
                     spinnerTextView.text = text
                 }
             }
-        return SpinnerDialog(builder, spinnerItems, index)
+        return SpinnerDialog(builder, spinnerItems)
     }
 
 }

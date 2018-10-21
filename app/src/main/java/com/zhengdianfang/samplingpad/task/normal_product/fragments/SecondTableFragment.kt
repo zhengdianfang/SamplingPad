@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_second_normal_table_layout.*
 class SecondTableFragment: TableFragment() {
 
     companion object {
-        fun newInstance(taskItem: TaskItem): SecondTableFragment {
+        fun newInstance(taskItem: TaskItem?): SecondTableFragment {
             val fragment = SecondTableFragment()
             val bundle = Bundle()
             bundle.putParcelable("task", taskItem)
@@ -36,6 +36,9 @@ class SecondTableFragment: TableFragment() {
 
     override fun setupViews() {
         super.setupViews()
+        if (taskItem == null) {
+           return
+        }
         enterpriseLicenseNumberEditText.setEditTextContent(taskItem.enterpriseLicenseNumber)
         enterpriseNameEditText.setEditTextContent(taskItem.enterpriseName)
         enterpriseAreaTypeRadioGroup.setDefaultCheckedRadioButton(taskItem.enterpriseAreaType)

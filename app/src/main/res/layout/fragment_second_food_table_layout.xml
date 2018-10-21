@@ -47,12 +47,11 @@
                app:radio_buttons="@array/region_type_array"
                app:radio_label="*区域类型：" />
 
-           <com.zhengdianfang.samplingpad.common.components.SpinnerGroupComponent
+           <com.zhengdianfang.samplingpad.common.components.AdminRegionSpinnerGroupComponent
+               android:id="@+id/regionSpinnerGroup"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:layout_marginTop="16dp"
-               app:spinner_group_label="*行政区域："
-               app:spinner_group_hints="@array/grovment_region_array" />
+               android:layout_marginTop="16dp" />
 
            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
                android:layout_width="match_parent"
@@ -65,8 +64,9 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="16dp"
-               app:spinner_label="*抽样地点："
-               app:spinner_hint="@array/verify_location_array" />
+               app:spinner_api="@string/sample_link_name_data_api"
+               app:spinner_label="@string/sample_link_name_label"
+               app:spinner_hint="@string/sample_link_name_hint" />
 
            <com.zhengdianfang.samplingpad.common.components.EditComponent
                android:layout_width="match_parent"

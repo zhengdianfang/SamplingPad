@@ -22,5 +22,6 @@ class SecondTableFragment: SupportFragment() {
         nextButtonButton.setOnClickListener {
             start(ThirdTableFragment.newInstance())
         }
+        regionSpinnerGroup.fetchData()
     }
 }

@@ -12,7 +12,7 @@ import com.zhengdianfang.samplingpad.task.normal_product.NormalProductSamplingTa
 import kotlinx.android.synthetic.main.fragment_verfiy_layout.*
 import me.yokeyword.fragmentation.SupportFragment
 
-class VerfiyFragment : SupportFragment() {
+class VerifyFragment : SupportFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

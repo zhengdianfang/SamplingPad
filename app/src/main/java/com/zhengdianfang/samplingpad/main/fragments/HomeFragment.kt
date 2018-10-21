@@ -24,7 +24,7 @@ class HomeFragment : SupportFragment() {
     }
 
     private fun setupViews() {
-        val verifyFragment = findChildFragment(VerfiyFragment::class.java)
+        val verifyFragment = findChildFragment(VerifyFragment::class.java)
         val taskListFragment = findChildFragment(TaskListFragment::class.java)
         homeTabBar.setOnCheckedChangeListener { _, buttonId ->
             when (buttonId) {

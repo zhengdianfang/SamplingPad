@@ -1,6 +1,7 @@
 package com.zhengdianfang.samplingpad.task.api
 
 import com.zhengdianfang.samplingpad.api.Response
+import com.zhengdianfang.samplingpad.common.entities.Region
 import com.zhengdianfang.samplingpad.task.entities.StatusCount
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import retrofit2.Call
@@ -22,4 +23,7 @@ interface TaskApi {
 
     @PUT("app/samples/{id}")
     fun saveSample(@Path("id") id: String, @Body taskItem: TaskItem): Call<Response<String>>
+
+    @GET("app/arealis/allTwo")
+    fun fetchRegionData(): Call<Response<MutableList<Region>>>
 }

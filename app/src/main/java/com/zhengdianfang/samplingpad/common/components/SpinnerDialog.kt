@@ -12,9 +12,14 @@ import org.jetbrains.anko.uiThread
 
 class SpinnerDialog(
     builder: Builder,
-    private val spinnerItems: MutableList<SpinnerItem>,
-    val index: Int
+    private val spinnerItems: MutableList<SpinnerItem>
 ) : MaterialDialog(builder) {
+
+    fun notiftyData(newData: MutableList<SpinnerItem>) {
+        spinnerItems.clear()
+        spinnerItems.addAll(newData)
+        notifyItemsChanged()
+    }
 
     fun fetchData(url: String) {
         doAsync {

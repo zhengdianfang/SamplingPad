@@ -40,7 +40,7 @@
         android:id="@+id/homeFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.zhengdianfang.samplingpad.main.fragments.VerfiyFragment"
+        android:name="com.zhengdianfang.samplingpad.main.fragments.VerifyFragment"
         tools:layout="@layout/fragment_verfiy_layout"/>
 
     <fragment

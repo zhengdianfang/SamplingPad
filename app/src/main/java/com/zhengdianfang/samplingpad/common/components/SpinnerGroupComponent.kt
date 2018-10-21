@@ -87,10 +87,9 @@ class SpinnerGroupComponent: BaseComponent {
             .items(spinnerItems)
             .itemsCallback { dialog, _, _, text ->
                 if (dialog is SpinnerDialog) {
-                    spinnerTextViews[dialog.index].text = text
                 }
             }
-        return SpinnerDialog(builder, spinnerItems, index)
+        return SpinnerDialog(builder, spinnerItems )
     }
 
 }
