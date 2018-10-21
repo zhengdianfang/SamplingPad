@@ -14,6 +14,7 @@ import com.zhengdianfang.samplingpad.common.LabelView
 class RadioGroupComponent: BaseComponent {
 
     private lateinit var radioGroup: FlexboxLayout
+    var radioButtonCheckCallback: ((position: Int, text: String) -> Unit)? = null
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
         this.setupViews(context, attributeSet)
@@ -99,6 +100,8 @@ class RadioGroupComponent: BaseComponent {
                     val radioButton = radioGroup.getChildAt(index) as RadioButton
                     if (checkedButton.text !== radioButton.text) {
                         radioButton.isChecked = false
+                    } else {
+                        radioButtonCheckCallback?.invoke(index, checkedButton.text.toString())
                     }
                 }
             }

@@ -12,7 +12,7 @@ import com.zhengdianfang.samplingpad.task.normal_product.fragments.TableFragment
 abstract class TableFragment: BaseFragment() {
 
     protected val taskItem by lazy { arguments?.getParcelable("task") as TaskItem }
-    protected val tableFragmentViewModel by lazy { ViewModelProviders.of(this).get(TableFragmentViewModel::class.java) }
+    private val tableFragmentViewModel by lazy { ViewModelProviders.of(this).get(TableFragmentViewModel::class.java) }
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -44,7 +44,7 @@ abstract class TableFragment: BaseFragment() {
         })
         tableFragmentViewModel.responseLiveData.observe(this, Observer { response ->
             Toast.makeText(context, response!!.msg, Toast.LENGTH_SHORT).show()
-            if (response!!.code == 200) {
+            if (response.code == 200) {
                 this.submitSuccessful()
             }
         })

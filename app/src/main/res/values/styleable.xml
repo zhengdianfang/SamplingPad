@@ -13,8 +13,15 @@
     </declare-styleable>
 
     <declare-styleable name="AppTheme.SpinnerGroupComponent">
-        <attr name="spinner_hints" format="reference" />
-        <attr name="spinner_apis" format="reference" />
+        <attr name="spinner_group_hints" format="reference" />
+        <attr name="spinner_group_apis" format="reference" />
+        <attr name="spinner_group_label" format="string" />
+        <attr name="spinner_group_label_min_width" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="AppTheme.SpinnerComponent">
+        <attr name="spinner_hint" format="reference" />
+        <attr name="spinner_api" format="reference" />
         <attr name="spinner_label" format="string" />
         <attr name="spinner_label_min_width" format="dimension" />
     </declare-styleable>

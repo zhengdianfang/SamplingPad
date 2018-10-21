@@ -71,4 +71,11 @@
     <string name="please_input_verify_code_hint">请输入验证码</string>
     <string name="login_successful">登录成功</string>
     <string name="login_failure">登录失败</string>
+    <string name="sample_link_name_text">选择抽样地点</string>
+    <string name="sample_link_name_label">*抽样地点：</string>
+
+
+
+    <!-- spinner apis -->
+    <string name="sample_link_name_data_api">app/samplelinks/%d</string>
 </resources>

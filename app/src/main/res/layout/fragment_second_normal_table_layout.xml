@@ -55,25 +55,25 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="16dp"
-               app:spinner_label="*行政区域："
-               app:spinner_hints="@array/grovment_region_array" />
+               app:spinner_group_label="*行政区域："
+               app:spinner_group_hints="@array/grovment_region_array" />
 
            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
                android:id="@+id/enterpriseLinkNameRadioGroup"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="16dp"
-               app:radio_buttons="@array/verify_step_array"
+               app:radio_buttons="@array/sample_link_names"
                app:radio_label="*抽样环节：" />
 
-           <com.zhengdianfang.samplingpad.common.components.SpinnerGroupComponent
-               android:id="@+id/verifyAddressSpinner"
+           <com.zhengdianfang.samplingpad.common.components.SpinnerComponent
+               android:id="@+id/sampleLinkNameSpinner"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="16dp"
-               app:spinner_label="*抽样地点："
-               app:spinner_apis="@array/pack_type_request_url_array"
-               app:spinner_hints="@array/verify_location_array" />
+               app:spinner_label="@string/sample_link_name_label"
+               app:spinner_api="@string/sample_link_name_data_api"
+               app:spinner_hint="@string/sample_link_name_text" />
 
            <com.zhengdianfang.samplingpad.common.components.EditComponent
                android:id="@+id/enterpriseAddressEditText"

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.R
+import com.zhengdianfang.samplingpad.api.ApiClient
 import com.zhengdianfang.samplingpad.common.TableFragment
 import com.zhengdianfang.samplingpad.common.components.BaseComponent
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
@@ -40,7 +41,12 @@ class SecondTableFragment: TableFragment() {
         enterpriseAreaTypeRadioGroup.setDefaultCheckedRadioButton(taskItem.enterpriseAreaType)
         // TODO 区 街道选择
         enterpriseLinkNameRadioGroup.setDefaultCheckedRadioButton(taskItem.enterpriseLinkName)
-        // TODO 抽样地点
+        enterpriseLinkNameRadioGroup.radioButtonCheckCallback  = { _, text ->
+            val enterpriseLinkNames = resources.getStringArray(R.array.sample_link_names)
+            val url = getString(R.string.sample_link_name_data_api, enterpriseLinkNames.indexOf(text) + 1)
+            sampleLinkNameSpinner.fetchSpinnerItems("${ApiClient.HOST}$url")
+        }
+        sampleLinkNameSpinner.setDefaultText(taskItem.sampleLinkName)
         enterpriseAddressEditText.setEditTextContent(taskItem.enterpriseAddress)
         val certificates = resources.getStringArray(R.array.licence_type_array)
         when(taskItem.enterpriseMOrP) {

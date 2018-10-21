@@ -8,7 +8,8 @@ data class StatusCount (
     var countRefuse: Int = 0,
     var countEnd: Int = 0,
     var countAbnormal: Int = 0,
-    var countAll: Int = 0
+    var countAll: Int = 0,
+    var retireCount: Int = 0
 )
 
 enum class Task_Status(val value: Int) {

@@ -4,16 +4,16 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.Gravity
-import android.view.View
 import android.widget.*
 import com.afollestad.materialdialogs.MaterialDialog
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.api.ApiClient
 import com.zhengdianfang.samplingpad.common.LabelView
+import com.zhengdianfang.samplingpad.common.entities.SpinnerItem
 
 class SpinnerGroupComponent: BaseComponent {
 
-    private val spinnerDialogList = mutableListOf<MaterialDialog>()
+    private val spinnerDialogList = mutableListOf<SpinnerDialog>()
     private val spinnerTextViews = mutableListOf<TextView>()
     private var hints = arrayOf<CharSequence>()
 
@@ -36,8 +36,8 @@ class SpinnerGroupComponent: BaseComponent {
     }
 
     private fun initSpinnerGroupView(context: Context, attrs: TypedArray) {
-        hints = attrs.getTextArray(R.styleable.AppTheme_SpinnerGroupComponent_spinner_hints)
-        val apiUrls = attrs.getTextArray(R.styleable.AppTheme_SpinnerGroupComponent_spinner_apis)
+        hints = attrs.getTextArray(R.styleable.AppTheme_SpinnerGroupComponent_spinner_group_hints)
+        val apiUrls = attrs.getTextArray(R.styleable.AppTheme_SpinnerGroupComponent_spinner_group_apis)
         hints?.forEachIndexed { index, text ->
             val textView = TextView(context).apply {
                 setBackgroundResource(R.drawable.edit_text_background)
@@ -69,25 +69,28 @@ class SpinnerGroupComponent: BaseComponent {
 
     private fun initLabelTextView(context: Context, attrs: TypedArray) {
         labelTextView = LabelView(context, null, R.attr.titleTextStyle, R.style.AppTheme_Table_Title).apply {
-            text = attrs.getString(R.styleable.AppTheme_SpinnerGroupComponent_spinner_label)
+            text = attrs.getString(R.styleable.AppTheme_SpinnerGroupComponent_spinner_group_label)
             gravity = Gravity.RIGHT
             layoutParams = LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply{
                 gravity = Gravity.CENTER_VERTICAL
                 rightMargin = (8 * resources.displayMetrics.density).toInt()
             }
-            minWidth = attrs.getDimension(R.styleable.AppTheme_SpinnerGroupComponent_spinner_label_min_width, 0F).toInt()
+            minWidth = attrs.getDimension(R.styleable.AppTheme_SpinnerGroupComponent_spinner_group_label_min_width, 0F).toInt()
         }
 
         addView(labelTextView)
     }
 
     private fun createSpinnerDataDialog(url: String, index: Int): SpinnerDialog {
-        val builder = MaterialDialog.Builder(context).items("").itemsCallback { dialog, _, position, text ->
-            if (dialog is SpinnerDialog) {
-                spinnerTextViews[dialog.index].text = text
+        val spinnerItems = mutableListOf<SpinnerItem>()
+        val builder = MaterialDialog.Builder(context)
+            .items(spinnerItems)
+            .itemsCallback { dialog, _, _, text ->
+                if (dialog is SpinnerDialog) {
+                    spinnerTextViews[dialog.index].text = text
+                }
             }
-        }
-        return SpinnerDialog(builder, url, index)
+        return SpinnerDialog(builder, spinnerItems, index)
     }
 
 }

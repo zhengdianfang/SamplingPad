@@ -27,7 +27,7 @@ class LoggingInterceptor: Interceptor {
             Timber.tag("LoggingInterceptor")
                 .d("${request.url().url().path}, response: $responseText")
 
-            return response.newBuilder().body(ResponseBody.create(MediaType.parse("application/json"), responseText)).build()
+            return response.newBuilder().body(ResponseBody.create(MediaType.parse("application/json"), responseText ?: "")).build()
         }
         return response
     }

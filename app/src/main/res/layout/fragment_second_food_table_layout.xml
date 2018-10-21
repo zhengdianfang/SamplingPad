@@ -51,28 +51,27 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="16dp"
-               app:spinner_label="*行政区域："
-               app:spinner_hints="@array/grovment_region_array" />
+               app:spinner_group_label="*行政区域："
+               app:spinner_group_hints="@array/grovment_region_array" />
 
            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="16dp"
-               app:radio_buttons="@array/verify_step_array"
+               app:radio_buttons="@array/sample_link_names"
                app:radio_label="*抽样环节：" />
 
-           <com.zhengdianfang.samplingpad.common.components.SpinnerGroupComponent
+           <com.zhengdianfang.samplingpad.common.components.SpinnerComponent
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="16dp"
                app:spinner_label="*抽样地点："
-               app:spinner_hints="@array/verify_location_array" />
+               app:spinner_hint="@array/verify_location_array" />
 
            <com.zhengdianfang.samplingpad.common.components.EditComponent
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="24dp"
-               app:edit_label_min_width="155dp"
                app:edit_hint="请输入单位地址"
                app:edit_label="*单位地址：" />
 

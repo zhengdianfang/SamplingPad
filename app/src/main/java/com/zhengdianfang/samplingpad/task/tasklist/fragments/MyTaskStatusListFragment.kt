@@ -70,7 +70,7 @@ class MyTaskStatusListFragment : BaseFragment() {
             refusesItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countRefuse ?: ""}"
             cannotVerifyItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countAbnormal ?: ""}"
             completeItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countEnd ?: ""}"
-            cancelItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countEnd ?: ""}"
+            cancelItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.retireCount?: ""}"
         })
     }
 

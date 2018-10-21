@@ -19,7 +19,7 @@
         <item>景点</item>
     </string-array>
     
-    <string-array name="verify_step_array">
+    <string-array name="sample_link_names">
         <item>生产环节</item>
         <item>流通环节</item>
         <item>餐饮环节</item>
@@ -68,8 +68,8 @@
         <item>散装</item>
     </string-array>
 
-    <string-array name="pack_type_request_url_array">
-        <item>/app/samplepackagelis</item>
+    <string-array name="sample_link_request_url_array">
+        <item>/app/samplelinks/linkId</item>
     </string-array>
 
     <string-array name="sample_pack_type_array">
