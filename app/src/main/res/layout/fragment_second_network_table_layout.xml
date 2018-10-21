@@ -27,44 +27,49 @@
                 android:text="第三方平台提供者信息" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/thirdLicenseNumberEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:edit_label_min_width="155dp"
                 app:edit_hint="请输入营业执照号"
-                app:edit_label="*营业执照号：" />
+                app:edit_label="*营业执照号："
+                app:edit_label_min_width="155dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/thirdNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:edit_label_min_width="155dp"
                 app:edit_hint="请输入单位名称"
-                app:edit_label="*单位名称：" />
+                app:edit_label="*单位名称："
+                app:edit_label_min_width="155dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/thirdPlatformNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:edit_label_min_width="155dp"
                 app:edit_hint="请输入第三方平台全名"
-                app:edit_label="*第三方平台全名：" />
+                app:edit_label="*第三方平台全名："
+                app:edit_label_min_width="155dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/thirdQsNoEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:edit_label_min_width="155dp"
                 app:edit_hint="请输入入网许可证号或ICP经营许可证"
-                app:edit_label="*许可证：" />
+                app:edit_label="*许可证："
+                app:edit_label_min_width="155dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/thirdUrlEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:edit_label_min_width="155dp"
                 app:edit_hint="请输入法人"
-                app:edit_label="*平台主页网址：" />
+                app:edit_label="*平台主页网址："
+                app:edit_label_min_width="155dp" />
 
         </LinearLayout>
 

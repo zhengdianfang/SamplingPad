@@ -9,7 +9,7 @@ import com.zhengdianfang.samplingpad.common.TableFragment
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import kotlinx.android.synthetic.main.fragment_first_normal_table_layout.*
 
-class FirstTableFragment: TableFragment() {
+open class FirstTableFragment: TableFragment() {
 
     companion object {
         fun newInstance(taskItem: TaskItem): FirstTableFragment {
@@ -35,25 +35,23 @@ class FirstTableFragment: TableFragment() {
 
     override fun setupViews() {
         super.setupViews()
-        if (taskItem != null) {
-            taskSourceTextView.setContentText(taskItem.taskSource)
-            planNameTextView.setContentText(taskItem.planName)
-            sampleCodeTextView.setContentText(taskItem.code)
-            detectionCompanyTextView.setContentText(taskItem.detectionCompanyName)
-            implPlanCodeTextView.setContentText(taskItem.implPlanCode)
-            leve1TypeTextView.setContentText(taskItem.level1Name)
-            level2TypeTextView.setContentText(taskItem.level2Name)
-            level3TypeTextView.setContentText(taskItem.level3Name)
-            level4TypeTextView.setContentText(taskItem.level4Name)
+        taskSourceTextView.setContentText(taskItem.taskSource)
+        planNameTextView.setContentText(taskItem.planName)
+        sampleCodeTextView.setContentText(taskItem.code)
+        detectionCompanyTextView.setContentText(taskItem.detectionCompanyName)
+        implPlanCodeTextView.setContentText(taskItem.implPlanCode)
+        leve1TypeTextView.setContentText(taskItem.level1Name)
+        level2TypeTextView.setContentText(taskItem.level2Name)
+        level3TypeTextView.setContentText(taskItem.level3Name)
+        level4TypeTextView.setContentText(taskItem.level4Name)
 
-            createOrgNameTextView.setContentText(taskItem.createOrgName)
-            createOrgAddressTextView.setContentText(taskItem.createOrgAddress)
-            createOrgAreaNameTextView.setContentText(taskItem.createOrgAreaName)
-            createOrgContactsTextView.setContentText(taskItem.createOrgContacts)
-            creatorEmailTextView.setContentText(taskItem.creatorEmail)
-            creatorPhoneTextView.setContentText(taskItem.creatorPhone)
-            inspectionKindNameRadioGroup.setDefaultCheckedRadioButton(taskItem.inspectionKindName)
-        }
+        createOrgNameTextView.setContentText(taskItem.createOrgName)
+        createOrgAddressTextView.setContentText(taskItem.createOrgAddress)
+        createOrgAreaNameTextView.setContentText(taskItem.createOrgAreaName)
+        createOrgContactsTextView.setContentText(taskItem.createOrgContacts)
+        creatorEmailTextView.setContentText(taskItem.creatorEmail)
+        creatorPhoneTextView.setContentText(taskItem.creatorPhone)
+        inspectionKindNameRadioGroup.setDefaultCheckedRadioButton(taskItem.inspectionKindName)
 
 
     }

@@ -30,7 +30,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:text="@string/start_verify_button"
+        android:textColor="@color/colorPrimary"
+        android:background="@drawable/stoke_button_background"
+        android:text="@string/can_not_verify_button"
         app:layout_constraintBaseline_toBaselineOf="@+id/operationButton1"
         app:layout_constraintEnd_toStartOf="@+id/operationButton1" />
 </android.support.constraint.ConstraintLayout>

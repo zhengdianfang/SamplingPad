@@ -96,7 +96,13 @@ data class TaskItem(
     var sampleAmountForRetest: Int?,
     var sampleStorageEnvironment: String?,
     var storagePlaceForRetest: String?,
-    var lableStandard: String?
+    var lableStandard: String?,
+    var thirdLicenseNumber: String?,
+    var thirdName: String?,
+    var thirdPlatformName: String?,
+    var thirdQsNoEditText: String?,
+    var thirdQsNo: String?,
+    var thirdUrl: String?
 
 ) : Parcelable {
     companion object {
