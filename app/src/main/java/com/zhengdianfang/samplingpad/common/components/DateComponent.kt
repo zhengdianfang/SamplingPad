@@ -1,6 +1,5 @@
 package com.zhengdianfang.samplingpad.common.components
 
-import android.app.DatePickerDialog
 import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
@@ -8,6 +7,8 @@ import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.zhengdianfang.samplingpad.R
+import com.zhengdianfang.samplingpad.common.BaseActivity
+import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.common.LabelView
 
 
@@ -15,8 +16,13 @@ class DateComponent : LinearLayout {
 
     private lateinit var labelTextView: LabelView
     private lateinit var dateTextView: TextView
-    private val datePickerDialog by lazy {
-        DatePickerDialog(context)
+
+    private val datePickDialog by lazy {
+        val dialog = DatePickDialog()
+        dialog.onConfirmCallback = { date ->
+            dateTextView.text = date
+        }
+        dialog
     }
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
@@ -46,7 +52,9 @@ class DateComponent : LinearLayout {
         }
 
         dateTextView.setOnClickListener {
-            datePickerDialog.show()
+            if (context is BaseActivity ) {
+                datePickDialog.show(context.supportFragmentManager, "datePicker" )
+            }
         }
         addView(dateTextView)
     }

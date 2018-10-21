@@ -75,7 +75,28 @@ data class TaskItem(
     var agencyName: String?,
     var agencyAddress: String?,
     var agencyContacts: String?,
-    var agencyPhone: String?
+    var agencyPhone: String?,
+    var producerBarcode :String?,
+    var sampleBrand: String?,
+    var samplePrice: Double?,
+    var sampleType: String?,
+    var sampleAttribute: String?,
+    var sampleSource: String?,
+    var samplePackageType: String?,
+    var samplePackaging: String?,
+    var sampleProductDate: String?,
+    var sampleBatchNo: String?,
+    var sampleQgp: String?,
+    var sampleSpecification: String?,
+    var sampleQualityLevel: String?,
+    var sampleMode: String?,
+    var sampleForm: String?,
+    var sampleAmount: Int?,
+    var sampleAmountForTest: Int?,
+    var sampleAmountForRetest: Int?,
+    var sampleStorageEnvironment: String?,
+    var storagePlaceForRetest: String?,
+    var lableStandard: String?
 
 ) : Parcelable {
     companion object {

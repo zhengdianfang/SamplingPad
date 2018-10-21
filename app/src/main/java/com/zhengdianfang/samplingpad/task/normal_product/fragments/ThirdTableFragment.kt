@@ -51,7 +51,7 @@ class ThirdTableFragment: TableFragment() {
     }
 
     override fun submitSuccessful() {
-        start(FourthTableFragment.newInstance())
+        start(FourthTableFragment.newInstance(taskItem))
     }
 
     override fun assembleSubmitTaskData() {

@@ -12,6 +12,7 @@
         android:padding="16dp">
 
         <LinearLayout
+            android:id="@+id/tableFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
@@ -28,14 +29,7 @@
                 android:text="样品信息" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:edit_hint="请输入订单号"
-                app:edit_label="*订单号：" />
-
-            <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/barCodeEditText"
+                android:id="@+id/producerBarcodeEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -51,7 +45,7 @@
                 app:edit_label="*样品名称：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/tradeMarkEditText"
+                android:id="@+id/sampleBrandEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -60,7 +54,7 @@
 
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/productPriceEditText"
+                android:id="@+id/samplePriceEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -76,7 +70,7 @@
                 app:radio_label="*样品类型：" />
 
             <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
-                android:id="@+id/sampleFieldRadioGroup"
+                android:id="@+id/sampleAttributeRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -84,7 +78,7 @@
                 app:radio_label="*样品属性：" />
 
             <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
-                android:id="@+id/sampleResourceRadioGroup"
+                android:id="@+id/sampleSourceRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -92,7 +86,7 @@
                 app:radio_label="*样品来源：" />
 
             <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
-                android:id="@+id/packTypeRadioGroup"
+                android:id="@+id/samplePackageTypeRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -100,7 +94,7 @@
                 app:radio_label="*包装分类：" />
 
             <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
-                android:id="@+id/samplePackRadioGroup"
+                android:id="@+id/samplePackagingRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -108,16 +102,15 @@
                 app:radio_label="*样品包装：" />
 
             <com.zhengdianfang.samplingpad.common.components.DateComponent
-                android:id="@+id/produceDateView"
+                android:id="@+id/sampleProduceDateView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:date_label="*生产日期："
                 app:date_hint="请选择生产日期"
-                />
+                app:date_label="*生产日期：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/produceCodeEditText"
+                android:id="@+id/sampleBatchNoEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -126,7 +119,7 @@
 
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/expirationDateEditText"
+                android:id="@+id/sampleQgpEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -135,7 +128,7 @@
 
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/modeCodeEditText"
+                android:id="@+id/sampleSpecificationEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -143,7 +136,7 @@
                 app:edit_label="*规格型号：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/qualityGradeEditText"
+                android:id="@+id/sampleQualityLevelEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -151,15 +144,15 @@
                 app:edit_label="*质量等级：" />
 
             <com.zhengdianfang.samplingpad.common.components.DateComponent
-                android:id="@+id/verifyDateView"
+                android:id="@+id/sampleDateView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:date_label="*抽检日期："
-                app:date_hint="请选择抽检日期" />
+                app:date_hint="请选择抽检日期"
+                app:date_label="*抽检日期：" />
 
             <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
-                android:id="@+id/verifyFunctionRadioGroup"
+                android:id="@+id/sampleModeRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -167,7 +160,7 @@
                 app:radio_label="*抽样方式：" />
 
             <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
-                android:id="@+id/sampleShapeRadioGroup"
+                android:id="@+id/sampleFormRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -175,6 +168,7 @@
                 app:radio_label="*样品形态：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/sampleAmountEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -182,34 +176,24 @@
                 app:edit_label="*抽检基数：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/sampleAmountForTestEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 app:edit_hint="请输入检验数量"
                 app:edit_label="*检验数量：" />
 
-            <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:edit_hint="请输入检验数量单位"
-                app:edit_label="*检验数量单位：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/sampleAmountForRetestEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 app:edit_hint="请输入备样数量"
                 app:edit_label="*备样数量：" />
 
-            <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:edit_hint="请输入备样数量单位"
-                app:edit_label="*备样数量单位：" />
-
             <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+                android:id="@+id/sampleStorageEnvironmentRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -217,6 +201,7 @@
                 app:radio_label="*存储条件：" />
 
             <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+                android:id="@+id/storagePlaceForRetestRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -224,18 +209,13 @@
                 app:radio_label="*复检备份样品保存地：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/lableStandardEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 app:edit_hint="请输入执行标准"
                 app:edit_label="*标注执行标准：" />
 
-            <com.zhengdianfang.samplingpad.common.components.AreaEditComponent
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:edit_hint="请输入备注描述"
-                app:edit_label="备注：" />
         </LinearLayout>
 
 

@@ -2,13 +2,14 @@ package com.zhengdianfang.samplingpad.task.normal_product
 
 import android.os.Bundle
 import com.zhengdianfang.samplingpad.R
+import com.zhengdianfang.samplingpad.common.BaseActivity
 import com.zhengdianfang.samplingpad.task.normal_product.fragments.FirstTableFragment
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import com.zhengdianfang.samplingpad.task.normal_product.fragments.SecondTableFragment
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import me.yokeyword.fragmentation.SupportActivity
 
-class NormalProductSamplingTableActivity: SupportActivity() {
+class NormalProductSamplingTableActivity: BaseActivity() {
 
     val task by lazy { intent.getParcelableExtra("task") as TaskItem }
 
