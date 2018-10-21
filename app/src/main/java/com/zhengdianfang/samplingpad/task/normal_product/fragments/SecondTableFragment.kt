@@ -11,7 +11,7 @@ import com.zhengdianfang.samplingpad.common.components.BaseComponent
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import kotlinx.android.synthetic.main.fragment_second_normal_table_layout.*
 
-class SecondTableFragment: TableFragment() {
+open class SecondTableFragment: TableFragment() {
 
     companion object {
         fun newInstance(taskItem: TaskItem?): SecondTableFragment {
