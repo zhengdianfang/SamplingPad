@@ -41,6 +41,14 @@ class AdminRegionSpinnerGroupComponent: BaseComponent {
         streetSpinnerTextView!!.setTextColor(ContextCompat.getColor(context, R.color.colorLightGray))
     }
 
+    fun getContent(): String {
+        val area =
+            if (areaSpinnerTextView!!.text == resources.getString(R.string.spinner_region_hint)) "" else areaSpinnerTextView!!.text
+        val street =
+            if (streetSpinnerTextView!!.text == resources.getString(R.string.spinner_street_hint)) "" else streetSpinnerTextView!!.text
+        return "$area$street"
+    }
+
     fun fetchData() {
         doAsync {
             val response = ApiClient.INSTANCE

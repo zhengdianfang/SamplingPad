@@ -89,7 +89,7 @@ class SpinnerGroupComponent: BaseComponent {
                 if (dialog is SpinnerDialog) {
                 }
             }
-        return SpinnerDialog(builder, spinnerItems )
+        return SpinnerDialog(builder)
     }
 
 }

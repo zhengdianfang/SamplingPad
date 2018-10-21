@@ -36,20 +36,17 @@ class SecondTableFragment: TableFragment() {
 
     override fun setupViews() {
         super.setupViews()
-        if (taskItem == null) {
-           return
-        }
         enterpriseLicenseNumberEditText.setEditTextContent(taskItem.enterpriseLicenseNumber)
         enterpriseNameEditText.setEditTextContent(taskItem.enterpriseName)
         enterpriseAreaTypeRadioGroup.setDefaultCheckedRadioButton(taskItem.enterpriseAreaType)
-        // TODO 区 街道选择
+        regionSpinnerGroup.fetchData()
         enterpriseLinkNameRadioGroup.setDefaultCheckedRadioButton(taskItem.enterpriseLinkName)
         enterpriseLinkNameRadioGroup.radioButtonCheckCallback  = { _, text ->
             val enterpriseLinkNames = resources.getStringArray(R.array.sample_link_names)
             val url = getString(R.string.sample_link_name_data_api, enterpriseLinkNames.indexOf(text) + 1)
-            sampleLinkNameSpinner.fetchSpinnerItems("${ApiClient.HOST}$url")
+            enterprisePlaceNameSpinner.fetchData("${ApiClient.HOST}$url")
         }
-        sampleLinkNameSpinner.setDefaultText(taskItem.sampleLinkName)
+        enterprisePlaceNameSpinner.setDefaultText(taskItem.enterprisePlaceName)
         enterpriseAddressEditText.setEditTextContent(taskItem.enterpriseAddress)
         val certificates = resources.getStringArray(R.array.licence_type_array)
         when(taskItem.enterpriseMOrP) {
@@ -87,6 +84,31 @@ class SecondTableFragment: TableFragment() {
     }
 
     override fun assembleSubmitTaskData() {
+        taskItem.enterpriseLicenseNumber = enterpriseLicenseNumberEditText.getContent()
+        taskItem.enterpriseName = enterpriseNameEditText.getContent()
+        taskItem.enterpriseAreaType = enterpriseAreaTypeRadioGroup.getCheckedText()
+        taskItem.enterpriseAreaName = regionSpinnerGroup.getContent()
+        taskItem.enterpriseLinkName =  enterpriseLinkNameRadioGroup.getCheckedText()
+        taskItem.enterprisePlaceName =  enterprisePlaceNameSpinner.getContent()
+        taskItem.enterpriseAddress = enterpriseAddressEditText.getContent()
+
+        val certificates = resources.getStringArray(R.array.licence_type_array)
+        taskItem.enterpriseMOrP = certificates.indexOf(enterpriseMOrPRadioGroup.getCheckedText()) + 1
+        taskItem.enterpriseQsNo = enterpriseQsNoEditText.getContent()
+        taskItem.enterpriseLegalRep = enterpriseLegalRepEditText.getContent()
+        taskItem.enterpriseContacts = enterpriseContactsEditText.getContent()
+        taskItem.enterprisePhone = enterprisePhoneEditText.getContent()
+        taskItem.enterpriseFax = enterpriseFaxEditText.getContent()
+        taskItem.enterpriseZipCode = enterpriseZipCodeEditText.getContent()
+        taskItem.enterpriseAnnualSales = enterpriseAnnualSalesEditText.getContent()
+        taskItem.specialAreaName = specialAreaNameRadioGroup.getCheckedText()
+
+        val chainTypes = resources.getStringArray(R.array.verify_unit_array)
+        when {
+            enterpriseChainRadioGroup.getCheckedText() == chainTypes[0] -> taskItem.enterpriseChain = TaskItem.CHAIN_ENTERPRISE
+            enterpriseChainRadioGroup.getCheckedText() == chainTypes[1] -> taskItem.enterpriseChain = TaskItem.UN_CHAIN_ENTERPRISE
+            enterpriseChainRadioGroup.getCheckedText() == chainTypes[2] -> taskItem.enterpriseChain = TaskItem.CHAIN_BRAND
+        }
     }
 
     override fun clearAllFilledData() {

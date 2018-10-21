@@ -65,8 +65,8 @@
                android:layout_height="wrap_content"
                android:layout_marginTop="16dp"
                app:spinner_api="@string/sample_link_name_data_api"
-               app:spinner_label="@string/sample_link_name_label"
-               app:spinner_hint="@string/sample_link_name_hint" />
+               app:spinner_label="@string/enterprise_place_name_label"
+               app:spinner_hint="@string/enterprise_place_name_hint" />
 
            <com.zhengdianfang.samplingpad.common.components.EditComponent
                android:layout_width="match_parent"

@@ -71,8 +71,8 @@
     <string name="please_input_verify_code_hint">请输入验证码</string>
     <string name="login_successful">登录成功</string>
     <string name="login_failure">登录失败</string>
-    <string name="sample_link_name_hint">选择抽样地点</string>
-    <string name="sample_link_name_label">*抽样地点：</string>
+    <string name="enterprise_place_name_hint">选择抽样地点</string>
+    <string name="enterprise_place_name_label">*抽样地点：</string>
     <string name="admin_region_label">*行政区域：</string>
     <string name="spinner_region_hint">区</string>
     <string name="spinner_street_hint">街道</string>

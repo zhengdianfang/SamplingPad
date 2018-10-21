@@ -15,7 +15,7 @@ class NormalProductSamplingTableActivity: SupportActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_normal_product_sampling_table_layout)
-        loadRootFragment(R.id.contentFrame, SecondTableFragment.newInstance(task))
+        loadRootFragment(R.id.contentFrame, FirstTableFragment.newInstance(task))
 
         toolBarTitleView.setText(R.string.normal_product_title)
 

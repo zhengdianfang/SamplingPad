@@ -10,16 +10,7 @@ import okhttp3.Request
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class SpinnerDialog(
-    builder: Builder,
-    private val spinnerItems: MutableList<SpinnerItem>
-) : MaterialDialog(builder) {
-
-    fun notiftyData(newData: MutableList<SpinnerItem>) {
-        spinnerItems.clear()
-        spinnerItems.addAll(newData)
-        notifyItemsChanged()
-    }
+class SpinnerDialog(builder: Builder) : MaterialDialog(builder) {
 
     fun fetchData(url: String) {
         doAsync {
@@ -34,8 +25,6 @@ class SpinnerDialog(
                     val json2Pojo =
                         Gson().fromJson<Response<MutableList<SpinnerItem>>>(responseData, object: TypeToken<Response<MutableList<SpinnerItem>>>(){}.type)
                     if (json2Pojo.data != null) {
-                        spinnerItems.clear()
-                        spinnerItems.addAll(json2Pojo.data!!)
                         uiThread {
                             notifyItemsChanged()
                         }

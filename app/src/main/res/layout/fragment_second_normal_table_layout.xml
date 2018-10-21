@@ -52,6 +52,7 @@
                app:radio_label="*区域类型：" />
 
            <com.zhengdianfang.samplingpad.common.components.AdminRegionSpinnerGroupComponent
+               android:id="@+id/regionSpinnerGroup"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="16dp" />
@@ -65,13 +66,13 @@
                app:radio_label="*抽样环节：" />
 
            <com.zhengdianfang.samplingpad.common.components.SpinnerComponent
-               android:id="@+id/sampleLinkNameSpinner"
+               android:id="@+id/enterprisePlaceNameSpinner"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="16dp"
-               app:spinner_label="@string/sample_link_name_label"
+               app:spinner_label="@string/enterprise_place_name_label"
                app:spinner_api="@string/sample_link_name_data_api"
-               app:spinner_hint="@string/sample_link_name_hint" />
+               app:spinner_hint="@string/enterprise_place_name_hint" />
 
            <com.zhengdianfang.samplingpad.common.components.EditComponent
                android:id="@+id/enterpriseAddressEditText"

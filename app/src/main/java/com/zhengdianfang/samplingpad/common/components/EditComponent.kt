@@ -26,6 +26,10 @@ class EditComponent: BaseComponent {
         editTextView.setText(text)
     }
 
+    fun getContent(): String {
+        return editTextView.text.toString()
+    }
+
     override fun clear() {
         editTextView.setText("")
     }

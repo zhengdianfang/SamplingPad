@@ -7,17 +7,24 @@ import android.support.v4.content.ContextCompat
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.Gravity
-import android.widget.*
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.afollestad.materialdialogs.MaterialDialog
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.api.ApiClient
+import com.zhengdianfang.samplingpad.api.Response
 import com.zhengdianfang.samplingpad.common.LabelView
 import com.zhengdianfang.samplingpad.common.entities.SpinnerItem
+import okhttp3.Request
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class SpinnerComponent: BaseComponent {
 
     private lateinit var spinnerTextView: TextView
-    private lateinit var spinnerDialog: SpinnerDialog
+    private lateinit var spinnerDialog: MaterialDialog
     private var hint = ""
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
@@ -28,8 +35,34 @@ class SpinnerComponent: BaseComponent {
         this.setupViews(context, attributeSet)
     }
 
-    fun fetchSpinnerItems(url: String) {
-        spinnerDialog.fetchData(url)
+    fun fetchData(url: String) {
+        doAsync {
+            val request = Request.Builder()
+                .url(url)
+                .build()
+            val call = ApiClient.okHttpClient.newCall(request)
+            val response = call.execute()
+            if (response.isSuccessful) {
+                val responseData = response.body()?.string() ?: ""
+                if (responseData.isNotEmpty()) {
+                    val json2Pojo =
+                        Gson().fromJson<Response<MutableList<SpinnerItem>>>(responseData, object: TypeToken<Response<MutableList<SpinnerItem>>>(){}.type)
+                    if (json2Pojo.data != null) {
+                        uiThread {
+                            spinnerDialog.setItems(*json2Pojo.data!!.map { it.name }.toTypedArray())
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun getContent(): String {
+        val text = spinnerTextView.text.toString()
+        if (text == hint) {
+            return ""
+        }
+        return text
     }
 
     fun setDefaultText(text: String?) {
@@ -40,6 +73,7 @@ class SpinnerComponent: BaseComponent {
 
     override fun clear() {
         spinnerTextView.text = hint
+        spinnerTextView.setTextColor(ContextCompat.getColor(context, R.color.colorLightGray))
     }
 
     private fun setupViews(context: Context, attributeSet: AttributeSet) {
@@ -50,24 +84,23 @@ class SpinnerComponent: BaseComponent {
 
     private fun initSpinnerView(context: Context, attrs: TypedArray) {
         hint = resources.getString(attrs.getResourceId(R.styleable.AppTheme_SpinnerComponent_spinner_hint, 0))
-        val apiUrl = resources.getString(attrs.getResourceId(R.styleable.AppTheme_SpinnerComponent_spinner_api, 0))
         spinnerTextView = TextView(context).apply {
             setBackgroundResource(R.drawable.edit_text_background)
             gravity = Gravity.CENTER_VERTICAL
             setTextColor(Color.BLACK)
             text = hint
             setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0)
-            setPadding(16, 8, 16, 8)
+            setPadding(16, 16, 16, 16)
             layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
                 weight = 1F
             }
         }
-
-        if (TextUtils.isEmpty(apiUrl).not()) {
-            spinnerDialog = createSpinnerDataDialog( 0)
-            spinnerTextView.setOnClickListener {
-                spinnerDialog.show()
-            }
+        spinnerDialog = createSpinnerDataDialog(MaterialDialog.ListCallback { _, _, _, text ->
+            spinnerTextView.setTextColor(Color.BLACK)
+            spinnerTextView.text = text
+        })
+        spinnerTextView.setOnClickListener {
+            spinnerDialog.show()
         }
         addView(spinnerTextView)
     }
@@ -86,16 +119,11 @@ class SpinnerComponent: BaseComponent {
         addView(labelTextView)
     }
 
-    private fun createSpinnerDataDialog(index: Int): SpinnerDialog {
-        val spinnerItems = mutableListOf<SpinnerItem>()
-        val builder = MaterialDialog.Builder(context)
-            .items(spinnerItems)
-            .itemsCallback { dialog, _, _, text ->
-                if (dialog is SpinnerDialog) {
-                    spinnerTextView.text = text
-                }
-            }
-        return SpinnerDialog(builder, spinnerItems)
+    private fun createSpinnerDataDialog(listCallback: MaterialDialog.ListCallback): MaterialDialog {
+        return MaterialDialog.Builder(context)
+            .items("")
+            .itemsCallback(listCallback)
+            .build()
     }
 
 }

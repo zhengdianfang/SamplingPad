@@ -63,7 +63,9 @@ data class TaskItem(
     var enterpriseZipCode: String?,
     var enterpriseAnnualSales: String?,
     var specialAreaName: String?,
-    var enterpriseChain: Int
+    var enterpriseChain: Int?,
+    var enterprisePlaceName: String?,
+    var enterpriseAreaName: String?
 ) : Parcelable {
     companion object {
 
