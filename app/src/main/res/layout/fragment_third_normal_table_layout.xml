@@ -12,209 +12,156 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
+            android:orientation="vertical"
             android:padding="16dp">
 
 
             <TextView
                 android:id="@+id/sectionTextView1"
                 style="@style/AppTheme.Table.Section"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="受检单位信息"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="受检单位信息" />
 
             <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
-                android:id="@+id/isImportRadioGroup1"
+                android:id="@+id/producerActiveRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sectionTextView1"
                 app:radio_buttons="@array/yes_or_no"
                 app:radio_label="*是否进口："
                 app:radio_label_min_width="110dp" />
 
-        </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:orientation="vertical"
             android:background="@android:color/white"
             android:padding="16dp">
 
             <TextView
                 android:id="@+id/sectionTextView2"
                 style="@style/AppTheme.Table.Section"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="委托生产单位信息"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="委托生产单位信息" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/licenceCodeEditText"
+                android:id="@+id/entrustCsNoEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 app:edit_hint="请输入生产许可证"
-                app:edit_label="*生产许可证："
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sectionTextView2" />
+                app:edit_label="*生产许可证：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/unitEditText"
+                android:id="@+id/entrustNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 app:edit_hint="请输入单位名称"
-                app:edit_label="*单位名称："
-                app:edit_label_min_width="115dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/licenceCodeEditText" />
+                app:edit_label="*单位名称：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/unitAddressEditText"
+                android:id="@+id/entrustAddressEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 app:edit_hint="请输入单位地址"
-                app:edit_label="*单位地址："
-                app:edit_label_min_width="115dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/unitEditText" />
+                app:edit_label="*单位地址：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/contactEditText"
+                android:id="@+id/entrustContactsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 app:edit_hint="请输入联系人"
-                app:edit_label="*联系人："
-                app:edit_label_min_width="115dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/unitAddressEditText" />
+                app:edit_label="*联系人：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/phoneNumberEditText"
+                android:id="@+id/entrustPhoneEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 app:edit_hint="请输入联系电话"
-                app:edit_label="*电话："
-                app:edit_label_min_width="115dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/contactEditText" />
+                app:edit_label="*电话：" />
 
-            <com.zhengdianfang.samplingpad.common.components.SpinnerGroupComponent
+            <com.zhengdianfang.samplingpad.common.components.AdminRegionSpinnerGroupComponent
                 android:id="@+id/areaSpinnerGroupView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText"
-                app:spinner_group_hints="@array/area_spinner_array"
-                app:spinner_group_label="*生产所在地：" />
+                android:layout_marginTop="24dp" />
 
 
-        </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:orientation="vertical"
             android:background="@android:color/white"
             android:padding="16dp">
 
             <TextView
                 android:id="@+id/sectionTextView3"
                 style="@style/AppTheme.Table.Section"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="进口代理商信息"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="进口代理商信息" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/unitNameEditText"
+                android:id="@+id/agencyNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 app:edit_hint="请输入单位名称"
-                app:edit_label="*单位名称："
-                app:edit_label_min_width="115dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sectionTextView3" />
+                app:edit_label="*单位名称：" />
 
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/unitAddressEditText1"
+                android:id="@+id/agencyAddressEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 app:edit_hint="请输入单位地址"
-                app:edit_label="*单位地址："
-                app:edit_label_min_width="115dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/unitNameEditText" />
+                app:edit_label="*单位地址：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/contactEditText1"
+                android:id="@+id/agencyContactsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 app:edit_hint="请输入联系人"
-                app:edit_label="*联系人："
-                app:edit_label_min_width="115dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/unitAddressEditText1" />
+                app:edit_label="*联系人：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/phoneNumberEditText1"
+                android:id="@+id/agencyPhoneEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 app:edit_hint="请输入联系电话"
-                app:edit_label="*电话："
-                app:edit_label_min_width="115dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/contactEditText1" />
+                app:edit_label="*电话：" />
 
             <com.zhengdianfang.samplingpad.common.components.SpinnerComponent
                 android:id="@+id/resourceSpinnerGroupView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText1"
-                app:spinner_label_min_width="115dp"
-                app:spinner_hint="@array/resource_spinner_array"
-                app:spinner_label="*原产地：" />
+                app:spinner_hint="@string/agency_origin_area_name_hint"
+                app:spinner_label="@string/agency_origin_area_name_label" />
 
-        </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

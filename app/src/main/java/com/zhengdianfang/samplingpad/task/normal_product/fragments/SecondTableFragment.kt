@@ -27,13 +27,6 @@ class SecondTableFragment: TableFragment() {
         return inflater.inflate(R.layout.fragment_second_normal_table_layout, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        nextButtonButton.setOnClickListener {
-            start(ThirdTableFragment.newInstance())
-        }
-    }
-
     override fun setupViews() {
         super.setupViews()
         enterpriseLicenseNumberEditText.setEditTextContent(taskItem.enterpriseLicenseNumber)
@@ -80,7 +73,7 @@ class SecondTableFragment: TableFragment() {
     }
 
     override fun submitSuccessful() {
-        start(ThirdTableFragment.newInstance())
+        start(ThirdTableFragment.newInstance(taskItem))
     }
 
     override fun assembleSubmitTaskData() {

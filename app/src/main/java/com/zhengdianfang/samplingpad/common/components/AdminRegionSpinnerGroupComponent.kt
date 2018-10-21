@@ -58,7 +58,7 @@ class AdminRegionSpinnerGroupComponent: BaseComponent {
             val body = response.body()
             if (body?.data != null) {
                 regionList = body.data!!
-                areaList = body.data?.filter { it.levelId == Region.LEVEL_AREA }
+                areaList = body.data?.filter { it.levelId == Region.LEVEL_COUNTY }
                 if (areaList != null) {
                     uiThread {
                         areaSpinnerDialog?.setItems(*areaList!!.map { it.name }.toTypedArray())

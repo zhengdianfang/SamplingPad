@@ -76,6 +76,11 @@
     <string name="admin_region_label">*行政区域：</string>
     <string name="spinner_region_hint">区</string>
     <string name="spinner_street_hint">街道</string>
+    <string name="agency_origin_area_name_label">*原产地：</string>
+    <string name="agency_origin_area_name_hint">选择原产地</string>
+    <string name="province_hint">省</string>
+    <string name="town_hint">市</string>
+    <string name="county_hint">区/县</string>
 
 
 
