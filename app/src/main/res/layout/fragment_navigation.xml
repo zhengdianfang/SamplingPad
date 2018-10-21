@@ -56,6 +56,14 @@
             android:drawableLeft="@drawable/ic_warn"
             android:text="@string/upgrade_app_text" />
 
+        <Button
+            android:id="@+id/logoutAppButton"
+            style="@style/AppTheme.Navigation.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_warn"
+            android:text="@string/logout_text" />
+
         <TextView
             android:id="@+id/appVersionTextView"
             android:layout_width="wrap_content"

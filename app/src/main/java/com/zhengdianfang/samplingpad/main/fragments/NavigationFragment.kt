@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.zhengdianfang.samplingpad.App
 
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.task.food_product.FoodProductSamplingTableActivity
@@ -33,6 +34,10 @@ class NavigationFragment : SupportFragment() {
         }
         upgradeAppButton.setOnClickListener {
             startActivity(Intent(context, FoodProductSamplingTableActivity::class.java))
+        }
+
+        logoutAppButton.setOnClickListener {
+            App.INSTANCE.logout()
         }
     }
 }

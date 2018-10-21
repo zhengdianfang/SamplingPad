@@ -15,7 +15,7 @@ class FoodProductSamplingTableActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food_product_sampling_table_layout)
-        loadRootFragment(R.id.contentFrame, FirstTableFragment.newInstance())
+        loadRootFragment(R.id.contentFrame, FirstTableFragment.newInstance(task))
 
         toolBarTitleView.setText(R.string.food_product_title)
 

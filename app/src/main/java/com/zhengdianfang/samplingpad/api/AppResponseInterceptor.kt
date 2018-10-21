@@ -29,7 +29,7 @@ class AppResponseInterceptor: Interceptor {
                     .newBuilder()
                     .code(responseBean.code)
                     .message(responseBean.msg)
-                    .body(ResponseBody.create(MediaType.parse("application/json"), responseText))
+                    .body(ResponseBody.create(MediaType.parse("application/json"), responseText!!))
                     .build()
             }
         }

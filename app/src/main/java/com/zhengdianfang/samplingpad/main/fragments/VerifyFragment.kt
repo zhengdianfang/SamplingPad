@@ -22,7 +22,6 @@ class VerifyFragment : SupportFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         verifyButton.setOnClickListener {
-            startActivity(Intent(context, NormalProductSamplingTableActivity::class.java))
         }
     }
 }
