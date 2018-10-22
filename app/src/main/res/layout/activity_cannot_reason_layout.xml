@@ -80,6 +80,98 @@
                 app:text_label="详细地址："/>
         </LinearLayout>
 
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:padding="16dp">
+
+            <com.zhengdianfang.samplingpad.common.components.TextComponent
+                android:id="@+id/enterpriseAnnualSalesTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/enterpriseLegalRepTextView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:text_label="年销售额：" />
+
+            <com.zhengdianfang.samplingpad.common.components.TextComponent
+                android:id="@+id/enterpriseLegalRepTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/enterpriseAnnualSalesTextView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:text_label="法人代表：" />
+
+            <com.zhengdianfang.samplingpad.common.components.TextComponent
+                android:id="@+id/entrustLicenseNumberTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/entrustContactsTextView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/enterpriseAnnualSalesTextView"
+                app:text_label="统一信用代码：" />
+
+            <com.zhengdianfang.samplingpad.common.components.TextComponent
+                android:id="@+id/entrustContactsTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/entrustLicenseNumberTextView"
+                app:layout_constraintTop_toBottomOf="@+id/enterpriseLegalRepTextView"
+                app:text_label="联系人：" />
+
+            <com.zhengdianfang.samplingpad.common.components.TextComponent
+                android:id="@+id/entrustPhoneTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/enterpriseFaxTextView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/entrustLicenseNumberTextView"
+                app:text_label="联系人：" />
+
+            <com.zhengdianfang.samplingpad.common.components.TextComponent
+                android:id="@+id/enterpriseFaxTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/entrustPhoneTextView"
+                app:layout_constraintTop_toBottomOf="@+id/entrustContactsTextView"
+                app:text_label="传真：" />
+
+            <com.zhengdianfang.samplingpad.common.components.TextComponent
+                android:id="@+id/abnormalTypeNameTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/enterpriseFaxTextView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/entrustLicenseNumberTextView"
+                app:text_label="无证原因：" />
+
+        </android.support.constraint.ConstraintLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

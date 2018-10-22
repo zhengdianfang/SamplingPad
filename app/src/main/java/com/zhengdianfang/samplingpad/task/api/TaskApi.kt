@@ -24,7 +24,7 @@ interface TaskApi {
     @PUT("app/samples/{id}")
     fun saveSample(@Path("id") id: String, @Body taskItem: TaskItem): Call<Response<String>>
 
-    @PUT("/app/samplesubmits/{id}")
+    @PUT("app/samplesubmits/{id}")
     fun submitSample(@Path("id") id: String, @Body taskItem: TaskItem): Call<Response<String>>
 
     @GET("app/arealis/allTwo")
