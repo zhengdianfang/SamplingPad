@@ -12,7 +12,7 @@ import com.zhengdianfang.samplingpad.task.normal_product.fragments.TableFragment
 abstract class TableFragment: BaseFragment() {
 
     protected val taskItem by lazy { arguments?.getParcelable("task") as TaskItem }
-    private val tableFragmentViewModel by lazy { ViewModelProviders.of(this).get(TableFragmentViewModel::class.java) }
+    val tableFragmentViewModel by lazy { ViewModelProviders.of(this).get(TableFragmentViewModel::class.java) }
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -23,6 +23,7 @@ abstract class TableFragment: BaseFragment() {
 
     open fun setupViews() {
         view?.findViewById<Button>(R.id.nextButtonButton)?.setOnClickListener {
+            assembleSubmitTaskData()
             tableFragmentViewModel.saveSample(taskItem)
         }
         view?.findViewById<Button>(R.id.resetButton)?.setOnClickListener {

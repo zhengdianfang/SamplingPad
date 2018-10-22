@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_user"
         android:hint="@string/account_text"
-        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

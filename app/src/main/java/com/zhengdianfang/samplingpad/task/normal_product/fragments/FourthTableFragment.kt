@@ -85,6 +85,6 @@ open class FourthTableFragment: TableFragment() {
     }
 
     override fun submitSuccessful() {
-        start(FifthTableFragment.newInstance())
+        start(FifthTableFragment.newInstance(taskItem))
     }
 }

@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
+import com.zhengdianfang.samplingpad.task.normal_product.fragments.FifthTableFragment
 import me.yokeyword.fragmentation.SupportFragment
 
-class SeventhTableFragment: SupportFragment() {
+class SeventhTableFragment: FifthTableFragment() {
 
     companion object {
         fun newInstance(taskItem: TaskItem): SeventhTableFragment {
@@ -20,6 +21,6 @@ class SeventhTableFragment: SupportFragment() {
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_seventh_normal_table_layout, container, false)
+        return inflater.inflate(R.layout.fragment_fifth_normal_table_layout, container, false)
     }
 }

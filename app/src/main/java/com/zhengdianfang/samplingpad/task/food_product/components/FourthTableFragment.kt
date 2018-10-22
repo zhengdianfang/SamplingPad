@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
+import com.zhengdianfang.samplingpad.task.normal_product.fragments.FifthTableFragment
 import me.yokeyword.fragmentation.SupportFragment
 
-class FourthTableFragment: SupportFragment() {
+class FourthTableFragment: FifthTableFragment() {
     companion object {
         fun newInstance(taskItem: TaskItem): FourthTableFragment {
             val fragment = FourthTableFragment()
@@ -20,10 +21,6 @@ class FourthTableFragment: SupportFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_fourth_food_table_layout, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        return inflater.inflate(R.layout.fragment_fifth_normal_table_layout, container, false)
     }
 }

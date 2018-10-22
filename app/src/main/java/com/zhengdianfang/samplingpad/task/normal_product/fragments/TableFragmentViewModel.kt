@@ -16,19 +16,34 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     val isLoadingLiveData = MutableLiveData<Boolean>()
 
     fun saveSample(taskItem: TaskItem) {
-       isLoadingLiveData.postValue(true)
         isLoadingLiveData.postValue(true)
-       doAsync {
-           val response = ApiClient.INSTANCE.create(TaskApi::class.java)
-               .saveSample(taskItem.id, taskItem)
-               .execute()
-           val body = response.body()
-           if (body != null) {
-               isLoadingLiveData.postValue(false)
-               uiThread {
-                   responseLiveData.postValue(body)
-               }
-           }
-       }
+        doAsync {
+            val response = ApiClient.INSTANCE.create(TaskApi::class.java)
+                .saveSample(taskItem.id, taskItem)
+                .execute()
+            val body = response.body()
+            if (body != null) {
+                isLoadingLiveData.postValue(false)
+                uiThread {
+                    responseLiveData.postValue(body)
+                }
+            }
+        }
+    }
+
+    fun submitSample(taskItem: TaskItem) {
+        isLoadingLiveData.postValue(true)
+        doAsync {
+            val response = ApiClient.INSTANCE.create(TaskApi::class.java)
+                .submitSample(taskItem.id, taskItem)
+                .execute()
+            val body = response.body()
+            if (body != null) {
+                isLoadingLiveData.postValue(false)
+                uiThread {
+                    responseLiveData.postValue(body)
+                }
+            }
+        }
     }
 }

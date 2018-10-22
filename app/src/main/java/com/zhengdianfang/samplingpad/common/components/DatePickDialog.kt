@@ -17,9 +17,10 @@ class DatePickDialog: DialogFragment() {
             .positiveText("确定")
             .negativeText("取消")
             .onPositive { _, _ ->
-                val month = if ((datePicker.month + 1) / 10 < 1) "0${datePicker.month + 1}" else "${datePicker.month + 1}"
-                val day = if (datePicker.dayOfMonth / 10 < 1) "0$datePicker.dayOfMonth" else "${datePicker.dayOfMonth}"
-                onConfirmCallback?.invoke("${datePicker.year}年${month}月${day}日")
+                var month = datePicker.month + 1
+                val monthStr = if ((month) / 10 < 1) "0${month}" else "$month"
+                val day = if (datePicker.dayOfMonth / 10 < 1) "0${datePicker.dayOfMonth}" else "${datePicker.dayOfMonth}"
+                onConfirmCallback?.invoke("${datePicker.year}年${monthStr}月${day}日")
             }
             .build()
     }

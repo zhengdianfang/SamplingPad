@@ -98,7 +98,7 @@
             android:padding="16dp">
 
             <Button
-                android:id="@+id/resetButton"
+                android:id="@+id/perviousButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
@@ -107,6 +107,15 @@
                 android:paddingRight="64dp"
                 android:text="@string/pervious_step_text"
                 android:textColor="@color/colorPrimary" />
+
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:paddingLeft="64dp"
+                android:paddingRight="64dp"
+                android:text="@string/save_and_submit_text" />
 
         </LinearLayout>
     </LinearLayout>
