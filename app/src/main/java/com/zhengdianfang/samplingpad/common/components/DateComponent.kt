@@ -10,6 +10,8 @@ import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseActivity
 import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.common.LabelView
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class DateComponent : LinearLayout {
@@ -31,6 +33,11 @@ class DateComponent : LinearLayout {
 
     constructor(context: Context, attributeSet: AttributeSet, style: Int): super(context, attributeSet, style) {
         this.setupViews(context, attributeSet)
+    }
+
+    fun getDate(): Long {
+        val simpleDateFormat = SimpleDateFormat("yyyy年MM月dd日")
+        return simpleDateFormat.parse(dateTextView.text.toString()).time
     }
 
     private fun setupViews(context: Context, attributeSet: AttributeSet) {

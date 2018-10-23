@@ -5,11 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.R
-import com.zhengdianfang.samplingpad.api.ApiClient
+import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.common.TableFragment
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import kotlinx.android.synthetic.main.fragment_third_normal_table_layout.*
-import me.yokeyword.fragmentation.SupportFragment
 
 class ThirdTableFragment: TableFragment() {
 

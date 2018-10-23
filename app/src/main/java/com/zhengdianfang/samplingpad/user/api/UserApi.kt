@@ -1,7 +1,7 @@
 package com.zhengdianfang.samplingpad.user.api
 
-import com.zhengdianfang.samplingpad.api.ApiClient
-import com.zhengdianfang.samplingpad.api.Response
+import com.zhengdianfang.samplingpad.http.ApiClient
+import com.zhengdianfang.samplingpad.http.Response
 import com.zhengdianfang.samplingpad.user.entities.User
 import retrofit2.Call
 import retrofit2.http.POST

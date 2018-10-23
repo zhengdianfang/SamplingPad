@@ -2,14 +2,11 @@ package com.zhengdianfang.samplingpad
 
 import android.app.Application
 import android.content.Intent
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
 import com.bumptech.glide.load.model.GlideUrl
-import com.zhengdianfang.samplingpad.api.ApiClient
+import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.user.LoginActivity
-import com.zhengdianfang.samplingpad.user.entities.User
-import okhttp3.OkHttpClient
 import org.jetbrains.anko.defaultSharedPreferences
 import timber.log.Timber
 import java.io.InputStream

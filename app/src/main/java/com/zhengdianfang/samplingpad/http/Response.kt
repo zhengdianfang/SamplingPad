@@ -1,4 +1,4 @@
-package com.zhengdianfang.samplingpad.api
+package com.zhengdianfang.samplingpad.http
 
 open class Response<T> {
     var msg = ""

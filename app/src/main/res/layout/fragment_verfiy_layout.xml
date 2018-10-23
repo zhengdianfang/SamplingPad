@@ -12,21 +12,7 @@
         android:padding="16dp">
 
         <com.zhengdianfang.samplingpad.common.components.EditComponent
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:edit_hint="请输入计划名称"
-            app:edit_label="计划名称："
-            app:edit_label_min_width="162dp" />
-
-        <com.zhengdianfang.samplingpad.common.components.EditComponent
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:edit_hint="请输入方案名称"
-            app:edit_label="方案名称："
-            app:edit_label_min_width="162dp" />
-
-        <com.zhengdianfang.samplingpad.common.components.EditComponent
+            android:id="@+id/implPlanCodeEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -35,6 +21,7 @@
             app:edit_label_min_width="162dp" />
 
         <com.zhengdianfang.samplingpad.common.components.EditComponent
+            android:id="@+id/level1NameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -51,11 +38,12 @@
             app:edit_label_min_width="162dp" />
 
         <com.zhengdianfang.samplingpad.common.components.EditComponent
+            android:id="@+id/enterpriseLicenseNumberEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:edit_hint="请输入计划名称"
-            app:edit_label="受检单位统\n社会信用代码："
+            app:edit_hint="请输入社会信用代码"
+            app:edit_label="受检单位统一\n社会信用代码："
             app:edit_label_min_width="162dp" />
 
         <com.zhengdianfang.samplingpad.common.components.EditComponent
@@ -67,6 +55,7 @@
             app:edit_label_min_width="162dp" />
 
         <com.zhengdianfang.samplingpad.common.components.EditComponent
+            android:id="@+id/producerCsNoEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -75,6 +64,7 @@
             app:edit_label_min_width="162dp" />
 
         <com.zhengdianfang.samplingpad.common.components.EditComponent
+            android:id="@+id/sampleNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -83,6 +73,7 @@
             app:edit_label_min_width="162dp" />
 
         <com.zhengdianfang.samplingpad.common.components.DateComponent
+            android:id="@+id/sampleProductDateView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -91,6 +82,7 @@
             app:date_label_min_width="162dp" />
 
         <com.zhengdianfang.samplingpad.common.components.EditComponent
+            android:id="@+id/chainBrandEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -99,6 +91,7 @@
             app:edit_label_min_width="162dp" />
 
         <com.zhengdianfang.samplingpad.common.components.DateComponent
+            android:id="@+id/sampleDateView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

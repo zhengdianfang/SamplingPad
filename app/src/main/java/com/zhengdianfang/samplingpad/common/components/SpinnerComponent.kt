@@ -13,8 +13,8 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.zhengdianfang.samplingpad.R
-import com.zhengdianfang.samplingpad.api.ApiClient
-import com.zhengdianfang.samplingpad.api.Response
+import com.zhengdianfang.samplingpad.http.ApiClient
+import com.zhengdianfang.samplingpad.http.Response
 import com.zhengdianfang.samplingpad.common.LabelView
 import com.zhengdianfang.samplingpad.common.entities.SpinnerItem
 import okhttp3.Request

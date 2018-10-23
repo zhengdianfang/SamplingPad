@@ -5,7 +5,7 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import com.zhengdianfang.samplingpad.App
 import com.zhengdianfang.samplingpad.R
-import com.zhengdianfang.samplingpad.api.ApiClient
+import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.user.api.UserApi
 import com.zhengdianfang.samplingpad.common.md5
 import org.jetbrains.anko.doAsync

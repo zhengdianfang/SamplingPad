@@ -1,6 +1,6 @@
 package com.zhengdianfang.samplingpad.task.api
 
-import com.zhengdianfang.samplingpad.api.Response
+import com.zhengdianfang.samplingpad.http.Response
 import com.zhengdianfang.samplingpad.common.entities.Region
 import com.zhengdianfang.samplingpad.task.entities.StatusCount
 import com.zhengdianfang.samplingpad.task.entities.TaskItem

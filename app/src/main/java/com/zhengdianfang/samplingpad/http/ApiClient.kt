@@ -1,4 +1,4 @@
-package com.zhengdianfang.samplingpad.api
+package com.zhengdianfang.samplingpad.http
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

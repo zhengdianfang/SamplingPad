@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.R
-import com.zhengdianfang.samplingpad.api.ApiClient
+import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.common.TableFragment
 import com.zhengdianfang.samplingpad.common.components.BaseComponent
 import com.zhengdianfang.samplingpad.task.entities.TaskItem

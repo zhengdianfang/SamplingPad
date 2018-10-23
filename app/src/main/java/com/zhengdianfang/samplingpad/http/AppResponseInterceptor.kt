@@ -1,8 +1,7 @@
-package com.zhengdianfang.samplingpad.api
+package com.zhengdianfang.samplingpad.http
 
 import com.google.gson.Gson
 import com.zhengdianfang.samplingpad.App
-import com.zhengdianfang.samplingpad.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.MediaType
 import okhttp3.Response
@@ -20,8 +19,8 @@ class AppResponseInterceptor: Interceptor {
             val responseText = response.body()?.string()
             if (responseText.isNullOrEmpty().not()) {
                 val gson = Gson()
-                val responseBean = gson.fromJson<com.zhengdianfang.samplingpad.api.Response<Any>>(
-                    responseText, com.zhengdianfang.samplingpad.api.Response::class.java)
+                val responseBean = gson.fromJson<com.zhengdianfang.samplingpad.http.Response<Any>>(
+                    responseText, com.zhengdianfang.samplingpad.http.Response::class.java)
                 if (responseBean.code == 403) {
                    App.INSTANCE.logout()
                 }

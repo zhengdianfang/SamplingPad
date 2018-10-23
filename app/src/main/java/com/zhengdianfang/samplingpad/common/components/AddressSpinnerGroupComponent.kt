@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.zhengdianfang.samplingpad.R
-import com.zhengdianfang.samplingpad.api.ApiClient
+import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.common.LabelView
 import com.zhengdianfang.samplingpad.common.entities.Region
 import com.zhengdianfang.samplingpad.task.api.TaskApi
