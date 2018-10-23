@@ -92,7 +92,6 @@
     </string>
 
 
-
     <!-- spinner apis -->
     <string name="sample_link_name_data_api">app/samplelinks/%d</string>
     <string name="logout_text">登出</string>

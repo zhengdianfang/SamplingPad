@@ -14,13 +14,3 @@ interface MainApi {
     fun postVerifySample(@FieldMap params: Map<String, String>) : Call<Response<String>>
 }
 
-data class VerifySampleParam(
-   val implPlanCode: String,
-   val producerCsNo: String,
-   val sampleName: String,
-   val sampleProductDate: Long,
-   val enterpriseLicenseNumber: String,
-   val level1Name: String,
-   val chainBrand: String,
-   val sampleDate: Long
-)

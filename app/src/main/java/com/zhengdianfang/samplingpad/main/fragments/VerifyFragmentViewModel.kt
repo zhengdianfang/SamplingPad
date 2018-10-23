@@ -4,14 +4,15 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import com.zhengdianfang.samplingpad.http.ApiClient
+import com.zhengdianfang.samplingpad.http.Response
 import com.zhengdianfang.samplingpad.main.api.MainApi
-import com.zhengdianfang.samplingpad.main.api.VerifySampleParam
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class VerifyFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
     val isLoadingLiveData = MutableLiveData<Boolean>()
-    val messageLiveData = MutableLiveData<String>()
+    val responseLiveData = MutableLiveData<Response<String>>()
 
     fun postVerifySample(params: Map<String, String>) {
         isLoadingLiveData.postValue(true)
@@ -22,8 +23,10 @@ class VerifyFragmentViewModel(application: Application) : AndroidViewModel(appli
 
             val body = response.body()
             if (body != null) {
-                messageLiveData.postValue(body.msg)
-                isLoadingLiveData.postValue(false)
+                uiThread {
+                    responseLiveData.postValue(body)
+                    isLoadingLiveData.postValue(false)
+                }
             }
         }
     }

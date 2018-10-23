@@ -6,10 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
-import com.zhengdianfang.samplingpad.main.api.VerifySampleParam
 import kotlinx.android.synthetic.main.fragment_verfiy_layout.*
 
 class VerifyFragment : BaseFragment() {
@@ -24,7 +22,6 @@ class VerifyFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
         verifyFragmentViewModel.isLoadingLiveData.observe(this, Observer { isLoading ->
             if (isLoading!!) {
                 startLoading()
@@ -33,11 +30,15 @@ class VerifyFragment : BaseFragment() {
             }
         })
 
-        verifyFragmentViewModel.messageLiveData.observe(this, Observer { msg ->
-            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+        verifyFragmentViewModel.responseLiveData.observe(this, Observer { response ->
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.add(android.R.id.content, VerifyResultFragment.newInstance(response!!.code == 200, response!!.msg))
+                ?.addToBackStack("")
+                ?.commit()
         })
 
         verifyButton.setOnClickListener {
+
             val implPlanCode = implPlanCodeEditText.getContent()
             val level1Name = level1NameEditText.getContent()
             val enterpriseLicenseNumber = enterpriseLicenseNumberEditText.getContent()
@@ -47,16 +48,6 @@ class VerifyFragment : BaseFragment() {
             val sampleDate = sampleDateView.getDate()
             val producerCsNo = producerCsNoEditText.getContent()
 
-            val verifySampleParam = VerifySampleParam(
-                implPlanCode,
-                producerCsNo,
-                sampleName,
-                sampleProductDate,
-                enterpriseLicenseNumber,
-                level1Name,
-                chainBrand,
-                sampleDate
-            )
             verifyFragmentViewModel.postVerifySample(
                 mapOf(
                     Pair("implPlanCode", implPlanCode),
