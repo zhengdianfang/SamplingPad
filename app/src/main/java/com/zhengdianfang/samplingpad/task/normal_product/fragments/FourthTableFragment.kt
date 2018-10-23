@@ -73,6 +73,8 @@ open class FourthTableFragment: TableFragment() {
         taskItem.sampleStorageEnvironment = sampleStorageEnvironmentRadioGroup.getCheckedText()
         taskItem.storagePlaceForRetest = storagePlaceForRetestRadioGroup.getCheckedText()
         taskItem.lableStandard = lableStandardEditText.getContent()
+        taskItem.sampleDate = sampleDateView.getDate()
+        taskItem.sampleProductDate = sampleProduceDateView.getDate()
     }
 
     override fun clearAllFilledData() {

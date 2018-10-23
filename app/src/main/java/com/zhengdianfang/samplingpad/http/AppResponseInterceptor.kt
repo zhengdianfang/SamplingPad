@@ -22,7 +22,7 @@ class AppResponseInterceptor: Interceptor {
                 val responseBean = gson.fromJson<com.zhengdianfang.samplingpad.http.Response<Any>>(
                     responseText, com.zhengdianfang.samplingpad.http.Response::class.java)
                 if (responseBean.code == 403) {
-                   App.INSTANCE.logout()
+                    App.INSTANCE.logout()
                 }
                 response = response
                     .newBuilder()

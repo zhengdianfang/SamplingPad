@@ -84,7 +84,7 @@ data class TaskItem(
     var sampleSource: String?,
     var samplePackageType: String?,
     var samplePackaging: String?,
-    var sampleProductDate: String?,
+    var sampleProductDate: Long?,
     var sampleBatchNo: String?,
     var sampleQgp: String?,
     var sampleSpecification: String?,
@@ -112,6 +112,7 @@ data class TaskItem(
     var producerPhone: String?,
     var enterpriseAddressSources: Int?,
     var producerName: String?,
+    var sampleDate: Long?,
     var entrustLicenseNumber: String?
 
 ) : Parcelable {
