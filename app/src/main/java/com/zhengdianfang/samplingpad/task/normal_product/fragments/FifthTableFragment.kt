@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.zhengdianfang.samplingpad.App
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.common.TableFragment
@@ -32,6 +33,8 @@ open class FifthTableFragment: TableFragment() {
         }
 
         submitButton.setOnClickListener {
+            taskItem.latitude = App.INSTANCE.latitude
+            taskItem.longitude = App.INSTANCE.longitude
             tableFragmentViewModel.submitSample(taskItem)
         }
     }

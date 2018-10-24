@@ -113,7 +113,9 @@ data class TaskItem(
     var enterpriseAddressSources: Int?,
     var producerName: String?,
     var sampleDate: Long?,
-    var entrustLicenseNumber: String?
+    var entrustLicenseNumber: String?,
+    var longitude: Double?,
+    var latitude: Double?
 
 ) : Parcelable {
     companion object {
