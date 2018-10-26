@@ -30,6 +30,9 @@ open class SecondTableFragment: TableFragment() {
     override fun setupViews() {
         super.setupViews()
         enterpriseLicenseNumberEditText.setEditTextContent(taskItem.enterpriseLicenseNumber)
+        enterpriseLicenseNumberEditText.search = {
+
+        }
         enterpriseNameEditText.setEditTextContent(taskItem.enterpriseName)
         enterpriseAreaTypeRadioGroup.setDefaultCheckedRadioButton(taskItem.enterpriseAreaType)
         regionSpinnerGroup.fetchData()

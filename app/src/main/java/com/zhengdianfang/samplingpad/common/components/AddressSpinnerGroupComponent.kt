@@ -88,7 +88,7 @@ class AddressSpinnerGroupComponent: BaseComponent {
             gravity = Gravity.CENTER_VERTICAL
             setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0)
             setPadding(16, 8, 16, 8)
-            setText(R.string.spinner_region_hint)
+            setText(R.string.province_hint)
             layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
                 rightMargin = resources.getDimension(R.dimen.radio_button_margin_right).toInt()
                 weight = 1F

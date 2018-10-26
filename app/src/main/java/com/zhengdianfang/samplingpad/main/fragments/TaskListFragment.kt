@@ -18,6 +18,7 @@ import com.zhengdianfang.samplingpad.task.network_product.NetworkProductSampling
 import com.zhengdianfang.samplingpad.task.normal_product.NormalProductSamplingTableActivity
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import com.zhengdianfang.samplingpad.task.entities.Task_Type
+import kotlinx.android.synthetic.main.empty_view_layout.*
 import kotlinx.android.synthetic.main.fragment_task_list.*
 
 class TaskListFragment : BaseFragment() {
@@ -47,6 +48,7 @@ class TaskListFragment : BaseFragment() {
             taskRecyclerView.adapter.notifyDataSetChanged()
             taskData.clear()
             taskData.addAll(data!!)
+            emptyView.visibility = if (taskData.size == 0) View.VISIBLE else View.GONE
             refreshFrame.isRefreshing = false
         })
     }
@@ -57,17 +59,17 @@ class TaskListFragment : BaseFragment() {
         }
         taskRecyclerView.addItemDecoration(ItemDecoration())
         val allTaskItemAdapter = AllTaskItemAdapter(taskData)
-        allTaskItemAdapter.setOnItemClickListener { _, _, position ->
-            val task = taskData[position]
-            when(task.foodTypeId) {
-                Task_Type.NORMAL_TASK.value -> startActivity(Intent(context, NormalProductSamplingTableActivity::class.java).putExtra("task", task))
-                Task_Type.FOOD_TASK.value -> startActivity(Intent(context, FoodProductSamplingTableActivity::class.java).putExtra("task", task))
-                Task_Type.NETWORK_TASK.value -> startActivity(Intent(context, NetworkProductSamplingTableActivity::class.java).putExtra("task", task))
-            }
-        }
-        allTaskItemAdapter.setOnItemChildClickListener { _, view, _ ->
+        allTaskItemAdapter.setOnItemChildClickListener { _, view, position ->
             if (view.id == R.id.operationButton2) {
-                startActivity(Intent(context, CanotVerifyReasonActivity::class.java))
+                startActivity(Intent(context, CanotVerifyReasonActivity::class.java).putExtra("taskItem", taskData[position]))
+            }
+            if (view.id == R.id.operationButton1) {
+                val task = taskData[position]
+                when(task.foodTypeId) {
+                    Task_Type.NORMAL_TASK.value -> startActivity(Intent(context, NormalProductSamplingTableActivity::class.java).putExtra("task", task))
+                    Task_Type.FOOD_TASK.value -> startActivity(Intent(context, FoodProductSamplingTableActivity::class.java).putExtra("task", task))
+                    Task_Type.NETWORK_TASK.value -> startActivity(Intent(context, NetworkProductSamplingTableActivity::class.java).putExtra("task", task))
+                }
             }
         }
         taskRecyclerView.adapter = allTaskItemAdapter

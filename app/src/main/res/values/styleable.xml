@@ -3,6 +3,7 @@
     <declare-styleable name="AppTheme.EditComponent">
         <attr name="edit_label" format="string" />
         <attr name="edit_hint" format="string" />
+        <attr name="edit_search" format="boolean" />
         <attr name="edit_label_min_width" format="dimension" />
     </declare-styleable>
 

@@ -32,6 +32,7 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="24dp"
+               app:edit_search="true"
                app:edit_hint="请输入统一社会信用代码"
                app:edit_label="*统一社会信用代码：" />
 

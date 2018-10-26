@@ -1,12 +1,16 @@
 package com.zhengdianfang.samplingpad.common
 
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.drawable.DrawableCompat
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.widget.RadioButton
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import java.util.regex.Pattern
 
 fun RadioButton.active(backgroundResId: Int, textColorId: Int) {
     if (backgroundResId > 0) {
@@ -53,5 +57,15 @@ fun String.md5(): String {
     }
 
     return ""
+}
+
+fun String.convertForegroundColorSpannableString(regex: String): SpannableString {
+    val spannableString = SpannableString(this)
+    val pattern = Pattern.compile(regex)
+    val matcher = pattern.matcher(this)
+    while (matcher.find()) {
+        spannableString.setSpan(ForegroundColorSpan(Color.RED), matcher.start(), matcher.end(), SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
+    }
+    return spannableString
 }
 

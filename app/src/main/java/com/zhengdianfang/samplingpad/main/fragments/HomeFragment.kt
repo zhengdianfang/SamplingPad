@@ -7,11 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.zhengdianfang.samplingpad.R
+import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.common.active
 import kotlinx.android.synthetic.main.fragment_home.*
 import me.yokeyword.fragmentation.SupportFragment
 
-class HomeFragment : SupportFragment() {
+class HomeFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -41,5 +42,11 @@ class HomeFragment : SupportFragment() {
             }
         }
         homeTabBar.check(R.id.verifyTab)
+
+        userSettingButton.setOnClickListener {
+            if (parentFragment is MainFragment) {
+                (parentFragment as? MainFragment)?.openDrawer()
+            }
+        }
     }
 }

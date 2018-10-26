@@ -103,16 +103,16 @@
             android:id="@+id/verifyButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="32dp"
             android:text="@string/verify_begin_text" />
 
         <TextView
+            android:id="@+id/introduceTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/middle"
-            android:lineSpacingExtra="8dp"
-            android:text="@string/verify_detail_text"/>
+            android:textSize="@dimen/small"
+            android:lineSpacingExtra="4dp" />
     </LinearLayout>
 </ScrollView>

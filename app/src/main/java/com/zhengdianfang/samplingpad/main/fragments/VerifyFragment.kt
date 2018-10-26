@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
+import com.zhengdianfang.samplingpad.common.convertForegroundColorSpannableString
 import kotlinx.android.synthetic.main.fragment_verfiy_layout.*
 
 class VerifyFragment : BaseFragment() {
@@ -61,5 +62,9 @@ class VerifyFragment : BaseFragment() {
                 )
             )
         }
+
+        introduceTextView.text = getString(R.string.verify_detail_text)
+            .convertForegroundColorSpannableString(regex = "(\\([^\\)]+\\))")
+
     }
 }

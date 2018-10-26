@@ -4,15 +4,18 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.Gravity
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.loc.i
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.LabelView
 
 class EditComponent: BaseComponent {
 
     private lateinit var editTextView: EditText
+    var search: ((text: String)-> Unit)? = null
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
         this.setupViews(context, attributeSet)
@@ -49,6 +52,16 @@ class EditComponent: BaseComponent {
             layoutParams = LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply{
                 weight = 1f
                 gravity = Gravity.CENTER_VERTICAL
+            }
+        }
+        if (attrs.getBoolean(R.styleable.AppTheme_EditComponent_edit_search, false)) {
+            this.editTextView.imeOptions = EditorInfo.IME_ACTION_SEARCH
+            this.editTextView.inputType = EditorInfo.TYPE_CLASS_TEXT
+            editTextView.setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    this.search!!.invoke(this.editTextView.text.toString())
+                }
+                true
             }
         }
         addView(editTextView)

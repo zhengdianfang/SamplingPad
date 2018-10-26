@@ -3,6 +3,7 @@
     <dimen name="super_super_large">20sp</dimen>
     <dimen name="large_22">22sp</dimen>
     <dimen name="large_18">18sp</dimen>
+    <dimen name="large_16">16sp</dimen>
     <dimen name="large_24">24sp</dimen>
     <dimen name="large">16sp</dimen>
     <dimen name="middle">14sp</dimen>

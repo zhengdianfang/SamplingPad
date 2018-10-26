@@ -12,6 +12,7 @@ import com.zhengdianfang.samplingpad.common.ItemDecoration
 import com.zhengdianfang.samplingpad.main.fragments.AllTaskItemAdapter
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import com.zhengdianfang.samplingpad.task.entities.Task_Status
+import kotlinx.android.synthetic.main.empty_view_layout.*
 import kotlinx.android.synthetic.main.fragment_task_list_with_status_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 
@@ -61,6 +62,7 @@ class TaskListWithStatusFragment: BaseFragment() {
             taskRecyclerView.adapter.notifyDataSetChanged()
             taskData.clear()
             taskData.addAll(data!!)
+            emptyView.visibility = if (taskData.size == 0) View.VISIBLE else View.GONE
             refreshFrame.isRefreshing = false
         })
     }

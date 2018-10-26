@@ -9,11 +9,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
         android:background="@color/colorLightGray"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/taskCodeTextView"
+            android:id="@+id/taskNoTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
@@ -30,6 +32,7 @@
             android:padding="16dp">
 
             <com.zhengdianfang.samplingpad.common.components.SpinnerComponent
+                android:id="@+id/abnormalTypeNameSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:spinner_hint="@string/resson_hint"
@@ -49,6 +52,7 @@
                 app:text_label="反馈原因：" />
 
             <com.zhengdianfang.samplingpad.common.components.TextComponent
+                android:id="@+id/enterpriseNameTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -63,12 +67,14 @@
             android:padding="16dp">
 
             <com.zhengdianfang.samplingpad.common.components.SpinnerComponent
+                android:id="@+id/enterpriseAreaNameSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:spinner_label="@string/region_type_text"
                 app:spinner_hint="@string/spinner_region_hint"/>
 
             <com.zhengdianfang.samplingpad.common.components.AddressSpinnerGroupComponent
+                android:id="@+id/addressSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"/>
@@ -111,31 +117,31 @@
                 app:text_label="法人代表：" />
 
             <com.zhengdianfang.samplingpad.common.components.TextComponent
-                android:id="@+id/entrustLicenseNumberTextView"
+                android:id="@+id/enterpriseLicenseNumberTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toStartOf="@+id/entrustContactsTextView"
+                app:layout_constraintEnd_toStartOf="@+id/enterpriseContactsTextView"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/enterpriseAnnualSalesTextView"
                 app:text_label="统一信用代码：" />
 
             <com.zhengdianfang.samplingpad.common.components.TextComponent
-                android:id="@+id/entrustContactsTextView"
+                android:id="@+id/enterpriseContactsTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/entrustLicenseNumberTextView"
+                app:layout_constraintStart_toEndOf="@+id/enterpriseLicenseNumberTextView"
                 app:layout_constraintTop_toBottomOf="@+id/enterpriseLegalRepTextView"
                 app:text_label="联系人：" />
 
             <com.zhengdianfang.samplingpad.common.components.TextComponent
-                android:id="@+id/entrustPhoneTextView"
+                android:id="@+id/enterprisePhoneTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -143,8 +149,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/enterpriseFaxTextView"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/entrustLicenseNumberTextView"
-                app:text_label="联系人：" />
+                app:layout_constraintTop_toBottomOf="@+id/enterpriseLicenseNumberTextView"
+                app:text_label="电话：" />
 
             <com.zhengdianfang.samplingpad.common.components.TextComponent
                 android:id="@+id/enterpriseFaxTextView"
@@ -154,21 +160,9 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/entrustPhoneTextView"
-                app:layout_constraintTop_toBottomOf="@+id/entrustContactsTextView"
+                app:layout_constraintStart_toEndOf="@+id/enterprisePhoneTextView"
+                app:layout_constraintTop_toBottomOf="@+id/enterpriseContactsTextView"
                 app:text_label="传真：" />
-
-            <com.zhengdianfang.samplingpad.common.components.TextComponent
-                android:id="@+id/abnormalTypeNameTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toStartOf="@+id/enterpriseFaxTextView"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/entrustLicenseNumberTextView"
-                app:text_label="无证原因：" />
 
         </android.support.constraint.ConstraintLayout>
 
@@ -197,7 +191,7 @@
                 android:background="@drawable/stoke_button_background"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:text="@string/save_and_submit_text"
+                android:text="@string/only_save_text"
                 android:textColor="@color/colorPrimary" />
         </LinearLayout>
     </LinearLayout>

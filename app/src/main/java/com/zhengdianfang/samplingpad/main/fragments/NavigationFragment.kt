@@ -9,12 +9,13 @@ import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.App
 
 import com.zhengdianfang.samplingpad.R
+import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.task.food_product.FoodProductSamplingTableActivity
 import com.zhengdianfang.samplingpad.task.tasklist.MyTaskListActivity
 import kotlinx.android.synthetic.main.fragment_navigation.*
 import me.yokeyword.fragmentation.SupportFragment
 
-class NavigationFragment : SupportFragment() {
+class NavigationFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
