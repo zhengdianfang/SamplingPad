@@ -25,6 +25,16 @@ enum class Task_Type(val value: Int) {
     NETWORK_TASK(3)
 }
 
+data class Goods(
+    val id: String,
+    val name: String,
+    val barCode: String,
+    val brand: String,
+    val packageType: String,
+    val specification: String,
+    val description: String?
+)
+
 @Parcelize
 data class TaskItem(
     var id: String = "",
@@ -127,5 +137,13 @@ data class TaskItem(
         const val UN_CHAIN_ENTERPRISE = 0
         const val CHAIN_ENTERPRISE = 1
         const val CHAIN_BRAND = 2
+    }
+
+    fun mergeGoods(goods: Goods) {
+        sampleName = goods.name
+        samplePackageType = goods.packageType
+        sampleBrand = goods.brand
+        sampleSpecification = goods.specification
+        producerBarcode = goods.barCode
     }
 }

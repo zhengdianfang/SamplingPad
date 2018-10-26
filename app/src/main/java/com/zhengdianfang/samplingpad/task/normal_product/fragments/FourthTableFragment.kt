@@ -1,5 +1,6 @@
 package com.zhengdianfang.samplingpad.task.normal_product.fragments
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +29,9 @@ open class FourthTableFragment: TableFragment() {
     override fun setupViews() {
         super.setupViews()
         producerBarcodeEditText.setEditTextContent(taskItem.producerBarcode)
+        producerBarcodeEditText.search = { code ->
+           tableFragmentViewModel.getGoodsByBarcode(code)
+        }
         sampleNameEditText.setEditTextContent(taskItem.sampleName)
         sampleBrandEditText.setEditTextContent(taskItem.sampleBrand)
         samplePriceEditText.setEditTextContent("${taskItem.samplePrice ?: ""}")
@@ -88,5 +92,15 @@ open class FourthTableFragment: TableFragment() {
 
     override fun submitSuccessful() {
         start(FifthTableFragment.newInstance(taskItem))
+    }
+
+    override fun bindViewModel() {
+        super.bindViewModel()
+        tableFragmentViewModel.goodsLiveData.observe(this, Observer { goods ->
+            if (null != goods) {
+                taskItem.mergeGoods(goods)
+                this.setupViews()
+            }
+        })
     }
 }

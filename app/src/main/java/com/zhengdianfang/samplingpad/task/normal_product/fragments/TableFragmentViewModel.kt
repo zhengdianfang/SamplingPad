@@ -6,6 +6,7 @@ import android.arch.lifecycle.MutableLiveData
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.http.Response
 import com.zhengdianfang.samplingpad.task.api.TaskApi
+import com.zhengdianfang.samplingpad.task.entities.Goods
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -14,6 +15,7 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
 
     val responseLiveData = MutableLiveData<Response<String>>()
     val isLoadingLiveData = MutableLiveData<Boolean>()
+    val goodsLiveData = MutableLiveData<Goods>()
 
     fun saveSample(taskItem: TaskItem) {
         isLoadingLiveData.postValue(true)
@@ -23,8 +25,8 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
                 .execute()
             val body = response.body()
             if (body != null) {
-                isLoadingLiveData.postValue(false)
                 uiThread {
+                    isLoadingLiveData.postValue(false)
                     responseLiveData.postValue(body)
                 }
             }
@@ -39,9 +41,25 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
                 .execute()
             val body = response.body()
             if (body != null) {
-                isLoadingLiveData.postValue(false)
                 uiThread {
+                    isLoadingLiveData.postValue(false)
                     responseLiveData.postValue(body)
+                }
+            }
+        }
+    }
+
+    fun getGoodsByBarcode(code: String) {
+        isLoadingLiveData.postValue(true)
+        doAsync {
+            val response = ApiClient.INSTANCE.create(TaskApi::class.java)
+                .fetchGoodsByBarcode(code.trim())
+                .execute()
+            val goods = response.body()?.data
+            if (goods != null) {
+                uiThread {
+                    isLoadingLiveData.postValue(false)
+                    goodsLiveData.postValue(goods)
                 }
             }
         }

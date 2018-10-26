@@ -29,7 +29,7 @@ class ThirdTableFragment: TableFragment() {
         super.setupViews()
 
         val yesOrNo = resources.getStringArray(R.array.yes_or_no)
-        if (taskItem.producerActive != null) {
+        if (taskItem.producerActive != null && taskItem.producerActive!! > 0) {
             producerActiveRadioGroup.setDefaultCheckedRadioButton(yesOrNo[taskItem.producerActive!!])
         }
         //委托单位信息

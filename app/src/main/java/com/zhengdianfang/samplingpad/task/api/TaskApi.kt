@@ -3,13 +3,11 @@ package com.zhengdianfang.samplingpad.task.api
 import com.zhengdianfang.samplingpad.http.Response
 import com.zhengdianfang.samplingpad.common.entities.Region
 import com.zhengdianfang.samplingpad.common.entities.SpinnerItem
+import com.zhengdianfang.samplingpad.task.entities.Goods
 import com.zhengdianfang.samplingpad.task.entities.StatusCount
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.PUT
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface TaskApi {
 
@@ -34,4 +32,6 @@ interface TaskApi {
     @GET("/enterprises/{licenseNumber}")
     fun fetchEnterpriseByLincenseCode(@Path("licenseNumber") licenseNumber: String): Call<Response<String>>
 
+    @GET("app/goods")
+    fun fetchGoodsByBarcode(@Query("barCode") code: String): Call<Response<Goods>>
 }
