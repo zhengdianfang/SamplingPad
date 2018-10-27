@@ -29,7 +29,8 @@
             app:edit_label="食品大类："
             app:edit_label_min_width="162dp" />
 
-        <com.zhengdianfang.samplingpad.common.components.EditComponent
+        <com.zhengdianfang.samplingpad.common.components.AutoCompleteEditComponent
+            android:id="@+id/enterpriseNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

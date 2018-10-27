@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.common.convertForegroundColorSpannableString
+import com.zhengdianfang.samplingpad.common.searchPoiByText
 import kotlinx.android.synthetic.main.fragment_verfiy_layout.*
+import timber.log.Timber
 
 class VerifyFragment : BaseFragment() {
 
@@ -22,24 +24,23 @@ class VerifyFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setupViews()
+        bindViewModels()
+    }
 
-        verifyFragmentViewModel.isLoadingLiveData.observe(this, Observer { isLoading ->
-            if (isLoading!!) {
-                startLoading()
-            } else {
-                stopLoading()
+    private fun autoCompleteNearbyShopName() {
+        enterpriseNameEditText.search = {text ->
+            text.searchPoiByText(context!!) {data ->
+                if (data != null) {
+                    Timber.d("search nearby market list ${data.size}")
+                    enterpriseNameEditText.notifySelectItems(data.asSequence().map { it.title }.toMutableList())
+                }
             }
-        })
+        }
+    }
 
-        verifyFragmentViewModel.responseLiveData.observe(this, Observer { response ->
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.add(android.R.id.content, VerifyResultFragment.newInstance(response!!.code == 200, response!!.msg))
-                ?.addToBackStack("")
-                ?.commit()
-        })
-
+    private fun setupViews() {
         verifyButton.setOnClickListener {
-
             val implPlanCode = implPlanCodeEditText.getContent()
             val level1Name = level1NameEditText.getContent()
             val enterpriseLicenseNumber = enterpriseLicenseNumberEditText.getContent()
@@ -65,6 +66,23 @@ class VerifyFragment : BaseFragment() {
 
         introduceTextView.text = getString(R.string.verify_detail_text)
             .convertForegroundColorSpannableString(regex = "(\\([^\\)]+\\))")
+        autoCompleteNearbyShopName()
+    }
 
+    private fun bindViewModels() {
+        verifyFragmentViewModel.isLoadingLiveData.observe(this, Observer { isLoading ->
+            if (isLoading!!) {
+                startLoading()
+            } else {
+                stopLoading()
+            }
+        })
+
+        verifyFragmentViewModel.responseLiveData.observe(this, Observer { response ->
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.add(android.R.id.content, VerifyResultFragment.newInstance(response!!.code == 200, response!!.msg))
+                ?.addToBackStack("")
+                ?.commit()
+        })
     }
 }

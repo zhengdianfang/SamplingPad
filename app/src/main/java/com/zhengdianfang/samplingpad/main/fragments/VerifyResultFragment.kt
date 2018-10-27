@@ -17,6 +17,7 @@ import com.zhengdianfang.samplingpad.App
 
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
+import com.zhengdianfang.samplingpad.common.searchPoiByText
 import kotlinx.android.synthetic.main.fragment_verify_result.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 
@@ -67,21 +68,9 @@ class VerifyResultFragment : BaseFragment() {
 
     private fun poiSearch(keyWord: String) {
         if (keyWord.isNotEmpty()) {
-
-            val query = PoiSearch.Query(keyWord, "060400")
-            val poiSearch = PoiSearch(this.context, query)
-            poiSearch.bound = PoiSearch.SearchBound(LatLonPoint(App.INSTANCE.latitude,
-                App.INSTANCE.longitude), 1000)
-            poiSearch.searchPOIAsyn()
-            poiSearch.setOnPoiSearchListener(object : PoiSearch.OnPoiSearchListener {
-                override fun onPoiItemSearched(poiItem: PoiItem?, code: Int) {
-                }
-
-                override fun onPoiSearched(poiSearch: PoiResult?, code: Int) {
-                    shopListView.adapter = ShopNameAdapter(poiSearch?.pois?.asSequence()?.map { it.title }?.take(20)?.toMutableList())
-                }
-
-            })
+            keyWord.searchPoiByText(context!!) {
+                shopListView.adapter = ShopNameAdapter(it?.asSequence()?.map { it.title }?.take(20)?.toMutableList())
+            }
         }
     }
 
