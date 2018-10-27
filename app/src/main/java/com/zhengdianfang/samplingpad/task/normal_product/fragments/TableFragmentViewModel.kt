@@ -6,6 +6,7 @@ import android.arch.lifecycle.MutableLiveData
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.http.Response
 import com.zhengdianfang.samplingpad.task.api.TaskApi
+import com.zhengdianfang.samplingpad.task.entities.Enterprise
 import com.zhengdianfang.samplingpad.task.entities.Goods
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import org.jetbrains.anko.doAsync
@@ -16,6 +17,7 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     val responseLiveData = MutableLiveData<Response<String>>()
     val isLoadingLiveData = MutableLiveData<Boolean>()
     val goodsLiveData = MutableLiveData<Goods>()
+    val enterpriseLiveData = MutableLiveData<Enterprise>()
 
     fun saveSample(taskItem: TaskItem) {
         isLoadingLiveData.postValue(true)
@@ -60,6 +62,22 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
                 uiThread {
                     isLoadingLiveData.postValue(false)
                     goodsLiveData.postValue(goods)
+                }
+            }
+        }
+    }
+
+    fun fetchEnterpriseByLincenseCode(licenseNumber: String) {
+        isLoadingLiveData.postValue(true)
+        doAsync {
+            val response = ApiClient.INSTANCE.create(TaskApi::class.java)
+                .fetchEnterpriseByLincenseCode(licenseNumber.trim())
+                .execute()
+            val enterprise = response.body()?.data
+            if (enterprise != null) {
+                uiThread {
+                    isLoadingLiveData.postValue(false)
+                    enterpriseLiveData.postValue(enterprise)
                 }
             }
         }

@@ -35,6 +35,28 @@ data class Goods(
     val description: String?
 )
 
+data class Enterprise(
+    val id: String?,
+    val name: String?,
+    val licenseNumber: String?,
+    val areaName: String?,
+    val areaType: String?,
+    val linkName: String?,
+    val placeName: String?,
+    val qsNo: String?,
+    val address: String?,
+    val annualSales: String?,
+    val legalRep: String?,
+    val contacts: String?,
+    val phone: String?,
+    val fax: String?,
+    val chainFlag: Int?,
+    val mOrP: Int?,
+    val url: String?,
+    val addressSources: Int?,
+    val zipCode: String?
+)
+
 @Parcelize
 data class TaskItem(
     var id: String = "",
@@ -146,4 +168,26 @@ data class TaskItem(
         sampleSpecification = goods.specification
         producerBarcode = goods.barCode
     }
+
+    fun mergeEnterprise(enterprise: Enterprise) {
+        enterpriseName = enterprise.name
+        enterpriseLicenseNumber = enterprise.licenseNumber
+        enterpriseAreaName = enterprise.areaName
+        enterpriseAreaType = enterprise.areaType
+        enterpriseLinkName = enterprise.linkName
+        enterprisePlaceName = enterprise.placeName
+        enterpriseQsNo = enterprise.qsNo
+        enterpriseAddress = enterprise.address
+        enterpriseAnnualSales = enterprise.annualSales
+        enterpriseLegalRep = enterprise.legalRep
+        enterpriseContacts = enterprise.contacts
+        enterprisePhone = enterprise.phone
+        enterpriseFax = enterprise.fax
+        enterpriseChain = enterprise.chainFlag
+        enterpriseMOrP = enterprise.mOrP
+        enterpriseUrl = enterprise.url
+        enterpriseAddressSources = enterprise.addressSources
+        enterpriseZipCode = enterprise.zipCode
+    }
+
 }

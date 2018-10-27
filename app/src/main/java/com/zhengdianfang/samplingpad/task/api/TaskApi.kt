@@ -3,6 +3,7 @@ package com.zhengdianfang.samplingpad.task.api
 import com.zhengdianfang.samplingpad.http.Response
 import com.zhengdianfang.samplingpad.common.entities.Region
 import com.zhengdianfang.samplingpad.common.entities.SpinnerItem
+import com.zhengdianfang.samplingpad.task.entities.Enterprise
 import com.zhengdianfang.samplingpad.task.entities.Goods
 import com.zhengdianfang.samplingpad.task.entities.StatusCount
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
@@ -29,8 +30,8 @@ interface TaskApi {
     @GET("app/arealis/allTwo")
     fun fetchRegionData(): Call<Response<MutableList<Region>>>
 
-    @GET("/enterprises/{licenseNumber}")
-    fun fetchEnterpriseByLincenseCode(@Path("licenseNumber") licenseNumber: String): Call<Response<String>>
+    @GET("enterprises/{licenseNumber}")
+    fun fetchEnterpriseByLincenseCode(@Path("licenseNumber") licenseNumber: String): Call<Response<Enterprise>>
 
     @GET("app/goods")
     fun fetchGoodsByBarcode(@Query("barCode") code: String): Call<Response<Goods>>

@@ -1,5 +1,6 @@
 package com.zhengdianfang.samplingpad.task.normal_product.fragments
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,8 +31,10 @@ open class SecondTableFragment: TableFragment() {
     override fun setupViews() {
         super.setupViews()
         enterpriseLicenseNumberEditText.setEditTextContent(taskItem.enterpriseLicenseNumber)
-        enterpriseLicenseNumberEditText.search = {
-
+        enterpriseLicenseNumberEditText.search = {text ->
+            if (text.isNotEmpty()) {
+                tableFragmentViewModel.fetchEnterpriseByLincenseCode(text)
+            }
         }
         enterpriseNameEditText.setEditTextContent(taskItem.enterpriseName)
         enterpriseAreaTypeRadioGroup.setDefaultCheckedRadioButton(taskItem.enterpriseAreaType)
@@ -105,6 +108,14 @@ open class SecondTableFragment: TableFragment() {
             enterpriseChainRadioGroup.getCheckedText() == chainTypes[1] -> taskItem.enterpriseChain = TaskItem.UN_CHAIN_ENTERPRISE
             enterpriseChainRadioGroup.getCheckedText() == chainTypes[2] -> taskItem.enterpriseChain = TaskItem.CHAIN_BRAND
         }
+    }
+
+    override fun bindViewModel() {
+        super.bindViewModel()
+        tableFragmentViewModel.enterpriseLiveData.observe(this, Observer { enterprise ->
+            this.taskItem.mergeEnterprise(enterprise!!)
+            this.setupViews()
+        })
     }
 
     override fun clearAllFilledData() {
