@@ -192,4 +192,20 @@ data class TaskItem(
         enterpriseZipCode = enterprise.zipCode
     }
 
+    fun mergeProduce(enterprise: Enterprise) {
+        producerLicenseNumber = enterprise.licenseNumber
+        producerName = enterprise.name
+        producerAddress = enterprise.address
+        producerAreaName = enterprise.areaName
+        producerContacts = enterprise.contacts
+        producerPhone = enterprise.phone
+    }
+
+    fun mergeEntrust(enterprise: Enterprise) {
+        entrustLicenseNumber = enterprise.licenseNumber
+        entrustName = enterprise.name
+        entrustAddress = enterprise.address
+        entrustContacts = enterprise.contacts
+        entrustPhone = enterprise.phone
+    }
 }

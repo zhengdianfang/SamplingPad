@@ -1,5 +1,6 @@
 package com.zhengdianfang.samplingpad.task.network_product.components
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +29,11 @@ class ThirdTableFragment: TableFragment() {
     override fun setupViews() {
         super.setupViews()
         enterpriseLicenseNumberNumberEditText.setEditTextContent(taskItem.enterpriseLicenseNumber)
+        enterpriseLicenseNumberNumberEditText.search = {text ->
+            if (text.isNotEmpty()) {
+                tableFragmentViewModel.fetchEnterpriseByLincenseCode(text)
+            }
+        }
         enterpriseQsNoEditText.setEditTextContent(taskItem.enterpriseQsNo)
         enterpriseAreaNameEditText.setEditTextContent(taskItem.enterpriseAreaName)
         enterpriseUrlEditText.setEditTextContent(taskItem.enterpriseUrl)
@@ -39,6 +45,20 @@ class ThirdTableFragment: TableFragment() {
         if (taskItem.enterpriseAddressSources != null) {
             enterpriseAddressSourcesRadioGroup.setDefaultCheckedRadioButton(sourceArray[taskItem.enterpriseAddressSources!! + 1])
         }
+
+        enterpriseQsNoEditText.search = {text ->
+            if (text.isNotEmpty()) {
+                tableFragmentViewModel.fetchEntrustByCsNo(text)
+            }
+        }
+    }
+
+    override fun bindViewModel() {
+        super.bindViewModel()
+        tableFragmentViewModel.enterpriseLiveData.observe(this, Observer {enterprise ->
+            taskItem.mergeEnterprise(enterprise!!)
+            this.setupViews()
+        })
     }
 
     override fun submitSuccessful() {

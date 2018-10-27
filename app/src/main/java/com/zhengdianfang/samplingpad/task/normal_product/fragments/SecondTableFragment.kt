@@ -10,6 +10,7 @@ import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.common.TableFragment
 import com.zhengdianfang.samplingpad.common.components.BaseComponent
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_second_normal_table_layout.*
 
 open class SecondTableFragment: TableFragment() {

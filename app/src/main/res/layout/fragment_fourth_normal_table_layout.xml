@@ -32,7 +32,7 @@
                 android:id="@+id/producerBarcodeEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 app:edit_hint="请输入条形码（散装可不填）"
                 app:edit_label="*条形码："
                 app:edit_search="true"/>
@@ -41,7 +41,7 @@
                 android:id="@+id/sampleNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 app:edit_hint="请输入样品名称"
                 app:edit_label="*样品名称：" />
 
@@ -49,7 +49,7 @@
                 android:id="@+id/sampleBrandEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 app:edit_hint="请输入商标名称（散装可不填）"
                 app:edit_label="*商标：" />
 
@@ -58,7 +58,7 @@
                 android:id="@+id/samplePriceEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 app:edit_hint="请输入样品单价"
                 app:edit_label="*样品单价：" />
 
@@ -114,7 +114,7 @@
                 android:id="@+id/sampleBatchNoEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 app:edit_hint="请输入生产批号"
                 app:edit_label="*生产批号：" />
 
@@ -123,7 +123,7 @@
                 android:id="@+id/sampleQgpEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 app:edit_hint="请输入保质期（盐除外）"
                 app:edit_label="*保质期：" />
 
@@ -132,7 +132,7 @@
                 android:id="@+id/sampleSpecificationEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 app:edit_hint="请输入规格型号  如：250ml"
                 app:edit_label="*规格型号：" />
 
@@ -140,7 +140,7 @@
                 android:id="@+id/sampleQualityLevelEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 app:edit_hint="请输入质量等级"
                 app:edit_label="*质量等级：" />
 
@@ -172,7 +172,7 @@
                 android:id="@+id/sampleAmountEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 app:edit_hint="请输入抽样基数"
                 app:edit_label="*抽检基数：" />
 
@@ -180,7 +180,7 @@
                 android:id="@+id/sampleAmountForTestEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 app:edit_hint="请输入检验数量"
                 app:edit_label="*检验数量：" />
 
@@ -189,7 +189,7 @@
                 android:id="@+id/sampleAmountForRetestEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 app:edit_hint="请输入备样数量"
                 app:edit_label="*备样数量：" />
 
@@ -213,9 +213,17 @@
                 android:id="@+id/lableStandardEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 app:edit_hint="请输入执行标准"
                 app:edit_label="*标注执行标准：" />
+
+            <com.zhengdianfang.samplingpad.common.components.AreaEditComponent
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:edit_hint="请输入备注描述"
+                app:edit_label="备注：" />
+
 
         </LinearLayout>
 
