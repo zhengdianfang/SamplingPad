@@ -99,15 +99,3 @@ fun String.searchPoiByText(context:Context, resultCallback: (poiItems: MutableLi
 
     })
 }
-
-//fun String.toInt() {
-//    val pattern = Pattern.compile("-?[0-9]+.?[0-9]+")
-//    val matcher = pattern.matcher(this)
-//    if (matcher.matches()) {
-//        return this.to
-//    }
-//    if (!isNum.matches()) {
-//        return false;
-//    }
-//    return true;
-//}

@@ -40,14 +40,14 @@ class RadioGroupComponent: BaseComponent {
         }
     }
 
-    fun getCheckedText(): String{
+    fun getCheckedText(): String? {
         for(index in 0 until radioGroup.childCount) {
             val radioButton = radioGroup.getChildAt(index) as RadioButton
             if (radioButton.isChecked) {
                 return radioButton.text.toString()
             }
         }
-        return ""
+        return null
     }
 
     private fun setupViews(context: Context, attributeSet: AttributeSet) {

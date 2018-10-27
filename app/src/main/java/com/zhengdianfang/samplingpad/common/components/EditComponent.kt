@@ -2,6 +2,7 @@ package com.zhengdianfang.samplingpad.common.components
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.inputmethod.EditorInfo
@@ -29,8 +30,12 @@ class EditComponent: BaseComponent {
         editTextView.setText(text)
     }
 
-    fun getContent(): String {
-        return editTextView.text.toString()
+    fun getContent(): String? {
+        val text =editTextView.text.toString()
+        if (TextUtils.isEmpty(text)) {
+            return null
+        }
+        return text
     }
 
     override fun clear() {

@@ -23,6 +23,17 @@
         <item name="android:padding">8dp</item>
     </style>
 
+    <style name="AppTheme.AutoCompleteEditText" parent="@style/Base.Widget.AppCompat.AutoCompleteTextView">
+        <item name="android:background">@drawable/edit_text_background</item>
+        <item name="android:textSize">@dimen/large</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColorHint">@color/colorEditTextHint</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:minHeight">@dimen/edit_height</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:popupBackground">@drawable/autocomplete_dropdown_background</item>
+    </style>
+
     <style name="AppTheme.Button" parent="@style/Base.Widget.AppCompat.Button">
         <item name="android:background">@drawable/button_background</item>
         <item name="android:textSize">@dimen/large</item>

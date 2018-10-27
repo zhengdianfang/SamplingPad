@@ -2,7 +2,6 @@ package com.zhengdianfang.samplingpad.common.components
 
 import android.content.Context
 import android.content.res.TypedArray
-import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
@@ -27,9 +26,9 @@ class AutoCompleteEditComponent: BaseComponent {
     private val publishSubject = PublishSubject.create<String>()
     private val disposable =
         publishSubject
-            .throttleLast(1, TimeUnit.SECONDS)
-            .subscribe {
-                search?.invoke("超市")
+            .throttleLast(500, TimeUnit.MILLISECONDS)
+            .subscribe {text ->
+                search?.invoke(text)
             }
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
@@ -72,7 +71,7 @@ class AutoCompleteEditComponent: BaseComponent {
     }
 
     private fun initEditTextView(context: Context, attrs: TypedArray) {
-        editTextView = AutoCompleteTextView(context, null, R.attr.editTextStyle, R.style.AppTheme_EditText).apply {
+        editTextView = AutoCompleteTextView(context, null, R.attr.editTextStyle, R.style.AppTheme_AutoCompleteEditText).apply {
             hint = attrs.getString(R.styleable.AppTheme_EditComponent_edit_hint)
             maxLines = 1
             setLines(1)
@@ -81,16 +80,16 @@ class AutoCompleteEditComponent: BaseComponent {
                 weight = 1f
                 gravity = Gravity.CENTER_VERTICAL
             }
+            setDropDownBackgroundResource(R.drawable.autocomplete_dropdown_background)
+            addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(editable: Editable?) {
+                    publishSubject.onNext(editable.toString())
+                }
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            })
         }
-        editTextView.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(editable: Editable?) {
-                publishSubject.onNext(editable.toString())
-            }
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        })
-
         editTextView.setAdapter(adapter)
         addView(editTextView)
     }
@@ -125,12 +124,5 @@ class AutoCompleteEditComponent: BaseComponent {
                 }
             }
         }
-
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-            val itemView = super.getView(position, convertView, parent)
-            itemView.setBackgroundColor(Color.WHITE)
-            return itemView
-        }
-
     }
 }

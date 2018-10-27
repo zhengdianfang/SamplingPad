@@ -19,6 +19,7 @@ class DateComponent : LinearLayout {
 
     private lateinit var labelTextView: LabelView
     private lateinit var dateTextView: TextView
+    private var hint = ""
 
     private val datePickDialog by lazy {
         val dialog = DatePickDialog()
@@ -36,8 +37,12 @@ class DateComponent : LinearLayout {
         this.setupViews(context, attributeSet)
     }
 
-    fun getDate(): String {
-        return dateTextView.text.toString()
+    fun getDate(): String? {
+        val text = dateTextView.text.toString()
+        if (text == hint) {
+            return null
+        }
+        return text
     }
 
     private fun setupViews(context: Context, attributeSet: AttributeSet) {
@@ -49,7 +54,8 @@ class DateComponent : LinearLayout {
     private fun initDateTextView(context: Context, attrs: TypedArray) {
         dateTextView = TextView(context).apply {
             setBackgroundResource(R.drawable.edit_text_background)
-            text = attrs.getString(R.styleable.AppTheme_DateComponent_date_hint)
+            hint = attrs.getString(R.styleable.AppTheme_DateComponent_date_hint)
+            text = hint
             setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_calendar, 0)
             setPadding(16, 16, 16, 16)
             layoutParams = LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT).apply{

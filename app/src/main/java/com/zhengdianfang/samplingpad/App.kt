@@ -60,6 +60,7 @@ class App: Application() {
     fun logout() {
         runOnUiThread {
             (ApiClient.okHttpClient.cookieJar() as ApiClient.AppCookieJar).clearCookies()
+            App.INSTANCE.token = ""
             startActivity(
                 Intent(this, LoginActivity::class.java)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

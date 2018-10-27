@@ -14,7 +14,7 @@ class VerifyFragmentViewModel(application: Application) : AndroidViewModel(appli
     val isLoadingLiveData = MutableLiveData<Boolean>()
     val responseLiveData = MutableLiveData<Response<String>>()
 
-    fun postVerifySample(params: Map<String, String>) {
+    fun postVerifySample(params: Map<String, String?>) {
         isLoadingLiveData.postValue(true)
         doAsync {
             val response = ApiClient.INSTANCE.create(MainApi::class.java)

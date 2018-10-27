@@ -35,7 +35,7 @@ class SpinnerComponent: BaseComponent {
         this.setupViews(context, attributeSet)
     }
 
-    fun fetchData(url: String) {
+    fun fetchData(url: String, predicate: (SpinnerItem) -> Boolean = { false }) {
         doAsync {
             val request = Request.Builder()
                 .url(url)
@@ -49,7 +49,7 @@ class SpinnerComponent: BaseComponent {
                         Gson().fromJson<Response<MutableList<SpinnerItem>>>(responseData, object: TypeToken<Response<MutableList<SpinnerItem>>>(){}.type)
                     if (json2Pojo.data != null) {
                         uiThread {
-                            spinnerDialog.setItems(*json2Pojo.data!!.map { it.name }.toTypedArray())
+                            spinnerDialog.setItems(*json2Pojo.data!!.asSequence().filter(predicate).map { it.name }.toList().toTypedArray())
                         }
                     }
                 }
@@ -57,10 +57,10 @@ class SpinnerComponent: BaseComponent {
         }
     }
 
-    fun getContent(): String {
+    fun getContent(): String? {
         val text = spinnerTextView.text.toString()
         if (text == hint) {
-            return ""
+            return null
         }
         return text
     }

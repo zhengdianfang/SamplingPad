@@ -9,9 +9,10 @@ import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.common.TableFragment
 import com.zhengdianfang.samplingpad.common.components.BaseComponent
+import com.zhengdianfang.samplingpad.common.searchPoiByText
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_second_normal_table_layout.*
+import timber.log.Timber
 
 open class SecondTableFragment: TableFragment() {
 
@@ -38,6 +39,14 @@ open class SecondTableFragment: TableFragment() {
             }
         }
         enterpriseNameEditText.setEditTextContent(taskItem.enterpriseName)
+        enterpriseNameEditText.search = {text ->
+            text.searchPoiByText(context!!) {data ->
+                if (data != null) {
+                    Timber.d("search nearby market list ${data.size}")
+                    enterpriseNameEditText.notifySelectItems(data.asSequence().map { it.title }.toMutableList())
+                }
+            }
+        }
         enterpriseAreaTypeRadioGroup.setDefaultCheckedRadioButton(taskItem.enterpriseAreaType)
         regionSpinnerGroup.fetchData()
 
@@ -79,7 +88,7 @@ open class SecondTableFragment: TableFragment() {
             TaskItem.CHAIN_ENTERPRISE ->
                 enterpriseChainRadioGroup.setDefaultCheckedRadioButton(chainTypes[0])
         }
-        enterpriseChainRadioGroup.radioButtonCheckCallback = {position, text ->
+        enterpriseChainRadioGroup.radioButtonCheckCallback = { position, _ ->
            if (position == TaskItem.UN_CHAIN_ENTERPRISE) {
                chainBrandEditText.visibility = View.GONE
            } else if (position == TaskItem.CHAIN_ENTERPRISE) {

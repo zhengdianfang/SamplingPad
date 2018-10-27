@@ -11,6 +11,6 @@ interface MainApi {
 
     @FormUrlEncoded
     @POST("app/totalvalidates")
-    fun postVerifySample(@FieldMap params: Map<String, String>) : Call<Response<String>>
+    fun postVerifySample(@FieldMap params: Map<String, String?>) : Call<Response<String>>
 }
 
