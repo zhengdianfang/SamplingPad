@@ -7,6 +7,7 @@ import com.zhengdianfang.samplingpad.common.BaseActivity
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import kotlinx.android.synthetic.main.activity_cannot_reason_layout.*
+import kotlinx.android.synthetic.main.toolbar_layout.*
 import me.yokeyword.fragmentation.SupportActivity
 
 class CanotVerifyReasonActivity: BaseActivity() {
@@ -27,24 +28,20 @@ class CanotVerifyReasonActivity: BaseActivity() {
     }
 
     private fun setupViews() {
+        toolBarTitleView.text = "无法检验原因"
+        backButton.setOnClickListener {
+            finish()
+        }
         taskNoTextView.text = "单号：${taskItem.code}"
-        enterpriseNameTextView.setContentText(taskItem.enterpriseName)
-        enterpriseAnnualSalesTextView.setContentText(taskItem.enterpriseAnnualSales)
-        enterpriseLegalRepTextView.setContentText(taskItem.enterpriseLegalRep)
-        enterpriseLicenseNumberTextView.setContentText(taskItem.enterpriseLicenseNumber)
-        enterpriseContactsTextView.setContentText(taskItem.enterpriseContacts)
-        enterprisePhoneTextView.setContentText(taskItem.enterprisePhone)
-        enterpriseFaxTextView.setContentText(taskItem.enterpriseFax)
-        saveAndSubmitButton.setOnClickListener{
-            val abnormalTypeName= abnormalTypeNameSpinner.getContent()
+        saveAndSubmitButton.setOnClickListener {
+            val abnormalTypeName = abnormalTypeNameSpinner.getContent()
         }
 
         saveOnlyButton.setOnClickListener {
-            val abnormalTypeName= abnormalTypeNameSpinner.getContent()
+            val abnormalTypeName = abnormalTypeNameSpinner.getContent()
         }
 
         abnormalTypeNameSpinner.fetchData("${ApiClient.HOST}/app/abnormaltypelis")
-        enterpriseAreaNameSpinner.fetchData("${ApiClient.HOST}/app/specialarealis")
-        addressSpinner.fetchData()
+
     }
 }

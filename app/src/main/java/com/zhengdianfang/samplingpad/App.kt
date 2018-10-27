@@ -11,6 +11,7 @@ import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.user.LoginActivity
 import org.jetbrains.anko.defaultSharedPreferences
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.runOnUiThread
 import timber.log.Timber
 import java.io.InputStream
 
@@ -57,13 +58,15 @@ class App: Application() {
     }
 
     fun logout() {
-        (ApiClient.okHttpClient.cookieJar() as ApiClient.AppCookieJar).clearCookies()
-        startActivity(
-            Intent(this, LoginActivity::class.java)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        )
+        runOnUiThread {
+            (ApiClient.okHttpClient.cookieJar() as ApiClient.AppCookieJar).clearCookies()
+            startActivity(
+                Intent(this, LoginActivity::class.java)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            )
+        }
     }
 
     private fun timber() {

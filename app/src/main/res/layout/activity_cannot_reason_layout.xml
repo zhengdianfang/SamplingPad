@@ -1,198 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:background="@color/colorLightGray"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <include layout="@layout/toolbar_layout" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="16dp"
-        android:padding="16dp"
-        android:background="@color/colorLightGray"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/taskNoTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:padding="16dp"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/large_22"
-            tools:text="单号：23123121231231231" />
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
             android:background="@android:color/white"
             android:orientation="vertical"
             android:padding="16dp">
+
+            <TextView
+                android:id="@+id/taskNoTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:padding="16dp"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/large_22"
+                tools:text="单号：23123121231231231" />
+
+            <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/wantSampleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:edit_label="*拟抽样品名称：" />
+
+            <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/enterpriseNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:edit_label="*受检单位名称：" />
+
+
+            <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/enterpriseAddressEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:edit_label="*受检单位地址：" />
+
+            <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/creatorNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:edit_label="*联系人：" />
+
+            <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:edit_label="*联系电话：" />
+
+            <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/taskNoEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:edit_label="*任务号：" />
 
             <com.zhengdianfang.samplingpad.common.components.SpinnerComponent
                 android:id="@+id/abnormalTypeNameSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 app:spinner_hint="@string/resson_hint"
                 app:spinner_label="@string/reason_label" />
 
-            <com.zhengdianfang.samplingpad.common.components.AreaEditComponent
+            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+                android:id="@+id/producerActiveRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:edit_hint="请输入具体原因描述"
-                app:edit_label="具体描述：" />
+                app:radio_buttons="@array/yes_or_no"
+                app:radio_label="*是否回访：" />
 
-            <com.zhengdianfang.samplingpad.common.components.TextComponent
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:text_label="反馈原因：" />
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="16dp">
 
-            <com.zhengdianfang.samplingpad.common.components.TextComponent
-                android:id="@+id/enterpriseNameTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:text_label="单位名称：" />
+                <Button
+                    android:id="@+id/saveAndSubmitButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:paddingLeft="32dp"
+                    android:paddingRight="32dp"
+                    android:text="@string/save_and_submit_text" />
+
+                <Button
+                    android:id="@+id/saveOnlyButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/stoke_button_background"
+                    android:paddingLeft="32dp"
+                    android:paddingRight="32dp"
+                    android:text="@string/only_save_text"
+                    android:textColor="@color/colorPrimary" />
+            </LinearLayout>
         </LinearLayout>
+    </ScrollView>
+</LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <com.zhengdianfang.samplingpad.common.components.SpinnerComponent
-                android:id="@+id/enterpriseAreaNameSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:spinner_label="@string/region_type_text"
-                app:spinner_hint="@string/spinner_region_hint"/>
-
-            <com.zhengdianfang.samplingpad.common.components.AddressSpinnerGroupComponent
-                android:id="@+id/addressSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"/>
-
-            <com.zhengdianfang.samplingpad.common.components.TextComponent
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:text_label="详细地址："/>
-        </LinearLayout>
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:padding="16dp">
-
-            <com.zhengdianfang.samplingpad.common.components.TextComponent
-                android:id="@+id/enterpriseAnnualSalesTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/enterpriseLegalRepTextView"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:text_label="年销售额：" />
-
-            <com.zhengdianfang.samplingpad.common.components.TextComponent
-                android:id="@+id/enterpriseLegalRepTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/enterpriseAnnualSalesTextView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:text_label="法人代表：" />
-
-            <com.zhengdianfang.samplingpad.common.components.TextComponent
-                android:id="@+id/enterpriseLicenseNumberTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toStartOf="@+id/enterpriseContactsTextView"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/enterpriseAnnualSalesTextView"
-                app:text_label="统一信用代码：" />
-
-            <com.zhengdianfang.samplingpad.common.components.TextComponent
-                android:id="@+id/enterpriseContactsTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/enterpriseLicenseNumberTextView"
-                app:layout_constraintTop_toBottomOf="@+id/enterpriseLegalRepTextView"
-                app:text_label="联系人：" />
-
-            <com.zhengdianfang.samplingpad.common.components.TextComponent
-                android:id="@+id/enterprisePhoneTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toStartOf="@+id/enterpriseFaxTextView"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/enterpriseLicenseNumberTextView"
-                app:text_label="电话：" />
-
-            <com.zhengdianfang.samplingpad.common.components.TextComponent
-                android:id="@+id/enterpriseFaxTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/enterprisePhoneTextView"
-                app:layout_constraintTop_toBottomOf="@+id/enterpriseContactsTextView"
-                app:text_label="传真：" />
-
-        </android.support.constraint.ConstraintLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="16dp">
-
-            <Button
-                android:id="@+id/saveAndSubmitButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
-                android:paddingLeft="32dp"
-                android:paddingRight="32dp"
-                android:text="@string/save_and_submit_text" />
-
-            <Button
-                android:id="@+id/saveOnlyButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:background="@drawable/stoke_button_background"
-                android:paddingLeft="32dp"
-                android:paddingRight="32dp"
-                android:text="@string/only_save_text"
-                android:textColor="@color/colorPrimary" />
-        </LinearLayout>
-    </LinearLayout>
-</ScrollView>
