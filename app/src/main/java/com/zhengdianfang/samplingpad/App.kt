@@ -83,8 +83,8 @@ class App: Application() {
             aMapLocationClient?.setLocationListener {
                 if (it.errorCode == 0) {
                     Timber.d("location longitude: $longitude, latitude: $latitude")
-                    this.weakRef.get()?.longitude = it.longitude
-                    this.weakRef.get()?.latitude = it.latitude
+                    App.INSTANCE.longitude = it.longitude
+                    App.INSTANCE.latitude = it.latitude
 
                 }
             }

@@ -50,6 +50,8 @@ class MainActivity : BaseActivity() {
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.READ_PHONE_STATE
             ), REQUEST_LOCATION_PERMISSION)
+        } else {
+            App.INSTANCE.initLocationClient()
         }
     }
 }

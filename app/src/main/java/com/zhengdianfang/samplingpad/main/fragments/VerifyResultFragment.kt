@@ -5,6 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import com.amap.api.services.cloud.CloudSearch
+import com.amap.api.services.core.LatLonPoint
+import com.amap.api.services.core.PoiItem
+import com.amap.api.services.poisearch.PoiResult
+import com.amap.api.services.poisearch.PoiSearch
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.BaseViewHolder
+import com.zhengdianfang.samplingpad.App
 
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
@@ -13,8 +22,8 @@ import kotlinx.android.synthetic.main.toolbar_layout.*
 
 class VerifyResultFragment : BaseFragment() {
 
-    private val isSuccessFul by lazy { arguments?.getBoolean("isSuccessFul")!! }
-    private val message by lazy { arguments?.getString("message")!! }
+    private val isSuccessFul by lazy { arguments?.getBoolean("isSuccessFul") ?: false }
+    private val message by lazy { arguments?.getString("message") ?: "" }
 
     companion object {
         fun newInstance(isSuccessFul: Boolean, message: String): VerifyResultFragment {
@@ -37,6 +46,7 @@ class VerifyResultFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupViews()
+        this.poiSearch("超市")
     }
 
     private fun setupViews() {
@@ -53,6 +63,33 @@ class VerifyResultFragment : BaseFragment() {
         }
 
         resultMessageTextView.text = message
+    }
+
+    private fun poiSearch(keyWord: String) {
+        if (keyWord.isNotEmpty()) {
+
+            val query = PoiSearch.Query(keyWord, "060400")
+            val poiSearch = PoiSearch(this.context, query)
+            poiSearch.bound = PoiSearch.SearchBound(LatLonPoint(App.INSTANCE.latitude,
+                App.INSTANCE.longitude), 1000)
+            poiSearch.searchPOIAsyn()
+            poiSearch.setOnPoiSearchListener(object : PoiSearch.OnPoiSearchListener {
+                override fun onPoiItemSearched(poiItem: PoiItem?, code: Int) {
+                }
+
+                override fun onPoiSearched(poiSearch: PoiResult?, code: Int) {
+                    shopListView.adapter = ShopNameAdapter(poiSearch?.pois?.asSequence()?.map { it.title }?.take(20)?.toMutableList())
+                }
+
+            })
+        }
+    }
+
+    private inner class ShopNameAdapter(data: MutableList<String>?)
+        : BaseQuickAdapter<String, BaseViewHolder>(R.layout.shop_item_layout, data) {
+        override fun convert(helper: BaseViewHolder, item: String) {
+            (helper.itemView as TextView).text = item
+        }
     }
 
 }
