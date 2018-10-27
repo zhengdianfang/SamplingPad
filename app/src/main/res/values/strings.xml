@@ -92,10 +92,11 @@
     </string>
 
 
-    <!-- spinner apis -->
     <string name="sample_link_name_data_api">app/samplelinks/%d</string>
     <string name="logout_text">登出</string>
     <string name="reason_label">原因：</string>
     <string name="resson_hint">请选择无法抽检原因</string>
     <string name="only_save_text">仅保存</string>
+    <string name="please_select_sample_type">请选择食品大类</string>
+    <string name="sample_level1_type_label">食品大类：</string>
 </resources>

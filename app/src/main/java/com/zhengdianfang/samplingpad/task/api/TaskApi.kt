@@ -31,8 +31,11 @@ interface TaskApi {
     fun fetchRegionData(): Call<Response<MutableList<Region>>>
 
     @GET("enterprises/{licenseNumber}")
-    fun fetchEnterpriseByLincenseCode(@Path("licenseNumber") licenseNumber: String): Call<Response<Enterprise>>
+    fun fetchEnterpriseByLicenseCode(@Path("licenseNumber") licenseNumber: String): Call<Response<Enterprise>>
 
     @GET("app/goods")
     fun fetchGoodsByBarcode(@Query("barCode") code: String): Call<Response<Goods>>
+
+    @GET("app/enterpriseproduct/{qsNo}")
+    fun fetchEntrustByCsNo(@Query("qsNo") code: String): Call<Response<Enterprise>>
 }

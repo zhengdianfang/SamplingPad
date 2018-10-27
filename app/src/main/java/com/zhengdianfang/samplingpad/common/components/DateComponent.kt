@@ -36,15 +36,8 @@ class DateComponent : LinearLayout {
         this.setupViews(context, attributeSet)
     }
 
-    fun getDate(): Long {
-        val simpleDateFormat = SimpleDateFormat("yyyy年MM月dd日")
-        var time = 0L
-        try {
-            time = simpleDateFormat.parse(dateTextView.text.toString()).time
-        }catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return time
+    fun getDate(): String {
+        return dateTextView.text.toString()
     }
 
     private fun setupViews(context: Context, attributeSet: AttributeSet) {

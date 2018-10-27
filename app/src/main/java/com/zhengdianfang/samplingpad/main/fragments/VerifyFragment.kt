@@ -10,12 +10,15 @@ import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.common.convertForegroundColorSpannableString
 import com.zhengdianfang.samplingpad.common.searchPoiByText
+import com.zhengdianfang.samplingpad.http.ApiClient
+import com.zhengdianfang.samplingpad.task.normal_product.fragments.TableFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_verfiy_layout.*
 import timber.log.Timber
 
 class VerifyFragment : BaseFragment() {
 
     private val verifyFragmentViewModel by lazy { ViewModelProviders.of(this).get(VerifyFragmentViewModel::class.java) }
+    private val tableFragmentViewModel by lazy { ViewModelProviders.of(this).get(TableFragmentViewModel::class.java) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -40,15 +43,17 @@ class VerifyFragment : BaseFragment() {
     }
 
     private fun setupViews() {
+        level1NameSpinner.fetchData("${ApiClient.HOST}app/sampletypelis")
         verifyButton.setOnClickListener {
             val implPlanCode = implPlanCodeEditText.getContent()
-            val level1Name = level1NameEditText.getContent()
+            val level1Name = level1NameSpinner.getContent()
             val enterpriseLicenseNumber = enterpriseLicenseNumberEditText.getContent()
             val sampleName = sampleNameEditText.getContent()
             val sampleProductDate = sampleProductDateView.getDate()
             val chainBrand = chainBrandEditText.getContent()
             val sampleDate = sampleDateView.getDate()
             val producerCsNo = producerCsNoEditText.getContent()
+            val enterpriseName = enterpriseNameEditText.getContent()
 
             verifyFragmentViewModel.postVerifySample(
                 mapOf(
@@ -59,7 +64,8 @@ class VerifyFragment : BaseFragment() {
                     Pair("sampleProductDate", "$sampleProductDate"),
                     Pair("chainBrand", chainBrand),
                     Pair("sampleDate", "$sampleDate"),
-                    Pair("producerCsNo", producerCsNo)
+                    Pair("producerCsNo", producerCsNo),
+                    Pair("enterpriseName", enterpriseName)
                 )
             )
         }
@@ -67,6 +73,11 @@ class VerifyFragment : BaseFragment() {
         introduceTextView.text = getString(R.string.verify_detail_text)
             .convertForegroundColorSpannableString(regex = "(\\([^\\)]+\\))")
         autoCompleteNearbyShopName()
+        enterpriseLicenseNumberEditText.search = { text ->
+            if (text.isNotEmpty()) {
+                tableFragmentViewModel.fetchEnterpriseByLincenseCode(text)
+            }
+        }
     }
 
     private fun bindViewModels() {
@@ -80,9 +91,13 @@ class VerifyFragment : BaseFragment() {
 
         verifyFragmentViewModel.responseLiveData.observe(this, Observer { response ->
             activity?.supportFragmentManager?.beginTransaction()
-                ?.add(android.R.id.content, VerifyResultFragment.newInstance(response!!.code == 200, response!!.msg))
+                ?.add(android.R.id.content, VerifyResultFragment.newInstance(response!!.code == 200, response.msg))
                 ?.addToBackStack("")
                 ?.commit()
+        })
+
+        tableFragmentViewModel.enterpriseLiveData.observe(this, Observer { enterprise ->
+            enterpriseNameEditText.setEditTextContent(enterprise!!.name)
         })
     }
 }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.common.TableFragment
+import com.zhengdianfang.samplingpad.task.entities.Goods
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import kotlinx.android.synthetic.main.fragment_third_normal_table_layout.*
 
@@ -28,17 +29,47 @@ class ThirdTableFragment: TableFragment() {
     override fun setupViews() {
         super.setupViews()
 
+        //标称信息
         val yesOrNo = resources.getStringArray(R.array.yes_or_no)
         if (taskItem.producerActive != null && taskItem.producerActive!! > 0) {
             producerActiveRadioGroup.setDefaultCheckedRadioButton(yesOrNo[taskItem.producerActive!!])
         }
+        producerActiveRadioGroup.radioButtonCheckCallback = { position, _ ->
+            if (position == 0) {
+                agencyFrame.visibility = View.GONE
+                showHideProduceFrame(View.VISIBLE)
+            } else {
+                agencyFrame.visibility = View.VISIBLE
+                showHideProduceFrame(View.GONE)
+            }
+        }
+        produceLicenseNumberEditText.setEditTextContent(taskItem.producerLicenseNumber)
+        produceCsNoEditText.setEditTextContent(taskItem.producerCsNo)
+        produceNameEditText.setEditTextContent(taskItem.producerName)
+        produceAddressEditText.setEditTextContent(taskItem.producerAddress)
+        produceContactsEditText.setEditTextContent(taskItem.producerContacts)
+        producePhoneEditText.setEditTextContent(taskItem.producerPhone)
+        addressSpinner.labelTextView.text = "*生产所在地："
+        addressSpinner.fetchData()
+
+        if (taskItem.entrustActive != null && taskItem.entrustActive!! > 0) {
+            entrustActiveRadioGroup.setDefaultCheckedRadioButton(yesOrNo[taskItem.entrustActive!!])
+        }
+        entrustActiveRadioGroup.radioButtonCheckCallback = { position, _ ->
+            if (position == 0) {
+                entrustFrame.visibility = View.GONE
+            } else {
+                entrustFrame.visibility = View.VISIBLE
+            }
+        }
+
         //委托单位信息
         entrustCsNoEditText.setEditTextContent(taskItem.entrustCsNo)
         entrustNameEditText.setEditTextContent(taskItem.entrustName)
         entrustAddressEditText.setEditTextContent(taskItem.entrustAddress)
         entrustContactsEditText.setEditTextContent(taskItem.entrustContacts)
         entrustPhoneEditText.setEditTextContent(taskItem.entrustPhone)
-
+        entrustLicenseNumberEditText.setEditTextContent(taskItem.enterpriseLicenseNumber)
         areaSpinnerGroupView.fetchData()
         //进口代理商信息
         agencyNameEditText.setEditTextContent(taskItem.agencyName)
@@ -49,21 +80,40 @@ class ThirdTableFragment: TableFragment() {
 
     }
 
+    private fun showHideProduceFrame(visiable: Int) {
+        for (index in 0 until produceFrame.childCount) {
+            if (index > 1) {
+                produceFrame.getChildAt(index).visibility = visiable
+            }
+        }
+    }
+
     override fun submitSuccessful() {
         start(FourthTableFragment.newInstance(taskItem))
     }
 
     override fun assembleSubmitTaskData() {
+        //标称信息
         val yesOrNo = resources.getStringArray(R.array.yes_or_no)
         taskItem.producerActive = yesOrNo.indexOf(producerActiveRadioGroup.getCheckedText())
+
+        taskItem.producerLicenseNumber = produceLicenseNumberEditText.getContent()
+        taskItem.producerCsNo = produceCsNoEditText.getContent()
+        taskItem.producerName = produceNameEditText.getContent()
+        taskItem.producerAddress = produceAddressEditText.getContent()
+        taskItem.producerContacts = produceContactsEditText.getContent()
+        taskItem.producerPhone = producePhoneEditText.getContent()
+        taskItem.producerAddress = addressSpinner.getContent()
+
         //委托单位信息
         taskItem.entrustCsNo = entrustCsNoEditText.getContent()
         taskItem.entrustName = entrustNameEditText.getContent()
         taskItem.entrustAddress = entrustAddressEditText.getContent()
         taskItem.entrustContacts = entrustContactsEditText.getContent()
         taskItem.entrustPhone = entrustPhoneEditText.getContent()
+        taskItem.enterpriseLicenseNumber = entrustLicenseNumberEditText.getContent()
+        taskItem.entrustActive = yesOrNo.indexOf(entrustActiveRadioGroup.getCheckedText())
 
-        areaSpinnerGroupView.fetchData()
         //进口代理商信息
         taskItem.agencyName = agencyNameEditText.getContent()
         taskItem.agencyAddress = agencyAddressEditText.getContent()

@@ -20,14 +20,14 @@
             app:edit_label="任务号："
             app:edit_label_min_width="162dp" />
 
-        <com.zhengdianfang.samplingpad.common.components.EditComponent
-            android:id="@+id/level1NameEditText"
+        <com.zhengdianfang.samplingpad.common.components.SpinnerComponent
+            android:id="@+id/level1NameSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:edit_hint="请输入计划名称"
-            app:edit_label="食品大类："
-            app:edit_label_min_width="162dp" />
+            app:spinner_hint="@string/please_select_sample_type"
+            app:spinner_label="@string/sample_level1_type_label"
+            app:spinner_label_min_width="162dp" />
 
         <com.zhengdianfang.samplingpad.common.components.AutoCompleteEditComponent
             android:id="@+id/enterpriseNameEditText"
@@ -44,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:edit_hint="请输入社会信用代码"
+            app:edit_search="true"
             app:edit_label="受检单位统一\n社会信用代码："
             app:edit_label_min_width="162dp" />
 

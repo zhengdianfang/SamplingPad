@@ -91,7 +91,7 @@ data class TaskItem(
     var enterpriseLegalRep: String?,
     var enterpriseContacts: String?,
     var enterprisePhone: String?,
-    var enterpriseFax :String?,
+    var enterpriseFax: String?,
     var enterpriseZipCode: String?,
     var enterpriseAnnualSales: String?,
     var specialAreaName: String?,
@@ -108,7 +108,7 @@ data class TaskItem(
     var agencyAddress: String?,
     var agencyContacts: String?,
     var agencyPhone: String?,
-    var producerBarcode :String?,
+    var producerBarcode: String?,
     var sampleBrand: String?,
     var samplePrice: Double?,
     var sampleType: String?,
@@ -116,7 +116,7 @@ data class TaskItem(
     var sampleSource: String?,
     var samplePackageType: String?,
     var samplePackaging: String?,
-    var sampleProductDate: Long?,
+    var sampleProductDate: String?,
     var sampleBatchNo: String?,
     var sampleQgp: String?,
     var sampleSpecification: String?,
@@ -144,11 +144,13 @@ data class TaskItem(
     var producerPhone: String?,
     var enterpriseAddressSources: Int?,
     var producerName: String?,
-    var sampleDate: Long?,
+    var sampleDate: String?,
     var entrustLicenseNumber: String?,
     var longitude: Double?,
     var latitude: Double?,
-    var abnormalTypeName: String?
+    var abnormalTypeName: String?,
+    var chainBrand: String?,
+    var entrustActive: Int?
 
 ) : Parcelable {
     companion object {

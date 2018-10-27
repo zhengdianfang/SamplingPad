@@ -26,9 +26,9 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
                 .saveSample(taskItem.id, taskItem)
                 .execute()
             val body = response.body()
-            if (body != null) {
-                uiThread {
-                    isLoadingLiveData.postValue(false)
+            uiThread {
+                isLoadingLiveData.postValue(false)
+                if (body != null) {
                     responseLiveData.postValue(body)
                 }
             }
@@ -42,9 +42,9 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
                 .submitSample(taskItem.id, taskItem)
                 .execute()
             val body = response.body()
-            if (body != null) {
-                uiThread {
-                    isLoadingLiveData.postValue(false)
+            uiThread {
+                isLoadingLiveData.postValue(false)
+                if (body != null) {
                     responseLiveData.postValue(body)
                 }
             }
@@ -58,9 +58,9 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
                 .fetchGoodsByBarcode(code.trim())
                 .execute()
             val goods = response.body()?.data
-            if (goods != null) {
-                uiThread {
-                    isLoadingLiveData.postValue(false)
+            uiThread {
+                isLoadingLiveData.postValue(false)
+                if (goods != null) {
                     goodsLiveData.postValue(goods)
                 }
             }
@@ -71,12 +71,28 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
         isLoadingLiveData.postValue(true)
         doAsync {
             val response = ApiClient.INSTANCE.create(TaskApi::class.java)
-                .fetchEnterpriseByLincenseCode(licenseNumber.trim())
+                .fetchEnterpriseByLicenseCode(licenseNumber.trim())
                 .execute()
             val enterprise = response.body()?.data
-            if (enterprise != null) {
-                uiThread {
-                    isLoadingLiveData.postValue(false)
+            uiThread {
+                isLoadingLiveData.postValue(false)
+                if (enterprise != null) {
+                    enterpriseLiveData.postValue(enterprise)
+                }
+            }
+        }
+    }
+
+    fun fetchEntrustByCsNo(code: String) {
+        isLoadingLiveData.postValue(true)
+        doAsync {
+            val response = ApiClient.INSTANCE.create(TaskApi::class.java)
+                .fetchEntrustByCsNo(code.trim())
+                .execute()
+            val enterprise = response.body()?.data
+            uiThread {
+                isLoadingLiveData.postValue(false)
+                if (enterprise != null) {
                     enterpriseLiveData.postValue(enterprise)
                 }
             }

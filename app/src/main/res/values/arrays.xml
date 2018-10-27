@@ -131,6 +131,5 @@
     <string-array name="verify_unit_array">
         <item>连锁企业</item>
         <item>非连锁企业</item>
-        <item>连锁品牌</item>
     </string-array>
 </resources>

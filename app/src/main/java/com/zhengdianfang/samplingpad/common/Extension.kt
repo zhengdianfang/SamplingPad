@@ -17,6 +17,7 @@ import com.zhengdianfang.samplingpad.App
 import com.zhengdianfang.samplingpad.BuildConfig
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 fun RadioButton.active(backgroundResId: Int, textColorId: Int) {
@@ -99,3 +100,14 @@ fun String.searchPoiByText(context:Context, resultCallback: (poiItems: MutableLi
     })
 }
 
+//fun String.toInt() {
+//    val pattern = Pattern.compile("-?[0-9]+.?[0-9]+")
+//    val matcher = pattern.matcher(this)
+//    if (matcher.matches()) {
+//        return this.to
+//    }
+//    if (!isNum.matches()) {
+//        return false;
+//    }
+//    return true;
+//}

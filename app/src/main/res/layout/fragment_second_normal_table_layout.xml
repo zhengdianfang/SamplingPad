@@ -97,6 +97,7 @@
                android:layout_height="wrap_content"
                android:layout_marginTop="24dp"
                app:edit_hint="请输入许可证号"
+               app:edit_search="true"
                app:edit_label="*许可证号：" />
 
            <com.zhengdianfang.samplingpad.common.components.EditComponent
@@ -177,6 +178,15 @@
                    android:textColor="@android:color/holo_red_light"
                    android:text="（流通和餐饮环节必选）" />
            </LinearLayout>
+
+           <com.zhengdianfang.samplingpad.common.components.EditComponent
+               android:id="@+id/chainBrandEditText"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="24dp"
+               app:edit_hint="请输入连锁品牌"
+               app:edit_label="*连锁品牌：" />
+
        </LinearLayout>
 
         <LinearLayout

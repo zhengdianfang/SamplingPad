@@ -39,11 +39,12 @@ open class SecondTableFragment: TableFragment() {
         enterpriseNameEditText.setEditTextContent(taskItem.enterpriseName)
         enterpriseAreaTypeRadioGroup.setDefaultCheckedRadioButton(taskItem.enterpriseAreaType)
         regionSpinnerGroup.fetchData()
+
+        fetchEnterprisePlaceName(taskItem.enterpriseLinkName)
+
         enterpriseLinkNameRadioGroup.setDefaultCheckedRadioButton(taskItem.enterpriseLinkName)
         enterpriseLinkNameRadioGroup.radioButtonCheckCallback  = { _, text ->
-            val enterpriseLinkNames = resources.getStringArray(R.array.sample_link_names)
-            val url = getString(R.string.sample_link_name_data_api, enterpriseLinkNames.indexOf(text) + 1)
-            enterprisePlaceNameSpinner.fetchData("${ApiClient.HOST}$url")
+            fetchEnterprisePlaceName(text)
         }
         enterprisePlaceNameSpinner.setDefaultText(taskItem.enterprisePlaceName)
         enterpriseAddressEditText.setEditTextContent(taskItem.enterpriseAddress)
@@ -56,6 +57,11 @@ open class SecondTableFragment: TableFragment() {
                 enterpriseMOrPRadioGroup.setDefaultCheckedRadioButton(certificates[1])
         }
         enterpriseQsNoEditText.setEditTextContent(taskItem.enterpriseQsNo)
+        enterpriseQsNoEditText.search = {text ->
+            if (text.isNotEmpty()) {
+               tableFragmentViewModel.fetchEntrustByCsNo(text)
+            }
+        }
         enterpriseLegalRepEditText.setEditTextContent(taskItem.enterpriseLegalRep)
         enterpriseContactsEditText.setEditTextContent(taskItem.enterpriseContacts)
         enterprisePhoneEditText.setEditTextContent(taskItem.enterprisePhone)
@@ -71,11 +77,23 @@ open class SecondTableFragment: TableFragment() {
 
             TaskItem.CHAIN_ENTERPRISE ->
                 enterpriseChainRadioGroup.setDefaultCheckedRadioButton(chainTypes[0])
-
-            TaskItem.CHAIN_BRAND ->
-                enterpriseChainRadioGroup.setDefaultCheckedRadioButton(chainTypes[2])
         }
+        enterpriseChainRadioGroup.radioButtonCheckCallback = {position, text ->
+           if (position == TaskItem.UN_CHAIN_ENTERPRISE) {
+               chainBrandEditText.visibility = View.GONE
+           } else if (position == TaskItem.CHAIN_ENTERPRISE) {
+               chainBrandEditText.visibility = View.VISIBLE
+           }
+        }
+        chainBrandEditText.setEditTextContent(taskItem.chainBrand)
 
+    }
+
+    private fun fetchEnterprisePlaceName(text: String?) {
+        val enterpriseLinkNames = resources.getStringArray(R.array.sample_link_names)
+        val index = enterpriseLinkNames.indexOf(text)
+        val url = getString(R.string.sample_link_name_data_api,  (if (index < 0) 0 else index) + 1)
+        enterprisePlaceNameSpinner.fetchData("${ApiClient.HOST}$url")
     }
 
     override fun submitSuccessful() {
@@ -108,6 +126,7 @@ open class SecondTableFragment: TableFragment() {
             enterpriseChainRadioGroup.getCheckedText() == chainTypes[1] -> taskItem.enterpriseChain = TaskItem.UN_CHAIN_ENTERPRISE
             enterpriseChainRadioGroup.getCheckedText() == chainTypes[2] -> taskItem.enterpriseChain = TaskItem.CHAIN_BRAND
         }
+        taskItem.chainBrand = chainBrandEditText.getContent()
     }
 
     override fun bindViewModel() {

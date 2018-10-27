@@ -9,7 +9,7 @@ import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.LabelView
 
 abstract class BaseComponent: LinearLayout {
-    protected lateinit var labelTextView: LabelView
+    lateinit var labelTextView: LabelView
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet)
 
