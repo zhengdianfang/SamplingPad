@@ -35,17 +35,13 @@ class AdminRegionSpinnerGroupComponent: BaseComponent {
     }
 
     override fun clear() {
-        areaSpinnerTextView!!.setText(R.string.spinner_region_hint)
-        streetSpinnerTextView!!.setText(R.string.spinner_street_hint)
-        areaSpinnerTextView!!.setTextColor(ContextCompat.getColor(context, R.color.colorLightGray))
-        streetSpinnerTextView!!.setTextColor(ContextCompat.getColor(context, R.color.colorLightGray))
+        areaSpinnerTextView!!.text = null
+        streetSpinnerTextView!!.text = null
     }
 
     fun getContent(): String {
-        val area =
-            if (areaSpinnerTextView!!.text == resources.getString(R.string.spinner_region_hint)) "" else areaSpinnerTextView!!.text
-        val street =
-            if (streetSpinnerTextView!!.text == resources.getString(R.string.spinner_street_hint)) "" else streetSpinnerTextView!!.text
+        val area = areaSpinnerTextView!!.text
+        val street =streetSpinnerTextView!!.text
         return "$area$street"
     }
 

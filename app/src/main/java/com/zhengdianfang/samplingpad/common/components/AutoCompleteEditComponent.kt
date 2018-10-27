@@ -61,7 +61,7 @@ class AutoCompleteEditComponent: BaseComponent {
     }
 
     override fun clear() {
-        editTextView.setText("")
+        editTextView.text = null
     }
 
     private fun setupViews(context: Context, attributeSet: AttributeSet) {

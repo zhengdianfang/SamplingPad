@@ -26,8 +26,6 @@ class AppResponseInterceptor: Interceptor {
                 }
                 response = response
                     .newBuilder()
-                    .code(responseBean.code)
-                    .message(responseBean.msg)
                     .body(ResponseBody.create(MediaType.parse("application/json"), responseText!!))
                     .build()
             }

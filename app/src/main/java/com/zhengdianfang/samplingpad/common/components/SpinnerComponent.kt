@@ -25,7 +25,6 @@ class SpinnerComponent: BaseComponent {
 
     private lateinit var spinnerTextView: TextView
     private lateinit var spinnerDialog: MaterialDialog
-    private var hint = ""
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
         this.setupViews(context, attributeSet)
@@ -59,7 +58,7 @@ class SpinnerComponent: BaseComponent {
 
     fun getContent(): String? {
         val text = spinnerTextView.text.toString()
-        if (text == hint) {
+        if (TextUtils.isEmpty(text)) {
             return null
         }
         return text
@@ -72,8 +71,7 @@ class SpinnerComponent: BaseComponent {
     }
 
     override fun clear() {
-        spinnerTextView.text = hint
-        spinnerTextView.setTextColor(ContextCompat.getColor(context, R.color.colorLightGray))
+        spinnerTextView.text = null
     }
 
     private fun setupViews(context: Context, attributeSet: AttributeSet) {
@@ -83,12 +81,11 @@ class SpinnerComponent: BaseComponent {
     }
 
     private fun initSpinnerView(context: Context, attrs: TypedArray) {
-        hint = resources.getString(attrs.getResourceId(R.styleable.AppTheme_SpinnerComponent_spinner_hint, 0))
         spinnerTextView = TextView(context).apply {
             setBackgroundResource(R.drawable.edit_text_background)
             gravity = Gravity.CENTER_VERTICAL
             setTextColor(Color.BLACK)
-            text = hint
+            hint = resources.getString(attrs.getResourceId(R.styleable.AppTheme_SpinnerComponent_spinner_hint, 0))
             setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0)
             setPadding(16, 16, 16, 16)
             layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT).apply {

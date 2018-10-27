@@ -40,20 +40,16 @@ class AddressSpinnerGroupComponent: BaseComponent {
     }
 
     override fun clear() {
-        provincialSpinnerTextView!!.setText(R.string.province_hint)
-        townSpinnerTextView!!.setText(R.string.town_hint)
-        countySpinnerTextView!!.setText(R.string.county_hint)
-        provincialSpinnerTextView!!.setTextColor(ContextCompat.getColor(context, R.color.colorLightGray))
-        townSpinnerTextView!!.setTextColor(ContextCompat.getColor(context, R.color.colorLightGray))
-        countySpinnerTextView!!.setTextColor(ContextCompat.getColor(context, R.color.colorLightGray))
+        provincialSpinnerTextView!!.text = null
+        townSpinnerTextView!!.text = null
+        countySpinnerTextView!!.text = null
     }
 
     fun getContent(): String {
-        val area =
-            if (provincialSpinnerTextView!!.text == resources.getString(R.string.spinner_region_hint)) "" else provincialSpinnerTextView!!.text
-        val street =
-            if (townSpinnerTextView!!.text == resources.getString(R.string.spinner_street_hint)) "" else townSpinnerTextView!!.text
-        return "$area$street"
+        val provincial = provincialSpinnerTextView!!.text
+        val town = townSpinnerTextView!!.text
+        val county = countySpinnerTextView!!.text
+        return "$provincial$town$county"
     }
 
     fun fetchData() {
@@ -88,7 +84,7 @@ class AddressSpinnerGroupComponent: BaseComponent {
             gravity = Gravity.CENTER_VERTICAL
             setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0)
             setPadding(16, 8, 16, 8)
-            setText(R.string.province_hint)
+            setHint(R.string.province_hint)
             layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
                 rightMargin = resources.getDimension(R.dimen.radio_button_margin_right).toInt()
                 weight = 1F
@@ -119,7 +115,7 @@ class AddressSpinnerGroupComponent: BaseComponent {
             gravity = Gravity.CENTER_VERTICAL
             setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0)
             setPadding(16, 8, 16, 8)
-            setText(R.string.town_hint)
+            setHint(R.string.town_hint)
             layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
                 rightMargin = resources.getDimension(R.dimen.radio_button_margin_right).toInt()
                 weight = 1F
@@ -146,7 +142,7 @@ class AddressSpinnerGroupComponent: BaseComponent {
             gravity = Gravity.CENTER_VERTICAL
             setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0)
             setPadding(16, 8, 16, 8)
-            setText(R.string.county_hint)
+            setHint(R.string.county_hint)
             layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
                 weight = 1F
             }

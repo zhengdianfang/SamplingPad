@@ -2,6 +2,7 @@ package com.zhengdianfang.samplingpad.common.components
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.LinearLayout
@@ -39,7 +40,7 @@ class DateComponent : LinearLayout {
 
     fun getDate(): String? {
         val text = dateTextView.text.toString()
-        if (text == hint) {
+        if (TextUtils.isEmpty(text)) {
             return null
         }
         return text
@@ -55,7 +56,6 @@ class DateComponent : LinearLayout {
         dateTextView = TextView(context).apply {
             setBackgroundResource(R.drawable.edit_text_background)
             hint = attrs.getString(R.styleable.AppTheme_DateComponent_date_hint)
-            text = hint
             setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_calendar, 0)
             setPadding(16, 16, 16, 16)
             layoutParams = LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT).apply{
