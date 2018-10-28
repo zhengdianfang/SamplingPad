@@ -14,11 +14,22 @@ class VerifyFragmentViewModel(application: Application) : AndroidViewModel(appli
     val isLoadingLiveData = MutableLiveData<Boolean>()
     val responseLiveData = MutableLiveData<Response<String>>()
 
-    fun postVerifySample(params: Map<String, String?>) {
+    fun postVerifySample(
+        implPlanCode: String?,
+        level1Name: String?,
+        enterpriseLicenseNumber: String?,
+        sampleName: String?,
+        sampleProductDate: String?,
+        chainBrand: String?,
+        sampleDate: String?,
+        producerCsNo: String?,
+        enterpriseName: String?
+) {
         isLoadingLiveData.postValue(true)
         doAsync {
             val response = ApiClient.INSTANCE.create(MainApi::class.java)
-                .postVerifySample(params)
+                .postVerifySample(implPlanCode, level1Name, enterpriseLicenseNumber, sampleName,
+                    sampleProductDate, chainBrand, sampleDate , producerCsNo, enterpriseName)
                 .execute()
 
             val body = response.body()

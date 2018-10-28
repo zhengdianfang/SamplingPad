@@ -33,8 +33,8 @@ class VerifyFragment : BaseFragment() {
     }
 
     private fun autoCompleteNearbyShopName() {
-        enterpriseNameEditText.search = {text ->
-            text.searchPoiByText(context!!) {data ->
+        enterpriseNameEditText.search = { text ->
+            text.searchPoiByText(context!!) { data ->
                 if (data != null) {
                     Timber.d("search nearby market list ${data.size}")
                     enterpriseNameEditText.notifySelectItems(data.asSequence().map { it.title }.toMutableList())
@@ -57,24 +57,22 @@ class VerifyFragment : BaseFragment() {
             val enterpriseName = enterpriseNameEditText.getContent()
 
             verifyFragmentViewModel.postVerifySample(
-                mapOf(
-                    Pair("implPlanCode", implPlanCode),
-                    Pair("level1Name", level1Name),
-                    Pair("enterpriseLicenseNumber", enterpriseLicenseNumber),
-                    Pair("sampleName", sampleName),
-                    Pair("sampleProductDate", "$sampleProductDate"),
-                    Pair("chainBrand", chainBrand),
-                    Pair("sampleDate", "$sampleDate"),
-                    Pair("producerCsNo", producerCsNo),
-                    Pair("enterpriseName", enterpriseName)
-                )
+                implPlanCode,
+                level1Name,
+                enterpriseLicenseNumber,
+                sampleName,
+                "$sampleProductDate",
+                chainBrand,
+                "$sampleDate",
+                producerCsNo,
+                enterpriseName
             )
         }
         resetButton.setOnClickListener {
             for (index in 0 until componentGroupFrame.childCount) {
                 val childrenView = componentGroupFrame.getChildAt(index)
                 if (childrenView is BaseComponent) {
-                   childrenView.clear()
+                    childrenView.clear()
                 }
             }
         }

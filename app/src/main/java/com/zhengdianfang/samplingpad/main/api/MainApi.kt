@@ -2,14 +2,23 @@ package com.zhengdianfang.samplingpad.main.api
 
 import com.zhengdianfang.samplingpad.http.Response
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.FieldMap
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface MainApi {
 
+    @FormUrlEncoded
     @POST("app/totalvalidates")
-    fun postVerifySample(@Body params: Map<String, String?>) : Call<Response<String>>
+    fun postVerifySample(
+
+        @Field("implPlanCode") implPlanCode: String?,
+        @Field("level1Name") level1Name: String?,
+        @Field("enterpriseLicenseNumber") enterpriseLicenseNumber: String?,
+        @Field("sampleName") sampleName: String?,
+        @Field("sampleProductDate") sampleProductDate: String?,
+        @Field("chainBrand") chainBrand: String?,
+        @Field("sampleDate") sampleDate: String?,
+        @Field("producerCsNo") producerCsNo: String?,
+        @Field("enterpriseName") enterpriseName: String?
+    ): Call<Response<String>>
 }
 
