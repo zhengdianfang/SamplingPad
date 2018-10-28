@@ -38,4 +38,7 @@ interface TaskApi {
 
     @GET("app/enterpriseproduct/{qsNo}")
     fun fetchEntrustByCsNo(@Query("qsNo") code: String): Call<Response<Enterprise>>
+
+    @POST("app/sampleabnormals")
+    fun sumbitExceptionTask(@Body params: Map<String, String?>): Call<Response<Any>>
 }
