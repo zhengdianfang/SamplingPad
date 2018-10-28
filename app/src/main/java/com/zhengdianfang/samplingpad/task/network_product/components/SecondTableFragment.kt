@@ -49,11 +49,4 @@ class SecondTableFragment: TableFragment() {
         taskItem.thirdUrl = thirdUrlEditText.getContent()
     }
 
-    override fun clearAllFilledData() {
-        thirdLicenseNumberEditText.clear()
-        thirdNameEditText.clear()
-        thirdPlatformNameEditText.clear()
-        thirdQsNoEditText.clear()
-        thirdUrlEditText.clear()
-    }
 }

@@ -118,7 +118,8 @@ data class TaskItem(
     var samplePackaging: String?,
     var sampleProductDate: String?,
     var sampleBatchNo: String?,
-    var sampleQgp: String?,
+    var sampleQgp: Int?,
+    var sampleQgpUnit: String?,
     var sampleSpecification: String?,
     var sampleQualityLevel: String?,
     var sampleMode: String?,
@@ -150,7 +151,9 @@ data class TaskItem(
     var latitude: Double?,
     var abnormalTypeName: String?,
     var chainBrand: String?,
-    var entrustActive: Int?
+    var entrustActive: Int?,
+    var sampleInspectAmountUnit: String?,
+    var samplePreparationUnit: String?
 
 ) : Parcelable {
     companion object {
@@ -160,7 +163,6 @@ data class TaskItem(
 
         const val UN_CHAIN_ENTERPRISE = 0
         const val CHAIN_ENTERPRISE = 1
-        const val CHAIN_BRAND = 2
     }
 
     fun mergeGoods(goods: Goods) {

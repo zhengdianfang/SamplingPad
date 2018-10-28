@@ -21,10 +21,6 @@ open class FirstTableFragment: TableFragment() {
         }
     }
 
-    override fun clearAllFilledData() {
-        inspectionKindNameRadioGroup.clear()
-    }
-
     override fun assembleSubmitTaskData() {
         taskItem.inspectionKindName = inspectionKindNameRadioGroup.getCheckedText()
     }

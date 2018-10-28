@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
+import com.zhengdianfang.samplingpad.common.components.BaseComponent
 import com.zhengdianfang.samplingpad.common.convertForegroundColorSpannableString
 import com.zhengdianfang.samplingpad.common.searchPoiByText
 import com.zhengdianfang.samplingpad.http.ApiClient
@@ -68,6 +69,14 @@ class VerifyFragment : BaseFragment() {
                     Pair("enterpriseName", enterpriseName)
                 )
             )
+        }
+        resetButton.setOnClickListener {
+            for (index in 0 until componentGroupFrame.childCount) {
+                val childrenView = componentGroupFrame.getChildAt(index)
+                if (childrenView is BaseComponent) {
+                   childrenView.clear()
+                }
+            }
         }
 
         introduceTextView.text = getString(R.string.verify_detail_text)

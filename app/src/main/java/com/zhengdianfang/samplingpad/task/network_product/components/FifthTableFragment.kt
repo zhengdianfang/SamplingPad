@@ -44,14 +44,6 @@ class FifthTableFragment: TableFragment() {
         taskItem.entrustPhone = entrustPhoneEditText.getContent()
     }
 
-    override fun clearAllFilledData() {
-        entrustLicenseNumberEditText.clear()
-        entrustNameEditText.clear()
-        entrustAddressEditText.clear()
-        entrustContactsEditText.clear()
-        entrustPhoneEditText.clear()
-    }
-
     override fun submitSuccessful() {
         start(SixthTableFragment.newInstance(taskItem))
     }

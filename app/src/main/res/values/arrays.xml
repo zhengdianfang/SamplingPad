@@ -129,7 +129,13 @@
     </string-array>
     
     <string-array name="verify_unit_array">
-        <item>连锁企业</item>
         <item>非连锁企业</item>
+        <item>连锁企业</item>
+    </string-array>
+
+    <string-array name="calendar_unit_array">
+        <item>年</item>
+        <item>月</item>
+        <item>日</item>
     </string-array>
 </resources>

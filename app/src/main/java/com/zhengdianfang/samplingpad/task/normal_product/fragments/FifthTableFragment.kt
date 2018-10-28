@@ -45,6 +45,4 @@ open class FifthTableFragment: TableFragment() {
     override fun assembleSubmitTaskData() {
     }
 
-    override fun clearAllFilledData() {
-    }
 }

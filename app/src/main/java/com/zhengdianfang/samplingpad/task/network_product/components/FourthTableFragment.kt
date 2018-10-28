@@ -54,12 +54,4 @@ class FourthTableFragment: TableFragment() {
         taskItem.producerPhone = producerPhoneEditText.getContent()
     }
 
-    override fun clearAllFilledData() {
-        producerActiveRadioGroup.clear()
-        producerCsNoEditText.clear()
-        producerNameEditText.clear()
-        producerAddressEditText.clear()
-        producerContactsEditText.clear()
-        producerPhoneEditText.clear()
-    }
 }

@@ -33,17 +33,11 @@ class ThirdTableFragment: TableFragment() {
         val yesOrNo = resources.getStringArray(R.array.yes_or_no)
         if (taskItem.producerActive != null && taskItem.producerActive!! > 0) {
             producerActiveRadioGroup.setDefaultCheckedRadioButton(yesOrNo[taskItem.producerActive!!])
+            showHideAgencyFrame(taskItem.producerActive!!)
         }
         producerActiveRadioGroup.radioButtonCheckCallback = { position, _ ->
-            if (position == 0) {
-                agencyFrame.visibility = View.GONE
-                showHideProduceFrame(View.VISIBLE)
-            } else {
-                agencyFrame.visibility = View.VISIBLE
-                showHideProduceFrame(View.GONE)
-            }
+            showHideAgencyFrame(position)
         }
-        produceLicenseNumberEditText.setEditTextContent(taskItem.producerLicenseNumber)
         produceCsNoEditText.setEditTextContent(taskItem.producerCsNo)
         produceNameEditText.setEditTextContent(taskItem.producerName)
         produceAddressEditText.setEditTextContent(taskItem.producerAddress)
@@ -54,13 +48,10 @@ class ThirdTableFragment: TableFragment() {
 
         if (taskItem.entrustActive != null && taskItem.entrustActive!! > 0) {
             entrustActiveRadioGroup.setDefaultCheckedRadioButton(yesOrNo[taskItem.entrustActive!!])
+            showHideEntrustFrame(taskItem.entrustActive!!)
         }
         entrustActiveRadioGroup.radioButtonCheckCallback = { position, _ ->
-            if (position == 0) {
-                entrustFrame.visibility = View.GONE
-            } else {
-                entrustFrame.visibility = View.VISIBLE
-            }
+            showHideEntrustFrame(position)
         }
 
         //委托单位信息
@@ -69,7 +60,6 @@ class ThirdTableFragment: TableFragment() {
         entrustAddressEditText.setEditTextContent(taskItem.entrustAddress)
         entrustContactsEditText.setEditTextContent(taskItem.entrustContacts)
         entrustPhoneEditText.setEditTextContent(taskItem.entrustPhone)
-        entrustLicenseNumberEditText.setEditTextContent(taskItem.enterpriseLicenseNumber)
         areaSpinnerGroupView.fetchData()
         //进口代理商信息
         agencyNameEditText.setEditTextContent(taskItem.agencyName)
@@ -78,6 +68,24 @@ class ThirdTableFragment: TableFragment() {
         agencyPhoneEditText.setEditTextContent(taskItem.agencyPhone)
         resourceSpinnerGroupView.fetchData("${ApiClient.HOST}app/areas/origin")
 
+    }
+
+    private fun showHideAgencyFrame(position: Int) {
+        if (position == 0) {
+            agencyFrame.visibility = View.GONE
+            showHideProduceFrame(View.VISIBLE)
+        } else {
+            agencyFrame.visibility = View.VISIBLE
+            showHideProduceFrame(View.GONE)
+        }
+    }
+
+    private fun showHideEntrustFrame(position: Int) {
+        if (position == 0) {
+            entrustFrame.visibility = View.GONE
+        } else {
+            entrustFrame.visibility = View.VISIBLE
+        }
     }
 
     private fun showHideProduceFrame(visiable: Int) {
@@ -97,7 +105,6 @@ class ThirdTableFragment: TableFragment() {
         val yesOrNo = resources.getStringArray(R.array.yes_or_no)
         taskItem.producerActive = yesOrNo.indexOf(producerActiveRadioGroup.getCheckedText())
 
-        taskItem.producerLicenseNumber = produceLicenseNumberEditText.getContent()
         taskItem.producerCsNo = produceCsNoEditText.getContent()
         taskItem.producerName = produceNameEditText.getContent()
         taskItem.producerAddress = produceAddressEditText.getContent()
@@ -111,7 +118,6 @@ class ThirdTableFragment: TableFragment() {
         taskItem.entrustAddress = entrustAddressEditText.getContent()
         taskItem.entrustContacts = entrustContactsEditText.getContent()
         taskItem.entrustPhone = entrustPhoneEditText.getContent()
-        taskItem.enterpriseLicenseNumber = entrustLicenseNumberEditText.getContent()
         taskItem.entrustActive = yesOrNo.indexOf(entrustActiveRadioGroup.getCheckedText())
 
         //进口代理商信息
@@ -121,17 +127,4 @@ class ThirdTableFragment: TableFragment() {
         taskItem.agencyPhone =  agencyPhoneEditText.getContent()
     }
 
-    override fun clearAllFilledData() {
-        producerActiveRadioGroup.clear()
-        entrustCsNoEditText.clear()
-        entrustNameEditText.clear()
-        entrustAddressEditText.clear()
-        entrustContactsEditText.clear()
-        entrustPhoneEditText.clear()
-
-        agencyNameEditText.clear()
-        agencyAddressEditText.clear()
-        agencyContactsEditText.clear()
-        agencyPhoneEditText.clear()
-    }
 }

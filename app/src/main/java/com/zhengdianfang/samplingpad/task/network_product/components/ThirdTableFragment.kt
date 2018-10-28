@@ -78,14 +78,4 @@ class ThirdTableFragment: TableFragment() {
         taskItem.enterpriseAddressSources = sourceArray.indexOf(enterpriseAddressSourcesRadioGroup.getCheckedText()) + 1
     }
 
-    override fun clearAllFilledData() {
-        enterpriseLicenseNumberNumberEditText.clear()
-        enterpriseQsNoEditText.clear()
-        enterpriseAreaNameEditText.clear()
-        enterpriseUrlEditText.clear()
-        enterpriseAddressEditText.clear()
-        enterpriseContactsEditText.clear()
-        enterprisePhoneEditText.clear()
-    }
-
 }

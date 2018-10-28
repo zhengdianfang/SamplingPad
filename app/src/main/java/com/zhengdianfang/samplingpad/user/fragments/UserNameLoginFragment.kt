@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.user.api.UserApi
 import com.zhengdianfang.samplingpad.common.BaseFragment
+import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_user_name_login.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
@@ -31,6 +32,7 @@ class UserNameLoginFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        Timber.d("start UserNameLoginFragment")
         setupViews()
         setupViewModel()
     }
@@ -49,6 +51,7 @@ class UserNameLoginFragment : BaseFragment() {
                 Toast.makeText(context, getString(R.string.login_successful), Toast.LENGTH_SHORT).show()
                 activity?.finish()
             } else {
+                (ApiClient.okHttpClient.cookieJar() as ApiClient.AppCookieJar).clearCookies()
                 Toast.makeText(context, getString(R.string.login_failure), Toast.LENGTH_SHORT).show()
             }
         })

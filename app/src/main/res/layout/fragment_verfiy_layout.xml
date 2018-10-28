@@ -6,6 +6,7 @@
     android:fillViewport="true">
 
     <LinearLayout
+        android:id="@+id/componentGroupFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -44,9 +45,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:edit_hint="请输入社会信用代码"
-            app:edit_search="true"
             app:edit_label="受检单位统一\n社会信用代码："
-            app:edit_label_min_width="162dp" />
+            app:edit_label_min_width="162dp"
+            app:edit_search="true" />
 
         <com.zhengdianfang.samplingpad.common.components.EditComponent
             android:layout_width="match_parent"
@@ -101,20 +102,40 @@
             app:date_label="抽样日期："
             app:date_label_min_width="162dp" />
 
-        <Button
-            android:id="@+id/verifyButton"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@string/verify_begin_text" />
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/resetButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/stoke_button_background"
+                android:text="@string/reset_text"
+                android:textColor="@color/colorPrimary" />
+
+            <Button
+                android:id="@+id/verifyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_weight="1"
+                android:text="@string/verify_begin_text" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/introduceTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
+            android:lineSpacingExtra="4dp"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/small"
-            android:lineSpacingExtra="4dp" />
+            android:textSize="@dimen/small" />
     </LinearLayout>
 </ScrollView>

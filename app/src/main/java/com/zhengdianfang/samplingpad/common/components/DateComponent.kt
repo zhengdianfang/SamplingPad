@@ -20,7 +20,6 @@ class DateComponent : LinearLayout {
 
     private lateinit var labelTextView: LabelView
     private lateinit var dateTextView: TextView
-    private var hint = ""
 
     private val datePickDialog by lazy {
         val dialog = DatePickDialog()
@@ -44,6 +43,10 @@ class DateComponent : LinearLayout {
             return null
         }
         return text
+    }
+
+    fun clear() {
+        dateTextView.text = ""
     }
 
     private fun setupViews(context: Context, attributeSet: AttributeSet) {

@@ -34,7 +34,7 @@ class SpinnerComponent: BaseComponent {
         this.setupViews(context, attributeSet)
     }
 
-    fun fetchData(url: String, predicate: (SpinnerItem) -> Boolean = { false }) {
+    fun fetchData(url: String, predicate: (SpinnerItem) -> Boolean = { true }) {
         doAsync {
             val request = Request.Builder()
                 .url(url)

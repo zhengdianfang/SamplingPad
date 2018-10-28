@@ -81,12 +81,13 @@ open class SecondTableFragment: TableFragment() {
         specialAreaNameRadioGroup.setDefaultCheckedRadioButton(taskItem.specialAreaName)
 
         val chainTypes = resources.getStringArray(R.array.verify_unit_array)
-        when(taskItem.enterpriseChain) {
-            TaskItem.UN_CHAIN_ENTERPRISE ->
-                enterpriseChainRadioGroup.setDefaultCheckedRadioButton(chainTypes[1])
-
-            TaskItem.CHAIN_ENTERPRISE ->
-                enterpriseChainRadioGroup.setDefaultCheckedRadioButton(chainTypes[0])
+        if (taskItem.enterpriseChain != null) {
+            enterpriseChainRadioGroup.setDefaultCheckedRadioButton(chainTypes[taskItem.enterpriseChain!!])
+            if (taskItem.enterpriseChain == TaskItem.UN_CHAIN_ENTERPRISE) {
+                chainBrandEditText.visibility = View.GONE
+            } else if (taskItem.enterpriseChain == TaskItem.CHAIN_ENTERPRISE) {
+                chainBrandEditText.visibility = View.VISIBLE
+            }
         }
         enterpriseChainRadioGroup.radioButtonCheckCallback = { position, _ ->
            if (position == TaskItem.UN_CHAIN_ENTERPRISE) {
@@ -95,6 +96,7 @@ open class SecondTableFragment: TableFragment() {
                chainBrandEditText.visibility = View.VISIBLE
            }
         }
+
         chainBrandEditText.setEditTextContent(taskItem.chainBrand)
 
     }
@@ -132,9 +134,8 @@ open class SecondTableFragment: TableFragment() {
 
         val chainTypes = resources.getStringArray(R.array.verify_unit_array)
         when {
-            enterpriseChainRadioGroup.getCheckedText() == chainTypes[0] -> taskItem.enterpriseChain = TaskItem.CHAIN_ENTERPRISE
-            enterpriseChainRadioGroup.getCheckedText() == chainTypes[1] -> taskItem.enterpriseChain = TaskItem.UN_CHAIN_ENTERPRISE
-            enterpriseChainRadioGroup.getCheckedText() == chainTypes[2] -> taskItem.enterpriseChain = TaskItem.CHAIN_BRAND
+            enterpriseChainRadioGroup.getCheckedText() == chainTypes[0] -> taskItem.enterpriseChain = TaskItem.UN_CHAIN_ENTERPRISE
+            enterpriseChainRadioGroup.getCheckedText() == chainTypes[1] -> taskItem.enterpriseChain = TaskItem.CHAIN_ENTERPRISE
         }
         taskItem.chainBrand = chainBrandEditText.getContent()
     }
@@ -145,15 +146,5 @@ open class SecondTableFragment: TableFragment() {
             this.taskItem.mergeEnterprise(enterprise!!)
             this.setupViews()
         })
-    }
-
-    override fun clearAllFilledData() {
-        for(index in 0 until tableFrame.childCount) {
-            val childView = tableFrame.getChildAt(index)
-            if (childView is BaseComponent) {
-                childView.clear()
-            }
-        }
-        enterpriseChainRadioGroup.clear()
     }
 }

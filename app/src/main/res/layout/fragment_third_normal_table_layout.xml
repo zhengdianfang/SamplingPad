@@ -6,6 +6,7 @@
     android:fillViewport="true">
 
     <LinearLayout
+        android:id="@+id/tableFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorLightGray"
@@ -27,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="标称和生产单位信息" />
+                android:text="标称生产单位信息" />
 
             <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
                 android:id="@+id/producerActiveRadioGroup"
@@ -37,14 +38,6 @@
                 app:radio_buttons="@array/yes_or_no"
                 app:radio_label="*是否进口："
                 app:radio_label_min_width="110dp" />
-
-            <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/produceLicenseNumberEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:edit_hint="请输入社会信用代码"
-                app:edit_label="*社会信用代码：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
                 android:id="@+id/produceCsNoEditText"
@@ -121,14 +114,6 @@
                 android:text="委托生产单位信息" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
-                android:id="@+id/entrustLicenseNumberEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:edit_hint="请输入社会信用代码"
-                app:edit_label="*社会信用代码：" />
-
-            <com.zhengdianfang.samplingpad.common.components.EditComponent
                 android:id="@+id/entrustCsNoEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -173,15 +158,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp" />
-
-            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
-                android:id="@+id/entrustTActiveRadioGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:radio_buttons="@array/yes_or_no"
-                app:radio_label="*是否进口："
-                app:radio_label_min_width="110dp" />
 
 
         </LinearLayout>
