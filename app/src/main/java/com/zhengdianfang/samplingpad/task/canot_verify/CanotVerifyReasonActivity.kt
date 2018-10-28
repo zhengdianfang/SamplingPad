@@ -77,6 +77,7 @@ public class CanotVerifyReasonFragment : BaseFragment() {
         }
         taskNoTextView.text = "单号：${taskItem.code}"
 
+        regionSpinnerGroup.fetchData()
         abnormalTypeNameSpinner.fetchData("${ApiClient.HOST}/app/abnormaltypelis")
         saveAndSubmitButton.setOnClickListener {
             val wantSample = wantSampleEditText.getContent()
@@ -85,6 +86,8 @@ public class CanotVerifyReasonFragment : BaseFragment() {
             val abnormalTypeName = abnormalTypeNameSpinner.getContent()
             val creatorName= creatorNameEditText.getContent()
             val taskNo = taskItem.code
+            val enterpriseAreaName = regionSpinnerGroup.getContent()
+            val createOrgName = detectionCompanyEditText.getContent()
 
             canotVerifyViewModel.submitCanotVerifyTask(
                 mapOf(
@@ -93,7 +96,9 @@ public class CanotVerifyReasonFragment : BaseFragment() {
                     Pair("enterpriseAddress", enterpriseAddress),
                     Pair("abnormalTypeName", abnormalTypeName),
                     Pair("creatorName", creatorName),
-                    Pair("taskNo", taskNo)
+                    Pair("taskNo", taskNo),
+                    Pair("enterpriseAreaName", enterpriseAreaName),
+                    Pair("createOrgName", createOrgName)
                 )
             )
         }

@@ -74,8 +74,10 @@ class ThirdTableFragment: TableFragment() {
         if (position == 0) {
             agencyFrame.visibility = View.GONE
             showHideProduceFrame(View.VISIBLE)
+            showHideEntrustFrame(taskItem.entrustActive ?: 0)
         } else {
             agencyFrame.visibility = View.VISIBLE
+            entrustFrame.visibility = View.GONE
             showHideProduceFrame(View.GONE)
         }
     }

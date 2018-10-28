@@ -20,9 +20,9 @@
     </string-array>
     
     <string-array name="sample_link_names">
-        <item>生产环节</item>
-        <item>流通环节</item>
-        <item>餐饮环节</item>
+        <item>生产</item>
+        <item>流通</item>
+        <item>餐饮</item>
     </string-array>
     
     <string-array name="grovment_region_array">

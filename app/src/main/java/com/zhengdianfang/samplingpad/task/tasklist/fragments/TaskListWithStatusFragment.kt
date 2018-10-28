@@ -47,6 +47,10 @@ class TaskListWithStatusFragment: BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         this.setupViews()
         this.bindViewModel()
+    }
+
+    override fun onResume() {
+        super.onResume()
         this.autoRefresh()
     }
 

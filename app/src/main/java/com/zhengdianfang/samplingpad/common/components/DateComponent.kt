@@ -49,6 +49,10 @@ class DateComponent : LinearLayout {
         dateTextView.text = ""
     }
 
+    fun setDefaultDate(calendar: Calendar) {
+        dateTextView.text = "${calendar.get(Calendar.YEAR)}-${calendar.get(Calendar.MONTH) + 1}-${calendar.get(Calendar.DAY_OF_MONTH)} 00:00:00"
+    }
+
     private fun setupViews(context: Context, attributeSet: AttributeSet) {
         val attrs = context.obtainStyledAttributes(attributeSet, R.styleable.AppTheme_DateComponent)
         initLabelTextView(context, attrs)

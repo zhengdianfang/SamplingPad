@@ -98,14 +98,14 @@
             android:padding="16dp">
 
             <Button
-                android:id="@+id/perviousButton"
+                android:id="@+id/saveOnlyButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
                 android:background="@drawable/stoke_button_background"
                 android:paddingLeft="64dp"
                 android:paddingRight="64dp"
-                android:text="@string/pervious_step_text"
+                android:text="@string/only_save_text"
                 android:textColor="@color/colorPrimary" />
 
             <Button

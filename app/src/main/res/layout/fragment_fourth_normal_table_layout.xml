@@ -185,8 +185,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:date_hint="请选择抽检日期"
-                app:date_label="*抽检日期：" />
+                app:date_hint="请选择抽样日期"
+                app:date_label="*抽样日期：" />
 
             <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
                 android:id="@+id/sampleModeRadioGroup"

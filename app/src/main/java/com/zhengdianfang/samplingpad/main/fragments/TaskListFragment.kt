@@ -35,6 +35,10 @@ class TaskListFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         setupViews()
         bindViewModel()
+    }
+
+    override fun onResume() {
+        super.onResume()
         autoRefresh()
     }
 

@@ -36,8 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:radio_buttons="@array/yes_or_no"
-                app:radio_label="*是否进口："
-                app:radio_label_min_width="110dp" />
+                app:radio_label="*是否进口：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
                 android:id="@+id/produceCsNoEditText"
@@ -102,6 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="vertical"
+            android:visibility="gone"
             android:background="@android:color/white"
             android:padding="16dp">
 
@@ -168,6 +168,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="vertical"
+            android:visibility="gone"
             android:background="@android:color/white"
             android:padding="16dp">
 

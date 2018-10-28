@@ -46,6 +46,11 @@
                 android:layout_marginTop="16dp"
                 app:edit_label="*受检单位名称：" />
 
+            <com.zhengdianfang.samplingpad.common.components.AdminRegionSpinnerGroupComponent
+                android:id="@+id/regionSpinnerGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
                 android:id="@+id/enterpriseAddressEditText"
@@ -53,6 +58,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:edit_label="*受检单位地址：" />
+
+            <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/detectionCompanyEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:edit_label="*检验机构：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
                 android:id="@+id/creatorNameEditText"

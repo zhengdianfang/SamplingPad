@@ -28,13 +28,11 @@ open class FifthTableFragment: TableFragment() {
     }
 
     override fun setupViews() {
-        perviousButton.setOnClickListener {
-            pop()
+        saveOnlyButton.setOnClickListener {
+            tableFragmentViewModel.saveSample(taskItem)
         }
 
         submitButton.setOnClickListener {
-            taskItem.latitude = App.INSTANCE.latitude
-            taskItem.longitude = App.INSTANCE.longitude
             tableFragmentViewModel.submitSample(taskItem)
         }
     }

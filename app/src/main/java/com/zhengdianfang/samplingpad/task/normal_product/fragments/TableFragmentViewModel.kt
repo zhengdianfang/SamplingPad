@@ -3,6 +3,7 @@ package com.zhengdianfang.samplingpad.task.normal_product.fragments
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
+import com.zhengdianfang.samplingpad.App
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.http.Response
 import com.zhengdianfang.samplingpad.task.api.TaskApi
@@ -20,6 +21,8 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     val enterpriseLiveData = MutableLiveData<Enterprise>()
 
     fun saveSample(taskItem: TaskItem) {
+        taskItem.latitude = App.INSTANCE.latitude
+        taskItem.longitude = App.INSTANCE.longitude
         isLoadingLiveData.postValue(true)
         doAsync {
             val response = ApiClient.INSTANCE.create(TaskApi::class.java)
@@ -36,6 +39,8 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     }
 
     fun submitSample(taskItem: TaskItem) {
+        taskItem.latitude = App.INSTANCE.latitude
+        taskItem.longitude = App.INSTANCE.longitude
         isLoadingLiveData.postValue(true)
         doAsync {
             val response = ApiClient.INSTANCE.create(TaskApi::class.java)

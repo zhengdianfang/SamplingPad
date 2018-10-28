@@ -7,11 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.afollestad.materialdialogs.MaterialDialog
 import com.zhengdianfang.samplingpad.R
-import com.zhengdianfang.samplingpad.common.QRCodeFragment
 import com.zhengdianfang.samplingpad.common.TableFragment
-import com.zhengdianfang.samplingpad.common.components.BaseComponent
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import kotlinx.android.synthetic.main.fragment_fourth_normal_table_layout.*
+import java.util.*
+import io.github.xudaojie.qrcodelib.CaptureActivity
+import android.content.Intent
+
+
 
 open class FourthTableFragment: TableFragment() {
 
@@ -66,13 +69,15 @@ open class FourthTableFragment: TableFragment() {
         lableStandardEditText.setEditTextContent(taskItem.lableStandard)
         sampleInspectAmountUnitEditText.setEditTextContent(taskItem.sampleInspectAmountUnit)
         samplePreparationUnitEditText.setEditTextContent(taskItem.samplePreparationUnit)
-
+        sampleDateView.setDefaultDate(Calendar.getInstance())
+        sampleProduceDateView.setDefaultDate(Calendar.getInstance())
         unitSpinner.setOnClickListener {
             calendarUnitDialog.show()
         }
 
         qrScanButton.setOnClickListener {
-            startForResult(QRCodeFragment.newInstance(), QR_SCAN_REQUEST)
+            val i = Intent(context, CaptureActivity::class.java)
+            startActivityForResult(i, QR_SCAN_REQUEST)
         }
 
     }
@@ -125,10 +130,9 @@ open class FourthTableFragment: TableFragment() {
         })
     }
 
-    override fun onFragmentResult(requestCode: Int, resultCode: Int, data: Bundle?) {
-        super.onFragmentResult(requestCode, resultCode, data)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == QR_SCAN_REQUEST) {
-            producerBarcodeEditText.setEditTextContent(data?.getString("result"))
+            producerBarcodeEditText.setEditTextContent(data?.getStringExtra("result"))
         }
     }
 }
