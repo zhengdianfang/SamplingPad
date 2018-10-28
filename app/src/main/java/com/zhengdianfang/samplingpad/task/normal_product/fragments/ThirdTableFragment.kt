@@ -105,7 +105,8 @@ class ThirdTableFragment: TableFragment() {
     override fun assembleSubmitTaskData() {
         //标称信息
         val yesOrNo = resources.getStringArray(R.array.yes_or_no)
-        taskItem.producerActive = yesOrNo.indexOf(producerActiveRadioGroup.getCheckedText())
+        var index = yesOrNo.indexOf(producerActiveRadioGroup.getCheckedText())
+        taskItem.producerActive = if (index > 0) index else 0
 
         taskItem.producerCsNo = produceCsNoEditText.getContent()
         taskItem.producerName = produceNameEditText.getContent()
@@ -120,7 +121,8 @@ class ThirdTableFragment: TableFragment() {
         taskItem.entrustAddress = entrustAddressEditText.getContent()
         taskItem.entrustContacts = entrustContactsEditText.getContent()
         taskItem.entrustPhone = entrustPhoneEditText.getContent()
-        taskItem.entrustActive = yesOrNo.indexOf(entrustActiveRadioGroup.getCheckedText())
+        index = yesOrNo.indexOf(entrustActiveRadioGroup.getCheckedText())
+        taskItem.entrustActive = if (index > 0) index else 0
 
         //进口代理商信息
         taskItem.agencyName = agencyNameEditText.getContent()

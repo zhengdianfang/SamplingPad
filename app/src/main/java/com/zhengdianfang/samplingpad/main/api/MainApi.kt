@@ -9,8 +9,7 @@ import retrofit2.http.POST
 
 interface MainApi {
 
-    @FormUrlEncoded
     @POST("app/totalvalidates")
-    fun postVerifySample(@FieldMap params: Map<String, String?>) : Call<Response<String>>
+    fun postVerifySample(@Body params: Map<String, String?>) : Call<Response<String>>
 }
 
