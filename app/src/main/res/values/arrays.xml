@@ -45,8 +45,12 @@
     </string-array>
 
     <string-array name="enterprise_address_sources_array">
-        <item>通过网店页面查询</item>
-        <item>无</item>
+        <item>食用农产品</item>
+        <item>工业加工食品 </item>
+        <item>餐饮加工食品</item>
+        <item>食品添加剂 </item>
+        <item>食品相关产品 </item>
+        <item>其他</item>
     </string-array>
 
     <string-array name="sample_field_array">

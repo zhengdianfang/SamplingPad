@@ -32,21 +32,21 @@ object ApiClient {
 
     class AppCookieJar : CookieJar {
 
-        private var cookies: List<Cookie>? = null
+        private val cookieStore = hashMapOf<String, List<Cookie>>()
 
         override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
-            this.cookies = cookies
-            Timber.d("save cookie: ${this.cookies.toString()}")
+            cookieStore[url.host()] = cookies
+            Timber.d("save cookie: ${this.cookieStore}")
         }
 
         override fun loadForRequest(url: HttpUrl): List<Cookie> {
-            Timber.d("load cookie: ${this.cookies.toString()}")
-            return if (cookies != null) cookies!! else ArrayList()
+            Timber.d("load cookie: ${this.cookieStore[url.host()].toString()}")
+            return cookieStore[url.host()] ?: listOf()
 
         }
 
         fun clearCookies() {
-            cookies = null
+            cookieStore.clear()
         }
     }
 }

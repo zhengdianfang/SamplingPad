@@ -11,10 +11,10 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <FrameLayout
+        <com.zhengdianfang.samplingpad.common.components.AutoWrapLineLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="64dp"
+            android:padding="16dp"
             android:background="@android:color/white">
 
             <TextView
@@ -26,16 +26,17 @@
                 android:background="@drawable/transparent"
                 android:drawablePadding="8dp"
                 android:textSize="@dimen/large_18"
+                android:gravity="center"
                 android:textColor="@android:color/black"
                 android:text="@string/upload_pic_text"/>
 
-        </FrameLayout>
+        </com.zhengdianfang.samplingpad.common.components.AutoWrapLineLayout>
 
-        <FrameLayout
+        <com.zhengdianfang.samplingpad.common.components.AutoWrapLineLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="64dp"
             android:layout_marginTop="16dp"
+            android:padding="16dp"
             android:background="@android:color/white">
 
             <TextView
@@ -47,10 +48,11 @@
                 android:background="@drawable/transparent"
                 android:drawablePadding="8dp"
                 android:textSize="@dimen/large_18"
+                android:gravity="center"
                 android:textColor="@android:color/black"
                 android:text="@string/upload_video_text"/>
 
-        </FrameLayout>
+        </com.zhengdianfang.samplingpad.common.components.AutoWrapLineLayout>
 
         <com.zhengdianfang.samplingpad.common.components.AutoWrapLineLayout
             android:layout_width="match_parent"
@@ -78,6 +80,7 @@
             android:background="@android:color/white">
 
             <TextView
+                android:id="@+id/testPdfView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/ic_pdf"

@@ -153,7 +153,8 @@ data class TaskItem(
     var chainBrand: String?,
     var entrustActive: Int?,
     var sampleInspectAmountUnit: String?,
-    var samplePreparationUnit: String?
+    var samplePreparationUnit: String?,
+    var attachmentUnitId: String?
 
 ) : Parcelable {
     companion object {

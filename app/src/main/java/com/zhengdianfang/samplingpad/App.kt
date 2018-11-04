@@ -22,8 +22,7 @@ class App: Application() {
     }
 
     private var aMapLocationClient: AMapLocationClient? = null
-
-    var latitude = 0.0
+var latitude = 0.0
     var longitude = 0.0
 
 

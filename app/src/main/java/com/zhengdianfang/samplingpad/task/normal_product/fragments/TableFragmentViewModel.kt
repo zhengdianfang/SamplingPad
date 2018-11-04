@@ -5,13 +5,24 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import com.zhengdianfang.samplingpad.App
 import com.zhengdianfang.samplingpad.http.ApiClient
+import com.zhengdianfang.samplingpad.http.ApiClient.HOST
+import com.zhengdianfang.samplingpad.http.AppResponseInterceptor
 import com.zhengdianfang.samplingpad.http.Response
+import com.zhengdianfang.samplingpad.http.UploadInterceptor
 import com.zhengdianfang.samplingpad.task.api.TaskApi
 import com.zhengdianfang.samplingpad.task.entities.Enterprise
 import com.zhengdianfang.samplingpad.task.entities.Goods
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
+import java.io.File
 
 class TableFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -19,6 +30,7 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     val isLoadingLiveData = MutableLiveData<Boolean>()
     val goodsLiveData = MutableLiveData<Goods>()
     val enterpriseLiveData = MutableLiveData<Enterprise>()
+    val uploadProgressLiveData = MutableLiveData<Int>()
 
     fun saveSample(taskItem: TaskItem) {
         taskItem.latitude = App.INSTANCE.latitude
@@ -102,5 +114,46 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
                 }
             }
         }
+    }
+
+    fun uploadFile(taskItem: TaskItem, businessType: String, attTypeName: String, files: Array<File>) {
+        doAsync {
+
+            val okHttpClient = OkHttpClient
+                .Builder()
+                .addNetworkInterceptor(UploadInterceptor { btyesWritten, contentLength ->
+                    uiThread {
+                        uploadProgressLiveData.postValue((btyesWritten / contentLength * 100).toInt())
+                    }
+                })
+                .addNetworkInterceptor(AppResponseInterceptor())
+                .build()
+
+            val partFiles = files.map {file ->
+                val requestFile = RequestBody.create(
+                    MediaType.parse("image/*"),
+                    file
+                )
+                MultipartBody.Part.createFormData("file", file.name, requestFile)
+            }.toTypedArray()
+
+            val response = Retrofit.Builder()
+                .baseUrl(HOST)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(TaskApi::class.java)
+                .uploadFile(taskItem.id, businessType, attTypeName, partFiles)
+                .execute()
+
+            uiThread {
+                if (response.body() != null) {
+                    Timber.d("upload result ${response.body()}")
+                    responseLiveData.postValue(response.body())
+                }
+            }
+        }
+
+
     }
 }

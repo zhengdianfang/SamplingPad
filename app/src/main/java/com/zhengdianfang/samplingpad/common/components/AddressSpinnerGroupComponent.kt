@@ -126,10 +126,8 @@ class AddressSpinnerGroupComponent: BaseComponent {
             townSpinnerTextView!!.text = text
             townSpinnerTextView!!.setTextColor(Color.BLACK)
             val selected = townList?.get(position)
-            val countyList = regionList?.filter { it.parentId == selected?.id && it.levelId == Region.LEVEL_COUNTY }
-            if (countyList != null) {
-                countySpinnerDialog!!.setItems(*countyList.map { it.name }.toTypedArray())
-            }
+            val countyList = regionList.filter { it.parentId == selected?.id && it.levelId == Region.LEVEL_COUNTY }
+            countySpinnerDialog!!.setItems(*countyList.map { it.name }.toTypedArray())
         })
 
         townSpinnerTextView!!.setOnClickListener {

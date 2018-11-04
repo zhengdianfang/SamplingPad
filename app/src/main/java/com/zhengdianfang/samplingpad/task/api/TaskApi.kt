@@ -7,8 +7,11 @@ import com.zhengdianfang.samplingpad.task.entities.Enterprise
 import com.zhengdianfang.samplingpad.task.entities.Goods
 import com.zhengdianfang.samplingpad.task.entities.StatusCount
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
+import java.io.File
 
 interface TaskApi {
 
@@ -41,4 +44,12 @@ interface TaskApi {
 
     @POST("app/sampleabnormals")
     fun sumbitExceptionTask(@Body params: Map<String, String?>): Call<Response<Any>>
+
+    @Multipart
+    @POST("app/uploadFilesToFTP")
+    fun uploadFile(
+        @Part("attUnitId") attUnitId: String,
+        @Part("businessType") businessType: String,
+        @Part("attTypeName") attTypeName:String,
+        @Part files:  Array<MultipartBody.Part>): Call<Response<String>>
 }
