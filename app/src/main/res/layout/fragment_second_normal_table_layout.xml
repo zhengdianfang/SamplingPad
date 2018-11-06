@@ -58,12 +58,12 @@
                android:layout_height="wrap_content"
                android:layout_marginTop="16dp" />
 
-           <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+           <com.zhengdianfang.samplingpad.common.components.NewRadioGroupComponent
                android:id="@+id/enterpriseLinkNameRadioGroup"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="16dp"
-               app:radio_buttons="@array/sample_link_names"
+               app:radio_data_key="linklisOptions"
                app:radio_label="*抽样环节：" />
 
            <com.zhengdianfang.samplingpad.common.components.SpinnerComponent
@@ -147,12 +147,12 @@
                app:edit_hint="请输入年销售额"
                app:edit_label="年销售额（￥）：" />
 
-           <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+           <com.zhengdianfang.samplingpad.common.components.NewRadioGroupComponent
                android:id="@+id/specialAreaNameRadioGroup"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="16dp"
-               app:radio_buttons="@array/special_region_array"
+               app:radio_data_key="specialarealisOptions"
                app:radio_label="特殊区域：" />
 
            <LinearLayout

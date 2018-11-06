@@ -22,7 +22,7 @@ open class FirstTableFragment: TableFragment() {
     }
 
     override fun assembleSubmitTaskData() {
-        taskItem.inspectionKindName = inspectionKindNameRadioGroup.getCheckedText()
+        taskItem.setInspectionKindOption(inspectionKindNameRadioGroup.getCheckedOption())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

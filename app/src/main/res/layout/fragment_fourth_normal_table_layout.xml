@@ -79,44 +79,44 @@
                 app:edit_hint="请输入样品单价"
                 app:edit_label="*样品单价：" />
 
-            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+            <com.zhengdianfang.samplingpad.common.components.NewRadioGroupComponent
                 android:id="@+id/sampleTypeRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:radio_buttons="@array/enterprise_address_sources_array"
+                app:radio_data_key="sampleTypeOptions"
                 app:radio_label="*样品类型：" />
 
-            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+            <com.zhengdianfang.samplingpad.common.components.NewRadioGroupComponent
                 android:id="@+id/sampleAttributeRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:radio_buttons="@array/sample_field_array"
+                app:radio_data_key="sampleattributelisOptions"
                 app:radio_label="*样品属性：" />
 
-            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+            <com.zhengdianfang.samplingpad.common.components.NewRadioGroupComponent
                 android:id="@+id/sampleSourceRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:radio_buttons="@array/sample_resource_array"
+                app:radio_data_key="sampleSourceOptions"
                 app:radio_label="*样品来源：" />
 
-            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+            <com.zhengdianfang.samplingpad.common.components.NewRadioGroupComponent
                 android:id="@+id/samplePackageTypeRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:radio_buttons="@array/pack_type_array"
+                app:radio_data_key="packagetypelisOptions"
                 app:radio_label="*包装分类：" />
 
-            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+            <com.zhengdianfang.samplingpad.common.components.NewRadioGroupComponent
                 android:id="@+id/samplePackagingRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:radio_buttons="@array/sample_pack_type_array"
+                app:radio_data_key="samplepackagelisOptions"
                 app:radio_label="*样品包装：" />
 
             <com.zhengdianfang.samplingpad.common.components.DateComponent
@@ -188,20 +188,20 @@
                 app:date_hint="请选择抽样日期"
                 app:date_label="*抽样日期：" />
 
-            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+            <com.zhengdianfang.samplingpad.common.components.NewRadioGroupComponent
                 android:id="@+id/sampleModeRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:radio_buttons="@array/verify_function_array"
+                app:radio_data_key="samplemethodlisOptions"
                 app:radio_label="*抽样方式：" />
 
-            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+            <com.zhengdianfang.samplingpad.common.components.NewRadioGroupComponent
                 android:id="@+id/sampleFormRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:radio_buttons="@array/sample_shape_array"
+                app:radio_data_key="sampleformlisOptions"
                 app:radio_label="*样品形态：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
@@ -246,20 +246,20 @@
                 app:edit_label="*备样数量单位：" />
 
 
-            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+            <com.zhengdianfang.samplingpad.common.components.NewRadioGroupComponent
                 android:id="@+id/sampleStorageEnvironmentRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:radio_buttons="@array/save_function_array"
+                app:radio_data_key="storageenvironmentlisOptions"
                 app:radio_label="*存储条件：" />
 
-            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+            <com.zhengdianfang.samplingpad.common.components.NewRadioGroupComponent
                 android:id="@+id/storagePlaceForRetestRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:radio_buttons="@array/save_copy_sample_address_array"
+                app:radio_data_key="samplereservelisOptions"
                 app:radio_label="*复检备份样品保存地：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent

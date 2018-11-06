@@ -1,6 +1,10 @@
 package com.zhengdianfang.samplingpad.common.entities
 
-data class SpinnerItem(val id: Int, val name: String, val level: Int) {
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class OptionItem(val id: Int, val name: String, val level: Int): Parcelable {
     override fun toString(): String {
         return name
     }

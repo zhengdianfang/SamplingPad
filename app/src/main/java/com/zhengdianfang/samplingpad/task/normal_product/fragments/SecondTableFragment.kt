@@ -9,6 +9,7 @@ import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.common.TableFragment
 import com.zhengdianfang.samplingpad.common.components.BaseComponent
+import com.zhengdianfang.samplingpad.common.entities.OptionItem
 import com.zhengdianfang.samplingpad.common.searchPoiByText
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import kotlinx.android.synthetic.main.fragment_second_normal_table_layout.*
@@ -50,11 +51,11 @@ open class SecondTableFragment: TableFragment() {
         enterpriseAreaTypeRadioGroup.setDefaultCheckedRadioButton(taskItem.enterpriseAreaType)
         regionSpinnerGroup.fetchData()
 
-        fetchEnterprisePlaceName(taskItem.enterpriseLinkName)
+        fetchEnterprisePlaceName(taskItem.enterpriseLinkId)
 
         enterpriseLinkNameRadioGroup.setDefaultCheckedRadioButton(taskItem.enterpriseLinkName)
-        enterpriseLinkNameRadioGroup.radioButtonCheckCallback  = { _, text ->
-            fetchEnterprisePlaceName(text)
+        enterpriseLinkNameRadioGroup.radioButtonCheckCallback  = { _, option ->
+            fetchEnterprisePlaceName(option.id)
         }
         enterprisePlaceNameSpinner.setDefaultText(taskItem.enterprisePlaceName)
         enterpriseAddressEditText.setEditTextContent(taskItem.enterpriseAddress)
@@ -101,11 +102,11 @@ open class SecondTableFragment: TableFragment() {
 
     }
 
-    private fun fetchEnterprisePlaceName(text: String?) {
-        val enterpriseLinkNames = resources.getStringArray(R.array.sample_link_names)
-        val index = enterpriseLinkNames.indexOf(text)
-        val url = getString(R.string.sample_link_name_data_api,  (if (index < 0) 0 else index) + 1)
-        enterprisePlaceNameSpinner.fetchData("${ApiClient.HOST}$url")
+    private fun fetchEnterprisePlaceName(id: Int?) {
+        if (id != null) {
+            val url = getString(R.string.sample_link_name_data_api, id)
+            enterprisePlaceNameSpinner.fetchData("${ApiClient.HOST}$url")
+        }
     }
 
     override fun submitSuccessful() {
@@ -117,7 +118,7 @@ open class SecondTableFragment: TableFragment() {
         taskItem.enterpriseName = enterpriseNameEditText.getContent()
         taskItem.enterpriseAreaType = enterpriseAreaTypeRadioGroup.getCheckedText()
         taskItem.enterpriseAreaName = regionSpinnerGroup.getContent()
-        taskItem.enterpriseLinkName =  enterpriseLinkNameRadioGroup.getCheckedText()
+        taskItem.setEnterpriseLink(enterpriseLinkNameRadioGroup.getCheckedOption())
         taskItem.enterprisePlaceName =  enterprisePlaceNameSpinner.getContent()
         taskItem.enterpriseAddress = enterpriseAddressEditText.getContent()
 
@@ -130,7 +131,7 @@ open class SecondTableFragment: TableFragment() {
         taskItem.enterpriseFax = enterpriseFaxEditText.getContent()
         taskItem.enterpriseZipCode = enterpriseZipCodeEditText.getContent()
         taskItem.enterpriseAnnualSales = enterpriseAnnualSalesEditText.getContent()
-        taskItem.specialAreaName = specialAreaNameRadioGroup.getCheckedText()
+        taskItem.setSpecialAreaName(specialAreaNameRadioGroup.getCheckedOption())
 
         val chainTypes = resources.getStringArray(R.array.verify_unit_array)
         when {

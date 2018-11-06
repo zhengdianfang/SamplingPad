@@ -3,7 +3,6 @@ package com.zhengdianfang.samplingpad.common.components
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Color
-import android.support.v4.content.ContextCompat
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.Gravity
@@ -16,7 +15,7 @@ import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.http.Response
 import com.zhengdianfang.samplingpad.common.LabelView
-import com.zhengdianfang.samplingpad.common.entities.SpinnerItem
+import com.zhengdianfang.samplingpad.common.entities.OptionItem
 import okhttp3.Request
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -34,7 +33,7 @@ class SpinnerComponent: BaseComponent {
         this.setupViews(context, attributeSet)
     }
 
-    fun fetchData(url: String, predicate: (SpinnerItem) -> Boolean = { true }) {
+    fun fetchData(url: String, predicate: (OptionItem) -> Boolean = { true }) {
         doAsync {
             val request = Request.Builder()
                 .url(url)
@@ -45,7 +44,7 @@ class SpinnerComponent: BaseComponent {
                 val responseData = response.body()?.string() ?: ""
                 if (responseData.isNotEmpty()) {
                     val json2Pojo =
-                        Gson().fromJson<Response<MutableList<SpinnerItem>>>(responseData, object: TypeToken<Response<MutableList<SpinnerItem>>>(){}.type)
+                        Gson().fromJson<Response<MutableList<OptionItem>>>(responseData, object: TypeToken<Response<MutableList<OptionItem>>>(){}.type)
                     if (json2Pojo.data != null) {
                         uiThread {
                             spinnerDialog.setItems(*json2Pojo.data!!.asSequence().filter(predicate).map { it.name }.toList().toTypedArray())

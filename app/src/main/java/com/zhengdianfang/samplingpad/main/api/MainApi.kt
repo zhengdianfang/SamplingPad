@@ -1,5 +1,6 @@
 package com.zhengdianfang.samplingpad.main.api
 
+import com.zhengdianfang.samplingpad.common.entities.OptionItem
 import com.zhengdianfang.samplingpad.http.Response
 import retrofit2.Call
 import retrofit2.http.*
@@ -20,5 +21,8 @@ interface MainApi {
         @Field("producerCsNo") producerCsNo: String?,
         @Field("enterpriseName") enterpriseName: String?
     ): Call<Response<String>>
+
+    @GET("app/{path}")
+    fun fetchOptionData(@Path("path") path: String): Call<Response<Array<OptionItem>>>
 }
 

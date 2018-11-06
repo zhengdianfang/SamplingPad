@@ -2,6 +2,7 @@ package com.zhengdianfang.samplingpad.task.entities
 
 import android.os.Parcelable
 import com.chad.library.adapter.base.entity.MultiItemEntity
+import com.zhengdianfang.samplingpad.common.entities.OptionItem
 import kotlinx.android.parcel.Parcelize
 
 data class StatusCount (
@@ -79,13 +80,15 @@ data class TaskItem(
     var createOrgName: String? = "",
     var createOrgAddress: String? = "",
     var createOrgAreaName: String? = "",
-    var createOrgContacts: String? = "",
-    var creatorEmail: String? = "",
-    var creatorPhone: String? = "",
-    var inspectionKindName: String? = "",
+    var createOrgContacts: String?,
+    var creatorEmail: String?,
+    var creatorPhone: String?,
+    var inspectionKindName: String?,
+    var inspectionKindId: Int?,
     var enterpriseLicenseNumber: String?,
     var enterpriseAreaType: String?,
     var enterpriseLinkName: String?,
+    var enterpriseLinkId: Int?,
     var enterpriseAddress: String?,
     var enterpriseMOrP: Int?,
     var enterpriseQsNo: String?,
@@ -96,6 +99,7 @@ data class TaskItem(
     var enterpriseZipCode: String?,
     var enterpriseAnnualSales: String?,
     var specialAreaName: String?,
+    var specialAreaId: Int?,
     var enterpriseChain: Int?,
     var enterprisePlaceName: String?,
     var enterpriseAreaName: String?,
@@ -211,6 +215,58 @@ data class TaskItem(
         entrustAddress = enterprise.address
         entrustContacts = enterprise.contacts
         entrustPhone = enterprise.phone
+    }
+
+    fun setInspectionKindOption(optionItem: OptionItem?) {
+        inspectionKindId = optionItem?.id
+        inspectionKindName = optionItem?.name
+    }
+
+    fun setEnterpriseLink(optionItem: OptionItem?) {
+        enterpriseLinkName = optionItem?.name
+        enterpriseLinkId = optionItem?.id
+    }
+
+    fun setSpecialAreaName(optionItem: OptionItem?) {
+        specialAreaName = optionItem?.name
+        specialAreaId = optionItem?.id
+    }
+
+    fun setSampleTypeOption(optionItem: OptionItem?) {
+        sampleType = optionItem?.name
+    }
+
+    fun setSampleAttributeOption(optionItem: OptionItem?) {
+        sampleAttribute = optionItem?.name
+    }
+
+    fun setSampleSourceOption(optionItem: OptionItem?) {
+        sampleSource = optionItem?.name
+    }
+
+
+    fun setSamplePackageType(optionItem: OptionItem?) {
+        samplePackageType = optionItem?.name
+    }
+
+    fun setSamplePackaging(checkedOption: OptionItem?) {
+        samplePackaging = checkedOption?.name
+    }
+
+    fun setSampleMode(checkedOption: OptionItem?) {
+        sampleMode = checkedOption?.name
+    }
+
+    fun setSampleForm(checkedOption: OptionItem?) {
+        sampleForm = checkedOption?.name
+    }
+
+    fun setSampleStorageEnvironment(checkedOption: OptionItem?) {
+        sampleStorageEnvironment = checkedOption?.name
+    }
+
+    fun setStoragePlaceForRetest(checkedOption: OptionItem?) {
+        storagePlaceForRetest = checkedOption?.name
     }
 }
 

@@ -43,13 +43,6 @@
                 app:text_content="深圳市市场和质量监督管理委员会计划名称"
                 app:text_label="计划名称：" />
 
-            <!--<com.zhengdianfang.samplingpad.common.components.TextComponent-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="16dp"-->
-                <!--app:text_label="任务名称："-->
-                <!--app:text_content="深圳市市场和质量监督管理委员会计划名称"/>-->
-
             <com.zhengdianfang.samplingpad.common.components.TextComponent
                 android:id="@+id/implPlanCodeTextView"
                 android:layout_width="match_parent"
@@ -125,12 +118,12 @@
                     app:text_label="食品细类：" />
             </LinearLayout>
 
-            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+            <com.zhengdianfang.samplingpad.common.components.NewRadioGroupComponent
                 android:id="@+id/inspectionKindNameRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:radio_buttons="@array/verify_category_array"
+                app:radio_data_key="inspectionKindOptions"
                 app:radio_label="*检验类别：" />
 
         </LinearLayout>
