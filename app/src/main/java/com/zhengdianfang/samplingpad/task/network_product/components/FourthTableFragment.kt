@@ -46,7 +46,8 @@ class FourthTableFragment: TableFragment() {
 
     override fun assembleSubmitTaskData() {
         val yesNoArray = resources.getStringArray(R.array.yes_or_no)
-        taskItem.producerActive = yesNoArray.indexOf(producerActiveRadioGroup.getCheckedText())
+        val index = yesNoArray.indexOf(producerActiveRadioGroup.getCheckedText())
+        taskItem.producerActive = if(index >= 0) index else null
         taskItem.producerCsNo = producerCsNoEditText.getContent()
         taskItem.producerName = producerNameEditText.getContent()
         taskItem.producerAddress = producerAddressEditText.getContent()

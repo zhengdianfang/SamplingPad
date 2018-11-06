@@ -31,7 +31,8 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     val isLoadingLiveData = MutableLiveData<Boolean>()
     val goodsLiveData = MutableLiveData<Goods>()
     val enterpriseLiveData = MutableLiveData<Enterprise>()
-    val uploadResponseLiveData = MutableLiveData<AttachmentIds>()
+    val uploadImageResponseLiveData = MutableLiveData<AttachmentIds>()
+    val uploadVideoResponseLiveData = MutableLiveData<AttachmentIds>()
     val attachmentIdsLiveData = MutableLiveData<Array<Int>>()
 
     fun saveSample(taskItem: TaskItem) {
@@ -169,13 +170,15 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
                 .execute()
 
             uiThread {
-                if (response.body() != null) {
+                if (response.body() != null ) {
                     Timber.d("upload result ${response.body()?.data.toString()}")
-                    uploadResponseLiveData.postValue(response.body()!!.data)
+                    if (attachmentType == "1") {
+                        uploadImageResponseLiveData.postValue(response.body()!!.data)
+                    } else if (attachmentType == "1") {
+                        uploadVideoResponseLiveData.postValue(response.body()!!.data)
+                    }
                 }
             }
         }
-
-
     }
 }

@@ -19,27 +19,13 @@
             android:padding="16dp"
             android:background="@android:color/white"/>
 
-        <com.zhengdianfang.samplingpad.common.components.AutoWrapLineLayout
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/videoFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:padding="16dp"
-            android:background="@android:color/white">
+            android:background="@android:color/white"/>
 
-            <TextView
-                android:id="@+id/uploadVideoButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:drawableTop="@drawable/ic_cloud_upload"
-                android:background="@drawable/transparent"
-                android:drawablePadding="8dp"
-                android:textSize="@dimen/large_18"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:text="@string/upload_video_text"/>
-
-        </com.zhengdianfang.samplingpad.common.components.AutoWrapLineLayout>
 
         <com.zhengdianfang.samplingpad.common.components.AutoWrapLineLayout
             android:layout_width="match_parent"

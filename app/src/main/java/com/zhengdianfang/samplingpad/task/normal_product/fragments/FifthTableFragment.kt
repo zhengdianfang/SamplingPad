@@ -9,11 +9,8 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.vincent.filepicker.Constant
 import com.vincent.filepicker.activity.ImagePickActivity
@@ -44,6 +41,7 @@ open class FifthTableFragment: TableFragment() {
     }
 
     private val imageAttachments = mutableListOf<MultiItemEntity>()
+    private val videoAttachments = mutableListOf<MultiItemEntity>()
 
     companion object {
 
@@ -75,6 +73,7 @@ open class FifthTableFragment: TableFragment() {
             } else if (requestCode == SELECT_VIDEO_REQUEST) {
                 val videoPaths = data.getParcelableArrayListExtra<VideoFile>(Constant.RESULT_PICK_VIDEO)
                 Timber.d("select videos: $videoPaths")
+                uploadDialog.show()
                 tableFragmentViewModel.uploadFile(
                     taskItem, "sample", "现场视频", "4", videoPaths.map { File(it.path) }.toTypedArray()) {
                     uploadDialog.setProgress(it)
@@ -86,11 +85,6 @@ open class FifthTableFragment: TableFragment() {
 
     override fun setupViews() {
 
-        uploadVideoButton.setOnClickListener {
-            val intent = Intent(context, VideoPickActivity::class.java)
-            intent.putExtra(Constant.MAX_NUMBER, 1)
-            startActivityForResult(intent, SELECT_VIDEO_REQUEST)
-        }
         saveOnlyButton.setOnClickListener {
             tableFragmentViewModel.saveSample(taskItem)
         }
@@ -110,6 +104,7 @@ open class FifthTableFragment: TableFragment() {
     override fun bindViewModel() {
         tableFragmentViewModel.attachmentIdsLiveData.observe(this, Observer { ids ->
             renderImageFrame(ids!!)
+            renderVedioFrame(arrayOf())
         })
         tableFragmentViewModel.isLoadingLiveData.observe(this, Observer { isLoading ->
             if (isLoading!!) {
@@ -126,7 +121,7 @@ open class FifthTableFragment: TableFragment() {
             }
         })
 
-        tableFragmentViewModel.uploadResponseLiveData.observe(this, Observer { attachmentIds ->
+        tableFragmentViewModel.uploadImageResponseLiveData.observe(this, Observer { attachmentIds ->
             uploadDialog.cancel()
             Toast.makeText(context, "上传成功", Toast.LENGTH_SHORT).show()
             imageAttachments.removeAt(imageAttachments.lastIndex)
@@ -134,6 +129,10 @@ open class FifthTableFragment: TableFragment() {
                 ?.map{ AttachmentItem("${ApiClient.HOST}${TaskApi.ATTACHMENT_URL}$it") }!!)
             imageAttachments.add(UploadItem())
             imageFrame.adapter.notifyDataSetChanged()
+        })
+        tableFragmentViewModel.uploadVideoResponseLiveData.observe(this, Observer {
+            uploadDialog.cancel()
+            Toast.makeText(context, "上传成功", Toast.LENGTH_SHORT).show()
         })
         tableFragmentViewModel.fetchAttachmentIdsBySampleId(this.taskItem.id)
     }
@@ -156,6 +155,25 @@ open class FifthTableFragment: TableFragment() {
         imageFrame.addItemDecoration(ItemDecoration())
         imageFrame.layoutManager.isAutoMeasureEnabled = true
         imageFrame.adapter = imageAdapter
+    }
+
+    private fun renderVedioFrame(ids: Array<Int>) {
+        videoAttachments.addAll(ids.map{ AttachmentItem("${ApiClient.HOST}${TaskApi.ATTACHMENT_URL}$it") })
+        videoAttachments.add(UploadItem())
+        val videoAdapter = AttachmentAdapter(videoAttachments)
+        videoAdapter.setOnItemClickListener { adapter, _, position ->
+            if (adapter.getItemViewType(position) == 1) {
+                val intent = Intent(context, VideoPickActivity::class.java)
+                intent.putExtra(Constant.MAX_NUMBER, 1)
+                startActivityForResult(intent, SELECT_VIDEO_REQUEST)
+            } else {
+                // todo play video
+            }
+        }
+        videoFrame.layoutManager = GridLayoutManager(context, 8)
+        videoFrame.addItemDecoration(ItemDecoration())
+        videoFrame.layoutManager.isAutoMeasureEnabled = true
+        videoFrame.adapter = videoAdapter
     }
 
     override fun submitSuccessful() {
