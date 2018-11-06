@@ -17,7 +17,7 @@ class MyTaskStatusListFragmentViewModel(application: Application): AndroidViewMo
     fun fetchStatusCount() {
         isLoadingLiveData.postValue(true)
         doAsync {
-            val response = ApiClient.INSTANCE.create(TaskApi::class.java)
+            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
                 .fetchStatusCount()
                 .execute()
             uiThread {

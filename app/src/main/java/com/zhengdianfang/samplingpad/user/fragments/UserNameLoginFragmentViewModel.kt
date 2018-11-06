@@ -25,7 +25,7 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
             code.isNullOrEmpty() -> errorLiveData.postValue(context.resources.getString(R.string.please_input_verify_code_hint))
             else -> doAsync {
                 isLoadingLiveData.postValue(true)
-                val response  = ApiClient.INSTANCE
+                val response  = ApiClient.getRetrofit()
                     .create(UserApi::class.java)
                     .login(username, password.md5(), code, rememberMe)
                     .execute()

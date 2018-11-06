@@ -1,6 +1,7 @@
 package com.zhengdianfang.samplingpad.task.entities
 
 import android.os.Parcelable
+import com.chad.library.adapter.base.entity.MultiItemEntity
 import kotlinx.android.parcel.Parcelize
 
 data class StatusCount (
@@ -154,7 +155,7 @@ data class TaskItem(
     var entrustActive: Int?,
     var sampleInspectAmountUnit: String?,
     var samplePreparationUnit: String?,
-    var attachmentUnitId: String?
+    var attachmentUnitId: String? = id
 
 ) : Parcelable {
     companion object {
@@ -212,3 +213,18 @@ data class TaskItem(
         entrustPhone = enterprise.phone
     }
 }
+
+data class AttachmentIds(val id: String)
+
+class AttachmentItem(val url: String): MultiItemEntity {
+    override fun getItemType(): Int {
+        return 0
+    }
+}
+
+class UploadItem: MultiItemEntity {
+    override fun getItemType(): Int {
+        return 1
+    }
+}
+

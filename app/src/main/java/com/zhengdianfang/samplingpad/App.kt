@@ -52,13 +52,13 @@ var latitude = 0.0
     }
 
     private fun initGlide() {
-        val factory = OkHttpUrlLoader.Factory(ApiClient.okHttpClient)
+        val factory = OkHttpUrlLoader.Factory(ApiClient.getHttpClient())
         Glide.get(this).registry.replace(GlideUrl::class.java, InputStream::class.java, factory)
     }
 
     fun logout() {
         runOnUiThread {
-            (ApiClient.okHttpClient.cookieJar() as ApiClient.AppCookieJar).clearCookies()
+            ApiClient.reset()
             App.INSTANCE.token = ""
             startActivity(
                 Intent(this, LoginActivity::class.java)

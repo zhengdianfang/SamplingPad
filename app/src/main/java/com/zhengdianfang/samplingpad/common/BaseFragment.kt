@@ -9,7 +9,7 @@ open class BaseFragment: SupportFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        toolBarTitleView?.setOnClickListener {
+        backButton?.setOnClickListener {
             pop()
         }
     }

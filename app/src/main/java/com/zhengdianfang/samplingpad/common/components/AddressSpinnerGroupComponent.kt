@@ -54,7 +54,7 @@ class AddressSpinnerGroupComponent: BaseComponent {
 
     fun fetchData() {
         doAsync {
-            val response = ApiClient.INSTANCE
+            val response = ApiClient.getRetrofit()
                 .create(TaskApi::class.java)
                 .fetchRegionData()
                 .execute()

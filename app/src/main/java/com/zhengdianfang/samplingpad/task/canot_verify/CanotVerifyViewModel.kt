@@ -15,7 +15,7 @@ class CanotVerifyViewModel(application: Application) : AndroidViewModel(applicat
     fun submitCanotVerifyTask(params: Map<String, String?>) {
         isLoadingLiveData.postValue(true)
         doAsync {
-            val response = ApiClient.INSTANCE.create(TaskApi::class.java)
+            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
                 .sumbitExceptionTask(params)
                 .execute()
             isLoadingLiveData.postValue(false)

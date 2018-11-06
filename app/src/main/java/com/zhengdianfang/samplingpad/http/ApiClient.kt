@@ -12,22 +12,35 @@ import timber.log.Timber
 object ApiClient {
 
     const val HOST = "http://39.104.56.18:8080/inspection/"
+    private var okHttpClient: OkHttpClient? = null
+    private var retrofit: Retrofit? = null
 
-    val okHttpClient: OkHttpClient by lazy {
-        OkHttpClient
-            .Builder()
-            .addInterceptor(LoggingInterceptor())
-            .addNetworkInterceptor(AppResponseInterceptor())
-            .cookieJar(AppCookieJar())
-            .build()
+    fun getHttpClient(): OkHttpClient {
+        if (this. okHttpClient == null) {
+            this.okHttpClient = OkHttpClient
+                .Builder()
+                .addInterceptor(LoggingInterceptor())
+                .addNetworkInterceptor(AppResponseInterceptor())
+                .cookieJar(AppCookieJar())
+                .build()
+        }
+        return okHttpClient!!
     }
 
-    val INSTANCE: Retrofit by lazy {
-        Retrofit.Builder()
-            .baseUrl(HOST)
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+    fun getRetrofit() : Retrofit {
+        if (retrofit == null) {
+            this.retrofit = Retrofit.Builder()
+                .baseUrl(HOST)
+                .client(getHttpClient())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        }
+        return retrofit!!
+    }
+
+    fun reset() {
+        this.okHttpClient = null
+        this.retrofit = null
     }
 
     class AppCookieJar : CookieJar {

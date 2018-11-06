@@ -28,7 +28,7 @@ class PrintAdapter(private val filePath: String): PrintDocumentAdapter() {
                          cancellationSignal: CancellationSignal?, callback: WriteResultCallback) {
 
         val fileInputStream = FileInputStream(filePath)
-        val fileOutputStream = FileOutputStream(destination?.fileDescriptor)
+        val fileOutputStream = FileOutputStream(destination.fileDescriptor)
         var bytesRead: Int
         val buf = ByteArray(1024)
         while (true) {

@@ -1,19 +1,18 @@
 package com.zhengdianfang.samplingpad.task.api
 
-import com.zhengdianfang.samplingpad.http.Response
 import com.zhengdianfang.samplingpad.common.entities.Region
-import com.zhengdianfang.samplingpad.common.entities.SpinnerItem
-import com.zhengdianfang.samplingpad.task.entities.Enterprise
-import com.zhengdianfang.samplingpad.task.entities.Goods
-import com.zhengdianfang.samplingpad.task.entities.StatusCount
-import com.zhengdianfang.samplingpad.task.entities.TaskItem
+import com.zhengdianfang.samplingpad.http.Response
+import com.zhengdianfang.samplingpad.task.entities.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
-import java.io.File
 
 interface TaskApi {
+
+    companion object {
+        const val ATTACHMENT_URL = "/attachments/showPhotos/"
+    }
 
     @GET("app/listtaskscount")
     fun fetchStatusCount(): Call<Response<StatusCount>>
@@ -46,10 +45,14 @@ interface TaskApi {
     fun sumbitExceptionTask(@Body params: Map<String, String?>): Call<Response<Any>>
 
     @Multipart
-    @POST("app/uploadFilesToFTP")
+    @POST("attachments/uploadFilesToFTP")
     fun uploadFile(
-        @Part("attUnitId") attUnitId: String,
-        @Part("businessType") businessType: String,
-        @Part("attTypeName") attTypeName:String,
-        @Part files:  Array<MultipartBody.Part>): Call<Response<String>>
+        @Part("attachmentUnitId") attachmentUnitId: RequestBody,
+        @Part("businessType") businessType: RequestBody,
+        @Part("attTypeName") attTypeName:RequestBody,
+        @Part("attTypeId") attTypeId: RequestBody,
+        @Part files:  Array<MultipartBody.Part>): Call<Response<AttachmentIds>>
+
+    @GET("attachments/samplepic/{id}")
+    fun fetchAttachmentIdsBySampleId(@Path("id") id: String): Call<Response<Array<Int>>>
 }

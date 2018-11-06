@@ -16,7 +16,7 @@ class TaskListWithStatusFragmentViewModel(application: Application) : AndroidVie
 
     fun loadTaskDataByStatus(task_Status: Task_Status) {
         doAsync {
-            val response = ApiClient.INSTANCE
+            val response = ApiClient.getRetrofit()
                 .create(TaskApi::class.java)
                 .fetchTaskListGroupByStatus(task_Status.value)
                 .execute()
@@ -31,7 +31,7 @@ class TaskListWithStatusFragmentViewModel(application: Application) : AndroidVie
 
     fun loadErrorTaskDataByStatus() {
         doAsync {
-            val response = ApiClient.INSTANCE
+            val response = ApiClient.getRetrofit()
                 .create(TaskApi::class.java)
                 .fetchErrorTaskListGroupByStatus()
                 .execute()

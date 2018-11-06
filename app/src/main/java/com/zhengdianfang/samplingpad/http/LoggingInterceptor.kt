@@ -22,7 +22,7 @@ class LoggingInterceptor: Interceptor {
         }
 
         val response = chain.proceed(request)
-        if (response.header("Content-Type")!!.contains("application/json")) {
+        if (response.header("Content-Type")?.contains("application/json") == true) {
             val responseText = response.body()?.string()
             Timber.tag("LoggingInterceptor")
                 .d("${request.url().url().path}, response: $responseText")

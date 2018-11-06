@@ -51,7 +51,7 @@ class UserNameLoginFragment : BaseFragment() {
                 Toast.makeText(context, getString(R.string.login_successful), Toast.LENGTH_SHORT).show()
                 activity?.finish()
             } else {
-                (ApiClient.okHttpClient.cookieJar() as ApiClient.AppCookieJar).clearCookies()
+                (ApiClient.getHttpClient().cookieJar() as ApiClient.AppCookieJar).clearCookies()
                 Toast.makeText(context, getString(R.string.login_failure), Toast.LENGTH_SHORT).show()
             }
         })

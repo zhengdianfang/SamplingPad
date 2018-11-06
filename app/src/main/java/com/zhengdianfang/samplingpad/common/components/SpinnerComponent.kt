@@ -39,7 +39,7 @@ class SpinnerComponent: BaseComponent {
             val request = Request.Builder()
                 .url(url)
                 .build()
-            val call = ApiClient.okHttpClient.newCall(request)
+            val call = ApiClient.getHttpClient().newCall(request)
             val response = call.execute()
             if (response.isSuccessful) {
                 val responseData = response.body()?.string() ?: ""

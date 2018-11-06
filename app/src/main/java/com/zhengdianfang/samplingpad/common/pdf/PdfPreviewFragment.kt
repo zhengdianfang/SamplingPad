@@ -41,7 +41,7 @@ class PdfPreviewFragment: BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        toolBarTitleView.setOnClickListener {
+        backButton.setOnClickListener {
             activity?.finish()
         }
         this.setupViews()
@@ -68,7 +68,7 @@ class PdfPreviewFragment: BaseFragment() {
         if (localFile!!.exists().not()) {
             doAsync {
                 val request = Request.Builder().url(pdfUrl).build()
-                val response = ApiClient.okHttpClient.newCall(request).execute()
+                val response = ApiClient.getHttpClient().newCall(request).execute()
                 val byteStream = response.body()?.byteStream()
                 FileUtils.copy(byteStream, localFile)
                 if (localFile!!.exists()) {

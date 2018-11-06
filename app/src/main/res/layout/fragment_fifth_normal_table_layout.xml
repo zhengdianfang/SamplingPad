@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
 
     <LinearLayout
@@ -11,26 +12,12 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <com.zhengdianfang.samplingpad.common.components.AutoWrapLineLayout
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/imageFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:background="@android:color/white">
-
-            <TextView
-                android:id="@+id/uploadPicButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:drawableTop="@drawable/ic_cloud_upload"
-                android:background="@drawable/transparent"
-                android:drawablePadding="8dp"
-                android:textSize="@dimen/large_18"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:text="@string/upload_pic_text"/>
-
-        </com.zhengdianfang.samplingpad.common.components.AutoWrapLineLayout>
+            android:background="@android:color/white"/>
 
         <com.zhengdianfang.samplingpad.common.components.AutoWrapLineLayout
             android:layout_width="match_parent"
@@ -62,6 +49,7 @@
             android:background="@android:color/white">
 
             <TextView
+                android:id="@+id/testPdfView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/ic_pdf"

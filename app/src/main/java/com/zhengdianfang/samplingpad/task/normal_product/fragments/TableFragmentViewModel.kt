@@ -10,6 +10,7 @@ import com.zhengdianfang.samplingpad.http.AppResponseInterceptor
 import com.zhengdianfang.samplingpad.http.Response
 import com.zhengdianfang.samplingpad.http.UploadInterceptor
 import com.zhengdianfang.samplingpad.task.api.TaskApi
+import com.zhengdianfang.samplingpad.task.entities.AttachmentIds
 import com.zhengdianfang.samplingpad.task.entities.Enterprise
 import com.zhengdianfang.samplingpad.task.entities.Goods
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
@@ -30,14 +31,15 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     val isLoadingLiveData = MutableLiveData<Boolean>()
     val goodsLiveData = MutableLiveData<Goods>()
     val enterpriseLiveData = MutableLiveData<Enterprise>()
-    val uploadProgressLiveData = MutableLiveData<Int>()
+    val uploadResponseLiveData = MutableLiveData<AttachmentIds>()
+    val attachmentIdsLiveData = MutableLiveData<Array<Int>>()
 
     fun saveSample(taskItem: TaskItem) {
         taskItem.latitude = App.INSTANCE.latitude
         taskItem.longitude = App.INSTANCE.longitude
         isLoadingLiveData.postValue(true)
         doAsync {
-            val response = ApiClient.INSTANCE.create(TaskApi::class.java)
+            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
                 .saveSample(taskItem.id, taskItem)
                 .execute()
             val body = response.body()
@@ -55,7 +57,7 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
         taskItem.longitude = App.INSTANCE.longitude
         isLoadingLiveData.postValue(true)
         doAsync {
-            val response = ApiClient.INSTANCE.create(TaskApi::class.java)
+            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
                 .submitSample(taskItem.id, taskItem)
                 .execute()
             val body = response.body()
@@ -71,7 +73,7 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     fun getGoodsByBarcode(code: String) {
         isLoadingLiveData.postValue(true)
         doAsync {
-            val response = ApiClient.INSTANCE.create(TaskApi::class.java)
+            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
                 .fetchGoodsByBarcode(code.trim())
                 .execute()
             val goods = response.body()?.data
@@ -87,7 +89,7 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     fun fetchEnterpriseByLincenseCode(licenseNumber: String) {
         isLoadingLiveData.postValue(true)
         doAsync {
-            val response = ApiClient.INSTANCE.create(TaskApi::class.java)
+            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
                 .fetchEnterpriseByLicenseCode(licenseNumber.trim())
                 .execute()
             val enterprise = response.body()?.data
@@ -103,7 +105,7 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     fun fetchEntrustByCsNo(code: String) {
         isLoadingLiveData.postValue(true)
         doAsync {
-            val response = ApiClient.INSTANCE.create(TaskApi::class.java)
+            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
                 .fetchEntrustByCsNo(code.trim())
                 .execute()
             val enterprise = response.body()?.data
@@ -116,14 +118,29 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
         }
     }
 
-    fun uploadFile(taskItem: TaskItem, businessType: String, attTypeName: String, files: Array<File>) {
+    fun fetchAttachmentIdsBySampleId(id: String) {
+       doAsync {
+           val response = ApiClient.getRetrofit().create(TaskApi::class.java)
+               .fetchAttachmentIdsBySampleId(id)
+               .execute()
+           val ids = response.body()?.data
+           uiThread {
+               if (ids != null) {
+                   attachmentIdsLiveData.postValue(ids)
+               }
+           }
+       }
+    }
+
+    fun uploadFile(taskItem: TaskItem, businessType: String, attTypeName: String, attachmentType: String, files: Array<File>, progressCallback: (progress: Int) -> Unit) {
         doAsync {
 
             val okHttpClient = OkHttpClient
                 .Builder()
-                .addNetworkInterceptor(UploadInterceptor { btyesWritten, contentLength ->
+                .addNetworkInterceptor(UploadInterceptor { bytesWritten, contentLength ->
                     uiThread {
-                        uploadProgressLiveData.postValue((btyesWritten / contentLength * 100).toInt())
+                        val progress = (bytesWritten.toDouble() / contentLength.toDouble() * 100).toInt()
+                        progressCallback.invoke(progress)
                     }
                 })
                 .addNetworkInterceptor(AppResponseInterceptor())
@@ -131,7 +148,7 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
 
             val partFiles = files.map {file ->
                 val requestFile = RequestBody.create(
-                    MediaType.parse("image/*"),
+                    MediaType.parse("multipart/form-data"),
                     file
                 )
                 MultipartBody.Part.createFormData("file", file.name, requestFile)
@@ -143,13 +160,18 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(TaskApi::class.java)
-                .uploadFile(taskItem.id, businessType, attTypeName, partFiles)
+                .uploadFile(
+                    RequestBody.create(MediaType.parse("multipart/form-data"), taskItem.attachmentUnitId),
+                    RequestBody.create(MediaType.parse("multipart/form-data"), businessType),
+                    RequestBody.create(MediaType.parse("multipart/form-data"), attTypeName),
+                    RequestBody.create(MediaType.parse("multipart/form-data"), attachmentType),
+                    partFiles)
                 .execute()
 
             uiThread {
                 if (response.body() != null) {
-                    Timber.d("upload result ${response.body()}")
-                    responseLiveData.postValue(response.body())
+                    Timber.d("upload result ${response.body()?.data.toString()}")
+                    uploadResponseLiveData.postValue(response.body()!!.data)
                 }
             }
         }

@@ -27,7 +27,7 @@ class VerifyFragmentViewModel(application: Application) : AndroidViewModel(appli
 ) {
         isLoadingLiveData.postValue(true)
         doAsync {
-            val response = ApiClient.INSTANCE.create(MainApi::class.java)
+            val response = ApiClient.getRetrofit().create(MainApi::class.java)
                 .postVerifySample(implPlanCode, level1Name, enterpriseLicenseNumber, sampleName,
                     sampleProductDate, chainBrand, sampleDate , producerCsNo, enterpriseName)
                 .execute()

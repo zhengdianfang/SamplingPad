@@ -16,7 +16,7 @@ class TaskListFragmentViewModel(application: Application): AndroidViewModel(appl
 
     fun loadTaskData() {
         doAsync {
-            val response = ApiClient.INSTANCE
+            val response = ApiClient.getRetrofit()
                 .create(TaskApi::class.java)
                 .fetchTaskListGroupByStatus(Task_Status.WAIT_VERIFY.value)
                 .execute()

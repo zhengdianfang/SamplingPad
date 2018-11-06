@@ -15,7 +15,7 @@ class AppResponseInterceptor: Interceptor {
             .addHeader("Authorization", App.INSTANCE.token)
             .build()
         var response = chain.proceed(newRequest)
-        if (response.isSuccessful && response.header("Content-Type")!!.contains("application/json")) {
+        if (response.isSuccessful && response.header("Content-Type")?.contains("application/json") == true) {
             val responseText = response.body()?.string()
             if (responseText.isNullOrEmpty().not()) {
                 val gson = Gson()
