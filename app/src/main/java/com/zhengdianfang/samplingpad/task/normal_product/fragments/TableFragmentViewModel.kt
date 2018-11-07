@@ -10,10 +10,7 @@ import com.zhengdianfang.samplingpad.http.AppResponseInterceptor
 import com.zhengdianfang.samplingpad.http.Response
 import com.zhengdianfang.samplingpad.http.UploadInterceptor
 import com.zhengdianfang.samplingpad.task.api.TaskApi
-import com.zhengdianfang.samplingpad.task.entities.AttachmentIds
-import com.zhengdianfang.samplingpad.task.entities.Enterprise
-import com.zhengdianfang.samplingpad.task.entities.Goods
-import com.zhengdianfang.samplingpad.task.entities.TaskItem
+import com.zhengdianfang.samplingpad.task.entities.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -33,7 +30,8 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     val enterpriseLiveData = MutableLiveData<Enterprise>()
     val uploadImageResponseLiveData = MutableLiveData<AttachmentIds>()
     val uploadVideoResponseLiveData = MutableLiveData<AttachmentIds>()
-    val attachmentIdsLiveData = MutableLiveData<Array<Int>>()
+    val attachmentIdsLiveData = MutableLiveData<Array<AttachmentItem>>()
+    val deleteAttachmentLiveData = MutableLiveData<Boolean>()
 
     fun saveSample(taskItem: TaskItem) {
         taskItem.latitude = App.INSTANCE.latitude
@@ -174,11 +172,20 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
                     Timber.d("upload result ${response.body()?.data.toString()}")
                     if (attachmentType == "1") {
                         uploadImageResponseLiveData.postValue(response.body()!!.data)
-                    } else if (attachmentType == "1") {
+                    } else if (attachmentType == "4") {
                         uploadVideoResponseLiveData.postValue(response.body()!!.data)
                     }
                 }
             }
+        }
+    }
+
+    fun deleteAttachments(ids: String) {
+        doAsync {
+            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
+                .deleteAttachment(ids)
+                .execute()
+            deleteAttachmentLiveData.postValue(true)
         }
     }
 }

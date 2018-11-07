@@ -54,5 +54,9 @@ interface TaskApi {
         @Part files:  Array<MultipartBody.Part>): Call<Response<AttachmentIds>>
 
     @GET("attachments/samplepic/{id}")
-    fun fetchAttachmentIdsBySampleId(@Path("id") id: String): Call<Response<Array<Int>>>
+    fun fetchAttachmentIdsBySampleId(@Path("id") id: String): Call<Response<Array<AttachmentItem>>>
+
+
+    @DELETE("attachments/{ids}")
+    fun deleteAttachment(@Path("ids") ids: String): Call<Response<String>>
 }

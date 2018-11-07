@@ -58,6 +58,19 @@ class AddressSpinnerGroupComponent: BaseComponent {
         return "$provincial$town$county"
     }
 
+    fun setDefault(provinceId: Int?, townId: Int?, countyId: Int?) {
+        if (provinceId != null) {
+            provincialSpinnerTextView?.text = regionList.firstOrNull { it.id == provinceId }?.name
+        }
+        if (townId != null) {
+            townSpinnerTextView?.text = regionList.firstOrNull { it.id == townId }?.name
+        }
+
+        if (countyId != null) {
+            countySpinnerTextView?.text = regionList.firstOrNull { it.id == countyId }?.name
+        }
+    }
+
     fun getProvince() = this.selectedProvince
     fun getTown() = this.selectedTown
     fun getCounty() = this.selectedCounty

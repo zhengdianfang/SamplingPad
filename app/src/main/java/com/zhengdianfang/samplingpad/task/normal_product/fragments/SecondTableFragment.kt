@@ -99,6 +99,7 @@ open class SecondTableFragment: TableFragment() {
         }
 
         chainBrandEditText.setEditTextContent(taskItem.chainBrand)
+        regionSpinnerGroup.setDefaultStreet(taskItem?.enterpriseAreaId)
 
     }
 
@@ -117,7 +118,7 @@ open class SecondTableFragment: TableFragment() {
         taskItem.enterpriseLicenseNumber = enterpriseLicenseNumberEditText.getContent()
         taskItem.enterpriseName = enterpriseNameEditText.getContent()
         taskItem.enterpriseAreaType = enterpriseAreaTypeRadioGroup.getCheckedText()
-        taskItem.enterpriseAreaName = regionSpinnerGroup.getContent()
+        taskItem.setEnterpriseAreaInfo(regionSpinnerGroup.getStreet())
         taskItem.setEnterpriseLink(enterpriseLinkNameRadioGroup.getCheckedOption())
         taskItem.enterprisePlaceName =  enterprisePlaceNameSpinner.getContent()
         taskItem.enterpriseAddress = enterpriseAddressEditText.getContent()

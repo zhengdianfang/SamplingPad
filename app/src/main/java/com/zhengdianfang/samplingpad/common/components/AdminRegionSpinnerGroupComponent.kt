@@ -25,6 +25,10 @@ class AdminRegionSpinnerGroupComponent: BaseComponent {
     private var streetSpinnerDialog: MaterialDialog? = null
     private var regionList = listOf<Region>()
     private var areaList: List<Region>? = null
+    private var streetList: List<Region>? = null
+
+    private var selectedArea: Region? = null
+    private var selectedStreet: Region? = null
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
         this.setupViews(context)
@@ -44,6 +48,22 @@ class AdminRegionSpinnerGroupComponent: BaseComponent {
         val street =streetSpinnerTextView!!.text
         return "$area$street"
     }
+
+    fun setDefaultStreet(id: Int?) {
+        if (id != null) {
+            val streets = regionList.filter{ it.id == id }
+            if (streets.isNotEmpty()) {
+                val areas = regionList.filter { it.id == streets.first().parentId }
+                streetSpinnerTextView?.text = streets.first().name
+                if (areas.isNotEmpty()) {
+                    areaSpinnerTextView?.text = areas.first().name
+                }
+            }
+        }
+    }
+
+    fun getArea() = this.selectedArea
+    fun getStreet() = this.selectedStreet
 
     fun fetchData() {
         doAsync {
@@ -85,11 +105,12 @@ class AdminRegionSpinnerGroupComponent: BaseComponent {
 
         areaSpinnerDialog = createSpinnerDataDialog(MaterialDialog.ListCallback { _, _, position, text ->
             areaSpinnerTextView!!.text = text
-            areaSpinnerTextView!!.setTextColor(Color.BLACK)
-            val selectedArea = areaList?.get(position)
+            selectedArea = areaList?.get(position)
             if (selectedArea != null) {
-                val filterStreets = regionList.filter { it.parentId == selectedArea.id && it.levelId == Region.LEVEL_STREET }
-                streetSpinnerDialog!!.setItems(*filterStreets.map { it.name }.toTypedArray())
+                streetList = regionList.filter { it.parentId == selectedArea!!.id && it.levelId == Region.LEVEL_STREET }
+                if (streetList != null) {
+                    streetSpinnerDialog!!.setItems(*streetList!!.map { it.name }.toTypedArray())
+                }
             }
         })
         areaSpinnerTextView!!.setOnClickListener {
@@ -112,9 +133,10 @@ class AdminRegionSpinnerGroupComponent: BaseComponent {
             }
         }
 
-        streetSpinnerDialog = createSpinnerDataDialog(MaterialDialog.ListCallback { _, _, _, text ->
+        streetSpinnerDialog = createSpinnerDataDialog(MaterialDialog.ListCallback { _, _, position, text ->
             streetSpinnerTextView!!.text = text
             streetSpinnerTextView!!.setTextColor(Color.BLACK)
+            selectedStreet = streetList?.get(position)
         })
 
         streetSpinnerTextView!!.setOnClickListener {

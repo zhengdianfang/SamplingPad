@@ -103,6 +103,7 @@ class MainActivity : BaseActivity() {
             saveOptionData2Perference("samplereservelisOptions", samplereservelisResponse.body()?.data)
 
 
+            saveOptionData2Perference("yesOrNo", arrayOf(OptionItem(0, "否", 0), OptionItem(1, "是", 0)))
 
 
 

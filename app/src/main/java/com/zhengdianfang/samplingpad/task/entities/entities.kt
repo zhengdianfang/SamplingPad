@@ -104,6 +104,7 @@ data class TaskItem(
     var enterpriseChain: Int?,
     var enterprisePlaceName: String?,
     var enterpriseAreaName: String?,
+    var enterpriseAreaId: Int?,
     var producerActive: Int?,
     var entrustCsNo: String?,
     var entrustName: String?,
@@ -287,11 +288,20 @@ data class TaskItem(
         producerCountyId = county?.id
         producerCountyName = county?.name
     }
+
+    fun setEnterpriseAreaInfo(street: Region?) {
+        enterpriseAreaId = street?.id
+        enterpriseAreaName = street?.name
+    }
 }
 
 data class AttachmentIds(val id: String)
 
-class AttachmentItem(val url: String): MultiItemEntity {
+
+class AttachmentItem(
+    var id: Int,
+    var documentType: String
+    ): MultiItemEntity {
     override fun getItemType(): Int {
         return 0
     }

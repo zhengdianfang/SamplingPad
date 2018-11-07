@@ -3,7 +3,6 @@ package com.zhengdianfang.samplingpad.common
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.provider.BaseColumns
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast

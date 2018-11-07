@@ -22,6 +22,7 @@ import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.ItemDecoration
 import com.zhengdianfang.samplingpad.common.PhotoPreviewFragment
 import com.zhengdianfang.samplingpad.common.TableFragment
+import com.zhengdianfang.samplingpad.common.VideoFragment
 import com.zhengdianfang.samplingpad.common.pdf.PdfPreviewActivity
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.task.api.TaskApi
@@ -82,6 +83,14 @@ open class FifthTableFragment: TableFragment() {
         }
     }
 
+    private fun fetchAttachment() {
+        tableFragmentViewModel.fetchAttachmentIdsBySampleId(this.taskItem.id)
+    }
+    override fun onFragmentResult(requestCode: Int, resultCode: Int, data: Bundle?) {
+        super.onFragmentResult(requestCode, resultCode, data)
+        fetchAttachment()
+    }
+
 
     override fun setupViews() {
 
@@ -99,12 +108,22 @@ open class FifthTableFragment: TableFragment() {
         testPdfView1.setOnClickListener {
             startActivity(Intent(context, PdfPreviewActivity::class.java))
         }
+        renderImageFrame()
+        renderVedioFrame()
     }
 
     override fun bindViewModel() {
-        tableFragmentViewModel.attachmentIdsLiveData.observe(this, Observer { ids ->
-            renderImageFrame(ids!!)
-            renderVedioFrame(arrayOf())
+        tableFragmentViewModel.attachmentIdsLiveData.observe(this, Observer { attachments ->
+            if (null != attachments) {
+                imageAttachments.clear()
+                imageAttachments.addAll(attachments.filter { it.documentType == ".jpg" || it.documentType == ".png" }.toTypedArray())
+                imageAttachments.add(UploadItem())
+                imageFrame.adapter.notifyDataSetChanged()
+                videoAttachments.clear()
+                videoAttachments.addAll(attachments.filter { it.documentType == ".mp4" }.toTypedArray())
+                videoAttachments.add(UploadItem())
+                videoFrame.adapter.notifyDataSetChanged()
+            }
         })
         tableFragmentViewModel.isLoadingLiveData.observe(this, Observer { isLoading ->
             if (isLoading!!) {
@@ -124,23 +143,19 @@ open class FifthTableFragment: TableFragment() {
         tableFragmentViewModel.uploadImageResponseLiveData.observe(this, Observer { attachmentIds ->
             uploadDialog.cancel()
             Toast.makeText(context, "上传成功", Toast.LENGTH_SHORT).show()
-            imageAttachments.removeAt(imageAttachments.lastIndex)
-            imageAttachments.addAll(attachmentIds?.id?.split(",")?.filter { TextUtils.isEmpty(it).not() }
-                ?.map{ AttachmentItem("${ApiClient.HOST}${TaskApi.ATTACHMENT_URL}$it") }!!)
-            imageAttachments.add(UploadItem())
-            imageFrame.adapter.notifyDataSetChanged()
+            fetchAttachment()
         })
-        tableFragmentViewModel.uploadVideoResponseLiveData.observe(this, Observer {
+        tableFragmentViewModel.uploadVideoResponseLiveData.observe(this, Observer { attachmentIds ->
             uploadDialog.cancel()
             Toast.makeText(context, "上传成功", Toast.LENGTH_SHORT).show()
+            fetchAttachment()
         })
-        tableFragmentViewModel.fetchAttachmentIdsBySampleId(this.taskItem.id)
+        fetchAttachment()
+
     }
 
-    private fun renderImageFrame(ids: Array<Int>) {
-        imageAttachments.addAll(ids.map{ AttachmentItem("${ApiClient.HOST}${TaskApi.ATTACHMENT_URL}$it") })
-        imageAttachments.add(UploadItem())
-        val imageAdapter = AttachmentAdapter(imageAttachments)
+    private fun renderImageFrame() {
+        val imageAdapter = AttachmentAdapter(imageAttachments, 0)
         imageAdapter.setOnItemClickListener { adapter, _, position ->
            if (adapter.getItemViewType(position) == 1) {
                val intent = Intent(context, ImagePickActivity::class.java)
@@ -148,7 +163,8 @@ open class FifthTableFragment: TableFragment() {
                intent.putExtra(Constant.MAX_NUMBER, 3)
                startActivityForResult(intent, SELECT_PHOTO_REQUEST)
            } else {
-               start(PhotoPreviewFragment.newInstance((adapter.data[position] as AttachmentItem).url))
+               val item = adapter.data[position] as AttachmentItem
+               startForResult(PhotoPreviewFragment.newInstance(item.id), 0x0001)
            }
         }
         imageFrame.layoutManager = GridLayoutManager(context, 8)
@@ -157,17 +173,16 @@ open class FifthTableFragment: TableFragment() {
         imageFrame.adapter = imageAdapter
     }
 
-    private fun renderVedioFrame(ids: Array<Int>) {
-        videoAttachments.addAll(ids.map{ AttachmentItem("${ApiClient.HOST}${TaskApi.ATTACHMENT_URL}$it") })
-        videoAttachments.add(UploadItem())
-        val videoAdapter = AttachmentAdapter(videoAttachments)
+    private fun renderVedioFrame() {
+        val videoAdapter = AttachmentAdapter(videoAttachments, 1)
         videoAdapter.setOnItemClickListener { adapter, _, position ->
             if (adapter.getItemViewType(position) == 1) {
                 val intent = Intent(context, VideoPickActivity::class.java)
                 intent.putExtra(Constant.MAX_NUMBER, 1)
                 startActivityForResult(intent, SELECT_VIDEO_REQUEST)
             } else {
-                // todo play video
+                val item = adapter.data[position] as AttachmentItem
+                startForResult(VideoFragment.newInstance(item.id), 0x0001)
             }
         }
         videoFrame.layoutManager = GridLayoutManager(context, 8)

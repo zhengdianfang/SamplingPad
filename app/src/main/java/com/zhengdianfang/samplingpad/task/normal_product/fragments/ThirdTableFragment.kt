@@ -30,14 +30,10 @@ class ThirdTableFragment: TableFragment() {
         super.setupViews()
 
         //标称信息
-        val yesOrNo = resources.getStringArray(R.array.yes_or_no)
-        if (taskItem.producerActive != null && taskItem.producerActive!! > 0) {
-            producerActiveRadioGroup.setDefaultCheckedRadioButton(yesOrNo[taskItem.producerActive!!])
-            showHideAgencyFrame(taskItem.producerActive!!)
+        producerActiveRadioGroup.radioButtonCheckCallback = { _, option ->
+            showHideAgencyFrame(option.id)
         }
-        producerActiveRadioGroup.radioButtonCheckCallback = { position, _ ->
-            showHideAgencyFrame(position)
-        }
+        producerActiveRadioGroup.setDefaultCheckedRadioButton(taskItem.producerActive)
         produceCsNoEditText.setEditTextContent(taskItem.producerCsNo)
         produceNameEditText.setEditTextContent(taskItem.producerName)
         produceAddressEditText.setEditTextContent(taskItem.producerAddress)
@@ -45,14 +41,12 @@ class ThirdTableFragment: TableFragment() {
         producePhoneEditText.setEditTextContent(taskItem.producerPhone)
         addressSpinner.labelTextView.text = "*生产所在地："
         addressSpinner.fetchData()
+        addressSpinner.setDefault(taskItem.producerProvincialId, taskItem.producerTownId, taskItem.producerCountyId)
 
-        if (taskItem.entrustActive != null && taskItem.entrustActive!! > 0) {
-            entrustActiveRadioGroup.setDefaultCheckedRadioButton(yesOrNo[taskItem.entrustActive!!])
-            showHideEntrustFrame(taskItem.entrustActive!!)
-        }
         entrustActiveRadioGroup.radioButtonCheckCallback = { position, _ ->
             showHideEntrustFrame(position)
         }
+        entrustActiveRadioGroup.setDefaultCheckedRadioButton(taskItem.entrustActive)
 
         //委托单位信息
         entrustCsNoEditText.setEditTextContent(taskItem.entrustCsNo)
@@ -70,22 +64,22 @@ class ThirdTableFragment: TableFragment() {
 
     }
 
-    private fun showHideAgencyFrame(position: Int) {
-        if (position == 0) {
+    private fun showHideAgencyFrame(active: Int) {
+        if (active == 0) {
             agencyFrame.visibility = View.GONE
+            showHideEntrustFrame(entrustActiveRadioGroup.getCheckedOption()?.id ?: 0)
             showHideProduceFrame(View.VISIBLE)
-            showHideEntrustFrame(taskItem.entrustActive ?: 0)
-        } else {
+        } else if (active == 1){
             agencyFrame.visibility = View.VISIBLE
             entrustFrame.visibility = View.GONE
             showHideProduceFrame(View.GONE)
         }
     }
 
-    private fun showHideEntrustFrame(position: Int) {
-        if (position == 0) {
+    private fun showHideEntrustFrame(active: Int) {
+        if (active == 0) {
             entrustFrame.visibility = View.GONE
-        } else {
+        } else if (active == 1){
             entrustFrame.visibility = View.VISIBLE
         }
     }
@@ -96,6 +90,7 @@ class ThirdTableFragment: TableFragment() {
                 produceFrame.getChildAt(index).visibility = visiable
             }
         }
+        entrustActiveRadioGroup.clear()
     }
 
     override fun submitSuccessful() {
@@ -104,9 +99,7 @@ class ThirdTableFragment: TableFragment() {
 
     override fun assembleSubmitTaskData() {
         //标称信息
-        val yesOrNo = resources.getStringArray(R.array.yes_or_no)
-        var index = yesOrNo.indexOf(producerActiveRadioGroup.getCheckedText())
-        taskItem.producerActive = if (index > 0) index else 0
+        taskItem.producerActive = producerActiveRadioGroup.getCheckedOption()?.id
 
         taskItem.producerCsNo = produceCsNoEditText.getContent()
         taskItem.producerName = produceNameEditText.getContent()
@@ -122,8 +115,7 @@ class ThirdTableFragment: TableFragment() {
         taskItem.entrustAddress = entrustAddressEditText.getContent()
         taskItem.entrustContacts = entrustContactsEditText.getContent()
         taskItem.entrustPhone = entrustPhoneEditText.getContent()
-        index = yesOrNo.indexOf(entrustActiveRadioGroup.getCheckedText())
-        taskItem.entrustActive = if (index > 0) index else 0
+        taskItem.entrustActive = entrustActiveRadioGroup.getCheckedOption()?.id
 
         //进口代理商信息
         taskItem.agencyName = agencyNameEditText.getContent()

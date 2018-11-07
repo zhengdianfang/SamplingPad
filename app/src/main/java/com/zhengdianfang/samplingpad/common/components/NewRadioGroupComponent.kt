@@ -40,6 +40,15 @@ class NewRadioGroupComponent: BaseComponent {
         }
     }
 
+    fun setDefaultCheckedRadioButton(id: Int?) {
+        if (id != null) {
+            val index = options?.indexOfFirst { it.id == id }
+            if (index != null && index >=0) {
+                (radioGroup.getChildAt(index) as RadioButton).isChecked = true
+            }
+        }
+    }
+
     override fun clear() {
         for(index in 0 until radioGroup.childCount) {
             val radioButton = radioGroup.getChildAt(index) as RadioButton

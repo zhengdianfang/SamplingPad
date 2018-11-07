@@ -30,12 +30,12 @@
                 android:layout_marginEnd="8dp"
                 android:text="标称生产单位信息" />
 
-            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+            <com.zhengdianfang.samplingpad.common.components.NewRadioGroupComponent
                 android:id="@+id/producerActiveRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:radio_buttons="@array/yes_or_no"
+                app:radio_data_key="yesOrNo"
                 app:radio_label="*是否进口：" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
@@ -84,12 +84,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"/>
 
-            <com.zhengdianfang.samplingpad.common.components.RadioGroupComponent
+            <com.zhengdianfang.samplingpad.common.components.NewRadioGroupComponent
                 android:id="@+id/entrustActiveRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:radio_buttons="@array/yes_or_no"
+                app:radio_data_key="yesOrNo"
                 app:radio_label="*是否委托生产："
                 app:radio_label_min_width="110dp" />
 
