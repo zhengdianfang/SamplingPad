@@ -22,4 +22,10 @@ interface UserApi {
         @Field("code")code: String,
         @Field("rememberMe")rememberMe: Boolean): Call<Response<User>>
 
+    @FormUrlEncoded
+    @POST("login/second")
+    fun loginSecond(
+        @Field("username") username: String,
+        @Field("password")password: String,
+        @Field("rememberMe")rememberMe: Boolean): Call<Response<String>>
 }

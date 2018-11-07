@@ -8,20 +8,12 @@
     android:padding="72dp"
     tools:context=".user.LoginActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/login_text"
-        android:gravity="center"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/large_24"
-        android:layout_marginBottom="64dp"/>
 
     <fragment
         android:id="@+id/userNameLoginFragment"
-        android:name="com.zhengdianfang.samplingpad.user.fragments.UserNameLoginFragment"
+        android:name="com.zhengdianfang.samplingpad.user.fragments.FirstLoginFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_user_name_login" />
+        tools:layout="@layout/fragment_first_login" />
 
 </LinearLayout>

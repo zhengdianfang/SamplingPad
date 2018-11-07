@@ -71,6 +71,8 @@ open class FourthTableFragment: TableFragment() {
         samplePreparationUnitEditText.setEditTextContent(taskItem.samplePreparationUnit)
         sampleDateView.setDefaultDate(Calendar.getInstance())
         sampleProduceDateView.setDefaultDate(Calendar.getInstance())
+        unitSpinner.text = taskItem.sampleQgpUnit
+        sampleQgpEditText.setEditTextContent(taskItem.sampleQgp?.toString())
         unitSpinner.setOnClickListener {
             calendarUnitDialog.show()
         }

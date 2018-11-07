@@ -114,6 +114,7 @@ class ThirdTableFragment: TableFragment() {
         taskItem.producerContacts = produceContactsEditText.getContent()
         taskItem.producerPhone = producePhoneEditText.getContent()
         taskItem.producerAddress = addressSpinner.getContent()
+        taskItem.setProducerAddressInfo(addressSpinner.getProvince(), addressSpinner.getTown(), addressSpinner.getCounty())
 
         //委托单位信息
         taskItem.entrustCsNo = entrustCsNoEditText.getContent()

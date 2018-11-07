@@ -3,6 +3,7 @@ package com.zhengdianfang.samplingpad.task.entities
 import android.os.Parcelable
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.zhengdianfang.samplingpad.common.entities.OptionItem
+import com.zhengdianfang.samplingpad.common.entities.Region
 import kotlinx.android.parcel.Parcelize
 
 data class StatusCount (
@@ -146,6 +147,12 @@ data class TaskItem(
     var producerAreaName: String?,
     var enterpriseUrl: String?,
     var producerAddress: String?,
+    var producerProvincialId: Int?,
+    var producerProvincialName: String?,
+    var producerTownId: Int?,
+    var producerTownName: String?,
+    var producerCountyId: Int?,
+    var producerCountyName: String?,
     var producerContacts: String?,
     var producerPhone: String?,
     var enterpriseAddressSources: Int?,
@@ -267,6 +274,18 @@ data class TaskItem(
 
     fun setStoragePlaceForRetest(checkedOption: OptionItem?) {
         storagePlaceForRetest = checkedOption?.name
+    }
+
+
+    fun setProducerAddressInfo(province: Region?, town: Region?, county: Region?) {
+        producerProvincialId = province?.id
+        producerProvincialName = province?.name
+
+        producerTownId = town?.id
+        producerTownName = town?.name
+
+        producerCountyId = county?.id
+        producerCountyName = county?.name
     }
 }
 

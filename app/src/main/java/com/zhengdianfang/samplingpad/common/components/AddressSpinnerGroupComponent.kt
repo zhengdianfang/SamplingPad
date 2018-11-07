@@ -30,6 +30,12 @@ class AddressSpinnerGroupComponent: BaseComponent {
     private var regionList = listOf<Region>()
     private var provincialList: List<Region>? = null
     private var townList: List<Region>? = null
+    private var countyList: List<Region>? = null
+
+    private var selectedProvince: Region? = null
+    private var selectedTown: Region? = null
+    private var selectedCounty: Region? = null
+
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
         this.setupViews(context)
@@ -51,6 +57,10 @@ class AddressSpinnerGroupComponent: BaseComponent {
         val county = countySpinnerTextView!!.text
         return "$provincial$town$county"
     }
+
+    fun getProvince() = this.selectedProvince
+    fun getTown() = this.selectedTown
+    fun getCounty() = this.selectedCounty
 
     fun fetchData() {
         doAsync {
@@ -94,9 +104,9 @@ class AddressSpinnerGroupComponent: BaseComponent {
         provincialSpinnerDialog = createSpinnerDataDialog(MaterialDialog.ListCallback { _, _, position, text ->
             provincialSpinnerTextView!!.text = text
             provincialSpinnerTextView!!.setTextColor(Color.BLACK)
-            val selected = provincialList?.get(position)
-            if (selected != null) {
-                townList = regionList.filter { it.parentId == selected.id && it.levelId == Region.LEVEL_TOWN }
+            selectedProvince = provincialList?.get(position)
+            if (selectedProvince != null) {
+                townList = regionList.filter { it.parentId == selectedProvince!!.id && it.levelId == Region.LEVEL_TOWN }
                 if (townList != null) {
                     townSpinnerDialog!!.setItems(*townList!!.map { it.name }.toTypedArray())
                 }
@@ -125,9 +135,13 @@ class AddressSpinnerGroupComponent: BaseComponent {
         townSpinnerDialog = createSpinnerDataDialog(MaterialDialog.ListCallback { _, _, position, text ->
             townSpinnerTextView!!.text = text
             townSpinnerTextView!!.setTextColor(Color.BLACK)
-            val selected = townList?.get(position)
-            val countyList = regionList.filter { it.parentId == selected?.id && it.levelId == Region.LEVEL_COUNTY }
-            countySpinnerDialog!!.setItems(*countyList.map { it.name }.toTypedArray())
+            selectedTown = townList?.get(position)
+            if (selectedTown != null) {
+                countyList = regionList.filter { it.parentId == selectedTown!!.id && it.levelId == Region.LEVEL_COUNTY }
+                if (null != countyList) {
+                    countySpinnerDialog!!.setItems(*countyList!!.map { it.name }.toTypedArray())
+                }
+            }
         })
 
         townSpinnerTextView!!.setOnClickListener {
@@ -148,8 +162,9 @@ class AddressSpinnerGroupComponent: BaseComponent {
             }
         }
 
-        countySpinnerDialog = createSpinnerDataDialog(MaterialDialog.ListCallback { _, _, _, text ->
+        countySpinnerDialog = createSpinnerDataDialog(MaterialDialog.ListCallback { _, _, position, text ->
             countySpinnerTextView!!.text = text
+            selectedCounty = countyList?.get(position)
             countySpinnerTextView!!.setTextColor(Color.BLACK)
         })
 

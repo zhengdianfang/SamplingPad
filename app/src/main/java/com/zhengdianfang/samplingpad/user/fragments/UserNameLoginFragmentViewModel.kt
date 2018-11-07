@@ -27,7 +27,7 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
                 isLoadingLiveData.postValue(true)
                 val response  = ApiClient.getRetrofit()
                     .create(UserApi::class.java)
-                    .login(username, password.md5(), code, rememberMe)
+                    .login(username, password.md5(), code,  rememberMe)
                     .execute()
 
                 uiThread {
@@ -38,6 +38,30 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
                             getApplication<App>().token = token
                             tokenLiveData.postValue(token)
                         }
+                    } else {
+                        errorLiveData.postValue(response.message())
+                    }
+                }
+            }
+        }
+    }
+
+    fun loginSecond(username: String, password: String, rememberMe: Boolean) {
+        val context = getApplication<App>()
+        when {
+            username.isNullOrEmpty() -> errorLiveData.postValue(context.resources.getString(R.string.please_input_username_hint))
+            password.isNullOrEmpty() -> errorLiveData.postValue(context.resources.getString(R.string.please_input_password_hint))
+            else -> doAsync {
+                isLoadingLiveData.postValue(true)
+                val response  = ApiClient.getRetrofit()
+                    .create(UserApi::class.java)
+                    .loginSecond(username, password.md5(), rememberMe)
+                    .execute()
+
+                uiThread {
+                    isLoadingLiveData.postValue(false)
+                    if (response.isSuccessful) {
+                        tokenLiveData.postValue(App.INSTANCE.token)
                     } else {
                         errorLiveData.postValue(response.message())
                     }
