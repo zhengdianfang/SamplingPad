@@ -153,8 +153,8 @@
                 app:edit_hint="请输入联系电话"
                 app:edit_label="*电话：" />
 
-            <com.zhengdianfang.samplingpad.common.components.AdminRegionSpinnerGroupComponent
-                android:id="@+id/areaSpinnerGroupView"
+            <com.zhengdianfang.samplingpad.common.components.AddressSpinnerGroupComponent
+                android:id="@+id/addressSpinnerGroupView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp" />

@@ -18,6 +18,7 @@ import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_first_login.*
 import timber.log.Timber
+import kotlin.math.log
 
 
 class FirstLoginFragment : BaseFragment() {
@@ -46,10 +47,11 @@ class FirstLoginFragment : BaseFragment() {
         userNameLoginFragmentViewModel.tokenLiveData.observe(this, Observer { loginToken ->
             Timber.d("login token: %s", loginToken)
             if (loginToken.isNullOrEmpty().not()) {
-                start(SecondLoginFragment())
-            } else {
-                (ApiClient.getHttpClient().cookieJar() as ApiClient.AppCookieJar).clearCookies()
-                Toast.makeText(context, getString(R.string.login_failure), Toast.LENGTH_SHORT).show()
+                val fragment = SecondLoginFragment()
+                val bundle = Bundle()
+                bundle.putString("token", loginToken)
+                fragment.arguments = bundle
+                start(fragment)
             }
         })
 

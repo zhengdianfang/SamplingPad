@@ -167,7 +167,14 @@ data class TaskItem(
     var entrustActive: Int?,
     var sampleInspectAmountUnit: String?,
     var samplePreparationUnit: String?,
-    var attachmentUnitId: String? = id
+    var attachmentUnitId: String? = id,
+    var entrustProvincialId: Int?,
+    var entrustProvincialName: String?,
+    var entrustTownId: Int?,
+    var entrustTownName: String?,
+    var entrustCountyId: Int?,
+    var entrustCountyName: String?
+
 
 ) : Parcelable {
     companion object {
@@ -287,6 +294,17 @@ data class TaskItem(
 
         producerCountyId = county?.id
         producerCountyName = county?.name
+    }
+
+    fun setEnstrustAddressInfo(province: Region?, town: Region?, county: Region?) {
+        entrustProvincialId = province?.id
+        entrustProvincialName = province?.name
+
+        entrustTownId = town?.id
+        entrustTownName = town?.name
+
+        entrustCountyId = county?.id
+        entrustCountyName = county?.name
     }
 
     fun setEnterpriseAreaInfo(street: Region?) {

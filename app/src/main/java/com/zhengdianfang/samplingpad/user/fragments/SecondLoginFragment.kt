@@ -19,6 +19,8 @@ import timber.log.Timber
 
 class SecondLoginFragment : BaseFragment() {
 
+    private val token by lazy { arguments?.getString("token")!! }
+
     private val userNameLoginFragmentViewModel by lazy { ViewModelProviders.of(this).get(UserNameLoginFragmentViewModel::class.java) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -65,7 +67,7 @@ class SecondLoginFragment : BaseFragment() {
             val username = userNameEditText.text.toString()
             val password = passwordEditText.text.toString()
             val rememberMe =  rememberMeRadioButton.isChecked
-            userNameLoginFragmentViewModel.loginSecond(username, password, rememberMe)
+            userNameLoginFragmentViewModel.loginSecond(token ,username, password, rememberMe)
         }
     }
 

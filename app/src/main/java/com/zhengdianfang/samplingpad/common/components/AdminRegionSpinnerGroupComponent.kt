@@ -2,7 +2,6 @@ package com.zhengdianfang.samplingpad.common.components
 
 import android.content.Context
 import android.graphics.Color
-import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.LinearLayout
@@ -15,6 +14,7 @@ import com.zhengdianfang.samplingpad.common.entities.Region
 import com.zhengdianfang.samplingpad.task.api.TaskApi
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import timber.log.Timber
 
 class AdminRegionSpinnerGroupComponent: BaseComponent {
 
@@ -29,6 +29,7 @@ class AdminRegionSpinnerGroupComponent: BaseComponent {
 
     private var selectedArea: Region? = null
     private var selectedStreet: Region? = null
+    private var defaultStreetId: Int? = null
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
         this.setupViews(context)
@@ -50,16 +51,7 @@ class AdminRegionSpinnerGroupComponent: BaseComponent {
     }
 
     fun setDefaultStreet(id: Int?) {
-        if (id != null) {
-            val streets = regionList.filter{ it.id == id }
-            if (streets.isNotEmpty()) {
-                val areas = regionList.filter { it.id == streets.first().parentId }
-                streetSpinnerTextView?.text = streets.first().name
-                if (areas.isNotEmpty()) {
-                    areaSpinnerTextView?.text = areas.first().name
-                }
-            }
-        }
+        this.defaultStreetId = id
     }
 
     fun getArea() = this.selectedArea
@@ -78,8 +70,25 @@ class AdminRegionSpinnerGroupComponent: BaseComponent {
                 if (areaList != null) {
                     uiThread {
                         areaSpinnerDialog?.setItems(*areaList!!.map { it.name }.toTypedArray())
+                        setSelectedAreaAndStreet()
                     }
                 }
+            }
+        }
+    }
+
+    private fun setSelectedAreaAndStreet() {
+        if (defaultStreetId != null) {
+            val streets = regionList.filter{ it.id == defaultStreetId }
+            if (streets.isNotEmpty()) {
+                val areas = regionList.filter { it.id == streets.first().parentId }
+                selectedStreet = streets.first()
+                streetSpinnerTextView?.text = selectedStreet?.name
+                if (areas.isNotEmpty()) {
+                    selectedArea = areas.first()
+                    areaSpinnerTextView?.text = selectedArea?.name
+                }
+                Timber.d("default area ${streetSpinnerTextView?.text?.toString()} ${areaSpinnerTextView?.text?.toString()}")
             }
         }
     }

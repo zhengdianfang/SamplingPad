@@ -31,7 +31,7 @@ class EditComponent: BaseComponent {
     }
 
     fun getContent(): String? {
-        val text =editTextView.text.toString()
+        val text = editTextView.text.toString()
         if (TextUtils.isEmpty(text)) {
             return null
         }

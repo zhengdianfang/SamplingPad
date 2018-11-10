@@ -32,9 +32,9 @@ class AddressSpinnerGroupComponent: BaseComponent {
     private var townList: List<Region>? = null
     private var countyList: List<Region>? = null
 
-    private var selectedProvince: Region? = null
-    private var selectedTown: Region? = null
-    private var selectedCounty: Region? = null
+    var selectedProvince: Region? = null
+    var selectedTown: Region? = null
+    var selectedCounty: Region? = null
 
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
@@ -58,22 +58,14 @@ class AddressSpinnerGroupComponent: BaseComponent {
         return "$provincial$town$county"
     }
 
-    fun setDefault(provinceId: Int?, townId: Int?, countyId: Int?) {
-        if (provinceId != null) {
-            provincialSpinnerTextView?.text = regionList.firstOrNull { it.id == provinceId }?.name
-        }
-        if (townId != null) {
-            townSpinnerTextView?.text = regionList.firstOrNull { it.id == townId }?.name
-        }
-
-        if (countyId != null) {
-            countySpinnerTextView?.text = regionList.firstOrNull { it.id == countyId }?.name
-        }
+    fun setDefault(province: Region?, town: Region?, county: Region?) {
+        this.selectedProvince = province
+        this.selectedTown = town
+        this.selectedCounty = county
+        provincialSpinnerTextView?.text = this.selectedProvince?.name
+        townSpinnerTextView?.text = this.selectedTown?.name
+        countySpinnerTextView?.text = this.selectedCounty?.name
     }
-
-    fun getProvince() = this.selectedProvince
-    fun getTown() = this.selectedTown
-    fun getCounty() = this.selectedCounty
 
     fun fetchData() {
         doAsync {

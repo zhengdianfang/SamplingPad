@@ -32,21 +32,21 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
 
                 uiThread {
                     isLoadingLiveData.postValue(false)
+                    val body = response.body()
+                    if (body?.code == 200) {
+                        tokenLiveData.postValue(body?.token)
+                    }else{
+                        errorLiveData.postValue(body?.msg)
+                    }
                     if (response.isSuccessful) {
-                        val token = response.body()?.token
-                        if (token != null) {
-                            getApplication<App>().token = token
-                            tokenLiveData.postValue(token)
-                        }
-                    } else {
-                        errorLiveData.postValue(response.message())
+
                     }
                 }
             }
         }
     }
 
-    fun loginSecond(username: String, password: String, rememberMe: Boolean) {
+    fun loginSecond(token: String, username: String, password: String, rememberMe: Boolean) {
         val context = getApplication<App>()
         when {
             username.isNullOrEmpty() -> errorLiveData.postValue(context.resources.getString(R.string.please_input_username_hint))
@@ -55,15 +55,17 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
                 isLoadingLiveData.postValue(true)
                 val response  = ApiClient.getRetrofit()
                     .create(UserApi::class.java)
-                    .loginSecond(username, password.md5(), rememberMe)
+                    .loginSecond(token ,username, password.md5(), rememberMe)
                     .execute()
 
                 uiThread {
                     isLoadingLiveData.postValue(false)
-                    if (response.isSuccessful) {
+                    val body = response.body()
+                    if (body?.code == 200) {
+                        App.INSTANCE.token = token
                         tokenLiveData.postValue(App.INSTANCE.token)
                     } else {
-                        errorLiveData.postValue(response.message())
+                        errorLiveData.postValue(body?.msg)
                     }
                 }
             }

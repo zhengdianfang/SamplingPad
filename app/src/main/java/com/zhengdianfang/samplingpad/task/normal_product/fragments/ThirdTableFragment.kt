@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.common.TableFragment
+import com.zhengdianfang.samplingpad.common.components.BaseComponent
+import com.zhengdianfang.samplingpad.common.entities.Region
 import com.zhengdianfang.samplingpad.task.entities.Goods
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import kotlinx.android.synthetic.main.fragment_third_normal_table_layout.*
@@ -28,10 +30,14 @@ class ThirdTableFragment: TableFragment() {
 
     override fun setupViews() {
         super.setupViews()
-
+        updateFrameVisibleStatus()
         //标称信息
         producerActiveRadioGroup.radioButtonCheckCallback = { _, option ->
-            showHideAgencyFrame(option.id)
+            taskItem.producerActive = option.id
+            if (option.id == 1) {
+               taskItem.entrustActive = null
+            }
+            updateFrameVisibleStatus()
         }
         producerActiveRadioGroup.setDefaultCheckedRadioButton(taskItem.producerActive)
         produceCsNoEditText.setEditTextContent(taskItem.producerCsNo)
@@ -41,10 +47,14 @@ class ThirdTableFragment: TableFragment() {
         producePhoneEditText.setEditTextContent(taskItem.producerPhone)
         addressSpinner.labelTextView.text = "*生产所在地："
         addressSpinner.fetchData()
-        addressSpinner.setDefault(taskItem.producerProvincialId, taskItem.producerTownId, taskItem.producerCountyId)
+        addressSpinner.setDefault(
+            Region(taskItem.producerProvincialId, taskItem.producerProvincialName),
+            Region(taskItem.producerTownId, taskItem.producerTownName),
+            Region(taskItem.producerCountyId, taskItem.producerCountyName))
 
-        entrustActiveRadioGroup.radioButtonCheckCallback = { position, _ ->
-            showHideEntrustFrame(position)
+        entrustActiveRadioGroup.radioButtonCheckCallback = { _, option ->
+            taskItem.entrustActive = option.id
+            updateFrameVisibleStatus()
         }
         entrustActiveRadioGroup.setDefaultCheckedRadioButton(taskItem.entrustActive)
 
@@ -54,7 +64,13 @@ class ThirdTableFragment: TableFragment() {
         entrustAddressEditText.setEditTextContent(taskItem.entrustAddress)
         entrustContactsEditText.setEditTextContent(taskItem.entrustContacts)
         entrustPhoneEditText.setEditTextContent(taskItem.entrustPhone)
-        areaSpinnerGroupView.fetchData()
+        addressSpinnerGroupView.labelTextView.text = "*生产所在地："
+        addressSpinnerGroupView.fetchData()
+        addressSpinnerGroupView.setDefault(
+            Region(taskItem.entrustProvincialId, taskItem.entrustProvincialName),
+            Region(taskItem.entrustTownId, taskItem.entrustTownName),
+            Region(taskItem.entrustCountyId, taskItem.entrustCountyName))
+
         //进口代理商信息
         agencyNameEditText.setEditTextContent(taskItem.agencyName)
         agencyAddressEditText.setEditTextContent(taskItem.agencyAddress)
@@ -64,34 +80,64 @@ class ThirdTableFragment: TableFragment() {
 
     }
 
-    private fun showHideAgencyFrame(active: Int) {
-        if (active == 0) {
-            agencyFrame.visibility = View.GONE
-            showHideEntrustFrame(entrustActiveRadioGroup.getCheckedOption()?.id ?: 0)
-            showHideProduceFrame(View.VISIBLE)
-        } else if (active == 1){
-            agencyFrame.visibility = View.VISIBLE
-            entrustFrame.visibility = View.GONE
-            showHideProduceFrame(View.GONE)
-        }
+    private fun updateFrameVisibleStatus() {
+        showHideProduceFrame(isShowProducerViews())
+        showHideEntrustFrame(isShowEntrustViews())
+        showHideAgencyFrame(isShowAgencyViews())
     }
 
-    private fun showHideEntrustFrame(active: Int) {
-        if (active == 0) {
-            entrustFrame.visibility = View.GONE
-        } else if (active == 1){
-            entrustFrame.visibility = View.VISIBLE
-        }
-    }
-
-    private fun showHideProduceFrame(visiable: Int) {
+    private fun showHideProduceFrame(visible: Boolean) {
         for (index in 0 until produceFrame.childCount) {
             if (index > 1) {
-                produceFrame.getChildAt(index).visibility = visiable
+                val childrenView = produceFrame.getChildAt(index)
+                if (childrenView is BaseComponent) {
+                    if (visible) {
+                        childrenView.visibility = View.VISIBLE
+                    } else {
+                        childrenView.visibility = View.GONE
+                        childrenView.clear()
+                    }
+                }
             }
         }
-        entrustActiveRadioGroup.clear()
     }
+
+    private fun showHideEntrustFrame(visible: Boolean) {
+        if (visible) {
+            entrustFrame.visibility = View.VISIBLE
+        } else {
+            entrustFrame.visibility = View.GONE
+            for (index in 0 until entrustFrame.childCount) {
+                val childrenView = entrustFrame.getChildAt(index)
+                if (childrenView is BaseComponent) {
+                    childrenView.clear()
+                }
+            }
+        }
+    }
+
+    private fun showHideAgencyFrame(visible: Boolean) {
+        if (visible) {
+            agencyFrame.visibility = View.VISIBLE
+        } else {
+            agencyFrame.visibility = View.GONE
+            for (index in 0 until agencyFrame.childCount) {
+                val childrenView = agencyFrame.getChildAt(index)
+                if (childrenView is BaseComponent) {
+                    childrenView.clear()
+                }
+            }
+        }
+    }
+
+
+    private fun isShowProducerViews() =
+        taskItem.producerActive == null || taskItem.producerActive  == 0
+
+    private fun isShowEntrustViews() =
+        (taskItem.producerActive == null || taskItem.producerActive  == 0) && taskItem.entrustActive == 1
+
+    private fun isShowAgencyViews() = taskItem.producerActive == 1
 
     override fun submitSuccessful() {
         start(FourthTableFragment.newInstance(taskItem))
@@ -106,8 +152,7 @@ class ThirdTableFragment: TableFragment() {
         taskItem.producerAddress = produceAddressEditText.getContent()
         taskItem.producerContacts = produceContactsEditText.getContent()
         taskItem.producerPhone = producePhoneEditText.getContent()
-        taskItem.producerAddress = addressSpinner.getContent()
-        taskItem.setProducerAddressInfo(addressSpinner.getProvince(), addressSpinner.getTown(), addressSpinner.getCounty())
+        taskItem.setProducerAddressInfo(addressSpinner.selectedProvince, addressSpinner.selectedTown, addressSpinner.selectedCounty)
 
         //委托单位信息
         taskItem.entrustCsNo = entrustCsNoEditText.getContent()
@@ -116,6 +161,7 @@ class ThirdTableFragment: TableFragment() {
         taskItem.entrustContacts = entrustContactsEditText.getContent()
         taskItem.entrustPhone = entrustPhoneEditText.getContent()
         taskItem.entrustActive = entrustActiveRadioGroup.getCheckedOption()?.id
+        taskItem.setEnstrustAddressInfo(addressSpinnerGroupView.selectedProvince, addressSpinnerGroupView.selectedTown, addressSpinnerGroupView.selectedCounty)
 
         //进口代理商信息
         taskItem.agencyName = agencyNameEditText.getContent()

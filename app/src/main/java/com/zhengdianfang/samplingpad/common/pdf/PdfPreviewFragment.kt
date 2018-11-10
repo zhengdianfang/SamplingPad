@@ -60,12 +60,13 @@ class PdfPreviewFragment: BaseFragment() {
 
     private fun downloadPdf() {
         val fileName = this.pdfUrl.split("/").last()
-        val localPdfDir = File("${Environment.getExternalStorageDirectory().absolutePath}/sampling/pdf/")
+        val localPdfDir = File("${context?.cacheDir?.absolutePath}/sampling/pdf/")
         if (localPdfDir.exists().not()) {
             localPdfDir.mkdirs()
         }
         localFile = File(localPdfDir, fileName)
         if (localFile!!.exists().not()) {
+            startLoading()
             doAsync {
                 val request = Request.Builder().url(pdfUrl).build()
                 val response = ApiClient.getHttpClient().newCall(request).execute()
@@ -73,6 +74,7 @@ class PdfPreviewFragment: BaseFragment() {
                 FileUtils.copy(byteStream, localFile)
                 if (localFile!!.exists()) {
                     uiThread {
+                        stopLoading()
                         pdfView.fromFile(localFile)
                             .defaultPage(0)
                             .onLoad {

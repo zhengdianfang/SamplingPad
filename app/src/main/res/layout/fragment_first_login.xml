@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="180dp"
             android:gravity="center"
-            android:text="@string/login_text"
+            android:text="抽样人员1"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/large_24"
             app:layout_constraintEnd_toEndOf="parent"

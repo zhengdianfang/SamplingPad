@@ -11,7 +11,7 @@ data class OptionItem(val id: Int, val name: String, val level: Int): Parcelable
 }
 
 
-data class Region(val id: Int, val name: String, val levelId: Int, val parentId: Int) {
+data class Region(val id: Int?, val name: String?, val levelId: Int = 0, val parentId: Int = 0) {
     companion object {
 
         const val LEVEL_PROVINCE = 2
