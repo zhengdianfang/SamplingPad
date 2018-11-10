@@ -22,9 +22,30 @@ class App: Application() {
     }
 
     private var aMapLocationClient: AMapLocationClient? = null
-var latitude = 0.0
+    var latitude = 0.0
     var longitude = 0.0
 
+    var firstUsername = ""
+        get() {
+            if (field.isNullOrEmpty()) {
+                field = defaultSharedPreferences.getString("firstUsername", "")
+            }
+            return field
+        }
+        set(value) {
+            defaultSharedPreferences.edit().putString("firstUsername", value).apply()
+        }
+
+    var secondUsername = ""
+        get() {
+            if (field.isNullOrEmpty()) {
+                field = defaultSharedPreferences.getString("secondUsername", "")
+            }
+            return field
+        }
+        set(value) {
+            defaultSharedPreferences.edit().putString("secondUsername", value).apply()
+        }
 
     var token: String = ""
         get() {

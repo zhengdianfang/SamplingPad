@@ -10,6 +10,7 @@ import com.zhengdianfang.samplingpad.App
 
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
+import com.zhengdianfang.samplingpad.main.MainActivity
 import com.zhengdianfang.samplingpad.task.food_product.FoodProductSamplingTableActivity
 import com.zhengdianfang.samplingpad.task.tasklist.MyTaskListActivity
 import kotlinx.android.synthetic.main.fragment_navigation.*
@@ -29,6 +30,9 @@ class NavigationFragment : BaseFragment() {
     }
 
     private fun setupViews() {
+
+        firstUserNameTextView.text = "抽样人员1：${App.INSTANCE.firstUsername}"
+        secondUserNameTextView.text = "抽样人员2：${App.INSTANCE.secondUsername}"
         appVersionTextView.text = context?.packageManager?.getPackageInfo(context?.packageName, 0)?.versionName
         myTaskListButton.setOnClickListener {
             startActivity(Intent(context, MyTaskListActivity::class.java))

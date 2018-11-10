@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.zhengdianfang.samplingpad.App
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.user.api.UserApi
 import com.zhengdianfang.samplingpad.common.BaseFragment
@@ -50,6 +51,7 @@ class FirstLoginFragment : BaseFragment() {
                 val fragment = SecondLoginFragment()
                 val bundle = Bundle()
                 bundle.putString("token", loginToken)
+                App.INSTANCE.firstUsername = userNameEditText.text.toString()
                 fragment.arguments = bundle
                 start(fragment)
             }

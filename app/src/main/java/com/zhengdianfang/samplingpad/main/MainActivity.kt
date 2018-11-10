@@ -22,6 +22,9 @@ class MainActivity : BaseActivity() {
         const val REQUEST_LOCATION_PERMISSION = 0x00001
     }
 
+    val firstUsername by lazy { intent.getStringExtra("firstUsername") }
+    val secondUsername by lazy { intent.getStringExtra("secondUsername") }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadRootFragment(android.R.id.content, MainFragment.newInstance(), false, false)

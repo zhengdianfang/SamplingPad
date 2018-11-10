@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.zhengdianfang.samplingpad.App
 
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
@@ -45,6 +46,7 @@ class SecondLoginFragment : BaseFragment() {
             Timber.d("login token: %s", loginToken)
             if (loginToken.isNullOrEmpty().not()) {
                 startActivity(Intent(context, MainActivity::class.java))
+                App.INSTANCE.secondUsername = userNameEditText.text.toString()
                 Toast.makeText(context, getString(R.string.login_successful), Toast.LENGTH_SHORT).show()
                 activity?.finish()
             } else {
