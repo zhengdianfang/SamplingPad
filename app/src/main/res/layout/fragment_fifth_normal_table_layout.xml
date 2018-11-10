@@ -2,7 +2,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
 
     <LinearLayout
@@ -94,6 +93,17 @@
                 android:paddingLeft="64dp"
                 android:paddingRight="64dp"
                 android:text="@string/save_and_submit_text" />
+
+            <Button
+                android:id="@+id/generateButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginLeft="16dp"
+                android:layout_gravity="center"
+                android:paddingLeft="64dp"
+                android:paddingRight="64dp"
+                android:text="生成pdf" />
 
         </LinearLayout>
     </LinearLayout>

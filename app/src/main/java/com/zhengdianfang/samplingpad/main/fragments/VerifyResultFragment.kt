@@ -1,7 +1,9 @@
 package com.zhengdianfang.samplingpad.main.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +19,9 @@ import com.zhengdianfang.samplingpad.App
 
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
+import com.zhengdianfang.samplingpad.common.MapActivity
 import com.zhengdianfang.samplingpad.common.searchPoiByText
+import kotlinx.android.synthetic.main.fragment_fifth_normal_table_layout.*
 import kotlinx.android.synthetic.main.fragment_verify_result.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 
@@ -25,6 +29,8 @@ class VerifyResultFragment : BaseFragment() {
 
     private val isSuccessFul by lazy { arguments?.getBoolean("isSuccessFul") ?: false }
     private val message by lazy { arguments?.getString("message") ?: "" }
+    private val poiItems = mutableListOf<PoiItem>()
+    private val shopNameAdapter by lazy { ShopNameAdapter(poiItems) }
 
     companion object {
         fun newInstance(isSuccessFul: Boolean, message: String): VerifyResultFragment {
@@ -64,20 +70,33 @@ class VerifyResultFragment : BaseFragment() {
         }
 
         resultMessageTextView.text = message
+        shopListView.layoutManager = LinearLayoutManager(context)
+        shopListView.adapter = shopNameAdapter
+        shopNameAdapter.setOnItemClickListener { _, _, position ->
+            val poiItem = poiItems[position]
+            startActivity(
+                Intent(context, MapActivity::class.java)
+                    .putExtra("latLonPoint", poiItem.latLonPoint)
+            )
+        }
     }
 
     private fun poiSearch(keyWord: String) {
         if (keyWord.isNotEmpty()) {
             keyWord.searchPoiByText(context!!) {
-                shopListView.adapter = ShopNameAdapter(it?.asSequence()?.map { it.title }?.take(20)?.toMutableList())
+                poiItems.clear()
+                if (it != null) {
+                    poiItems.addAll(it)
+                    shopNameAdapter.notifyDataSetChanged()
+                }
             }
         }
     }
 
-    private inner class ShopNameAdapter(data: MutableList<String>?)
-        : BaseQuickAdapter<String, BaseViewHolder>(R.layout.shop_item_layout, data) {
-        override fun convert(helper: BaseViewHolder, item: String) {
-            (helper.itemView as TextView).text = item
+    private inner class ShopNameAdapter(data: MutableList<PoiItem>?)
+        : BaseQuickAdapter<PoiItem, BaseViewHolder>(R.layout.shop_item_layout, data) {
+        override fun convert(helper: BaseViewHolder, item: PoiItem) {
+            (helper.itemView as TextView).text = item?.title
         }
     }
 

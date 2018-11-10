@@ -59,4 +59,7 @@ interface TaskApi {
 
     @DELETE("attachments/{ids}")
     fun deleteAttachment(@Path("ids") ids: String): Call<Response<String>>
+
+    @GET("createSampleReport/{sampleId}")
+    fun generateSamplePdf(@Path("sampleId") sampleId: String): Call<Response<Map<String, String>>>
 }

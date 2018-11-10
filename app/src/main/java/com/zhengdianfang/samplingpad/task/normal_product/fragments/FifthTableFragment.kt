@@ -135,8 +135,14 @@ open class FifthTableFragment: TableFragment() {
         tableFragmentViewModel.responseLiveData.observe(this, Observer { response ->
             Timber.d("upload file result : ${response!!.msg}")
             Toast.makeText(context, response.msg, Toast.LENGTH_SHORT).show()
+
+        })
+
+        tableFragmentViewModel.sumbitResponseLiveData.observe(this, Observer { response ->
+            Timber.d("upload file result : ${response!!.msg}")
+            Toast.makeText(context, response.msg, Toast.LENGTH_SHORT).show()
             if (response.code == 200) {
-                this.submitSuccessful()
+                renderGeneratePdfButton()
             }
         })
 
@@ -189,6 +195,15 @@ open class FifthTableFragment: TableFragment() {
         videoFrame.addItemDecoration(ItemDecoration())
         videoFrame.layoutManager.isAutoMeasureEnabled = true
         videoFrame.adapter = videoAdapter
+    }
+
+    private fun renderGeneratePdfButton () {
+        saveOnlyButton.visibility = View.GONE
+        submitButton.visibility = View.GONE
+        generateButton.visibility = View.VISIBLE
+        generateButton.setOnClickListener {
+            tableFragmentViewModel.generatePdf(taskItem)
+        }
     }
 
     override fun submitSuccessful() {

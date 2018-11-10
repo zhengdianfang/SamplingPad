@@ -57,7 +57,8 @@ data class Enterprise(
     val mOrP: Int?,
     val url: String?,
     val addressSources: Int?,
-    val zipCode: String?
+    val zipCode: String?,
+    val chainBrand: String?
 )
 
 @Parcelize

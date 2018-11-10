@@ -25,6 +25,7 @@ import java.io.File
 class TableFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
     val responseLiveData = MutableLiveData<Response<String>>()
+    val sumbitResponseLiveData = MutableLiveData<Response<String>>()
     val isLoadingLiveData = MutableLiveData<Boolean>()
     val goodsLiveData = MutableLiveData<Goods>()
     val enterpriseLiveData = MutableLiveData<Enterprise>()
@@ -63,7 +64,23 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
             uiThread {
                 isLoadingLiveData.postValue(false)
                 if (body != null) {
-                    responseLiveData.postValue(body)
+                    sumbitResponseLiveData.postValue(body)
+                }
+            }
+        }
+    }
+
+    fun generatePdf(taskItem: TaskItem) {
+        doAsync {
+            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
+                .generateSamplePdf(taskItem.id)
+                .execute()
+            val body = response.body()
+            uiThread {
+                isLoadingLiveData.postValue(false)
+                if (body != null) {
+//                    responseLiveData.postValue(body)
+                    Timber.d("generate pdf : ${body.data}")
                 }
             }
         }

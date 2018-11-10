@@ -105,6 +105,7 @@ class VerifyFragment : BaseFragment() {
 
         tableFragmentViewModel.enterpriseLiveData.observe(this, Observer { enterprise ->
             enterpriseNameEditText.setEditTextContent(enterprise!!.name)
+            chainBrandEditText.setEditTextContent(enterprise.chainBrand)
         })
     }
 }
