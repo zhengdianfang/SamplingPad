@@ -319,7 +319,8 @@ data class AttachmentIds(val id: String)
 
 class AttachmentItem(
     var id: Int,
-    var documentType: String
+    var documentType: String,
+    var url: String?
     ): MultiItemEntity {
     override fun getItemType(): Int {
         return 0

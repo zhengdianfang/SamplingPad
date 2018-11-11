@@ -72,18 +72,32 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     }
 
     fun generatePdf(taskItem: TaskItem) {
+        taskItem.latitude = App.INSTANCE.latitude
+        taskItem.longitude = App.INSTANCE.longitude
         isLoadingLiveData.postValue(true)
+
+        //先保存, 保存成功再执行生成pdf
         doAsync {
-            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
-                .generateSamplePdf(taskItem.id)
+            val saveResponse = ApiClient.getRetrofit().create(TaskApi::class.java)
+                .saveSample(taskItem.id, taskItem)
                 .execute()
-            val body = response.body()
-            uiThread {
-                isLoadingLiveData.postValue(false)
-                if (body != null) {
-                    generatePdfLiveData.postValue(body.data)
+            val saveBody = saveResponse.body()
+            if (saveBody?.code == 200) {
+                val pdfResponse = ApiClient.getRetrofit().create(TaskApi::class.java)
+                    .generateSamplePdf(taskItem.id)
+                    .execute()
+                val pdfBody = pdfResponse.body()
+                uiThread {
+                    isLoadingLiveData.postValue(false)
+                    if (pdfBody != null) {
+                        generatePdfLiveData.postValue(pdfBody.data)
+                    }
                 }
+            } else {
+                isLoadingLiveData.postValue(false)
+                responseLiveData.postValue(saveBody)
             }
+
         }
     }
 

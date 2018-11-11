@@ -24,5 +24,8 @@ interface MainApi {
 
     @GET("app/{path}")
     fun fetchOptionData(@Path("path") path: String): Call<Response<Array<OptionItem>>>
+
+    @GET("app/appversions")
+    fun fetchAppVersion(): Call<Response<Map<String, String>>>
 }
 

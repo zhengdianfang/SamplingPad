@@ -1,11 +1,16 @@
 package com.zhengdianfang.samplingpad.main.fragments
 
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.afollestad.materialdialogs.MaterialDialog
 import com.zhengdianfang.samplingpad.App
 
 import com.zhengdianfang.samplingpad.R
@@ -18,6 +23,8 @@ import me.yokeyword.fragmentation.SupportFragment
 
 class NavigationFragment : BaseFragment() {
 
+    private val navigationFragmentViewModel by lazy { ViewModelProviders.of(this).get(NavigationFragmentViewModel::class.java) }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -27,6 +34,7 @@ class NavigationFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         this.setupViews()
+        this.bindViewModel()
     }
 
     private fun setupViews() {
@@ -38,11 +46,37 @@ class NavigationFragment : BaseFragment() {
             startActivity(Intent(context, MyTaskListActivity::class.java))
         }
         upgradeAppButton.setOnClickListener {
-            startActivity(Intent(context, FoodProductSamplingTableActivity::class.java))
+            navigationFragmentViewModel.fetchAppVersion()
         }
 
         logoutAppButton.setOnClickListener {
             App.INSTANCE.logout()
         }
+    }
+
+    private fun bindViewModel() {
+        navigationFragmentViewModel.isLoadingLiveData.observe(this, Observer { isLoading ->
+            if (isLoading == true) {
+                startLoading()
+            } else {
+                stopLoading()
+            }
+        })
+
+        navigationFragmentViewModel.upgradeInfoLiveData.observe(this, Observer { upgradeInfo ->
+            if (upgradeInfo == null) {
+                Toast.makeText(context, "已是最新版本", Toast.LENGTH_SHORT).show()
+            } else {
+                MaterialDialog.Builder(context!!)
+                    .title("更新")
+                    .content(upgradeInfo?.get("description") ?: "")
+                    .positiveText("确定")
+                    .onPositive { _, _ ->
+                       startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(upgradeInfo?.get("url"))))
+                    }
+                    .negativeText("取消")
+                    .show()
+            }
+        })
     }
 }

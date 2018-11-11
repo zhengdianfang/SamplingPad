@@ -102,6 +102,10 @@ open class FifthTableFragment: TableFragment() {
         submitButton.setOnClickListener {
             tableFragmentViewModel.submitSample(taskItem)
         }
+
+        generateButton.setOnClickListener {
+            tableFragmentViewModel.generatePdf(taskItem)
+        }
         renderImageFrame()
         renderVideoFrame()
         renderPdfFrame()
@@ -142,7 +146,7 @@ open class FifthTableFragment: TableFragment() {
             Timber.d("upload file result : ${response!!.msg}")
             Toast.makeText(context, response.msg, Toast.LENGTH_SHORT).show()
             if (response.code == 200) {
-                renderGeneratePdfButton()
+                activity?.finish()
             }
         })
 
@@ -157,14 +161,15 @@ open class FifthTableFragment: TableFragment() {
             fetchAttachment()
         })
         tableFragmentViewModel.generatePdfLiveData.observe(this, Observer { pdfObject ->
-            val url = pdfObject?.get("url")
             taskItem.sampleReportAttachmentId = pdfObject?.get("sampleReportAttachmentId")?.toIntOrNull()
+            val url = pdfObject?.get("url")
             if (TextUtils.isEmpty(url).not()) {
+                pdfAttachments.add(AttachmentItem(pdfObject?.get("id")?.toInt() ?: 0, ".pdf", url))
+                pdfFrame.adapter.notifyDataSetChanged()
                 startActivity(
                     Intent(context, PdfPreviewActivity::class.java)
                         .putExtra("url", "http://$url")
                 )
-                activity?.finish()
             }
         })
         fetchAttachment()
@@ -214,22 +219,13 @@ open class FifthTableFragment: TableFragment() {
             val item = adapter.data[position] as AttachmentItem
             startActivity(
                 Intent(context, PdfPreviewActivity::class.java)
-                    .putExtra("url","${ApiClient.HOST}${TaskApi.ATTACHMENT_URL}${item.id}")
+                    .putExtra("url",item.url)
             )
         }
         pdfFrame.layoutManager = GridLayoutManager(context, 8)
         pdfFrame.addItemDecoration(ItemDecoration())
         pdfFrame.layoutManager.isAutoMeasureEnabled = true
         pdfFrame.adapter = pdfAdapter
-    }
-
-    private fun renderGeneratePdfButton () {
-        saveOnlyButton.visibility = View.GONE
-        submitButton.visibility = View.GONE
-        generateButton.visibility = View.VISIBLE
-        generateButton.setOnClickListener {
-            tableFragmentViewModel.generatePdf(taskItem)
-        }
     }
 
     override fun submitSuccessful() {
