@@ -46,30 +46,27 @@
 
             <Button
                 android:id="@+id/saveOnlyButton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
-                android:paddingLeft="64dp"
-                android:paddingRight="64dp"
+                android:layout_weight="1"
                 android:text="@string/only_save_text" />
 
             <Button
                 android:id="@+id/generateButton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginLeft="16dp"
                 android:layout_gravity="center"
-                android:paddingLeft="64dp"
-                android:paddingRight="64dp"
                 android:text="保存并生成" />
 
             <Button
                 android:id="@+id/submitButton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginLeft="16dp"
-                android:paddingLeft="64dp"
-                android:paddingRight="64dp"
                 android:text="提交" />
 
 

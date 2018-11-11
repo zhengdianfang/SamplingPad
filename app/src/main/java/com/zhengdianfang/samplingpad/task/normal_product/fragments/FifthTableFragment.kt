@@ -24,8 +24,6 @@ import com.zhengdianfang.samplingpad.common.PhotoPreviewFragment
 import com.zhengdianfang.samplingpad.common.TableFragment
 import com.zhengdianfang.samplingpad.common.VideoFragment
 import com.zhengdianfang.samplingpad.common.pdf.PdfPreviewActivity
-import com.zhengdianfang.samplingpad.http.ApiClient
-import com.zhengdianfang.samplingpad.task.api.TaskApi
 import com.zhengdianfang.samplingpad.task.entities.AttachmentItem
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import com.zhengdianfang.samplingpad.task.entities.UploadItem
@@ -115,7 +113,7 @@ open class FifthTableFragment: TableFragment() {
         tableFragmentViewModel.attachmentIdsLiveData.observe(this, Observer { attachments ->
             if (null != attachments) {
                 imageAttachments.clear()
-                imageAttachments.addAll(attachments.filter { it.documentType == ".jpg" || it.documentType == ".png" }.toTypedArray())
+                imageAttachments.addAll(attachments.filter { it.documentType == ".jpg" || it.documentType == ".png" || it.documentType == ".jpeg" }.toTypedArray())
                 imageAttachments.add(UploadItem())
                 imageFrame.adapter.notifyDataSetChanged()
 
@@ -124,9 +122,9 @@ open class FifthTableFragment: TableFragment() {
                 videoAttachments.add(UploadItem())
                 videoFrame.adapter.notifyDataSetChanged()
 
-                pdfAttachments.clear()
-                pdfAttachments.addAll(attachments.filter { it.documentType == ".pdf" }.toTypedArray())
-                pdfFrame.adapter.notifyDataSetChanged()
+//                pdfAttachments.clear()
+//                pdfAttachments.addAll(attachments.filter { it.documentType == ".pdf" }.toTypedArray())
+//                pdfFrame.adapter.notifyDataSetChanged()
             }
         })
         tableFragmentViewModel.isLoadingLiveData.observe(this, Observer { isLoading ->
@@ -139,7 +137,9 @@ open class FifthTableFragment: TableFragment() {
         tableFragmentViewModel.responseLiveData.observe(this, Observer { response ->
             Timber.d("upload file result : ${response!!.msg}")
             Toast.makeText(context, response.msg, Toast.LENGTH_SHORT).show()
-
+            if (response.code == 200) {
+                activity?.finish()
+            }
         })
 
         tableFragmentViewModel.sumbitResponseLiveData.observe(this, Observer { response ->

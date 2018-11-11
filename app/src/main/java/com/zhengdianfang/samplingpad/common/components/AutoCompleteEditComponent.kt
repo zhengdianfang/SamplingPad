@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
 
 class AutoCompleteEditComponent: BaseComponent {
 
-    lateinit var editTextView: AutoCompleteTextView
+    private lateinit var editTextView: AutoCompleteTextView
     var search: ((text: String)-> Unit)? = null
     private val selectableItems = mutableListOf<String>()
     private val adapter by lazy { ItemAdapter(context, selectableItems) }

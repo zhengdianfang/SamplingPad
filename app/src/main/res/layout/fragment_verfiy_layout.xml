@@ -18,8 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:edit_hint="请输入任务号名称"
-            app:edit_label="任务号："
-            app:edit_label_min_width="162dp" />
+            app:edit_label="任务号：" />
 
         <com.zhengdianfang.samplingpad.common.components.SpinnerComponent
             android:id="@+id/level1NameSpinner"
@@ -27,8 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:spinner_hint="@string/please_select_sample_type"
-            app:spinner_label="@string/sample_level1_type_label"
-            app:spinner_label_min_width="162dp" />
+            app:spinner_label="@string/sample_level1_type_label" />
 
         <com.zhengdianfang.samplingpad.common.components.AutoCompleteEditComponent
             android:id="@+id/enterpriseNameEditText"
@@ -36,8 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:edit_hint="请输入受检单位名称"
-            app:edit_label="受检单位名称："
-            app:edit_label_min_width="162dp" />
+            app:edit_label="受检单位名称：" />
 
         <com.zhengdianfang.samplingpad.common.components.EditComponent
             android:id="@+id/enterpriseLicenseNumberEditText"
@@ -46,7 +43,6 @@
             android:layout_marginTop="16dp"
             app:edit_hint="请输入社会信用代码"
             app:edit_label="受检单位统一\n社会信用代码："
-            app:edit_label_min_width="162dp"
             app:edit_search="true" />
 
         <com.zhengdianfang.samplingpad.common.components.EditComponent
@@ -54,8 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:edit_hint="请输入生产企业名称"
-            app:edit_label="生产企业名称："
-            app:edit_label_min_width="162dp" />
+            app:edit_label="生产企业名称：" />
 
         <com.zhengdianfang.samplingpad.common.components.EditComponent
             android:id="@+id/producerCsNoEditText"
@@ -63,8 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:edit_hint="请输入生产许可证编号"
-            app:edit_label="生产许可证编\n(SC/QS)："
-            app:edit_label_min_width="162dp" />
+            app:edit_label="生产许可证编\n(SC/QS)：" />
 
         <com.zhengdianfang.samplingpad.common.components.EditComponent
             android:id="@+id/sampleNameEditText"
@@ -72,8 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:edit_hint="请输入样品名称"
-            app:edit_label="样品名称："
-            app:edit_label_min_width="162dp" />
+            app:edit_label="样品名称：" />
 
         <com.zhengdianfang.samplingpad.common.components.DateComponent
             android:id="@+id/sampleProductDateView"
@@ -81,8 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:date_hint="请选择生产日期"
-            app:date_label="生产日期："
-            app:date_label_min_width="162dp" />
+            app:date_label="生产日期：" />
 
         <com.zhengdianfang.samplingpad.common.components.EditComponent
             android:id="@+id/chainBrandEditText"
@@ -90,8 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:edit_hint="请输入连锁品牌"
-            app:edit_label="连锁品牌："
-            app:edit_label_min_width="162dp" />
+            app:edit_label="连锁品牌：" />
 
         <com.zhengdianfang.samplingpad.common.components.DateComponent
             android:id="@+id/sampleDateView"
@@ -99,8 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:date_hint="请选择抽样日期"
-            app:date_label="抽样日期："
-            app:date_label_min_width="162dp" />
+            app:date_label="抽样日期：" />
 
         <LinearLayout
             android:layout_width="match_parent"

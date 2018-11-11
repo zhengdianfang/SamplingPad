@@ -193,6 +193,7 @@ data class TaskItem(
         sampleBrand = goods.brand
         sampleSpecification = goods.specification
         producerBarcode = goods.barCode
+        chainBrand = goods.brand
     }
 
     fun mergeEnterprise(enterprise: Enterprise) {
@@ -214,6 +215,7 @@ data class TaskItem(
         enterpriseUrl = enterprise.url
         enterpriseAddressSources = enterprise.addressSources
         enterpriseZipCode = enterprise.zipCode
+        chainBrand = enterprise.chainBrand
     }
 
     fun mergeProduce(enterprise: Enterprise) {
