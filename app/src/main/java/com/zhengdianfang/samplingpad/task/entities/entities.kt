@@ -174,8 +174,8 @@ data class TaskItem(
     var entrustTownId: Int?,
     var entrustTownName: String?,
     var entrustCountyId: Int?,
-    var entrustCountyName: String?
-
+    var entrustCountyName: String?,
+    var sampleReportAttachmentId: Int?
 
 ) : Parcelable {
     companion object {

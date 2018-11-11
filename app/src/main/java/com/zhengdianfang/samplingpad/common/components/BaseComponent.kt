@@ -22,4 +22,6 @@ abstract class BaseComponent: LinearLayout {
 
     abstract fun clear()
 
+    abstract fun checkFieldHasValue(): Boolean
+
 }

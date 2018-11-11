@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
-import kotlinx.android.synthetic.main.fragment_third_food_table_layout.*
-import me.yokeyword.fragmentation.SupportFragment
 
 class ThirdTableFragment: com.zhengdianfang.samplingpad.task.normal_product.fragments.FourthTableFragment() {
     companion object {

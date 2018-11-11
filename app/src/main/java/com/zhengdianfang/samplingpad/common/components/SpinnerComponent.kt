@@ -73,6 +73,10 @@ class SpinnerComponent: BaseComponent {
         spinnerTextView.text = null
     }
 
+    override fun checkFieldHasValue(): Boolean {
+        return TextUtils.isEmpty(spinnerTextView.text.toString()).not()
+    }
+
     private fun setupViews(context: Context, attributeSet: AttributeSet) {
         val attrs = context.obtainStyledAttributes(attributeSet, R.styleable.AppTheme_SpinnerComponent)
         initLabelTextView(context, attrs)

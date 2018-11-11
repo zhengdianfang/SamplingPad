@@ -3,6 +3,7 @@ package com.zhengdianfang.samplingpad.common.components
 import android.content.Context
 import android.graphics.Color
 import android.support.v4.content.ContextCompat
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.LinearLayout
@@ -49,6 +50,13 @@ class AddressSpinnerGroupComponent: BaseComponent {
         provincialSpinnerTextView!!.text = null
         townSpinnerTextView!!.text = null
         countySpinnerTextView!!.text = null
+    }
+
+    override fun checkFieldHasValue(): Boolean {
+       return TextUtils.isEmpty(provincialSpinnerTextView!!.text.toString()).not() &&
+           TextUtils.isEmpty(townSpinnerTextView!!.text.toString()).not() &&
+           TextUtils.isEmpty(countySpinnerTextView!!.text.toString()).not()
+
     }
 
     fun getContent(): String {

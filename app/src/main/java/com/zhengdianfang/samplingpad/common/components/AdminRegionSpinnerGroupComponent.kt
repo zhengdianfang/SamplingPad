@@ -77,6 +77,10 @@ class AdminRegionSpinnerGroupComponent: BaseComponent {
         }
     }
 
+    override fun checkFieldHasValue(): Boolean {
+        return this.selectedArea != null && this.selectedStreet != null
+    }
+
     private fun setSelectedAreaAndStreet() {
         if (defaultStreetId != null) {
             val streets = regionList.filter{ it.id == defaultStreetId }

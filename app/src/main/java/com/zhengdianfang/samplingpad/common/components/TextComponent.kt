@@ -9,9 +9,8 @@ import android.widget.TextView
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.LabelView
 
-class TextComponent : LinearLayout {
+class TextComponent : BaseComponent {
 
-    private lateinit var labelTextView: LabelView
     private lateinit var contentTextView : TextView
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
@@ -24,6 +23,13 @@ class TextComponent : LinearLayout {
 
     fun setContentText(text: String?) {
         this.contentTextView.text = text
+    }
+
+    override fun clear() {
+    }
+
+    override fun checkFieldHasValue(): Boolean {
+        return true
     }
 
     private fun setupViews(context: Context, attributeSet: AttributeSet) {

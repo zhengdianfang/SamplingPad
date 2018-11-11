@@ -10,9 +10,8 @@ import android.widget.TextView
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.LabelView
 
-class AreaEditComponent: LinearLayout {
+class AreaEditComponent: BaseComponent {
 
-    private lateinit var labelTextView: LabelView
     private lateinit var editTextView: EditText
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
@@ -29,6 +28,12 @@ class AreaEditComponent: LinearLayout {
         initEditTextView(context, attrs)
     }
 
+    override fun clear() {
+    }
+
+    override fun checkFieldHasValue(): Boolean {
+        return true
+    }
     private fun initEditTextView(context: Context, attrs: TypedArray) {
         editTextView = EditText(context, null, R.attr.editTextStyle, R.style.AppTheme_EditText).apply {
             setLines(5)

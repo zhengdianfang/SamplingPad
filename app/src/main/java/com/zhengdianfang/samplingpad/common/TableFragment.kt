@@ -3,6 +3,7 @@ package com.zhengdianfang.samplingpad.common
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
@@ -26,8 +27,10 @@ abstract class TableFragment: BaseFragment() {
 
     open fun setupViews() {
         view?.findViewById<Button>(R.id.nextButtonButton)?.setOnClickListener {
-            assembleSubmitTaskData()
-            tableFragmentViewModel.saveSample(taskItem)
+            if (validateRequiredField(tableFrame)) {
+                assembleSubmitTaskData()
+                tableFragmentViewModel.saveSample(taskItem)
+            }
         }
         view?.findViewById<Button>(R.id.resetButton)?.setOnClickListener {
             this.clear()
@@ -38,6 +41,28 @@ abstract class TableFragment: BaseFragment() {
         if (tableFrame != null) {
             clearDataByFrameLayout(tableFrame)
         }
+    }
+
+    open fun validateRequiredField(viewGroup: ViewGroup): Boolean {
+        if (viewGroup != null) {
+            for (index in 0 until viewGroup.childCount) {
+                val childView = viewGroup.getChildAt(index)
+                if (childView is BaseComponent) {
+                    if (childView.visibility == View.VISIBLE &&
+                        childView.isRequired() &&
+                        childView.checkFieldHasValue().not()) {
+                        val toastText = childView.labelTextView.text.toString().replace("*", "")
+                        Toast.makeText(context, "请填写$toastText", Toast.LENGTH_SHORT).show()
+                        return false
+                    }
+                } else if(childView is ViewGroup && childView.visibility == View.VISIBLE) {
+                   if (!validateRequiredField(childView)) {
+                       return false
+                   }
+                }
+            }
+        }
+        return true
     }
 
     private fun clearDataByFrameLayout(viewGroup: ViewGroup) {

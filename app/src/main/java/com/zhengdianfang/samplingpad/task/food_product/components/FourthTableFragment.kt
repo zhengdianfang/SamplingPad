@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import com.zhengdianfang.samplingpad.task.normal_product.fragments.FifthTableFragment
-import me.yokeyword.fragmentation.SupportFragment
 
 class FourthTableFragment: FifthTableFragment() {
     companion object {

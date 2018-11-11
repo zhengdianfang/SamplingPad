@@ -43,6 +43,7 @@ open class FifthTableFragment: TableFragment() {
 
     private val imageAttachments = mutableListOf<MultiItemEntity>()
     private val videoAttachments = mutableListOf<MultiItemEntity>()
+    private val pdfAttachments = mutableListOf<MultiItemEntity>()
 
     companion object {
 
@@ -101,15 +102,9 @@ open class FifthTableFragment: TableFragment() {
         submitButton.setOnClickListener {
             tableFragmentViewModel.submitSample(taskItem)
         }
-        testPdfView.setOnClickListener {
-            startActivity(Intent(context, PdfPreviewActivity::class.java))
-        }
-
-        testPdfView1.setOnClickListener {
-            startActivity(Intent(context, PdfPreviewActivity::class.java))
-        }
         renderImageFrame()
-        renderVedioFrame()
+        renderVideoFrame()
+        renderPdfFrame()
     }
 
     override fun bindViewModel() {
@@ -119,10 +114,15 @@ open class FifthTableFragment: TableFragment() {
                 imageAttachments.addAll(attachments.filter { it.documentType == ".jpg" || it.documentType == ".png" }.toTypedArray())
                 imageAttachments.add(UploadItem())
                 imageFrame.adapter.notifyDataSetChanged()
+
                 videoAttachments.clear()
                 videoAttachments.addAll(attachments.filter { it.documentType == ".mp4" }.toTypedArray())
                 videoAttachments.add(UploadItem())
                 videoFrame.adapter.notifyDataSetChanged()
+
+                pdfAttachments.clear()
+                pdfAttachments.addAll(attachments.filter { it.documentType == ".pdf" }.toTypedArray())
+                pdfFrame.adapter.notifyDataSetChanged()
             }
         })
         tableFragmentViewModel.isLoadingLiveData.observe(this, Observer { isLoading ->
@@ -146,15 +146,26 @@ open class FifthTableFragment: TableFragment() {
             }
         })
 
-        tableFragmentViewModel.uploadImageResponseLiveData.observe(this, Observer { attachmentIds ->
+        tableFragmentViewModel.uploadImageResponseLiveData.observe(this, Observer {
             uploadDialog.cancel()
             Toast.makeText(context, "上传成功", Toast.LENGTH_SHORT).show()
             fetchAttachment()
         })
-        tableFragmentViewModel.uploadVideoResponseLiveData.observe(this, Observer { attachmentIds ->
+        tableFragmentViewModel.uploadVideoResponseLiveData.observe(this, Observer {
             uploadDialog.cancel()
             Toast.makeText(context, "上传成功", Toast.LENGTH_SHORT).show()
             fetchAttachment()
+        })
+        tableFragmentViewModel.generatePdfLiveData.observe(this, Observer { pdfObject ->
+            val url = pdfObject?.get("url")
+            taskItem.sampleReportAttachmentId = pdfObject?.get("sampleReportAttachmentId")?.toIntOrNull()
+            if (TextUtils.isEmpty(url).not()) {
+                startActivity(
+                    Intent(context, PdfPreviewActivity::class.java)
+                        .putExtra("url", "http://$url")
+                )
+                activity?.finish()
+            }
         })
         fetchAttachment()
 
@@ -179,7 +190,7 @@ open class FifthTableFragment: TableFragment() {
         imageFrame.adapter = imageAdapter
     }
 
-    private fun renderVedioFrame() {
+    private fun renderVideoFrame() {
         val videoAdapter = AttachmentAdapter(videoAttachments, 1)
         videoAdapter.setOnItemClickListener { adapter, _, position ->
             if (adapter.getItemViewType(position) == 1) {
@@ -195,6 +206,21 @@ open class FifthTableFragment: TableFragment() {
         videoFrame.addItemDecoration(ItemDecoration())
         videoFrame.layoutManager.isAutoMeasureEnabled = true
         videoFrame.adapter = videoAdapter
+    }
+
+    private fun renderPdfFrame() {
+        val pdfAdapter = AttachmentAdapter(pdfAttachments, 1)
+        pdfAdapter.setOnItemClickListener { adapter, _, position ->
+            val item = adapter.data[position] as AttachmentItem
+            startActivity(
+                Intent(context, PdfPreviewActivity::class.java)
+                    .putExtra("url","${ApiClient.HOST}${TaskApi.ATTACHMENT_URL}${item.id}")
+            )
+        }
+        pdfFrame.layoutManager = GridLayoutManager(context, 8)
+        pdfFrame.addItemDecoration(ItemDecoration())
+        pdfFrame.layoutManager.isAutoMeasureEnabled = true
+        pdfFrame.adapter = pdfAdapter
     }
 
     private fun renderGeneratePdfButton () {

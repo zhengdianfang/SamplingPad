@@ -16,9 +16,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class DateComponent : LinearLayout {
+class DateComponent : BaseComponent {
 
-    private lateinit var labelTextView: LabelView
     private lateinit var dateTextView: TextView
 
     private val datePickDialog by lazy {
@@ -45,8 +44,12 @@ class DateComponent : LinearLayout {
         return text
     }
 
-    fun clear() {
+    override fun clear() {
         dateTextView.text = ""
+    }
+
+    override fun checkFieldHasValue(): Boolean {
+        return TextUtils.isEmpty(dateTextView.text.toString()).not()
     }
 
     fun setDefaultDate(calendar: Calendar) {

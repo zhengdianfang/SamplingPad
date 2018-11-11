@@ -3,6 +3,7 @@ package com.zhengdianfang.samplingpad.common.components
 import android.content.Context
 import android.content.res.TypedArray
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.Gravity
@@ -44,6 +45,10 @@ class AutoCompleteEditComponent: BaseComponent {
         if (disposable.isDisposed.not()) {
             disposable.dispose()
         }
+    }
+
+    override fun checkFieldHasValue(): Boolean {
+        return TextUtils.isEmpty(this.editTextView.text.toString()).not()
     }
 
     fun setEditTextContent(text: String?) {

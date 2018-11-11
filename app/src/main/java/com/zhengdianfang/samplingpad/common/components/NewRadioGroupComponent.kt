@@ -66,6 +66,16 @@ class NewRadioGroupComponent: BaseComponent {
         return null
     }
 
+    override fun checkFieldHasValue(): Boolean {
+        for(index in 0 until radioGroup.childCount) {
+            val radioButton = radioGroup.getChildAt(index) as RadioButton
+            if (radioButton.isChecked) {
+                return true
+            }
+        }
+        return false;
+    }
+
     private fun setupViews(context: Context, attributeSet: AttributeSet) {
         val attrs = context.obtainStyledAttributes(attributeSet, R.styleable.AppTheme_RadioGroupComponent)
         initLabelTextView(context, attrs)

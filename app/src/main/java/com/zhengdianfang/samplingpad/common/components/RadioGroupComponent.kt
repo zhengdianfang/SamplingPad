@@ -15,6 +15,7 @@ class RadioGroupComponent: BaseComponent {
 
     private lateinit var radioGroup: FlexboxLayout
     var radioButtonCheckCallback: ((position: Int, text: String) -> Unit)? = null
+    private var selectedText: String? = null
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
         this.setupViews(context, attributeSet)
@@ -38,6 +39,17 @@ class RadioGroupComponent: BaseComponent {
             val radioButton = radioGroup.getChildAt(index) as RadioButton
             radioButton.isChecked = false
         }
+    }
+
+    override fun checkFieldHasValue(): Boolean {
+        for(index in 0 until radioGroup.childCount) {
+            val radioButton = radioGroup.getChildAt(index) as RadioButton
+            if (radioButton.isChecked) {
+                return true
+            }
+
+        }
+        return false
     }
 
     fun getCheckedText(): String? {

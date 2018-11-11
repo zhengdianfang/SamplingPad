@@ -42,6 +42,10 @@ class EditComponent: BaseComponent {
         editTextView.setText("")
     }
 
+    override fun checkFieldHasValue(): Boolean {
+        return TextUtils.isEmpty(this.editTextView.text.toString()).not()
+    }
+
     private fun setupViews(context: Context, attributeSet: AttributeSet) {
         val attrs = context.obtainStyledAttributes(attributeSet, R.styleable.AppTheme_EditComponent)
         initLabelTextView(context, attrs)

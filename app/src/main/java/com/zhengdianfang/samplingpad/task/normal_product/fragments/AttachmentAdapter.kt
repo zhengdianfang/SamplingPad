@@ -21,10 +21,14 @@ class AttachmentAdapter(data: List<MultiItemEntity>, private val type: Int) : Ba
 
     override fun convert(helper: BaseViewHolder, item: MultiItemEntity) {
         if (item.itemType == 0 && item is AttachmentItem) {
-            Glide.with(helper.itemView.context)
-                .load("${ApiClient.HOST}${TaskApi.ATTACHMENT_URL}${item.id}")
-                .apply(RequestOptions().placeholder(R.drawable.verify_code_default_pic))
-                .into(helper.itemView.findViewById(R.id.imageView) as ImageView)
+            if (item.documentType == ".pdf") {
+                Glide.with(helper.itemView.context).load(R.drawable.ic_pdf).into(helper.itemView.findViewById(R.id.imageView) as ImageView)
+            } else {
+                Glide.with(helper.itemView.context)
+                    .load("${ApiClient.HOST}${TaskApi.ATTACHMENT_URL}${item.id}")
+                    .apply(RequestOptions().placeholder(R.drawable.verify_code_default_pic))
+                    .into(helper.itemView.findViewById(R.id.imageView) as ImageView)
+            }
         } else if(item.itemType == 1) {
             (helper.itemView as TextView).text = if (type == 0) "上传图片" else "上传视频"
         }

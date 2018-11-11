@@ -33,6 +33,7 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     val uploadVideoResponseLiveData = MutableLiveData<AttachmentIds>()
     val attachmentIdsLiveData = MutableLiveData<Array<AttachmentItem>>()
     val deleteAttachmentLiveData = MutableLiveData<Boolean>()
+    val generatePdfLiveData = MutableLiveData<Map<String, String>>()
 
     fun saveSample(taskItem: TaskItem) {
         taskItem.latitude = App.INSTANCE.latitude
@@ -71,6 +72,7 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     }
 
     fun generatePdf(taskItem: TaskItem) {
+        isLoadingLiveData.postValue(true)
         doAsync {
             val response = ApiClient.getRetrofit().create(TaskApi::class.java)
                 .generateSamplePdf(taskItem.id)
@@ -79,8 +81,7 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
             uiThread {
                 isLoadingLiveData.postValue(false)
                 if (body != null) {
-//                    responseLiveData.postValue(body)
-                    Timber.d("generate pdf : ${body.data}")
+                    generatePdfLiveData.postValue(body.data)
                 }
             }
         }
