@@ -68,55 +68,11 @@
                 app:text_content="9238247564382575"/>
 
 
-            <LinearLayout
+            <com.zhengdianfang.samplingpad.common.components.CategorySpinnerComponent
+                android:id="@+id/categorySpinnerGroup"
+                android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <com.zhengdianfang.samplingpad.common.components.TextComponent
-                    android:id="@+id/leve1TypeTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_weight="1"
-                    app:text_content="质量监督管理委员粮食加工品"
-                    app:text_label="食品大类：" />
-
-                <com.zhengdianfang.samplingpad.common.components.TextComponent
-                    android:id="@+id/level2TypeTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_weight="1"
-                    app:text_content="农产品及农产品加工品"
-                    app:text_label="食品亚类：" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <com.zhengdianfang.samplingpad.common.components.TextComponent
-                    android:id="@+id/level3TypeTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_weight="1"
-                    app:text_content="质量监督管理委员粮食加工品"
-                    app:text_label="食品次亚类：" />
-
-                <com.zhengdianfang.samplingpad.common.components.TextComponent
-                    android:id="@+id/level4TypeTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_weight="1"
-                    app:text_content="农产品及农产品加工品"
-                    app:text_label="食品细类：" />
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
             <com.zhengdianfang.samplingpad.common.components.NewRadioGroupComponent
                 android:id="@+id/inspectionKindNameRadioGroup"

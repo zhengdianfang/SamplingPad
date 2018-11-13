@@ -30,6 +30,7 @@
     <application
         android:name=".App"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -69,7 +70,12 @@
             android:value="12880619d34cea5e7a525234ff9cae65" />
 
         <activity android:name=".common.pdf.PdfPreviewActivity" />
-        <activity android:name=".common.MapActivity"></activity>
+        <activity
+            android:name=".common.MapActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity android:name=".PerviewTaskFormActivity"></activity>
     </application>
 
 </manifest>

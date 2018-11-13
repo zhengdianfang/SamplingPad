@@ -5,18 +5,22 @@ import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.LinearLayout
+import com.zhengdianfang.samplingpad.PerviewTaskFormActivity
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.LabelView
 
 abstract class BaseComponent: LinearLayout {
     lateinit var labelTextView: LabelView
+    var disable = false
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet)
 
     constructor(context: Context, attributeSet: AttributeSet, style: Int): super(context, attributeSet, style)
+    init {
 
+    }
 
-    fun isRequired(): Boolean {
+    open fun isRequired(): Boolean {
         return labelTextView.isRequired()
     }
 

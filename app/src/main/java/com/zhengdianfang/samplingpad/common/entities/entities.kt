@@ -20,3 +20,4 @@ data class Region(val id: Int?, val name: String?, val levelId: Int = 0, val par
         const val LEVEL_STREET = 5
     }
 }
+data class Category(val id: Int?, val name: String?, val level: Int = 0, val parentId: Int = 0)

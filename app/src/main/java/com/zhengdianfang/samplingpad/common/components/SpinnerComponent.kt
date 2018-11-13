@@ -33,6 +33,11 @@ class SpinnerComponent: BaseComponent {
         this.setupViews(context, attributeSet)
     }
 
+    fun setDisable() {
+        this.spinnerTextView.setBackgroundResource(0)
+        this.spinnerTextView.setOnClickListener {  }
+    }
+
     fun fetchData(url: String, predicate: (OptionItem) -> Boolean = { true }) {
         doAsync {
             val request = Request.Builder()

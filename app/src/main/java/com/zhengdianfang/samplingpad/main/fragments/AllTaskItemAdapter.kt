@@ -54,6 +54,10 @@ class AllTaskItemAdapter(data: MutableList<TaskItem>)
                 helper.setVisible(R.id.operationButton1, true)
                 helper.setVisible(R.id.operationButton2, true)
             }
+            Task_Status.CANCEL.value -> {
+                helper.setVisible(R.id.operationButton1, true)
+                helper.setVisible(R.id.operationButton2, true)
+            }
             else -> {
                 helper.setVisible(R.id.operationButton1, false)
                 helper.setVisible(R.id.operationButton2, false)

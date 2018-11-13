@@ -1,5 +1,7 @@
 package com.zhengdianfang.samplingpad.common
 
+import android.app.Activity
+import android.content.res.Resources
 import android.os.Bundle
 import com.amap.api.navi.AMapNavi
 import com.amap.api.navi.AMapNaviListener
@@ -34,6 +36,10 @@ class MapActivity : BaseActivity(),  AMapNaviListener, AMapNaviViewListener {
         backButton.setOnClickListener {
             finish()
         }
+    }
+
+    override fun getResources(): Resources {
+        return baseContext.resources
     }
 
     override fun onResume() {

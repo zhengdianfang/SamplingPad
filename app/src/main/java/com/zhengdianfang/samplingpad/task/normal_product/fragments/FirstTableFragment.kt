@@ -23,6 +23,7 @@ open class FirstTableFragment: TableFragment() {
 
     override fun assembleSubmitTaskData() {
         taskItem.setInspectionKindOption(inspectionKindNameRadioGroup.getCheckedOption())
+        categorySpinnerGroup.mergeSelectedValuesToTaskItem(taskItem)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -36,11 +37,7 @@ open class FirstTableFragment: TableFragment() {
         sampleCodeTextView.setContentText(taskItem.code)
         detectionCompanyTextView.setContentText(taskItem.detectionCompanyName)
         implPlanCodeTextView.setContentText(taskItem.implPlanCode)
-        leve1TypeTextView.setContentText(taskItem.level1Name)
-        level2TypeTextView.setContentText(taskItem.level2Name)
-        level3TypeTextView.setContentText(taskItem.level3Name)
-        level4TypeTextView.setContentText(taskItem.level4Name)
-
+        categorySpinnerGroup.setDefaultValues(taskItem)
         createOrgNameTextView.setContentText(taskItem.createOrgName)
         createOrgAddressTextView.setContentText(taskItem.createOrgAddress)
         createOrgAreaNameTextView.setContentText(taskItem.createOrgAreaName)
