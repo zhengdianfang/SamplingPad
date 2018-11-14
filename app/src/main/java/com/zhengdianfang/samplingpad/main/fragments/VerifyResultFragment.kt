@@ -8,20 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.amap.api.services.cloud.CloudSearch
-import com.amap.api.services.core.LatLonPoint
 import com.amap.api.services.core.PoiItem
-import com.amap.api.services.poisearch.PoiResult
-import com.amap.api.services.poisearch.PoiSearch
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import com.zhengdianfang.samplingpad.App
-
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.common.MapActivity
 import com.zhengdianfang.samplingpad.common.searchPoiByText
-import kotlinx.android.synthetic.main.fragment_fifth_normal_table_layout.*
 import kotlinx.android.synthetic.main.fragment_verify_result.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 
@@ -96,7 +89,7 @@ class VerifyResultFragment : BaseFragment() {
     private inner class ShopNameAdapter(data: MutableList<PoiItem>?)
         : BaseQuickAdapter<PoiItem, BaseViewHolder>(R.layout.shop_item_layout, data) {
         override fun convert(helper: BaseViewHolder, item: PoiItem) {
-            (helper.itemView as TextView).text = item?.title
+            (helper.itemView as TextView).text = item.title
         }
     }
 

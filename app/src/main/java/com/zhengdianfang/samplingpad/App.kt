@@ -2,6 +2,7 @@ package com.zhengdianfang.samplingpad
 
 import android.app.Application
 import android.content.Intent
+import android.text.TextUtils
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.bumptech.glide.Glide
@@ -79,14 +80,16 @@ class App: Application() {
 
     fun logout() {
         runOnUiThread {
-            ApiClient.reset()
-            App.INSTANCE.token = ""
-            startActivity(
-                Intent(this, LoginActivity::class.java)
-                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            )
+            if (TextUtils.isEmpty(App.INSTANCE.token).not()) {
+                App.INSTANCE.token = ""
+                ApiClient.reset()
+                startActivity(
+                    Intent(this, LoginActivity::class.java)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                )
+            }
         }
     }
 

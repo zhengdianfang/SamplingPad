@@ -5,11 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".common.MapActivity">
 
-    <include layout="@layout/toolbar_layout" />
     <com.amap.api.navi.AMapNaviView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:layout_weight="1"/>
 
 </LinearLayout>

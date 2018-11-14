@@ -51,8 +51,10 @@ class TaskListFragment : BaseFragment() {
         taskListFragmentViewModel.taskListLiveData.observe(this, Observer { data ->
             taskRecyclerView.adapter.notifyDataSetChanged()
             taskData.clear()
-            taskData.addAll(data!!)
-            emptyView.visibility = if (taskData.size == 0) View.VISIBLE else View.GONE
+            if (data != null) {
+                taskData.addAll(data)
+                emptyView.visibility = if (taskData.size == 0) View.VISIBLE else View.GONE
+            }
             refreshFrame.isRefreshing = false
         })
     }

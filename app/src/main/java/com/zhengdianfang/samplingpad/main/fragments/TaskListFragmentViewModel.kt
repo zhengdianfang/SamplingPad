@@ -25,6 +25,8 @@ class TaskListFragmentViewModel(application: Application): AndroidViewModel(appl
                 uiThread {
                     taskListLiveData.postValue(data)
                 }
+            } else {
+                taskListLiveData.postValue(null)
             }
         }
     }

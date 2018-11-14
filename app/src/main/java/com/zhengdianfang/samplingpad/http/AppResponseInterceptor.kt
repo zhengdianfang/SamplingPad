@@ -5,7 +5,6 @@ import com.zhengdianfang.samplingpad.App
 import okhttp3.Interceptor
 import okhttp3.MediaType
 import okhttp3.Response
-
 import okhttp3.ResponseBody
 
 class AppResponseInterceptor: Interceptor {
@@ -17,7 +16,7 @@ class AppResponseInterceptor: Interceptor {
         var response = chain.proceed(newRequest)
         if (response.isSuccessful && response.header("Content-Type")?.contains("application/json") == true) {
             val responseText = response.body()?.string()
-            if (responseText.isNullOrEmpty().not()) {
+            if (response.code() != 302 && responseText.isNullOrEmpty().not()) {
                 val gson = Gson()
                 val responseBean = gson.fromJson<com.zhengdianfang.samplingpad.http.Response<Any>>(
                     responseText, com.zhengdianfang.samplingpad.http.Response::class.java)
