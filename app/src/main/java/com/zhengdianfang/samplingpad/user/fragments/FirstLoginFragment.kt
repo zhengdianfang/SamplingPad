@@ -17,6 +17,7 @@ import com.zhengdianfang.samplingpad.user.api.UserApi
 import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.main.MainActivity
+import com.zhengdianfang.samplingpad.user.LoginActivity
 import kotlinx.android.synthetic.main.fragment_first_login.*
 import timber.log.Timber
 import kotlin.math.log
@@ -73,7 +74,8 @@ class FirstLoginFragment : BaseFragment() {
             val password = passwordEditText.text.toString()
             val code = imageCodeEditText.text.toString()
             val rememberMe =  rememberMeRadioButton.isChecked
-            userNameLoginFragmentViewModel.login(username, password, code, rememberMe)
+            Timber.d("now codeKey : ${(context as LoginActivity).cookieKey}")
+            userNameLoginFragmentViewModel.login((context as LoginActivity).cookieKey, username, password, code, rememberMe)
         }
     }
 
@@ -82,12 +84,13 @@ class FirstLoginFragment : BaseFragment() {
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .skipMemoryCache(true)
 
-
+        (context as LoginActivity).generateCookieKey()
         Glide.with(this).load(UserApi.VERIFY_CODE_URL)
             .apply(requestOptions)
             .into(codeImageView)
 
         codeImageView.setOnClickListener {
+            (context as LoginActivity).generateCookieKey()
             Glide.with(this).clear(codeImageView)
             Glide.with(this).load(UserApi.VERIFY_CODE_URL)
                 .apply(requestOptions)

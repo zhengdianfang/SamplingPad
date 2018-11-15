@@ -18,7 +18,7 @@ data class StatusCount (
 enum class Task_Status(val value: Int) {
     WAIT_VERIFY(1),
     CANCEL(3),
-    COMPLETE(7),
+    COMPLETE(2),
     REFUSE(4),
     CAN_NOT_VERIFY(0)
 }
@@ -175,8 +175,9 @@ data class TaskItem(
     var entrustTownName: String?,
     var entrustCountyId: Int?,
     var entrustCountyName: String?,
-    var sampleReportAttachmentId: Int?
-
+    var sampleReportAttachmentId: Int?,
+    var beautyFoodType: String?,
+    var wellBrandName: String?
 ) : Parcelable {
     companion object {
 

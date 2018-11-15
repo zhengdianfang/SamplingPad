@@ -164,6 +164,7 @@ open class FifthTableFragment: TableFragment() {
             taskItem.sampleReportAttachmentId = pdfObject?.get("sampleReportAttachmentId")?.toIntOrNull()
             val url = pdfObject?.get("url")
             if (TextUtils.isEmpty(url).not()) {
+                pdfAttachments.clear()
                 pdfAttachments.add(AttachmentItem(pdfObject?.get("id")?.toInt() ?: 0, ".pdf", url))
                 pdfFrame.adapter.notifyDataSetChanged()
                 startActivity(

@@ -78,6 +78,8 @@
     <string name="spinner_street_hint">街道</string>
     <string name="agency_origin_area_name_label">*原产地：</string>
     <string name="agency_origin_area_name_hint">选择原产地</string>
+    <string name="food_type">菜系类型</string>
+    <string name="food_type_hint">请选择菜系类型</string>
     <string name="province_hint">省</string>
     <string name="town_hint">市</string>
     <string name="county_hint">区/县</string>

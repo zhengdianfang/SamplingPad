@@ -15,6 +15,7 @@ import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.main.MainActivity
+import com.zhengdianfang.samplingpad.user.LoginActivity
 import kotlinx.android.synthetic.main.fragment_second_login.*
 import timber.log.Timber
 
@@ -69,7 +70,7 @@ class SecondLoginFragment : BaseFragment() {
             val username = userNameEditText.text.toString()
             val password = passwordEditText.text.toString()
             val rememberMe =  rememberMeRadioButton.isChecked
-            userNameLoginFragmentViewModel.loginSecond(token ,username, password, rememberMe)
+            userNameLoginFragmentViewModel.loginSecond((context as LoginActivity).cookieKey, token ,username, password, rememberMe)
         }
     }
 

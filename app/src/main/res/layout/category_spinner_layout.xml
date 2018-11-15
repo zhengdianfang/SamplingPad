@@ -2,62 +2,67 @@
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnCount="4">
+    android:columnCount="2">
 
     <com.zhengdianfang.samplingpad.common.LabelView
         style="@style/AppTheme.Table.Title"
-        android:text="*食品大类："/>
+        android:text="*食品大类：" />
 
     <TextView
         android:id="@+id/level1NameSpinner"
         style="@style/AppTheme.Table.Title"
+        android:layout_width="0dp"
+        android:layout_columnWeight="1"
+        android:layout_marginRight="8dp"
         android:background="@drawable/spinner_background"
         android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_columnWeight="1"
-        />
+        android:paddingLeft="16dp" />
 
     <com.zhengdianfang.samplingpad.common.LabelView
         style="@style/AppTheme.Table.Title"
-        android:text="*食品亚类："/>
+        android:layout_marginTop="16dp"
+        android:text="*食品亚类：" />
 
     <TextView
         android:id="@+id/level2NameSpinner"
         style="@style/AppTheme.Table.Title"
+        android:layout_width="0dp"
         android:layout_columnWeight="1"
-        android:paddingLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="8dp"
         android:background="@drawable/spinner_background"
         android:gravity="center_vertical"
-        />
+        android:paddingLeft="16dp" />
 
     <com.zhengdianfang.samplingpad.common.LabelView
         style="@style/AppTheme.Table.Title"
         android:layout_marginTop="16dp"
-        android:text="*食品次亚类："/>
+        android:text="*食品次亚类：" />
 
     <TextView
         android:id="@+id/level3NameSpinner"
         style="@style/AppTheme.Table.Title"
-        android:layout_marginTop="16dp"
+        android:layout_width="0dp"
         android:layout_columnWeight="1"
-        android:paddingLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="8dp"
         android:background="@drawable/spinner_background"
         android:gravity="center_vertical"
-        android:layout_marginRight="8dp"
-        />
+        android:paddingLeft="16dp" />
 
     <com.zhengdianfang.samplingpad.common.LabelView
         style="@style/AppTheme.Table.Title"
         android:layout_marginTop="16dp"
-        android:text="*食品细类："/>
+        android:text="*食品细类：" />
 
     <TextView
         android:id="@+id/level4NameSpinner"
         style="@style/AppTheme.Table.Title"
+        android:layout_width="0dp"
+        android:layout_columnWeight="1"
         android:layout_marginTop="16dp"
-        android:paddingLeft="16dp"
+        android:layout_marginRight="8dp"
         android:background="@drawable/spinner_background"
         android:gravity="center_vertical"
-        android:layout_columnWeight="1" />
+        android:paddingLeft="16dp" />
 </GridLayout>

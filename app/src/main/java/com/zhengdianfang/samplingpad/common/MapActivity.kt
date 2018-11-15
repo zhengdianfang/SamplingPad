@@ -28,7 +28,7 @@ class MapActivity : BaseMapActivity() {
                 NaviLatLng(39.926911, 116.617201), NaviLatLng(latLonPoint.latitude, latLonPoint.longitude))
         } else {
             mAMapNavi.calculateWalkRoute(
-                NaviLatLng(App.INSTANCE.longitude, App.INSTANCE.latitude), NaviLatLng(latLonPoint.latitude, latLonPoint.longitude))
+                NaviLatLng(App.INSTANCE.latitude, App.INSTANCE.longitude), NaviLatLng(latLonPoint.latitude, latLonPoint.longitude))
         }
     }
 

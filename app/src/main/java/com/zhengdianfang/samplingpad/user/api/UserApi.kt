@@ -18,6 +18,7 @@ interface UserApi {
     @FormUrlEncoded
     @POST("login")
     fun login(
+        @Header("codeKey") codeKey: String,
         @Field("username") username: String,
         @Field("password")password: String,
         @Field("code")code: String,
@@ -26,6 +27,7 @@ interface UserApi {
     @FormUrlEncoded
     @POST("login/second")
     fun loginSecond(
+        @Header("codeKey") codeKey: String,
         @Header("Authorization") token: String,
         @Field("username") username: String,
         @Field("password")password: String,

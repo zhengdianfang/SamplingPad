@@ -270,12 +270,29 @@
                 app:edit_hint="请输入执行标准"
                 app:edit_label="*标注执行标准：" />
 
+            <com.zhengdianfang.samplingpad.common.components.SpinnerComponent
+                android:id="@+id/beautyFoodTypeGroupView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:spinner_hint="@string/food_type"
+                app:spinner_label="@string/food_type_hint" />
+
+            <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/wellBrandNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:edit_hint="请输入招牌名称"
+                app:edit_label="*招牌名称 ：" />
+
             <com.zhengdianfang.samplingpad.common.components.AreaEditComponent
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:edit_hint="请输入备注描述"
                 app:edit_label="备注：" />
+
 
 
         </LinearLayout>

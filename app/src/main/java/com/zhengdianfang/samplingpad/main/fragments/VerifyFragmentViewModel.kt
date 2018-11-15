@@ -6,6 +6,7 @@ import android.arch.lifecycle.MutableLiveData
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.http.Response
 import com.zhengdianfang.samplingpad.main.api.MainApi
+import com.zhengdianfang.samplingpad.main.entites.VerifyParams
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -28,8 +29,8 @@ class VerifyFragmentViewModel(application: Application) : AndroidViewModel(appli
         isLoadingLiveData.postValue(true)
         doAsync {
             val response = ApiClient.getRetrofit().create(MainApi::class.java)
-                .postVerifySample(implPlanCode, level1Name, enterpriseLicenseNumber, sampleName,
-                    sampleProductDate, chainBrand, sampleDate , producerCsNo, enterpriseName)
+                .postVerifySample(VerifyParams(implPlanCode, level1Name, enterpriseLicenseNumber, sampleName,
+                    sampleProductDate, chainBrand, sampleDate , producerCsNo, enterpriseName))
                 .execute()
 
             val body = response.body()

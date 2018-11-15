@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_fourth_normal_table_layout.*
 import java.util.*
 import io.github.xudaojie.qrcodelib.CaptureActivity
 import android.content.Intent
-
+import com.zhengdianfang.samplingpad.http.ApiClient
 
 
 open class FourthTableFragment: TableFragment() {
@@ -81,7 +81,16 @@ open class FourthTableFragment: TableFragment() {
             val i = Intent(context, CaptureActivity::class.java)
             startActivityForResult(i, QR_SCAN_REQUEST)
         }
-
+        if (taskItem.enterpriseLinkId == 2 || taskItem.enterpriseLinkId == 3) {
+            beautyFoodTypeGroupView.visibility = View.VISIBLE
+            beautyFoodTypeGroupView.fetchData("${ApiClient.HOST}beautyFoodTypesAll")
+            beautyFoodTypeGroupView.setDefaultText(taskItem.beautyFoodType)
+            wellBrandNameEditText.visibility = View.VISIBLE
+            wellBrandNameEditText.setEditTextContent(taskItem.wellBrandName)
+        } else {
+            beautyFoodTypeGroupView.visibility = View.GONE
+            wellBrandNameEditText.visibility = View.GONE
+        }
     }
 
     override fun assembleSubmitTaskData() {
@@ -111,6 +120,8 @@ open class FourthTableFragment: TableFragment() {
         taskItem.sampleProductDate = sampleProduceDateView.getDate()
         taskItem.sampleInspectAmountUnit = sampleInspectAmountUnitEditText.getContent()
         taskItem.samplePreparationUnit = samplePreparationUnitEditText.getContent()
+        taskItem.beautyFoodType = beautyFoodTypeGroupView.getContent()
+        taskItem.wellBrandName = wellBrandNameEditText.getContent()
     }
 
     override fun clear() {

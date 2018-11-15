@@ -17,7 +17,7 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
     val tokenLiveData = MutableLiveData<String>()
     val isLoadingLiveData = MutableLiveData<Boolean>()
 
-    fun login(username: String, password: String, code: String, rememberMe: Boolean) {
+    fun login(codeKey: String, username: String, password: String, code: String, rememberMe: Boolean) {
         val context = getApplication<App>()
         when {
             username.isNullOrEmpty() -> errorLiveData.postValue(context.resources.getString(R.string.please_input_username_hint))
@@ -27,7 +27,7 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
                 isLoadingLiveData.postValue(true)
                 val response  = ApiClient.getRetrofit()
                     .create(UserApi::class.java)
-                    .login(username, password.md5(), code,  rememberMe)
+                    .login(codeKey, username, password.md5(), code,  rememberMe)
                     .execute()
 
                 uiThread {
@@ -46,7 +46,7 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
         }
     }
 
-    fun loginSecond(token: String, username: String, password: String, rememberMe: Boolean) {
+    fun loginSecond(codeKey: String, token: String, username: String, password: String, rememberMe: Boolean) {
         val context = getApplication<App>()
         when {
             username.isNullOrEmpty() -> errorLiveData.postValue(context.resources.getString(R.string.please_input_username_hint))
@@ -55,7 +55,7 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
                 isLoadingLiveData.postValue(true)
                 val response  = ApiClient.getRetrofit()
                     .create(UserApi::class.java)
-                    .loginSecond(token ,username, password.md5(), rememberMe)
+                    .loginSecond(codeKey, token ,username, password.md5(), rememberMe)
                     .execute()
 
                 uiThread {
