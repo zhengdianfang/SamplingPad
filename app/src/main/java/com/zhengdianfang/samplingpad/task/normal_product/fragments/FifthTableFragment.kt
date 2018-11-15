@@ -24,6 +24,7 @@ import com.zhengdianfang.samplingpad.common.PhotoPreviewFragment
 import com.zhengdianfang.samplingpad.common.TableFragment
 import com.zhengdianfang.samplingpad.common.VideoFragment
 import com.zhengdianfang.samplingpad.common.pdf.PdfPreviewActivity
+import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.task.entities.AttachmentItem
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import com.zhengdianfang.samplingpad.task.entities.UploadItem
@@ -84,6 +85,9 @@ open class FifthTableFragment: TableFragment() {
 
     private fun fetchAttachment() {
         tableFragmentViewModel.fetchAttachmentIdsBySampleId(this.taskItem.id)
+        if (taskItem.sampleReportAttachmentId != null) {
+            tableFragmentViewModel.fetchPdfById(taskItem.sampleReportAttachmentId!!)
+        }
     }
     override fun onFragmentResult(requestCode: Int, resultCode: Int, data: Bundle?) {
         super.onFragmentResult(requestCode, resultCode, data)
@@ -171,6 +175,14 @@ open class FifthTableFragment: TableFragment() {
                     Intent(context, PdfPreviewActivity::class.java)
                         .putExtra("url", "http://$url")
                 )
+            }
+        })
+        tableFragmentViewModel.pdfHistoryLiveData.observe(this, Observer { pdfObject ->
+            val url = pdfObject?.get("url")
+            if (TextUtils.isEmpty(url).not()) {
+                pdfAttachments.clear()
+                pdfAttachments.add(AttachmentItem(pdfObject?.get("id")?.toInt() ?: 0, ".pdf", url))
+                pdfFrame.adapter.notifyDataSetChanged()
             }
         })
         fetchAttachment()

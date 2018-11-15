@@ -66,4 +66,7 @@ interface TaskApi {
 
     @GET("createSampleReport/{sampleId}")
     fun generateSamplePdf(@Path("sampleId") sampleId: String): Call<Response<Map<String, String>>>
+
+    @GET("appShowSamplePdf/{sampleReportAttachmentId}")
+    fun fetchPdfById(@Path("sampleReportAttachmentId") sampleReportAttachmentId: Int): Call<Response<Map<String, String>>>
 }

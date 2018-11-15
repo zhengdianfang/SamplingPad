@@ -34,6 +34,7 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     val attachmentIdsLiveData = MutableLiveData<Array<AttachmentItem>>()
     val deleteAttachmentLiveData = MutableLiveData<Boolean>()
     val generatePdfLiveData = MutableLiveData<Map<String, String>>()
+    val pdfHistoryLiveData = MutableLiveData<Map<String, String>>()
 
     fun saveSample(taskItem: TaskItem) {
         taskItem.latitude = App.INSTANCE.latitude
@@ -219,5 +220,20 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
                 .execute()
             deleteAttachmentLiveData.postValue(true)
         }
+    }
+
+    fun fetchPdfById(sampleReportAttachmentId: Int) {
+        doAsync {
+            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
+                .fetchPdfById(sampleReportAttachmentId)
+                .execute()
+            val body = response.body()
+            if (body != null) {
+                uiThread {
+                    pdfHistoryLiveData.postValue(body.data)
+                }
+            }
+        }
+
     }
 }
