@@ -98,7 +98,7 @@ class VerifyFragment : BaseFragment() {
 
         verifyFragmentViewModel.responseLiveData.observe(this, Observer { response ->
             activity?.supportFragmentManager?.beginTransaction()
-                ?.add(android.R.id.content, VerifyResultFragment.newInstance(response!!.code == 200, response.msg))
+                ?.add(android.R.id.content, VerifyResultFragment.newInstance(response!!.verdict == "校验通过", response.msg))
                 ?.addToBackStack("")
                 ?.commit()
         })

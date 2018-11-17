@@ -15,9 +15,9 @@ class AllTaskItemAdapter(data: MutableList<TaskItem>)
     private val drawableColorMap = mapOf(
         Pair(Task_Status.WAIT_VERIFY.value, R.color.yellow),
         Pair(Task_Status.CANCEL.value, R.color.colorDarkGray),
-        Pair(Task_Status.COMPLETE.value, R.color.green),
+        Pair(0, R.color.green),
         Pair(Task_Status.REFUSE.value, R.color.blue),
-        Pair(Task_Status.CAN_NOT_VERIFY.value, R.color.red)
+        Pair(5, R.color.red)
     )
 
     override fun convert(helper: BaseViewHolder, item: TaskItem) {
@@ -35,7 +35,7 @@ class AllTaskItemAdapter(data: MutableList<TaskItem>)
         helper.setText(R.id.level2CategroyTextView, "食品亚类：${item.level2Name ?: ""}")
         helper.setText(R.id.level3CategoryTextView, "食品比亚类：${item.level3Name ?: ""}")
         helper.setText(R.id.level4CategoryTextView, "食品细类：${item.level4Name ?: ""}")
-        helper.setText(R.id.addressTextView, "抽样地点：${item.sampleLinkName ?: ""}")
+        helper.setText(R.id.addressTextView, "抽样地点：${item.enterprisePlaceName ?: ""}")
         helper.setText(R.id.spaceTextView, "场所名称：${item.enterpriseName ?: ""}")
         helper.addOnClickListener(R.id.operationButton1)
         helper.addOnClickListener(R.id.operationButton2)

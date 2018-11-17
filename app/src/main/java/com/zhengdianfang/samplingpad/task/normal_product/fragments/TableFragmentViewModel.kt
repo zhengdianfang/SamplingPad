@@ -31,6 +31,7 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     val enterpriseLiveData = MutableLiveData<Enterprise>()
     val uploadImageResponseLiveData = MutableLiveData<AttachmentIds>()
     val uploadVideoResponseLiveData = MutableLiveData<AttachmentIds>()
+    val uploadErrorResponseLiveData = MutableLiveData<String>()
     val attachmentIdsLiveData = MutableLiveData<Array<AttachmentItem>>()
     val deleteAttachmentLiveData = MutableLiveData<Boolean>()
     val generatePdfLiveData = MutableLiveData<Map<String, String>>()
@@ -166,7 +167,6 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
 
     fun uploadFile(taskItem: TaskItem, businessType: String, attTypeName: String, attachmentType: String, files: Array<File>, progressCallback: (progress: Int) -> Unit) {
         doAsync {
-
             val okHttpClient = OkHttpClient
                 .Builder()
                 .addNetworkInterceptor(UploadInterceptor { bytesWritten, contentLength ->
@@ -200,14 +200,17 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
                     partFiles)
                 .execute()
 
+            val body = response.body()
             uiThread {
-                if (response.body() != null ) {
+                if (body != null && body.code == 200 ) {
                     Timber.d("upload result ${response.body()?.data.toString()}")
                     if (attachmentType == "1") {
                         uploadImageResponseLiveData.postValue(response.body()!!.data)
                     } else if (attachmentType == "4") {
                         uploadVideoResponseLiveData.postValue(response.body()!!.data)
                     }
+                } else {
+                    uploadErrorResponseLiveData.postValue(body?.msg ?: "")
                 }
             }
         }

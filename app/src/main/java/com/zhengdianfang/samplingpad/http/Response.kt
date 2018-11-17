@@ -5,4 +5,5 @@ open class Response<T> {
     var code = 0
     var data: T? = null
     var token = ""
+    var verdict = ""
 }

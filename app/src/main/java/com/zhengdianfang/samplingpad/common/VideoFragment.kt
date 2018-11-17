@@ -22,6 +22,10 @@ import okhttp3.Request
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.io.File
+import android.content.DialogInterface
+import android.media.MediaPlayer
+import com.autonavi.amap.mapcore.FileUtil
+import java.lang.Exception
 
 
 class VideoFragment : BaseFragment() {
@@ -89,7 +93,15 @@ class VideoFragment : BaseFragment() {
                 val request = Request.Builder().url("${ApiClient.HOST}${TaskApi.ATTACHMENT_URL}$attachmentId").build()
                 val response = ApiClient.getHttpClient().newCall(request).execute()
                 val byteStream = response.body()?.byteStream()
-                FileUtils.copy(byteStream, localFile)
+                val tmpFile = File(localPdfDir, "$attachmentId.tmp")
+                try {
+                    FileUtils.copy(byteStream, tmpFile)
+                    tmpFile.copyTo(localFile!!, true)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                } finally {
+                    tmpFile.deleteOnExit()
+                }
                 uiThread {
                     stopLoading()
                     if (localFile!!.exists()) {
@@ -107,6 +119,15 @@ class VideoFragment : BaseFragment() {
         mediaController.setAnchorView(videoView)
         videoView.setMediaController(mediaController)
         videoView.setVideoURI(Uri.parse("file://${localFile!!.absolutePath}"))
+        videoView.setOnErrorListener { _, _, _ ->
+           MaterialDialog.Builder(context!!)
+               .content("视频解析失败！")
+               .positiveText("关闭")
+               .onPositive { _, _ ->
+                   pop()
+               }.show()
+           true
+        }
         videoView.start()
         videoView.requestFocus()
     }

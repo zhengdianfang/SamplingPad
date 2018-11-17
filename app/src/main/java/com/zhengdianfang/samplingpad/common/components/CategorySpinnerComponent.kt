@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.TextView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.zhengdianfang.samplingpad.R
+import com.zhengdianfang.samplingpad.common.LabelView
 import com.zhengdianfang.samplingpad.common.entities.Category
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.task.api.TaskApi
@@ -114,6 +115,8 @@ class CategorySpinnerComponent: BaseComponent {
     }
 
     private fun setupViews(context: Context) {
+        this.labelTextView = LabelView(context)
+        this.labelTextView.text = "食品类型"
         LayoutInflater.from(context).inflate(R.layout.category_spinner_layout, this)
         levelNameViews = arrayOf(
             level1NameSpinner,

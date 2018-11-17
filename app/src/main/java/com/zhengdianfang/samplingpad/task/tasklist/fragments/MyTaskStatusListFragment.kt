@@ -54,8 +54,12 @@ class MyTaskStatusListFragment : BaseFragment() {
         this.bindViewModel()
     }
 
-    private fun bindViewModel() {
+    override fun onResume() {
+        super.onResume()
         taskStatusListFragmentViewModel.fetchStatusCount()
+    }
+
+    private fun bindViewModel() {
         taskStatusListFragmentViewModel.isLoadingLiveData.observe(this, Observer { isLoading ->
             if (isLoading == true) {
                 startLoading()

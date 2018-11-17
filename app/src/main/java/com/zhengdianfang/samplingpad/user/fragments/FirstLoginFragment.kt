@@ -85,14 +85,14 @@ class FirstLoginFragment : BaseFragment() {
             .skipMemoryCache(true)
 
         (context as LoginActivity).generateCookieKey()
-        Glide.with(this).load(UserApi.VERIFY_CODE_URL)
+        Glide.with(this).load("${UserApi.VERIFY_CODE_URL}?d=${(context as LoginActivity).cookieKey}")
             .apply(requestOptions)
             .into(codeImageView)
 
         codeImageView.setOnClickListener {
             (context as LoginActivity).generateCookieKey()
             Glide.with(this).clear(codeImageView)
-            Glide.with(this).load(UserApi.VERIFY_CODE_URL)
+            Glide.with(this).load("${UserApi.VERIFY_CODE_URL}?d=${(context as LoginActivity).cookieKey}")
                 .apply(requestOptions)
                 .into(codeImageView)
 

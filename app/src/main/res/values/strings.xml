@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SamplingPad</string>
+    <string name="app_name">MQS食品抽样系统</string>
     <string name="register_text">注册账户</string>
     <string name="forget_password_text">忘记密码</string>
     <string name="login_text">登录</string>
