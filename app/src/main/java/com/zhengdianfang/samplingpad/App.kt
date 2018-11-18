@@ -59,7 +59,8 @@ class App: Application() {
         }
         set(value) {
             Timber.d("set new token: %s", value)
-            defaultSharedPreferences.edit().putString("token", value).apply()
+            defaultSharedPreferences.edit().putString("token", value).commit()
+            field = value
         }
 
     override fun onCreate() {
