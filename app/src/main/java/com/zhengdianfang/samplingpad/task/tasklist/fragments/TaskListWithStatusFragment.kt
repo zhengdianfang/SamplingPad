@@ -70,10 +70,12 @@ class TaskListWithStatusFragment: BaseFragment() {
     private fun bindViewModel() {
         taskListWithStatusFragmentViewModel.taskListLiveData.observe(this, Observer { data ->
             taskData.clear()
-            taskData.addAll(data!!)
-            emptyView.visibility = if (taskData.size == 0) View.VISIBLE else View.GONE
+            if (null != data) {
+                taskData.addAll(data)
+                emptyView.visibility = if (taskData.size == 0) View.VISIBLE else View.GONE
+                taskRecyclerView.adapter.notifyDataSetChanged()
+            }
             refreshFrame.isRefreshing = false
-            taskRecyclerView.adapter.notifyDataSetChanged()
         })
     }
 

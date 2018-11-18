@@ -9,6 +9,7 @@ import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import com.zhengdianfang.samplingpad.task.entities.Task_Status
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import java.lang.Exception
 
 class TaskListWithStatusFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -16,30 +17,42 @@ class TaskListWithStatusFragmentViewModel(application: Application) : AndroidVie
 
     fun loadTaskDataByStatus(task_Status: Task_Status) {
         doAsync {
-            val response = ApiClient.getRetrofit()
-                .create(TaskApi::class.java)
-                .fetchTaskListGroupByStatus(task_Status.value)
-                .execute()
-            val data = response.body()?.data
-            if (data != null) {
-                uiThread {
-                    taskListLiveData.postValue(data)
-                }
+            try {
+                val response = ApiClient.getRetrofit()
+                    .create(TaskApi::class.java)
+                    .fetchTaskListGroupByStatus(task_Status.value)
+                    .execute()
+                val data = response.body()?.data
+                    uiThread {
+                        if (data != null) {
+                            taskListLiveData.postValue(data)
+                        }
+                    }
+            }catch(e :Exception) {
+
+            } finally {
+                taskListLiveData.postValue(null)
             }
         }
     }
 
     fun loadErrorTaskDataByStatus() {
         doAsync {
-            val response = ApiClient.getRetrofit()
-                .create(TaskApi::class.java)
-                .fetchErrorTaskListGroupByStatus()
-                .execute()
-            val data = response.body()?.data
-            if (data != null) {
+            try {
+                val response = ApiClient.getRetrofit()
+                    .create(TaskApi::class.java)
+                    .fetchErrorTaskListGroupByStatus()
+                    .execute()
+                val data = response.body()?.data
                 uiThread {
-                    taskListLiveData.postValue(data)
+                    if (data != null) {
+                        taskListLiveData.postValue(data)
+                    }
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                taskListLiveData.postValue(null)
             }
         }
     }

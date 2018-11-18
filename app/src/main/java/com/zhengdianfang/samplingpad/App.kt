@@ -80,15 +80,17 @@ class App: Application() {
 
     fun logout() {
         runOnUiThread {
-            if (TextUtils.isEmpty(App.INSTANCE.token).not()) {
-                App.INSTANCE.token = ""
-                ApiClient.reset()
-                startActivity(
-                    Intent(this, LoginActivity::class.java)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                )
+            synchronized(this) {
+                if (TextUtils.isEmpty(App.INSTANCE.token).not()) {
+                    App.INSTANCE.token = ""
+                    ApiClient.reset()
+                    startActivity(
+                        Intent(this, LoginActivity::class.java)
+                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    )
+                }
             }
         }
     }
@@ -109,7 +111,6 @@ class App: Application() {
             aMapLocationClient?.setLocationOption(aMapLocationClientOption)
             aMapLocationClient?.setLocationListener {
                 if (it.errorCode == 0) {
-                    Timber.d("location longitude: $longitude, latitude: $latitude")
                     App.INSTANCE.longitude = it.longitude
                     App.INSTANCE.latitude = it.latitude
 

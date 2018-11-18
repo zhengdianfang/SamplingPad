@@ -37,7 +37,6 @@ open class FifthTableFragment: TableFragment() {
     private val uploadDialog by lazy {
         MaterialDialog.Builder(context!!)
             .progress(false, 100)
-            .cancelable(false)
             .build()
     }
 
@@ -72,6 +71,7 @@ open class FifthTableFragment: TableFragment() {
                     taskItem, "sample", "现场照片", "1", photoPaths.map { File(it.path) }.toTypedArray()) {
                     Timber.d("upload progress $it")
                     uploadDialog.setProgress(it)
+                    uploadDialog.setCancelable(it == 0 || it == 100)
                 }
             } else if (requestCode == SELECT_VIDEO_REQUEST) {
                 val videoPaths = data.getParcelableArrayListExtra<VideoFile>(Constant.RESULT_PICK_VIDEO)
@@ -127,10 +127,6 @@ open class FifthTableFragment: TableFragment() {
                 videoAttachments.addAll(attachments.filter { it.documentType == ".mp4" }.toTypedArray())
                 videoAttachments.add(UploadItem())
                 videoFrame.adapter.notifyDataSetChanged()
-
-//                pdfAttachments.clear()
-//                pdfAttachments.addAll(attachments.filter { it.documentType == ".pdf" }.toTypedArray())
-//                pdfFrame.adapter.notifyDataSetChanged()
             }
         })
         tableFragmentViewModel.isLoadingLiveData.observe(this, Observer { isLoading ->

@@ -19,7 +19,7 @@ object ApiClient {
     private var retrofit: Retrofit? = null
 
     fun getHttpClient(): OkHttpClient {
-        if (this. okHttpClient == null) {
+        if (this.okHttpClient == null) {
             this.okHttpClient = OkHttpClient
                 .Builder()
                 .addInterceptor(LoggingInterceptor())

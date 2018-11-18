@@ -2,6 +2,7 @@ package com.zhengdianfang.samplingpad.http
 
 import com.google.gson.Gson
 import com.zhengdianfang.samplingpad.App
+import com.zhengdianfang.samplingpad.user.api.UserApi
 import okhttp3.Interceptor
 import okhttp3.MediaType
 import okhttp3.Response

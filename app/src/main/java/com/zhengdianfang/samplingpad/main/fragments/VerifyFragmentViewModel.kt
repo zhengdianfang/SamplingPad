@@ -9,6 +9,7 @@ import com.zhengdianfang.samplingpad.main.api.MainApi
 import com.zhengdianfang.samplingpad.main.entites.VerifyParams
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import java.lang.Exception
 
 class VerifyFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -28,17 +29,22 @@ class VerifyFragmentViewModel(application: Application) : AndroidViewModel(appli
 ) {
         isLoadingLiveData.postValue(true)
         doAsync {
-            val response = ApiClient.getRetrofit().create(MainApi::class.java)
-                .postVerifySample(VerifyParams(implPlanCode, level1Name, enterpriseLicenseNumber, sampleName,
-                    sampleProductDate, chainBrand, sampleDate , producerCsNo, enterpriseName))
-                .execute()
+            try {
+                val response = ApiClient.getRetrofit().create(MainApi::class.java)
+                    .postVerifySample(VerifyParams(implPlanCode, level1Name, enterpriseLicenseNumber, sampleName,
+                        sampleProductDate, chainBrand, sampleDate , producerCsNo, enterpriseName))
+                    .execute()
 
-            val body = response.body()
-            if (body != null) {
-                uiThread {
-                    responseLiveData.postValue(body)
-                    isLoadingLiveData.postValue(false)
+                val body = response.body()
+                if (body != null) {
+                    uiThread {
+                        responseLiveData.postValue(body)
+                    }
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                isLoadingLiveData.postValue(false)
             }
         }
     }

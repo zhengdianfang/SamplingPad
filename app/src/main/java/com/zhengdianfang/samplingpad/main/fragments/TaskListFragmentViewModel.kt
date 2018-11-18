@@ -9,6 +9,7 @@ import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import com.zhengdianfang.samplingpad.task.entities.Task_Status
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import java.lang.Exception
 
 class TaskListFragmentViewModel(application: Application): AndroidViewModel(application) {
 
@@ -16,18 +17,24 @@ class TaskListFragmentViewModel(application: Application): AndroidViewModel(appl
 
     fun loadTaskData() {
         doAsync {
-            val response = ApiClient.getRetrofit()
-                .create(TaskApi::class.java)
-                .fetchTaskListGroupByStatus(Task_Status.WAIT_VERIFY.value)
-                .execute()
-            val data = response.body()?.data
-            if (data != null) {
-                uiThread {
-                    taskListLiveData.postValue(data)
+            try {
+                val response = ApiClient.getRetrofit()
+                    .create(TaskApi::class.java)
+                    .fetchTaskListGroupByStatus(Task_Status.WAIT_VERIFY.value)
+                    .execute()
+                val data = response.body()?.data
+                if (data != null) {
+                    uiThread {
+                        taskListLiveData.postValue(data)
+                    }
+                } else {
+                    taskListLiveData.postValue(null)
                 }
-            } else {
+            }catch (e: Exception) {
+                e.printStackTrace()
                 taskListLiveData.postValue(null)
             }
+
         }
     }
 }

@@ -21,6 +21,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 import java.io.File
+import java.lang.Exception
 
 class TableFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -42,15 +43,20 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
         taskItem.longitude = App.INSTANCE.longitude
         isLoadingLiveData.postValue(true)
         doAsync {
-            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
-                .saveSample(taskItem.id, taskItem)
-                .execute()
-            val body = response.body()
-            uiThread {
-                isLoadingLiveData.postValue(false)
-                if (body != null) {
-                    responseLiveData.postValue(body)
+            try {
+                val response = ApiClient.getRetrofit().create(TaskApi::class.java)
+                    .saveSample(taskItem.id, taskItem)
+                    .execute()
+                val body = response.body()
+                uiThread {
+                    if (body != null) {
+                        responseLiveData.postValue(body)
+                    }
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                isLoadingLiveData.postValue(false)
             }
         }
     }
@@ -60,16 +66,22 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
         taskItem.longitude = App.INSTANCE.longitude
         isLoadingLiveData.postValue(true)
         doAsync {
-            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
-                .submitSample(taskItem.id, taskItem)
-                .execute()
-            val body = response.body()
-            uiThread {
-                isLoadingLiveData.postValue(false)
-                if (body != null) {
-                    sumbitResponseLiveData.postValue(body)
+            try {
+                val response = ApiClient.getRetrofit().create(TaskApi::class.java)
+                    .submitSample(taskItem.id, taskItem)
+                    .execute()
+                val body = response.body()
+                uiThread {
+                    if (body != null) {
+                        sumbitResponseLiveData.postValue(body)
+                    }
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                isLoadingLiveData.postValue(false)
             }
+
         }
     }
 
@@ -80,25 +92,30 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
 
         //先保存, 保存成功再执行生成pdf
         doAsync {
-            val saveResponse = ApiClient.getRetrofit().create(TaskApi::class.java)
-                .saveSample(taskItem.id, taskItem)
-                .execute()
-            val saveBody = saveResponse.body()
-            if (saveBody?.code == 200) {
-                val pdfResponse = ApiClient.getRetrofit().create(TaskApi::class.java)
-                    .generateSamplePdf(taskItem.id)
+            try {
+                val saveResponse = ApiClient.getRetrofit().create(TaskApi::class.java)
+                    .saveSample(taskItem.id, taskItem)
                     .execute()
-                val pdfBody = pdfResponse.body()
-                uiThread {
-                    isLoadingLiveData.postValue(false)
-                    if (pdfBody != null) {
-                        generatePdfLiveData.postValue(pdfBody.data)
+                val saveBody = saveResponse.body()
+                if (saveBody?.code == 200) {
+                    val pdfResponse = ApiClient.getRetrofit().create(TaskApi::class.java)
+                        .generateSamplePdf(taskItem.id)
+                        .execute()
+                    val pdfBody = pdfResponse.body()
+                    uiThread {
+                        if (pdfBody != null) {
+                            generatePdfLiveData.postValue(pdfBody.data)
+                        }
                     }
+                } else {
+                    responseLiveData.postValue(saveBody)
                 }
-            } else {
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
                 isLoadingLiveData.postValue(false)
-                responseLiveData.postValue(saveBody)
             }
+
 
         }
     }
@@ -106,15 +123,20 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     fun getGoodsByBarcode(code: String) {
         isLoadingLiveData.postValue(true)
         doAsync {
-            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
-                .fetchGoodsByBarcode(code.trim())
-                .execute()
-            val goods = response.body()?.data
-            uiThread {
-                isLoadingLiveData.postValue(false)
-                if (goods != null) {
-                    goodsLiveData.postValue(goods)
+            try {
+                val response = ApiClient.getRetrofit().create(TaskApi::class.java)
+                    .fetchGoodsByBarcode(code.trim())
+                    .execute()
+                val goods = response.body()?.data
+                uiThread {
+                    if (goods != null) {
+                        goodsLiveData.postValue(goods)
+                    }
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }  finally {
+                isLoadingLiveData.postValue(false)
             }
         }
     }
@@ -122,47 +144,58 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     fun fetchEnterpriseByLincenseCode(licenseNumber: String) {
         isLoadingLiveData.postValue(true)
         doAsync {
-            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
-                .fetchEnterpriseByLicenseCode(licenseNumber.trim())
-                .execute()
-            val enterprise = response.body()?.data
-            uiThread {
-                isLoadingLiveData.postValue(false)
-                if (enterprise != null) {
-                    enterpriseLiveData.postValue(enterprise)
+            try {
+                val response = ApiClient.getRetrofit().create(TaskApi::class.java)
+                    .fetchEnterpriseByLicenseCode(licenseNumber.trim())
+                    .execute()
+                val enterprise = response.body()?.data
+                uiThread {
+                    if (enterprise != null) {
+                        enterpriseLiveData.postValue(enterprise)
+                    }
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                isLoadingLiveData.postValue(false)
             }
+
         }
     }
 
     fun fetchEntrustByCsNo(code: String) {
         isLoadingLiveData.postValue(true)
         doAsync {
-            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
-                .fetchEntrustByCsNo(code.trim())
-                .execute()
-            val enterprise = response.body()?.data
-            uiThread {
-                isLoadingLiveData.postValue(false)
-                if (enterprise != null) {
-                    enterpriseLiveData.postValue(enterprise)
+            try {
+                val response = ApiClient.getRetrofit().create(TaskApi::class.java)
+                    .fetchEntrustByCsNo(code.trim())
+                    .execute()
+                val enterprise = response.body()?.data
+                uiThread {
+                    if (enterprise != null) {
+                        enterpriseLiveData.postValue(enterprise)
+                    }
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                isLoadingLiveData.postValue(false)
             }
         }
     }
 
     fun fetchAttachmentIdsBySampleId(id: String) {
-       doAsync {
-           val response = ApiClient.getRetrofit().create(TaskApi::class.java)
-               .fetchAttachmentIdsBySampleId(id)
-               .execute()
-           val ids = response.body()?.data
-           uiThread {
-               if (ids != null) {
-                   attachmentIdsLiveData.postValue(ids)
-               }
-           }
-       }
+        doAsync {
+            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
+                .fetchAttachmentIdsBySampleId(id)
+                .execute()
+            val ids = response.body()?.data
+            uiThread {
+                if (ids != null) {
+                    attachmentIdsLiveData.postValue(ids)
+                }
+            }
+        }
     }
 
     fun uploadFile(taskItem: TaskItem, businessType: String, attTypeName: String, attachmentType: String, files: Array<File>, progressCallback: (progress: Int) -> Unit) {
@@ -186,39 +219,46 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
                 MultipartBody.Part.createFormData("file", file.name, requestFile)
             }.toTypedArray()
 
-            val response = Retrofit.Builder()
-                .baseUrl(HOST)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(TaskApi::class.java)
-                .uploadFile(
-                    RequestBody.create(MediaType.parse("multipart/form-data"), taskItem.attachmentUnitId),
-                    RequestBody.create(MediaType.parse("multipart/form-data"), businessType),
-                    RequestBody.create(MediaType.parse("multipart/form-data"), attTypeName),
-                    RequestBody.create(MediaType.parse("multipart/form-data"), attachmentType),
-                    partFiles)
-                .execute()
+            try {
+                val response = Retrofit.Builder()
+                    .baseUrl(HOST)
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+                    .create(TaskApi::class.java)
+                    .uploadFile(
+                        RequestBody.create(MediaType.parse("multipart/form-data"), taskItem.attachmentUnitId ?: taskItem.id),
+                        RequestBody.create(MediaType.parse("multipart/form-data"), businessType),
+                        RequestBody.create(MediaType.parse("multipart/form-data"), attTypeName),
+                        RequestBody.create(MediaType.parse("multipart/form-data"), attachmentType),
+                        partFiles)
+                    .execute()
 
-            val body = response.body()
-            uiThread {
-                if (body != null && body.code == 200 ) {
-                    Timber.d("upload result ${response.body()?.data.toString()}")
-                    if (attachmentType == "1") {
-                        uploadImageResponseLiveData.postValue(response.body()!!.data)
-                    } else if (attachmentType == "4") {
-                        uploadVideoResponseLiveData.postValue(response.body()!!.data)
+                val body = response.body()
+                uiThread {
+                    if (body != null && body.code == 200 ) {
+                        Timber.d("upload result ${response.body()?.data.toString()}")
+                        if (attachmentType == "1") {
+                            uploadImageResponseLiveData.postValue(response.body()!!.data)
+                        } else if (attachmentType == "4") {
+                            uploadVideoResponseLiveData.postValue(response.body()!!.data)
+                        }
+                    } else {
+                        uploadErrorResponseLiveData.postValue(body?.msg ?: "")
                     }
-                } else {
-                    uploadErrorResponseLiveData.postValue(body?.msg ?: "")
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                uploadErrorResponseLiveData.postValue("")
             }
+
         }
     }
 
     fun deleteAttachments(ids: String) {
         doAsync {
-            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
+            ApiClient.getRetrofit().create(TaskApi::class.java)
                 .deleteAttachment(ids)
                 .execute()
             deleteAttachmentLiveData.postValue(true)

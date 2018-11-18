@@ -8,6 +8,7 @@ import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.main.api.MainApi
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import java.lang.Exception
 
 class NavigationFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -17,24 +18,27 @@ class NavigationFragmentViewModel(application: Application) : AndroidViewModel(a
     fun fetchAppVersion() {
         isLoadingLiveData.postValue(true)
         doAsync {
-            val response = ApiClient.getRetrofit().create(MainApi::class.java)
-                .fetchAppVersion()
-                .execute()
-            val body = response.body()
-            if (body != null) {
-                val newVersion = body.data?.get("version")
-                val nowVersion =
-                    getApplication<App>().packageManager.getPackageInfo(getApplication<App>().packageName, 0).versionName
-                uiThread {
-                    if (newVersion.equals(nowVersion)) {
-                        upgradeInfoLiveData.postValue(null)
-                    } else {
-                        upgradeInfoLiveData.postValue(body.data)
+            try {
+                val response = ApiClient.getRetrofit().create(MainApi::class.java)
+                    .fetchAppVersion()
+                    .execute()
+                val body = response.body()
+                if (body != null) {
+                    val newVersion = body.data?.get("version")
+                    val nowVersion =
+                        getApplication<App>().packageManager.getPackageInfo(getApplication<App>().packageName, 0).versionName
+                    uiThread {
+                        if (newVersion.equals(nowVersion)) {
+                            upgradeInfoLiveData.postValue(null)
+                        } else {
+                            upgradeInfoLiveData.postValue(body.data)
+                        }
                     }
                 }
-            }
-            uiThread {
-                isLoadingLiveData.postValue(false)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                uiThread { isLoadingLiveData.postValue(false) }
             }
         }
     }

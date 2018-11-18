@@ -24,24 +24,30 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
             password.isNullOrEmpty() -> errorLiveData.postValue(context.resources.getString(R.string.please_input_password_hint))
             code.isNullOrEmpty() -> errorLiveData.postValue(context.resources.getString(R.string.please_input_verify_code_hint))
             else -> doAsync {
-                isLoadingLiveData.postValue(true)
-                val response  = ApiClient.getRetrofit()
-                    .create(UserApi::class.java)
-                    .login(codeKey, username, password.md5(), code,  rememberMe)
-                    .execute()
+                try {
+                    isLoadingLiveData.postValue(true)
+                    val response  = ApiClient.getRetrofit()
+                        .create(UserApi::class.java)
+                        .login(codeKey, username, password.md5(), code,  rememberMe)
+                        .execute()
 
-                uiThread {
+                    uiThread {
+                        val body = response.body()
+                        if (body?.code == 200) {
+                            tokenLiveData.postValue(body?.token)
+                        }else{
+                            errorLiveData.postValue(body?.msg)
+                        }
+                        if (response.isSuccessful) {
+
+                        }
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                } finally {
                     isLoadingLiveData.postValue(false)
-                    val body = response.body()
-                    if (body?.code == 200) {
-                        tokenLiveData.postValue(body?.token)
-                    }else{
-                        errorLiveData.postValue(body?.msg)
-                    }
-                    if (response.isSuccessful) {
-
-                    }
                 }
+
             }
         }
     }
@@ -52,22 +58,28 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
             username.isNullOrEmpty() -> errorLiveData.postValue(context.resources.getString(R.string.please_input_username_hint))
             password.isNullOrEmpty() -> errorLiveData.postValue(context.resources.getString(R.string.please_input_password_hint))
             else -> doAsync {
-                isLoadingLiveData.postValue(true)
-                val response  = ApiClient.getRetrofit()
-                    .create(UserApi::class.java)
-                    .loginSecond(codeKey, token ,username, password.md5(), rememberMe)
-                    .execute()
+                try {
+                    isLoadingLiveData.postValue(true)
+                    val response  = ApiClient.getRetrofit()
+                        .create(UserApi::class.java)
+                        .loginSecond(codeKey, token ,username, password.md5(), rememberMe)
+                        .execute()
 
-                uiThread {
-                    isLoadingLiveData.postValue(false)
-                    val body = response.body()
-                    if (body?.code == 200) {
-                        App.INSTANCE.token = token
-                        tokenLiveData.postValue(App.INSTANCE.token)
-                    } else {
-                        errorLiveData.postValue(body?.msg)
+                    uiThread {
+                        val body = response.body()
+                        if (body?.code == 200) {
+                            App.INSTANCE.token = token
+                            tokenLiveData.postValue(App.INSTANCE.token)
+                        } else {
+                            errorLiveData.postValue(body?.msg)
+                        }
                     }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                } finally {
+                    isLoadingLiveData.postValue(false)
                 }
+
             }
         }
     }

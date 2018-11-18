@@ -8,6 +8,7 @@ import com.zhengdianfang.samplingpad.task.api.TaskApi
 import com.zhengdianfang.samplingpad.task.entities.StatusCount
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import java.lang.Exception
 
 class MyTaskStatusListFragmentViewModel(application: Application): AndroidViewModel(application) {
 
@@ -17,11 +18,16 @@ class MyTaskStatusListFragmentViewModel(application: Application): AndroidViewMo
     fun fetchStatusCount() {
         isLoadingLiveData.postValue(true)
         doAsync {
-            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
-                .fetchStatusCount()
-                .execute()
-            uiThread {
-                countLiveData.postValue(response.body()?.data)
+            try {
+                val response = ApiClient.getRetrofit().create(TaskApi::class.java)
+                    .fetchStatusCount()
+                    .execute()
+                uiThread {
+                    countLiveData.postValue(response.body()?.data)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
                 isLoadingLiveData.postValue(false)
             }
 

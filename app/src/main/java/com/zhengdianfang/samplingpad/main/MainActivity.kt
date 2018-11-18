@@ -1,10 +1,15 @@
 package com.zhengdianfang.samplingpad.main
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import com.baidu.trace.LBSTraceClient
+import com.baidu.trace.Trace
+import com.baidu.trace.model.OnTraceListener
+import com.baidu.trace.model.PushMessage
 import com.google.gson.Gson
 import com.zhengdianfang.samplingpad.App
 import com.zhengdianfang.samplingpad.common.BaseActivity
@@ -15,21 +20,35 @@ import com.zhengdianfang.samplingpad.main.fragments.MainFragment
 import org.jetbrains.anko.defaultSharedPreferences
 import org.jetbrains.anko.doAsync
 import timber.log.Timber
+import android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
+import android.os.PowerManager
+import android.provider.Settings
 
-class MainActivity : BaseActivity() {
+
+class MainActivity : BaseActivity(), OnTraceListener {
 
     companion object {
         const val REQUEST_LOCATION_PERMISSION = 0x00001
     }
 
-    val firstUsername by lazy { intent.getStringExtra("firstUsername") }
-    val secondUsername by lazy { intent.getStringExtra("secondUsername") }
+    private var traceClient: LBSTraceClient? = null
+    private var trace: Trace? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadRootFragment(android.R.id.content, MainFragment.newInstance(), false, false)
         applyLocationPermission()
         loadDataOnBackground()
+//        initBaiduTrace()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        traceClient?.stopTrace(trace, this)
+        traceClient?.stopGather(this)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -44,6 +63,33 @@ class MainActivity : BaseActivity() {
                 App.INSTANCE.initLocationClient()
             }
         }
+    }
+
+    override fun onStartGatherCallback(status: Int, message: String?) {
+        Timber.d("Baidu gather start : $status======$message")
+    }
+
+    override fun onStopGatherCallback(status: Int, message: String?) {
+        Timber.d("Baidu gather stop: $status======$message")
+    }
+
+    override fun onBindServiceCallback(p0: Int, p1: String?) {
+    }
+
+    override fun onInitBOSCallback(p0: Int, p1: String?) {
+    }
+
+
+    override fun onPushCallback(p0: Byte, message: PushMessage?) {
+        Timber.d("Baidu push  : ${message.toString()}")
+    }
+
+    override fun onStartTraceCallback(status: Int, message: String?) {
+        Timber.d("Baidu trace start : $status======$message")
+    }
+
+    override fun onStopTraceCallback(status: Int, message: String?) {
+        Timber.d("Baidu trace stop: $status======$message")
     }
 
     private fun applyLocationPermission() {
@@ -110,4 +156,34 @@ class MainActivity : BaseActivity() {
 
         }
     }
+
+    private fun initBaiduTrace() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val packageName = this.packageName
+            val isIgnoring = (getSystemService(Context.POWER_SERVICE) as PowerManager).isIgnoringBatteryOptimizations(packageName)
+            if (!isIgnoring) {
+                val intent = Intent(
+                    Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
+                intent.data = Uri.parse("package:$packageName")
+                try {
+                    startActivity(intent)
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
+
+            }
+        }
+        val serviceId: Long = 205477
+        val entityName = "${App.INSTANCE.firstUsername}"
+        val isNeedObjectStorage = false
+        trace = Trace(serviceId, entityName, isNeedObjectStorage)
+        traceClient = LBSTraceClient(applicationContext)
+        // 定位周期(单位:秒)
+        val gatherInterval = 5
+        val packInterval = 10
+        traceClient!!.setInterval(gatherInterval, packInterval)
+        traceClient!!.startTrace(trace, this)
+        traceClient!!.startGather(this)
+    }
+
 }

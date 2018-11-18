@@ -82,6 +82,7 @@ class FirstLoginFragment : BaseFragment() {
     private fun setupCodeImageView() {
         val requestOptions = RequestOptions()
             .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .placeholder(R.drawable.verify_code_default_pic)
             .skipMemoryCache(true)
 
         (context as LoginActivity).generateCookieKey()
@@ -92,7 +93,8 @@ class FirstLoginFragment : BaseFragment() {
         codeImageView.setOnClickListener {
             (context as LoginActivity).generateCookieKey()
             Glide.with(this).clear(codeImageView)
-            Glide.with(this).load("${UserApi.VERIFY_CODE_URL}?d=${(context as LoginActivity).cookieKey}")
+            Glide.with(this)
+                .load("${UserApi.VERIFY_CODE_URL}?d=${(context as LoginActivity).cookieKey}")
                 .apply(requestOptions)
                 .into(codeImageView)
 

@@ -12,7 +12,7 @@ import retrofit2.http.*
 interface TaskApi {
 
     companion object {
-        const val ATTACHMENT_URL = "/attachments/showPhotos/"
+        const val ATTACHMENT_URL = "attachments/showPhotos/"
     }
 
     @GET("app/listtaskscount")
