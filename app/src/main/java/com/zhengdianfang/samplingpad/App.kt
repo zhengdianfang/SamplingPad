@@ -10,6 +10,7 @@ import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
 import com.bumptech.glide.load.model.GlideUrl
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.user.LoginActivity
+import com.zhengdianfang.samplingpad.user.api.UserApi
 import org.jetbrains.anko.defaultSharedPreferences
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.runOnUiThread
@@ -79,8 +80,13 @@ class App: Application() {
     }
 
     fun logout() {
+        doAsync {
+            ApiClient.getRetrofit().create(UserApi::class.java)
+                .logout()
+                .execute()
+        }
         runOnUiThread {
-            synchronized(this) {
+            synchronized(App@this) {
                 if (TextUtils.isEmpty(App.INSTANCE.token).not()) {
                     App.INSTANCE.token = ""
                     ApiClient.reset()

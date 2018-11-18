@@ -44,10 +44,8 @@ class SecondLoginFragment : BaseFragment() {
         })
 
         userNameLoginFragmentViewModel.tokenLiveData.observe(this, Observer { loginToken ->
-            Timber.d("login token: %s", loginToken)
-            if (loginToken.isNullOrEmpty().not()) {
+            if (loginToken != null) {
                 startActivity(Intent(context, MainActivity::class.java))
-                App.INSTANCE.secondUsername = userNameEditText.text.toString()
                 Toast.makeText(context, getString(R.string.login_successful), Toast.LENGTH_SHORT).show()
                 activity?.finish()
             } else {

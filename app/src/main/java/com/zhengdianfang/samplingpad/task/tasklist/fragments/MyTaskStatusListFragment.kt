@@ -97,7 +97,11 @@ class MyTaskStatusListFragment : BaseFragment() {
                 ContextCompat.getDrawable(context!!, R.drawable.my_task_item_left_drawable)!!.tintDrawable(color)
             statusNameTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(leftDrawable, null, null, null)
             itemView.setOnClickListener {
-               start(TaskListWithStatusFragment.newInstance(statusNames[index], task_Status))
+                if (task_Status.equals(Task_Status.CAN_NOT_VERIFY)) {
+                   start(TaskListWithExceptionFragment.newInstance())
+                } else {
+                    start(TaskListWithStatusFragment.newInstance(statusNames[index], task_Status))
+                }
             }
         }
     }

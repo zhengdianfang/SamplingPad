@@ -22,7 +22,7 @@ interface TaskApi {
     fun fetchTaskListGroupByStatus(@Path("status") status: Int): Call<Response<MutableList<TaskItem>>>
 
     @GET("app/listabnormaltasks")
-    fun fetchErrorTaskListGroupByStatus(): Call<Response<MutableList<TaskItem>>>
+    fun fetchErrorTaskListGroupByStatus(): Call<Response<MutableList<TaskException>>>
 
     @PUT("app/samples/{id}")
     fun saveSample(@Path("id") id: String, @Body taskItem: TaskItem): Call<Response<String>>

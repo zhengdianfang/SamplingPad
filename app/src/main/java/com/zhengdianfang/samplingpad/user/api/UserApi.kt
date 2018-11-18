@@ -4,10 +4,7 @@ import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.http.Response
 import com.zhengdianfang.samplingpad.user.entities.User
 import retrofit2.Call
-import retrofit2.http.POST
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.Header
+import retrofit2.http.*
 
 interface UserApi {
 
@@ -31,5 +28,8 @@ interface UserApi {
         @Header("Authorization") token: String,
         @Field("username") username: String,
         @Field("password")password: String,
-        @Field("remeqmberMe")rememberMe: Boolean): Call<Response<String>>
+        @Field("remeqmberMe")rememberMe: Boolean): Call<Map<String, String>>
+
+    @GET("logout")
+    fun logout(): Call<Response<String>>
 }

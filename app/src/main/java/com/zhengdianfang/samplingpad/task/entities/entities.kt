@@ -316,9 +316,23 @@ data class TaskItem(
         enterpriseAreaName = street?.name
     }
 }
+data class TaskException(
+    val id: Int?,
+    val task_no: String?,
+    val enterprise_area_id: Int?,
+    val abnormal_type_id: Int?,
+    val enterprise_address: String?,
+    val abnormal_type_name: String?,
+    val create_org_name: String?,
+    val want_sample: String?,
+    val enterprise_area_name: String?,
+    val creator_id: String?,
+    val creator_name: String?,
+    val enterprise_name: String?,
+    val create_date: String?
+)
 
 data class AttachmentIds(val id: String)
-
 
 class AttachmentItem(
     var id: Int,

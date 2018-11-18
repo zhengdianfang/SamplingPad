@@ -67,11 +67,13 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
 
                     uiThread {
                         val body = response.body()
-                        if (body?.code == 200) {
+                        if (body?.get("code")?.toIntOrNull() == 200) {
                             App.INSTANCE.token = token
+                            App.INSTANCE.firstUsername = body?.get("userName1") ?: ""
+                            App.INSTANCE.secondUsername = body?.get("userName2") ?: ""
                             tokenLiveData.postValue(App.INSTANCE.token)
                         } else {
-                            errorLiveData.postValue(body?.msg)
+                            errorLiveData.postValue(body?.get("msg"))
                         }
                     }
                 } catch (e: Exception) {
