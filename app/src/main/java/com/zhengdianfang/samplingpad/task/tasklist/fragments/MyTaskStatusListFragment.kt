@@ -26,16 +26,14 @@ class MyTaskStatusListFragment : BaseFragment() {
         R.id.waitVerifyItem,
         R.id.cancelItem,
         R.id.completeItem,
-        R.id.refusesItem,
-        R.id.cannotVerifyItem
+        R.id.refusesItem
     )
 
     private val itemLeftDrawableColors = arrayOf(
         R.color.yellow,
         R.color.red,
         R.color.green,
-        R.color.blue,
-        R.color.colorDarkGray
+        R.color.blue
     )
 
     companion object {
@@ -72,7 +70,6 @@ class MyTaskStatusListFragment : BaseFragment() {
             Timber.d("statusCount : %s", statusCount.toString())
             waitVerifyItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countAll ?: ""}"
             refusesItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countRefuse ?: ""}"
-            cannotVerifyItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countAbnormal ?: ""}"
             completeItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.countSubmit ?: ""}"
             cancelItem.findViewById<TextView>(R.id.taskCountTextView).text = "${statusCount?.retireCount?: ""}"
         })
@@ -97,11 +94,7 @@ class MyTaskStatusListFragment : BaseFragment() {
                 ContextCompat.getDrawable(context!!, R.drawable.my_task_item_left_drawable)!!.tintDrawable(color)
             statusNameTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(leftDrawable, null, null, null)
             itemView.setOnClickListener {
-                if (task_Status.equals(Task_Status.CAN_NOT_VERIFY)) {
-                   start(TaskListWithExceptionFragment.newInstance())
-                } else {
-                    start(TaskListWithStatusFragment.newInstance(statusNames[index], task_Status))
-                }
+                start(TaskListWithStatusFragment.newInstance(statusNames[index], task_Status))
             }
         }
     }

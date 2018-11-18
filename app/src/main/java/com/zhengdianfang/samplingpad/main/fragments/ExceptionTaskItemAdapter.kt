@@ -11,7 +11,7 @@ import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import com.zhengdianfang.samplingpad.task.entities.Task_Status
 
 class ExceptionTaskItemAdapter(data: MutableList<TaskException>)
-    : BaseQuickAdapter<TaskException, BaseViewHolder>(R.layout.task_item_layout, data) {
+    : BaseQuickAdapter<TaskException, BaseViewHolder>(R.layout.exception_task_item_layout, data) {
 
 
     override fun convert(helper: BaseViewHolder, item: TaskException) {
@@ -21,7 +21,12 @@ class ExceptionTaskItemAdapter(data: MutableList<TaskException>)
     }
 
     private fun renderBasicInfo(helper: BaseViewHolder, item: TaskException) {
-
+        helper.setText(R.id.taskNoTextView, "任务号：${item.task_no}")
+            .setText(R.id.enterpriseNameView, "单位名称：${item.enterprise_name}")
+            .setText(R.id.enterprisePlaceView, "行政区域：${item.enterprise_area_name}")
+            .setText(R.id.timeView, item.create_date)
+            .setText(R.id.sampleNameView, "样品名称：${item.want_sample}")
+            .setText(R.id.reasonTextView, item.abnormal_type_name)
     }
 
     private fun renderMarkImageView(helper: BaseViewHolder) {

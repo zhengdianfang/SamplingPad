@@ -65,7 +65,7 @@ class TaskListWithExceptionFragment: BaseFragment() {
 
     private fun setupViews() {
         backButton.setOnClickListener {
-            pop()
+            activity?.finish()
         }
         toolBarTitleView.text =  "无法抽样"
         refreshFrame.setOnRefreshListener {

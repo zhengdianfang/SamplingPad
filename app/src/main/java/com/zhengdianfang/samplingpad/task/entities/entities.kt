@@ -20,7 +20,6 @@ enum class Task_Status(val value: Int) {
     CANCEL(3),
     COMPLETE(2),
     REFUSE(4),
-    CAN_NOT_VERIFY(0)
 }
 enum class Task_Type(val value: Int) {
     NORMAL_TASK(1),

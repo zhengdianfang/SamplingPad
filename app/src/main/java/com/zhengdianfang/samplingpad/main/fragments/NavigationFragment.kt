@@ -17,7 +17,9 @@ import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.main.MainActivity
 import com.zhengdianfang.samplingpad.task.food_product.FoodProductSamplingTableActivity
+import com.zhengdianfang.samplingpad.task.tasklist.ExceptionTaskListActivity
 import com.zhengdianfang.samplingpad.task.tasklist.MyTaskListActivity
+import com.zhengdianfang.samplingpad.task.tasklist.fragments.TaskListWithExceptionFragment
 import kotlinx.android.synthetic.main.fragment_navigation.*
 import me.yokeyword.fragmentation.SupportFragment
 
@@ -45,6 +47,11 @@ class NavigationFragment : BaseFragment() {
         myTaskListButton.setOnClickListener {
             startActivity(Intent(context, MyTaskListActivity::class.java))
         }
+
+        exceptionTaskListButton.setOnClickListener {
+            startActivity(Intent(context, ExceptionTaskListActivity::class.java))
+        }
+
         upgradeAppButton.setOnClickListener {
             navigationFragmentViewModel.fetchAppVersion()
         }

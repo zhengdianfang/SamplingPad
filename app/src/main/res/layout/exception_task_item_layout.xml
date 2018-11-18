@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:padding="16dp"
+    android:columnCount="5">
+
+    <ImageView
+        android:id="@+id/markImageView"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_task"/>
+
+    <TextView
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/super_super_large"
+        android:layout_marginLeft="16dp"
+        android:text="原因："
+        />
+
+    <TextView
+        android:id="@+id/reasonTextView"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/super_super_large"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:layout_columnWeight="1"
+        android:ellipsize="end" />
+
+
+    <TextView
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/super_super_large"
+        android:layout_marginLeft="16dp"
+        android:text="回访：" />
+
+    <TextView
+        android:id="@+id/reviewTextView"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/super_super_large"
+        android:layout_columnWeight="1"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:text="123123123k" />
+
+    <TextView
+        android:id="@+id/timeView"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/middle"
+        android:text="123123123123"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_columnWeight="1"
+        android:layout_columnSpan="4"
+        android:layout_column="1"
+        />
+
+
+    <TextView
+        android:id="@+id/sampleNameView"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/middle"
+        android:text="样品名称："
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_columnWeight="1"
+        android:layout_columnSpan="4"
+        android:layout_column="1"
+        />
+
+    <TextView
+        android:id="@+id/enterpriseNameView"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/middle"
+        android:text="单位名称："
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_columnWeight="1"
+        android:layout_columnSpan="4"
+        android:layout_column="1"
+        />
+
+    <TextView
+        android:id="@+id/enterprisePlaceView"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/middle"
+        android:text="行政区域："
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_columnWeight="1"
+        android:layout_columnSpan="4"
+        android:layout_column="1"
+        />
+
+    <TextView
+        android:id="@+id/taskNoTextView"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/middle"
+        android:text="任务号："
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_columnWeight="1"
+        android:layout_columnSpan="4"
+        android:layout_column="1" />
+</GridLayout>

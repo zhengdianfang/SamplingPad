@@ -55,11 +55,7 @@ class TaskListWithStatusFragment: BaseFragment() {
     }
 
     private fun requestData() {
-        if (status == Task_Status.CAN_NOT_VERIFY) {
-            taskListWithStatusFragmentViewModel.loadErrorTaskDataByStatus()
-        } else {
-            taskListWithStatusFragmentViewModel.loadTaskDataByStatus(this.status)
-        }
+        taskListWithStatusFragmentViewModel.loadTaskDataByStatus(this.status)
     }
 
     private fun autoRefresh() {
