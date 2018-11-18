@@ -20,6 +20,7 @@ enum class Task_Status(val value: Int) {
     CANCEL(3),
     COMPLETE(2),
     REFUSE(4),
+    CAN_NOT_VERIFY(0)
 }
 enum class Task_Type(val value: Int) {
     NORMAL_TASK(1),
@@ -328,7 +329,8 @@ data class TaskException(
     val creator_id: String?,
     val creator_name: String?,
     val enterprise_name: String?,
-    val create_date: String?
+    val create_date: String?,
+    val callback: Int?
 )
 
 data class AttachmentIds(val id: String)

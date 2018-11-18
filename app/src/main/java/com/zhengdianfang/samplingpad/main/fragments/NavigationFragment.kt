@@ -16,6 +16,7 @@ import com.zhengdianfang.samplingpad.App
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.main.MainActivity
+import com.zhengdianfang.samplingpad.task.canot_verify.CanotVerifyReasonActivity
 import com.zhengdianfang.samplingpad.task.food_product.FoodProductSamplingTableActivity
 import com.zhengdianfang.samplingpad.task.tasklist.ExceptionTaskListActivity
 import com.zhengdianfang.samplingpad.task.tasklist.MyTaskListActivity
@@ -49,7 +50,7 @@ class NavigationFragment : BaseFragment() {
         }
 
         exceptionTaskListButton.setOnClickListener {
-            startActivity(Intent(context, ExceptionTaskListActivity::class.java))
+            startActivity(Intent(context, CanotVerifyReasonActivity::class.java))
         }
 
         upgradeAppButton.setOnClickListener {

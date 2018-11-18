@@ -86,9 +86,6 @@ class TaskListWithStatusFragment: BaseFragment() {
         taskRecyclerView.addItemDecoration(ItemDecoration())
         val allTaskItemAdapter = AllTaskItemAdapter(taskData)
         allTaskItemAdapter.setOnItemChildClickListener { _, view, position ->
-            if (view.id == R.id.operationButton2) {
-                startActivity(Intent(context, CanotVerifyReasonActivity::class.java).putExtra("taskItem", taskData[position]))
-            }
             if (view.id == R.id.operationButton1) {
                 val task = taskData[position]
                 when(task.foodTypeId) {

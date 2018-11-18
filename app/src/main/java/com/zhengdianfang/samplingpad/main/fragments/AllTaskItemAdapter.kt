@@ -38,7 +38,6 @@ class AllTaskItemAdapter(data: MutableList<TaskItem>)
         helper.setText(R.id.addressTextView, "抽样地点：${item.enterprisePlaceName ?: ""}")
         helper.setText(R.id.spaceTextView, "场所名称：${item.enterpriseName ?: ""}")
         helper.addOnClickListener(R.id.operationButton1)
-        helper.addOnClickListener(R.id.operationButton2)
     }
 
     private fun renderMarkImageView(helper: BaseViewHolder, item: TaskItem) {
@@ -52,15 +51,12 @@ class AllTaskItemAdapter(data: MutableList<TaskItem>)
         when (item.state) {
             Task_Status.WAIT_VERIFY.value -> {
                 helper.setVisible(R.id.operationButton1, true)
-                helper.setVisible(R.id.operationButton2, true)
             }
             Task_Status.CANCEL.value -> {
                 helper.setVisible(R.id.operationButton1, true)
-                helper.setVisible(R.id.operationButton2, true)
             }
             else -> {
                 helper.setVisible(R.id.operationButton1, false)
-                helper.setVisible(R.id.operationButton2, false)
             }
         }
     }

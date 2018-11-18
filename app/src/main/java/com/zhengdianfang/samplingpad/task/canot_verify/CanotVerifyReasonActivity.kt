@@ -11,35 +11,28 @@ import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseActivity
 import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.http.ApiClient
-import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import kotlinx.android.synthetic.main.activity_cannot_reason_layout.*
+import kotlinx.android.synthetic.main.notification_template_lines_media.view.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 
 class CanotVerifyReasonActivity: BaseActivity() {
 
-    private val taskItem by lazy { intent.getParcelableExtra("taskItem") as TaskItem }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loadRootFragment(android.R.id.content, CanotVerifyReasonFragment.newInstance(taskItem))
+        loadRootFragment(android.R.id.content, CanotVerifyReasonFragment.newInstance())
 
     }
 
 }
 
-public class CanotVerifyReasonFragment : BaseFragment() {
+class CanotVerifyReasonFragment : BaseFragment() {
 
     companion object {
-        fun newInstance(taskItem: TaskItem):  CanotVerifyReasonFragment {
-            val fragment = CanotVerifyReasonFragment()
-            val bundle = Bundle()
-            bundle.putParcelable("taskItem", taskItem)
-            fragment.arguments = bundle
-            return fragment
+        fun newInstance():  CanotVerifyReasonFragment {
+            return CanotVerifyReasonFragment()
         }
     }
 
-    private val taskItem by lazy { arguments?.getParcelable("taskItem") as TaskItem }
     private val canotVerifyViewModel by lazy { ViewModelProviders.of(this).get(CanotVerifyViewModel::class.java) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -75,7 +68,6 @@ public class CanotVerifyReasonFragment : BaseFragment() {
         backButton.setOnClickListener {
             activity?.finish()
         }
-        taskNoTextView.text = "单号：${taskItem.code}"
 
         regionSpinnerGroup.fetchData()
         abnormalTypeNameSpinner.fetchData("${ApiClient.HOST}/app/abnormaltypelis")
@@ -85,9 +77,10 @@ public class CanotVerifyReasonFragment : BaseFragment() {
             val enterpriseAddress = enterpriseAddressEditText.getContent()
             val abnormalTypeName = abnormalTypeNameSpinner.getContent()
             val creatorName= creatorNameEditText.getContent()
-            val taskNo = taskItem.code
             val enterpriseAreaName = regionSpinnerGroup.getContent()
             val createOrgName = detectionCompanyEditText.getContent()
+            val callback = if (producerActiveRadioGroup.getCheckedText() == "是")  1 else  0
+            val taskNo = taskNoEditText.getContent()
 
             canotVerifyViewModel.submitCanotVerifyTask(
                 mapOf(
@@ -96,9 +89,10 @@ public class CanotVerifyReasonFragment : BaseFragment() {
                     Pair("enterpriseAddress", enterpriseAddress),
                     Pair("abnormalTypeName", abnormalTypeName),
                     Pair("creatorName", creatorName),
-                    Pair("taskNo", taskNo),
                     Pair("enterpriseAreaName", enterpriseAreaName),
-                    Pair("createOrgName", createOrgName)
+                    Pair("createOrgName", createOrgName),
+                    Pair("callback", callback.toString()),
+                    Pair("taskNo", taskNo)
                 )
             )
         }

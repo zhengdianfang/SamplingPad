@@ -27,6 +27,7 @@ class ExceptionTaskItemAdapter(data: MutableList<TaskException>)
             .setText(R.id.timeView, item.create_date)
             .setText(R.id.sampleNameView, "样品名称：${item.want_sample}")
             .setText(R.id.reasonTextView, item.abnormal_type_name)
+            .setText(R.id.reviewTextView, if (item.callback == 1) "是" else "否" )
     }
 
     private fun renderMarkImageView(helper: BaseViewHolder) {

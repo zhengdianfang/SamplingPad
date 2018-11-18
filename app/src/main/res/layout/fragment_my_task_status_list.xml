@@ -36,6 +36,9 @@
                 android:id="@+id/refusesItem"
                 layout="@layout/my_task_status_item_layout" />
 
+            <include
+                android:id="@+id/cannotVerifyItem"
+                layout="@layout/my_task_status_item_layout" />
 
         </LinearLayout>
 
