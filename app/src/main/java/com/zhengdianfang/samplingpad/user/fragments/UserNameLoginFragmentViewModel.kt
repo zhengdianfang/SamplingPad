@@ -8,13 +8,14 @@ import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.user.api.UserApi
 import com.zhengdianfang.samplingpad.common.md5
+import com.zhengdianfang.samplingpad.user.entities.User
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel(application) {
 
     val errorLiveData = MutableLiveData<String>()
-    val tokenLiveData = MutableLiveData<String>()
+    val userLiveData = MutableLiveData<User>()
     val isLoadingLiveData = MutableLiveData<Boolean>()
 
     fun login(codeKey: String, username: String, password: String, code: String, rememberMe: Boolean) {
@@ -23,32 +24,32 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
             username.isNullOrEmpty() -> errorLiveData.postValue(context.resources.getString(R.string.please_input_username_hint))
             password.isNullOrEmpty() -> errorLiveData.postValue(context.resources.getString(R.string.please_input_password_hint))
             code.isNullOrEmpty() -> errorLiveData.postValue(context.resources.getString(R.string.please_input_verify_code_hint))
-            else -> doAsync {
-                try {
-                    isLoadingLiveData.postValue(true)
-                    val response  = ApiClient.getRetrofit()
-                        .create(UserApi::class.java)
-                        .login(codeKey, username, password.md5(), code,  rememberMe)
-                        .execute()
+            else ->
+                doAsync {
+                    try {
+                        isLoadingLiveData.postValue(true)
+                        val response  = ApiClient.getRetrofit()
+                            .create(UserApi::class.java)
+                            .login(codeKey, username, password.md5(), code,  rememberMe)
+                            .execute()
 
-                    uiThread {
-                        val body = response.body()
-                        if (body?.code == 200) {
-                            tokenLiveData.postValue(body?.token)
-                        }else{
-                            errorLiveData.postValue(body?.msg)
+                        uiThread {
+                            val body = response.body()
+                            if (body?.code == 200) {
+                                val user = body.userInfo
+                                user?.token = body?.token
+                                userLiveData.postValue(user)
+                            }else{
+                                errorLiveData.postValue(body?.msg)
+                            }
                         }
-                        if (response.isSuccessful) {
-
-                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    } finally {
+                        isLoadingLiveData.postValue(false)
                     }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                } finally {
-                    isLoadingLiveData.postValue(false)
-                }
 
-            }
+                }
         }
     }
 
@@ -68,10 +69,9 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
                     uiThread {
                         val body = response.body()
                         if (body?.get("code")?.toIntOrNull() == 200) {
-                            App.INSTANCE.token = token
-                            App.INSTANCE.firstUsername = body?.get("userName1") ?: ""
-                            App.INSTANCE.secondUsername = body?.get("userName2") ?: ""
-                            tokenLiveData.postValue(App.INSTANCE.token)
+                            App.INSTANCE.user?.userName1 = body?.get("userName1") ?: ""
+                            App.INSTANCE.user?.userName2 = body?.get("userName2") ?: ""
+                            userLiveData.postValue(App.INSTANCE.user)
                         } else {
                             errorLiveData.postValue(body?.get("msg"))
                         }

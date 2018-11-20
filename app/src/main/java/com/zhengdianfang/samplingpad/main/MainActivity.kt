@@ -42,7 +42,7 @@ class MainActivity : BaseActivity(), OnTraceListener {
         loadRootFragment(android.R.id.content, MainFragment.newInstance(), false, false)
         applyLocationPermission()
         loadDataOnBackground()
-//        initBaiduTrace()
+        fetchThirdSdkId()
     }
 
     override fun onDestroy() {
@@ -85,6 +85,9 @@ class MainActivity : BaseActivity(), OnTraceListener {
     }
 
     override fun onStartTraceCallback(status: Int, message: String?) {
+        if (status == 0) {
+            traceClient!!.startGather(this)
+        }
         Timber.d("Baidu trace start : $status======$message")
     }
 
@@ -157,7 +160,7 @@ class MainActivity : BaseActivity(), OnTraceListener {
         }
     }
 
-    private fun initBaiduTrace() {
+    private fun initBaiduTrace(serviceId: String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val packageName = this.packageName
             val isIgnoring = (getSystemService(Context.POWER_SERVICE) as PowerManager).isIgnoringBatteryOptimizations(packageName)
@@ -173,8 +176,8 @@ class MainActivity : BaseActivity(), OnTraceListener {
 
             }
         }
-        val serviceId: Long = 205477
-        val entityName = "${App.INSTANCE.firstUsername}"
+        val serviceId: Long = serviceId.toLong()
+        val entityName = "${App.INSTANCE.user?.userName1}"
         val isNeedObjectStorage = false
         trace = Trace(serviceId, entityName, isNeedObjectStorage)
         traceClient = LBSTraceClient(applicationContext)
@@ -183,7 +186,19 @@ class MainActivity : BaseActivity(), OnTraceListener {
         val packInterval = 10
         traceClient!!.setInterval(gatherInterval, packInterval)
         traceClient!!.startTrace(trace, this)
-        traceClient!!.startGather(this)
+    }
+
+    private fun fetchThirdSdkId() {
+        doAsync {
+            val response = ApiClient.getRetrofit()
+                .create(MainApi::class.java)
+                .fetchAcountId(App.INSTANCE.user?.id ?: "")
+                .execute()
+            val body = response.body()
+            if (body != null) {
+                initBaiduTrace(body.data?.get("serviceId") ?: "")
+            }
+        }
     }
 
 }

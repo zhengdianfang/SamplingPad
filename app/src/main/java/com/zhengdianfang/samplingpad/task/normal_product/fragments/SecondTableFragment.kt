@@ -6,11 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.R
-import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.common.TableFragment
-import com.zhengdianfang.samplingpad.common.components.BaseComponent
-import com.zhengdianfang.samplingpad.common.entities.OptionItem
 import com.zhengdianfang.samplingpad.common.searchPoiByText
+import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import kotlinx.android.synthetic.main.fragment_second_normal_table_layout.*
 import timber.log.Timber
@@ -124,7 +122,7 @@ open class SecondTableFragment: TableFragment() {
         taskItem.enterpriseAddress = enterpriseAddressEditText.getContent()
 
         val certificates = resources.getStringArray(R.array.licence_type_array)
-        taskItem.enterpriseMOrP = certificates.indexOf(enterpriseMOrPRadioGroup.getCheckedText()) + 1
+        taskItem.enterpriseMOrP = if (enterpriseMOrPRadioGroup.getCheckedText() == certificates[0]) 1 else 2
         taskItem.enterpriseQsNo = enterpriseQsNoEditText.getContent()
         taskItem.enterpriseLegalRep = enterpriseLegalRepEditText.getContent()
         taskItem.enterpriseContacts = enterpriseContactsEditText.getContent()

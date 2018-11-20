@@ -8,9 +8,11 @@ import com.amap.api.location.AMapLocationClientOption
 import com.bumptech.glide.Glide
 import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
 import com.bumptech.glide.load.model.GlideUrl
+import com.google.gson.Gson
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.user.LoginActivity
 import com.zhengdianfang.samplingpad.user.api.UserApi
+import com.zhengdianfang.samplingpad.user.entities.User
 import org.jetbrains.anko.defaultSharedPreferences
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.runOnUiThread
@@ -27,39 +29,24 @@ class App: Application() {
     var latitude = 0.0
     var longitude = 0.0
 
-    var firstUsername = ""
+    var user: User? = null
         get() {
-            if (field.isNullOrEmpty()) {
-                field = defaultSharedPreferences.getString("firstUsername", "")
+            if (field == null) {
+                val json = defaultSharedPreferences.getString("firstUsername", "")
+                if (TextUtils.isEmpty(json).not()) {
+                    Timber.d("get login users: %s", field)
+                    field = Gson().fromJson(json, User::class.java)
+                }
             }
             return field
         }
         set(value) {
-            defaultSharedPreferences.edit().putString("firstUsername", value).apply()
-        }
-
-    var secondUsername = ""
-        get() {
-            if (field.isNullOrEmpty()) {
-                field = defaultSharedPreferences.getString("secondUsername", "")
+            Timber.d("set login users: %s", value)
+            if (value != null) {
+                defaultSharedPreferences.edit().putString("firstUsername", Gson().toJson(value)).apply()
+            } else {
+                defaultSharedPreferences.edit().putString("firstUsername", "").apply()
             }
-            return field
-        }
-        set(value) {
-            defaultSharedPreferences.edit().putString("secondUsername", value).apply()
-        }
-
-    var token: String = ""
-        get() {
-            if (field.isNullOrEmpty()) {
-                field = defaultSharedPreferences.getString("token", "")
-                Timber.d("get new token: %s", field)
-            }
-            return field
-        }
-        set(value) {
-            Timber.d("set new token: %s", value)
-            defaultSharedPreferences.edit().putString("token", value).commit()
             field = value
         }
 
@@ -81,23 +68,21 @@ class App: Application() {
     }
 
     fun logout() {
-        doAsync {
-            ApiClient.getRetrofit().create(UserApi::class.java)
-                .logout()
-                .execute()
-        }
-        runOnUiThread {
-            synchronized(App@this) {
-                if (TextUtils.isEmpty(App.INSTANCE.token).not()) {
-                    App.INSTANCE.token = ""
-                    ApiClient.reset()
-                    startActivity(
-                        Intent(this, LoginActivity::class.java)
-                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                    )
+        synchronized(this) {
+            if (App.INSTANCE.user != null) {
+                doAsync {
+                    ApiClient.getRetrofit().create(UserApi::class.java)
+                        .logout()
+                        .execute()
                 }
+                App.INSTANCE.user = null
+                ApiClient.reset()
+                startActivity(
+                    Intent(this, LoginActivity::class.java)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                )
             }
         }
     }

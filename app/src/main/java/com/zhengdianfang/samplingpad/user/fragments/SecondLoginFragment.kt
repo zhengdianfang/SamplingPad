@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.zhengdianfang.samplingpad.App
 
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
@@ -17,7 +16,6 @@ import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.main.MainActivity
 import com.zhengdianfang.samplingpad.user.LoginActivity
 import kotlinx.android.synthetic.main.fragment_second_login.*
-import timber.log.Timber
 
 class SecondLoginFragment : BaseFragment() {
 
@@ -43,7 +41,7 @@ class SecondLoginFragment : BaseFragment() {
            }
         })
 
-        userNameLoginFragmentViewModel.tokenLiveData.observe(this, Observer { loginToken ->
+        userNameLoginFragmentViewModel.userLiveData.observe(this, Observer { loginToken ->
             if (loginToken != null) {
                 startActivity(Intent(context, MainActivity::class.java))
                 Toast.makeText(context, getString(R.string.login_successful), Toast.LENGTH_SHORT).show()

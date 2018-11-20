@@ -62,4 +62,5 @@ dependencies {
     implementation 'com.vincent.filepicker:MultiTypeFilePicker:1.0.8'
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
     implementation 'com.bm.photoview:library:1.4.1'
+
 }

@@ -2,7 +2,6 @@ package com.zhengdianfang.samplingpad.user.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,12 +14,9 @@ import com.zhengdianfang.samplingpad.App
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.user.api.UserApi
 import com.zhengdianfang.samplingpad.common.BaseFragment
-import com.zhengdianfang.samplingpad.http.ApiClient
-import com.zhengdianfang.samplingpad.main.MainActivity
 import com.zhengdianfang.samplingpad.user.LoginActivity
 import kotlinx.android.synthetic.main.fragment_first_login.*
 import timber.log.Timber
-import kotlin.math.log
 
 
 class FirstLoginFragment : BaseFragment() {
@@ -46,13 +42,13 @@ class FirstLoginFragment : BaseFragment() {
            }
         })
 
-        userNameLoginFragmentViewModel.tokenLiveData.observe(this, Observer { loginToken ->
-            Timber.d("login token: %s", loginToken)
-            if (loginToken.isNullOrEmpty().not()) {
+        userNameLoginFragmentViewModel.userLiveData.observe(this, Observer { loginUser ->
+            Timber.d("login user : %s", loginUser)
+            if (loginUser != null) {
                 val fragment = SecondLoginFragment()
                 val bundle = Bundle()
-                bundle.putString("token", loginToken)
-                App.INSTANCE.firstUsername = userNameEditText.text.toString()
+                bundle.putString("token", loginUser.token)
+                App.INSTANCE.user = loginUser
                 fragment.arguments = bundle
                 start(fragment)
             }

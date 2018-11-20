@@ -12,10 +12,12 @@ class AppResponseInterceptor: Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val newRequest = request.newBuilder()
-            .addHeader("Authorization", App.INSTANCE.token)
+            .addHeader("Authorization", App.INSTANCE.user?.token ?: "")
             .build()
         var response = chain.proceed(newRequest)
-        if (response.isSuccessful && response.header("Content-Type")?.contains("application/json") == true) {
+        if (!request.url().toString().contains("logout") &&
+            response.isSuccessful &&
+            response.header("Content-Type")?.contains("application/json") == true) {
             val responseText = response.body()?.string()
             if (response.code() != 302 && responseText.isNullOrEmpty().not()) {
                 val gson = Gson()

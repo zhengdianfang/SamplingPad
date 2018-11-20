@@ -34,6 +34,8 @@ import java.io.File
 
 open class FifthTableFragment: TableFragment() {
 
+    private val MIN_UPLOAD_PHOTO_COUNT = 7
+
     private val uploadDialog by lazy {
         MaterialDialog.Builder(context!!)
             .progress(false, 100)
@@ -65,13 +67,17 @@ open class FifthTableFragment: TableFragment() {
         if (resultCode == Activity.RESULT_OK && data != null) {
             if (requestCode == SELECT_PHOTO_REQUEST) {
                 val photoPaths = data.getParcelableArrayListExtra<ImageFile>(Constant.RESULT_PICK_IMAGE)
-                Timber.d("select photos: $photoPaths")
-                uploadDialog.show()
-                tableFragmentViewModel.uploadFile(
-                    taskItem, "sample", "现场照片", "1", photoPaths.map { File(it.path) }.toTypedArray()) {
-                    Timber.d("upload progress $it")
-                    uploadDialog.setProgress(it)
-                    uploadDialog.setCancelable(it == 0 || it == 100)
+                if (photoPaths.size >= MIN_UPLOAD_PHOTO_COUNT) {
+                    Timber.d("select photos: $photoPaths")
+                    uploadDialog.show()
+                    tableFragmentViewModel.uploadFile(
+                        taskItem, "sample", "现场照片", "1", photoPaths.map { File(it.path) }.toTypedArray()) {
+                        Timber.d("upload progress $it")
+                        uploadDialog.setProgress(it)
+                        uploadDialog.setCancelable(it == 0 || it == 100)
+                    }
+                } else {
+                    Toast.makeText(context, "最少上传7张图片", Toast.LENGTH_SHORT).show()
                 }
             } else if (requestCode == SELECT_VIDEO_REQUEST) {
                 val videoPaths = data.getParcelableArrayListExtra<VideoFile>(Constant.RESULT_PICK_VIDEO)

@@ -1,6 +1,8 @@
 package com.zhengdianfang.samplingpad.user.entities
 
 data class User(
-    var userName: String,
+    var id: String,
+    var userName1: String,
+    var userName2: String,
     var token: String
 )

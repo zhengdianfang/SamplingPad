@@ -42,8 +42,8 @@ class NavigationFragment : BaseFragment() {
 
     private fun setupViews() {
 
-        firstUserNameTextView.text = "抽样人员1：${App.INSTANCE.firstUsername}"
-        secondUserNameTextView.text = "抽样人员2：${App.INSTANCE.secondUsername}"
+        firstUserNameTextView.text = "抽样人员1：${App.INSTANCE.user?.userName1}"
+        secondUserNameTextView.text = "抽样人员2：${App.INSTANCE.user?.userName2}"
         appVersionTextView.text = context?.packageManager?.getPackageInfo(context?.packageName, 0)?.versionName
         myTaskListButton.setOnClickListener {
             startActivity(Intent(context, MyTaskListActivity::class.java))

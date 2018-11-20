@@ -12,6 +12,7 @@ import com.zhengdianfang.samplingpad.common.components.BaseComponent
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import com.zhengdianfang.samplingpad.task.normal_product.fragments.TableFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_fourth_normal_table_layout.*
+import timber.log.Timber
 
 abstract class TableFragment: BaseFragment() {
 
@@ -29,6 +30,7 @@ abstract class TableFragment: BaseFragment() {
         view?.findViewById<Button>(R.id.nextButtonButton)?.setOnClickListener {
             if (validateRequiredField(tableFrame)) {
                 assembleSubmitTaskData()
+                Timber.d("save task item : $taskItem")
                 tableFragmentViewModel.saveSample(taskItem)
             }
         }

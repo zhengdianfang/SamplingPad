@@ -13,7 +13,7 @@ class LoadingActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_loading)
 
-        if (defaultSharedPreferences.getString("token", "").isNullOrEmpty()) {
+        if (App.INSTANCE.user == null) {
             startActivity(Intent(this, LoginActivity::class.java))
         } else {
             startActivity(Intent(this, MainActivity::class.java))

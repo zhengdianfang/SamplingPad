@@ -14,7 +14,6 @@ class LoginActivity : SupportActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadRootFragment(android.R.id.content, FirstLoginFragment())
-        Timber.d("get token ${App.INSTANCE.token}")
     }
 
 
