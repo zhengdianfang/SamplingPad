@@ -32,7 +32,7 @@ class App: Application() {
     var user: User? = null
         get() {
             if (field == null) {
-                val json = defaultSharedPreferences.getString("firstUsername", "")
+                val json = defaultSharedPreferences.getString("user", "")
                 if (TextUtils.isEmpty(json).not()) {
                     Timber.d("get login users: %s", field)
                     field = Gson().fromJson(json, User::class.java)
@@ -43,9 +43,9 @@ class App: Application() {
         set(value) {
             Timber.d("set login users: %s", value)
             if (value != null) {
-                defaultSharedPreferences.edit().putString("firstUsername", Gson().toJson(value)).apply()
+                defaultSharedPreferences.edit().putString("user", Gson().toJson(value)).apply()
             } else {
-                defaultSharedPreferences.edit().putString("firstUsername", "").apply()
+                defaultSharedPreferences.edit().putString("user", "").apply()
             }
             field = value
         }

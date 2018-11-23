@@ -67,17 +67,13 @@ open class FifthTableFragment: TableFragment() {
         if (resultCode == Activity.RESULT_OK && data != null) {
             if (requestCode == SELECT_PHOTO_REQUEST) {
                 val photoPaths = data.getParcelableArrayListExtra<ImageFile>(Constant.RESULT_PICK_IMAGE)
-                if (photoPaths.size >= MIN_UPLOAD_PHOTO_COUNT) {
-                    Timber.d("select photos: $photoPaths")
-                    uploadDialog.show()
-                    tableFragmentViewModel.uploadFile(
-                        taskItem, "sample", "现场照片", "1", photoPaths.map { File(it.path) }.toTypedArray()) {
-                        Timber.d("upload progress $it")
-                        uploadDialog.setProgress(it)
-                        uploadDialog.setCancelable(it == 0 || it == 100)
-                    }
-                } else {
-                    Toast.makeText(context, "最少上传7张图片", Toast.LENGTH_SHORT).show()
+                Timber.d("select photos: $photoPaths")
+                uploadDialog.show()
+                tableFragmentViewModel.uploadFile(
+                    taskItem, "sample", "现场照片", "1", photoPaths.map { File(it.path) }.toTypedArray()) {
+                    Timber.d("upload progress $it")
+                    uploadDialog.setProgress(it)
+                    uploadDialog.setCancelable(it == 0 || it == 100)
                 }
             } else if (requestCode == SELECT_VIDEO_REQUEST) {
                 val videoPaths = data.getParcelableArrayListExtra<VideoFile>(Constant.RESULT_PICK_VIDEO)
@@ -110,7 +106,11 @@ open class FifthTableFragment: TableFragment() {
         }
 
         submitButton.setOnClickListener {
-            tableFragmentViewModel.submitSample(taskItem)
+            if (imageAttachments.size < MIN_UPLOAD_PHOTO_COUNT) {
+                Toast.makeText(context, "最少上传7张图片", Toast.LENGTH_SHORT).show()
+            } else {
+                tableFragmentViewModel.submitSample(taskItem)
+            }
         }
 
         generateButton.setOnClickListener {
@@ -203,7 +203,7 @@ open class FifthTableFragment: TableFragment() {
            if (adapter.getItemViewType(position) == 1) {
                val intent = Intent(context, ImagePickActivity::class.java)
                intent.putExtra(IS_NEED_CAMERA, true)
-               intent.putExtra(Constant.MAX_NUMBER, 3)
+               intent.putExtra(Constant.MAX_NUMBER, 7)
                startActivityForResult(intent, SELECT_PHOTO_REQUEST)
            } else {
                val item = adapter.data[position] as AttachmentItem

@@ -103,9 +103,10 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="0y4bU2GKCGwPihekeA2ThAtrwsN6ioSt" />
+
         <meta-data
             android:name="com.netease.nim.appKey"
-            android:value="f8901337a123f9a8266950f0c37fb99b" />
+            android:value="45c6af3c98409b18a84451215d0bdd6e" />
 
         <!-- 云信后台服务，请使用独立进程。 -->
         <service

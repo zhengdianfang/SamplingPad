@@ -75,7 +75,7 @@ class CanotVerifyReasonFragment : BaseFragment() {
             val wantSample = wantSampleEditText.getContent()
             val enterpriseName = enterpriseNameEditText.getContent()
             val enterpriseAddress = enterpriseAddressEditText.getContent()
-            val abnormalTypeName = abnormalTypeNameSpinner.getContent()
+            val abnormalTypeName = abnormalTypeNameSpinner.getSelectedOption()?.name
             val creatorName= creatorNameEditText.getContent()
             val enterpriseAreaName = regionSpinnerGroup.getContent()
             val createOrgName = detectionCompanyEditText.getContent()

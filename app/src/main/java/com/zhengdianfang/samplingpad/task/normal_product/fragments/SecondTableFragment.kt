@@ -118,7 +118,7 @@ open class SecondTableFragment: TableFragment() {
         taskItem.enterpriseAreaType = enterpriseAreaTypeRadioGroup.getCheckedText()
         taskItem.setEnterpriseAreaInfo(regionSpinnerGroup.getStreet())
         taskItem.setEnterpriseLink(enterpriseLinkNameRadioGroup.getCheckedOption())
-        taskItem.enterprisePlaceName =  enterprisePlaceNameSpinner.getContent()
+        taskItem.enterprisePlaceName =  enterprisePlaceNameSpinner.getSelectedOption()?.name
         taskItem.enterpriseAddress = enterpriseAddressEditText.getContent()
 
         val certificates = resources.getStringArray(R.array.licence_type_array)

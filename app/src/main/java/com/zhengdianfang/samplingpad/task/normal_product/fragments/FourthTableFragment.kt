@@ -120,7 +120,7 @@ open class FourthTableFragment: TableFragment() {
         taskItem.sampleProductDate = sampleProduceDateView.getDate()
         taskItem.sampleInspectAmountUnit = sampleInspectAmountUnitEditText.getContent()
         taskItem.samplePreparationUnit = samplePreparationUnitEditText.getContent()
-        taskItem.beautyFoodType = beautyFoodTypeGroupView.getContent()
+        taskItem.beautyFoodType = beautyFoodTypeGroupView.getSelectedOption()?.name
         taskItem.wellBrandName = wellBrandNameEditText.getContent()
     }
 

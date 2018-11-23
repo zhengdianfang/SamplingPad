@@ -167,7 +167,8 @@ class ThirdTableFragment: TableFragment() {
         taskItem.agencyName = agencyNameEditText.getContent()
         taskItem.agencyAddress = agencyAddressEditText.getContent()
         taskItem.agencyContacts = agencyContactsEditText.getContent()
-        taskItem.agencyPhone =  agencyPhoneEditText.getContent()
+        taskItem.agencyPhone = agencyPhoneEditText.getContent()
+        taskItem.setAgencyOriginArea(resourceSpinnerGroupView.getSelectedOption())
     }
 
 }

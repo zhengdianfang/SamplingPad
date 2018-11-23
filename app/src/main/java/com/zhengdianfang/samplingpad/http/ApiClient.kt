@@ -14,7 +14,7 @@ object ApiClient {
     //http://118.190.137.152/inspection/
     //http://39.104.56.18:8080/inspection/
     //http://103.113.159.106/inspection/
-    const val HOST = "http://118.190.137.152:8080/inspection/"
+    const val HOST = "http://39.104.56.18:8080/inspection/"
     private var okHttpClient: OkHttpClient? = null
     private var retrofit: Retrofit? = null
 

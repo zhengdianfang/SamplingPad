@@ -116,6 +116,8 @@ data class TaskItem(
     var agencyAddress: String?,
     var agencyContacts: String?,
     var agencyPhone: String?,
+    var agencyOriginAreaName: String?,
+    var agencyOriginAreaId: Int?,
     var producerBarcode: String?,
     var sampleBrand: String?,
     var samplePrice: Double?,
@@ -314,6 +316,11 @@ data class TaskItem(
     fun setEnterpriseAreaInfo(street: Region?) {
         enterpriseAreaId = street?.id
         enterpriseAreaName = street?.name
+    }
+
+    fun setAgencyOriginArea(optionItem: OptionItem?) {
+        agencyOriginAreaName = optionItem?.name
+        agencyOriginAreaId = optionItem?.id
     }
 }
 data class TaskException(

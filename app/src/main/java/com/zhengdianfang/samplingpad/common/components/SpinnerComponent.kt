@@ -24,6 +24,8 @@ class SpinnerComponent: BaseComponent {
 
     private lateinit var spinnerTextView: TextView
     private lateinit var spinnerDialog: MaterialDialog
+    private var options = mutableListOf<OptionItem>()
+    private var selectedOption: OptionItem? = null
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
         this.setupViews(context, attributeSet)
@@ -51,8 +53,9 @@ class SpinnerComponent: BaseComponent {
                     val json2Pojo =
                         Gson().fromJson<Response<MutableList<OptionItem>>>(responseData, object: TypeToken<Response<MutableList<OptionItem>>>(){}.type)
                     if (json2Pojo.data != null) {
+                        options = json2Pojo.data!!.filter(predicate).toMutableList()
                         uiThread {
-                            spinnerDialog.setItems(*json2Pojo.data!!.asSequence().filter(predicate).map { it.name }.toList().toTypedArray())
+                            spinnerDialog.setItems(*options.asSequence().map { it.name }.toList().toTypedArray())
                         }
                     }
                 }
@@ -60,12 +63,8 @@ class SpinnerComponent: BaseComponent {
         }
     }
 
-    fun getContent(): String? {
-        val text = spinnerTextView.text.toString()
-        if (TextUtils.isEmpty(text)) {
-            return null
-        }
-        return text
+    fun getSelectedOption(): OptionItem? {
+        return this.selectedOption
     }
 
     fun setDefaultText(text: String?) {
@@ -100,9 +99,10 @@ class SpinnerComponent: BaseComponent {
                 weight = 1F
             }
         }
-        spinnerDialog = createSpinnerDataDialog(MaterialDialog.ListCallback { _, _, _, text ->
+        spinnerDialog = createSpinnerDataDialog(MaterialDialog.ListCallback { _, _, position, text ->
             spinnerTextView.setTextColor(Color.BLACK)
             spinnerTextView.text = text
+            this.selectedOption = options[position]
         })
         spinnerTextView.setOnClickListener {
             spinnerDialog.show()

@@ -2,30 +2,36 @@ package com.zhengdianfang.samplingpad.main
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.PowerManager
+import android.provider.Settings
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.text.TextUtils
 import com.baidu.trace.LBSTraceClient
 import com.baidu.trace.Trace
 import com.baidu.trace.model.OnTraceListener
 import com.baidu.trace.model.PushMessage
 import com.google.gson.Gson
+import com.netease.nimlib.sdk.NIMClient
+import com.netease.nimlib.sdk.RequestCallback
+import com.netease.nimlib.sdk.SDKOptions
+import com.netease.nimlib.sdk.auth.AuthService
+import com.netease.nimlib.sdk.auth.LoginInfo
 import com.zhengdianfang.samplingpad.App
 import com.zhengdianfang.samplingpad.common.BaseActivity
 import com.zhengdianfang.samplingpad.common.entities.OptionItem
+import com.zhengdianfang.samplingpad.common.md5
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.main.api.MainApi
 import com.zhengdianfang.samplingpad.main.fragments.MainFragment
 import org.jetbrains.anko.defaultSharedPreferences
 import org.jetbrains.anko.doAsync
 import timber.log.Timber
-import android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
-import android.content.Intent
-import android.net.Uri
-import android.os.Build
-import android.os.PowerManager
-import android.provider.Settings
 
 
 class MainActivity : BaseActivity(), OnTraceListener {
@@ -188,6 +194,45 @@ class MainActivity : BaseActivity(), OnTraceListener {
         traceClient!!.startTrace(trace, this)
     }
 
+    private fun initVideoSdk() {
+        runOnUiThread {
+            NIMClient.init(this, getLoginInfo(), initSDKOptions())
+//            NIMClient.getService(AuthService::class.java).login(getLoginInfo()).setCallback(object: RequestCallback<LoginInfo> {
+//                override fun onSuccess(p0: LoginInfo) {
+//
+//                    Timber.d("im $p0")
+//                }
+//                override fun onFailed(p0: Int) {
+//                    Timber.d("im $p0")
+//                }
+//
+//                override fun onException(p0: Throwable?) {
+//                    Timber.d("im $p0")
+//
+//                }
+//
+//            })
+        }
+    }
+
+    private fun initSDKOptions(): SDKOptions {
+        val options = SDKOptions()
+        options.preloadAttach = true
+        return options
+    }
+
+    private fun getLoginInfo(): LoginInfo? {
+        val account = App.INSTANCE.user?.videoAccount
+        val token = App.INSTANCE.user?.videoToken
+
+        return if (!TextUtils.isEmpty(account) && !TextUtils.isEmpty(token)) {
+            LoginInfo(account, token)
+        } else {
+            LoginInfo("zdf345", "111111".md5())
+        }
+    }
+
+
     private fun fetchThirdSdkId() {
         doAsync {
             val response = ApiClient.getRetrofit()
@@ -196,9 +241,11 @@ class MainActivity : BaseActivity(), OnTraceListener {
                 .execute()
             val body = response.body()
             if (body != null) {
+//                initVideoSdk()
                 initBaiduTrace(body.data?.get("serviceId") ?: "")
             }
         }
     }
+
 
 }
