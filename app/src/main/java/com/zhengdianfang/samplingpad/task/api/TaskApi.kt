@@ -30,8 +30,11 @@ interface TaskApi {
     @PUT("app/samplesubmits/{id}")
     fun submitSample(@Path("id") id: String, @Body taskItem: TaskItem): Call<Response<String>>
 
-    @GET("app/arealis/allTwo")
+    @GET("areas/allChina")
     fun fetchRegionData(): Call<Response<MutableList<Region>>>
+
+    @GET("app/arealis/allTwo")
+    fun fetchAreaStreetData(): Call<Response<MutableList<Region>>>
 
     @GET("app/foodCataloglis")
     fun fetchCategroyData(): Call<Response<MutableList<Category>>>

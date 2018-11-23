@@ -61,7 +61,7 @@ class AdminRegionSpinnerGroupComponent: BaseComponent {
         doAsync {
             val response = ApiClient.getRetrofit()
                 .create(TaskApi::class.java)
-                .fetchRegionData()
+                .fetchAreaStreetData()
                 .execute()
             val body = response.body()
             if (body?.data != null) {
@@ -121,6 +121,7 @@ class AdminRegionSpinnerGroupComponent: BaseComponent {
             selectedArea = areaList?.get(position)
             if (selectedArea != null) {
                 streetList = regionList.filter { it.parentId == selectedArea!!.id && it.levelId == Region.LEVEL_STREET }
+                Timber.d("streetList size : ${streetList?.size}")
                 if (streetList != null) {
                     streetSpinnerDialog!!.setItems(*streetList!!.map { it.name }.toTypedArray())
                 }
