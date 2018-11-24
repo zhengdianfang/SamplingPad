@@ -54,8 +54,7 @@ class AddressSpinnerGroupComponent: BaseComponent {
 
     override fun checkFieldHasValue(): Boolean {
        return TextUtils.isEmpty(provincialSpinnerTextView!!.text.toString()).not() &&
-           TextUtils.isEmpty(townSpinnerTextView!!.text.toString()).not() &&
-           TextUtils.isEmpty(countySpinnerTextView!!.text.toString()).not()
+           TextUtils.isEmpty(townSpinnerTextView!!.text.toString()).not()
 
     }
 

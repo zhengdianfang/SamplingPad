@@ -40,9 +40,9 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-feature android:glEsVersion="0x00020000" android:required="true" />
     <permission
-        android:name="com.zhengdianfang.samplingpad.permission.RECEIVE_MSG"
+        android:name="${applicationId}.permission.RECEIVE_MSG"
         android:protectionLevel="signature"/>
-    <uses-permission android:name="com.zhengdianfang.samplingpad.permission.RECEIVE_MSG"/>
+    <uses-permission android:name="${applicationId}.permission.RECEIVE_MSG"/>
 
     <application
         android:name=".App"
@@ -106,7 +106,7 @@
 
         <meta-data
             android:name="com.netease.nim.appKey"
-            android:value="45c6af3c98409b18a84451215d0bdd6e" />
+            android:value="f8901337a123f9a8266950f0c37fb99b" />
 
         <!-- 云信后台服务，请使用独立进程。 -->
         <service
@@ -145,7 +145,7 @@
         <!-- android:authorities="{包名}.ipc.provider", 请将com.netease.nim.demo替换为自己的包名 -->
         <provider
             android:name="com.netease.nimlib.ipc.NIMContentProvider"
-            android:authorities="com.zhengdianfang.samplingpad.ipc.provider"
+            android:authorities="${applicationId}.ipc.provider"
             android:exported="false"
             android:process=":core" />
 

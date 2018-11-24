@@ -1,6 +1,7 @@
 package com.zhengdianfang.samplingpad
 
 import android.app.Application
+import android.content.Context
 import android.content.Intent
 import android.text.TextUtils
 import com.amap.api.location.AMapLocationClient
@@ -9,6 +10,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
 import com.bumptech.glide.load.model.GlideUrl
 import com.google.gson.Gson
+import com.netease.nim.avchatkit.AVChatKit
+import com.netease.nimlib.sdk.NIMClient
+import com.netease.nimlib.sdk.RequestCallback
+import com.netease.nimlib.sdk.SDKOptions
+import com.netease.nimlib.sdk.auth.AuthService
+import com.netease.nimlib.sdk.auth.LoginInfo
+import com.netease.nimlib.sdk.util.NIMUtil
+import com.zhengdianfang.samplingpad.common.md5
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.user.LoginActivity
 import com.zhengdianfang.samplingpad.user.api.UserApi
@@ -18,6 +27,12 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.runOnUiThread
 import timber.log.Timber
 import java.io.InputStream
+import com.zhengdianfang.samplingpad.main.MainActivity
+import com.netease.nim.avchatkit.config.AVChatOptions
+import com.netease.nim.avchatkit.AVChatKit.getUserInfoProvider
+import com.netease.nim.avchatkit.model.IUserInfoProvider
+import com.netease.nimlib.sdk.uinfo.model.UserInfo
+
 
 class App: Application() {
 
@@ -55,6 +70,7 @@ class App: Application() {
         INSTANCE = this
         timber()
         initGlide()
+        initVideoSdk()
     }
 
     override fun onTerminate() {
@@ -109,6 +125,48 @@ class App: Application() {
                 }
             }
             aMapLocationClient?.startLocation()
+        }
+    }
+    private fun initVideoSdk() {
+        NIMClient.init(this, getLoginInfo(), initSDKOptions())
+        if (NIMUtil.isMainProcess(this)) {
+            val avChatOptions = object : AVChatOptions() {
+                override fun logout(context: Context) {
+                }
+            }
+            AVChatKit.init(avChatOptions)
+            AVChatKit.setContext(this)
+            AVChatKit.setUserInfoProvider(object : IUserInfoProvider() {
+                override fun getUserInfo(account: String): UserInfo {
+                    return object: UserInfo {
+                        override fun getAvatar() = ""
+                        override fun getName() = ""
+                        override fun getAccount() = "zdf345"
+
+                    }
+                }
+
+                override fun getUserDisplayName(account: String): String {
+                    return ""
+                }
+            })
+        }
+    }
+
+    private fun initSDKOptions(): SDKOptions {
+        val options = SDKOptions()
+        options.preloadAttach = true
+        return options
+    }
+
+    private fun getLoginInfo(): LoginInfo? {
+        val account = App.INSTANCE.user?.videoAccount
+        val token = App.INSTANCE.user?.videoToken
+
+        return if (!TextUtils.isEmpty(account) && !TextUtils.isEmpty(token)) {
+            LoginInfo(account, token)
+        } else {
+            LoginInfo("zdf345", "111111".md5())
         }
     }
 

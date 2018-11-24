@@ -69,8 +69,10 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
                     uiThread {
                         val body = response.body()
                         if (body?.get("code")?.toIntOrNull() == 200) {
-                            App.INSTANCE.user?.userName1 = body?.get("userName1") ?: ""
-                            App.INSTANCE.user?.userName2 = body?.get("userName2") ?: ""
+                            val user = App.INSTANCE.user
+                            user?.userName1 = body?.get("userName1") ?: ""
+                            user?.userName2 = body?.get("userName2") ?: ""
+                            App.INSTANCE.user = user
                             userLiveData.postValue(App.INSTANCE.user)
                         } else {
                             errorLiveData.postValue(body?.get("msg"))

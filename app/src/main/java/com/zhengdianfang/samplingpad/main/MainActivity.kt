@@ -17,6 +17,7 @@ import com.baidu.trace.Trace
 import com.baidu.trace.model.OnTraceListener
 import com.baidu.trace.model.PushMessage
 import com.google.gson.Gson
+import com.netease.nim.avchatkit.AVChatKit
 import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.RequestCallback
 import com.netease.nimlib.sdk.SDKOptions
@@ -49,6 +50,7 @@ class MainActivity : BaseActivity(), OnTraceListener {
         applyLocationPermission()
         loadDataOnBackground()
         fetchThirdSdkId()
+
     }
 
     override fun onDestroy() {
@@ -194,44 +196,24 @@ class MainActivity : BaseActivity(), OnTraceListener {
         traceClient!!.startTrace(trace, this)
     }
 
-    private fun initVideoSdk() {
-        runOnUiThread {
-            NIMClient.init(this, getLoginInfo(), initSDKOptions())
-//            NIMClient.getService(AuthService::class.java).login(getLoginInfo()).setCallback(object: RequestCallback<LoginInfo> {
-//                override fun onSuccess(p0: LoginInfo) {
-//
-//                    Timber.d("im $p0")
-//                }
-//                override fun onFailed(p0: Int) {
-//                    Timber.d("im $p0")
-//                }
-//
-//                override fun onException(p0: Throwable?) {
-//                    Timber.d("im $p0")
-//
-//                }
-//
-//            })
-        }
+    private fun loginVideoSDK(account: String, password: String) {
+        AVChatKit.setAccount(account)
+        NIMClient.getService(AuthService::class.java).login(LoginInfo(account, password)).setCallback(object: RequestCallback<LoginInfo> {
+            override fun onSuccess(p0: LoginInfo) {
+                Timber.d("im onSuccess $p0")
+            }
+            override fun onFailed(p0: Int) {
+                Timber.d("im onFailed $p0")
+            }
+
+            override fun onException(p0: Throwable?) {
+                Timber.d("im onException $p0")
+
+            }
+
+        })
+
     }
-
-    private fun initSDKOptions(): SDKOptions {
-        val options = SDKOptions()
-        options.preloadAttach = true
-        return options
-    }
-
-    private fun getLoginInfo(): LoginInfo? {
-        val account = App.INSTANCE.user?.videoAccount
-        val token = App.INSTANCE.user?.videoToken
-
-        return if (!TextUtils.isEmpty(account) && !TextUtils.isEmpty(token)) {
-            LoginInfo(account, token)
-        } else {
-            LoginInfo("zdf345", "111111".md5())
-        }
-    }
-
 
     private fun fetchThirdSdkId() {
         doAsync {
@@ -241,8 +223,8 @@ class MainActivity : BaseActivity(), OnTraceListener {
                 .execute()
             val body = response.body()
             if (body != null) {
-//                initVideoSdk()
                 initBaiduTrace(body.data?.get("serviceId") ?: "")
+                loginVideoSDK(body.data?.get("accid") ?: "", body.data?.get("password") ?: "")
             }
         }
     }
