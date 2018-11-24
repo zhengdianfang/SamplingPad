@@ -1,0 +1,35 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion  27
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionName "1.0"
+        versionCode 1
+
+//        renderscriptTargetApi rootProject.ext.compileSdkVersion
+//        renderscriptSupportModeEnabled true
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/java']
+            res.srcDirs = ['src/main/res','src/main/res-avchat']
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+}
+
+dependencies {
+    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+    api deps('com.android.support:design')
+    api deps('com.android.support.constraint:constraint-layout')
+    api deps('com.github.bumptech.glide:glide')
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
+    api 'jp.wasabeef:glide-transformations:3.0.1'
+    api project(path: ':faceunity')
+}
