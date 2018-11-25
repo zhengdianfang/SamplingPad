@@ -170,7 +170,7 @@ data class TaskItem(
     var entrustActive: Int?,
     var sampleInspectAmountUnit: String?,
     var samplePreparationUnit: String?,
-    var attachmentUnitId: String? = id,
+    var attachmentUnitId: String?,
     var entrustProvincialId: Int?,
     var entrustProvincialName: String?,
     var entrustTownId: Int?,
@@ -219,23 +219,6 @@ data class TaskItem(
         enterpriseAddressSources = enterprise.addressSources
         enterpriseZipCode = enterprise.zipCode
         chainBrand = enterprise.chainBrand
-    }
-
-    fun mergeProduce(enterprise: Enterprise) {
-        producerLicenseNumber = enterprise.licenseNumber
-        producerName = enterprise.name
-        producerAddress = enterprise.address
-        producerAreaName = enterprise.areaName
-        producerContacts = enterprise.contacts
-        producerPhone = enterprise.phone
-    }
-
-    fun mergeEntrust(enterprise: Enterprise) {
-        entrustLicenseNumber = enterprise.licenseNumber
-        entrustName = enterprise.name
-        entrustAddress = enterprise.address
-        entrustContacts = enterprise.contacts
-        entrustPhone = enterprise.phone
     }
 
     fun setInspectionKindOption(optionItem: OptionItem?) {
