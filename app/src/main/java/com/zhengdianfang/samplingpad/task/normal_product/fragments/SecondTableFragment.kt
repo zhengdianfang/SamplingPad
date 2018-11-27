@@ -97,14 +97,14 @@ open class SecondTableFragment: TableFragment() {
         }
 
         chainBrandEditText.setEditTextContent(taskItem.chainBrand)
-        regionSpinnerGroup.setDefaultStreet(taskItem?.enterpriseAreaId)
+        regionSpinnerGroup.setDefaultStreet(taskItem.enterpriseAreaId)
 
     }
 
     private fun fetchEnterprisePlaceName(id: Int?) {
         if (id != null) {
             val url = getString(R.string.sample_link_name_data_api, id)
-            enterprisePlaceNameSpinner.fetchData("${ApiClient.HOST}$url")
+            enterprisePlaceNameSpinner.fetchData("${ApiClient.getHost()}$url")
         }
     }
 

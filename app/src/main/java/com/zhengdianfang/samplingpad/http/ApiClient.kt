@@ -1,5 +1,7 @@
 package com.zhengdianfang.samplingpad.http
 
+import android.text.TextUtils
+import com.zhengdianfang.samplingpad.BuildConfig
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -14,9 +16,11 @@ object ApiClient {
     //http://118.190.137.152:8080/inspection/
     //http://39.104.56.18:8080/inspection/
     //http://103.113.159.106/inspection/
-    const val HOST = "http://39.104.56.18:8080/inspection/"
+    private const val DEFAULT_HOST = "http://118.190.137.152:8080/inspection/"
     private var okHttpClient: OkHttpClient? = null
     private var retrofit: Retrofit? = null
+
+    fun getHost() = if(TextUtils.isEmpty(BuildConfig.HOST)) DEFAULT_HOST else BuildConfig.HOST
 
     fun getHttpClient(): OkHttpClient {
         if (this.okHttpClient == null) {
@@ -33,7 +37,7 @@ object ApiClient {
     fun getRetrofit() : Retrofit {
         if (retrofit == null) {
             this.retrofit = Retrofit.Builder()
-                .baseUrl(HOST)
+                .baseUrl(getHost())
                 .client(getHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

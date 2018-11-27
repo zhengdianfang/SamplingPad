@@ -44,7 +44,7 @@ class VerifyFragment : BaseFragment() {
     }
 
     private fun setupViews() {
-        level1NameSpinner.fetchData("${ApiClient.HOST}app/foodCataloglis") { item -> item.level == 1 }
+        level1NameSpinner.fetchData("${ApiClient.getHost()}app/foodCataloglis") { item -> item.level == 1 }
         verifyButton.setOnClickListener {
             val implPlanCode = implPlanCodeEditText.getContent()
             val level1Name = level1NameSpinner.getSelectedOption()?.name

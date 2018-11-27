@@ -25,7 +25,7 @@ class AttachmentAdapter(data: List<MultiItemEntity>, private val type: Int) : Ba
                 Glide.with(helper.itemView.context).load(R.drawable.ic_pdf).into(helper.itemView as ImageView)
             } else {
                 Glide.with(helper.itemView.context)
-                    .load("${ApiClient.HOST}${TaskApi.ATTACHMENT_URL}${item.id}")
+                    .load("${ApiClient.getHost()}${TaskApi.ATTACHMENT_URL}${item.id}")
                     .apply(RequestOptions().placeholder(R.drawable.verify_code_default_pic))
                     .into(helper.itemView as ImageView)
             }

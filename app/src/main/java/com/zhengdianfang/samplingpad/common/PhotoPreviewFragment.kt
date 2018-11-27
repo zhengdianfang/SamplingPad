@@ -58,7 +58,7 @@ class PhotoPreviewFragment : BaseFragment() {
         }
         photoView.enable()
         photoView.scaleType = ImageView.ScaleType.CENTER_INSIDE;
-        Glide.with(context!!).load("${ApiClient.HOST}${TaskApi.ATTACHMENT_URL}$attachmentId").into(photoView)
+        Glide.with(context!!).load("${ApiClient.getHost()}${TaskApi.ATTACHMENT_URL}$attachmentId").into(photoView)
         tableFragmentViewModel.deleteAttachmentLiveData.observe(this, Observer {
             if (it == true) {
                 Toast.makeText(context, "删除成功", Toast.LENGTH_SHORT).show()

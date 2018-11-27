@@ -90,7 +90,7 @@ class VideoFragment : BaseFragment() {
         if (localFile!!.exists().not()) {
             startLoading()
             doAsync {
-                val request = Request.Builder().url("${ApiClient.HOST}${TaskApi.ATTACHMENT_URL}$attachmentId").build()
+                val request = Request.Builder().url("${ApiClient.getHost()}${TaskApi.ATTACHMENT_URL}$attachmentId").build()
                 val response = ApiClient.getHttpClient().newCall(request).execute()
                 val byteStream = response.body()?.byteStream()
                 val tmpFile = File(localPdfDir, "$attachmentId.tmp")

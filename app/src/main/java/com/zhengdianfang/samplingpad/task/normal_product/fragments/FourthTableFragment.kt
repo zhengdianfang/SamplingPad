@@ -83,7 +83,7 @@ open class FourthTableFragment: TableFragment() {
         }
         if (taskItem.enterpriseLinkId == 2 || taskItem.enterpriseLinkId == 3) {
             beautyFoodTypeGroupView.visibility = View.VISIBLE
-            beautyFoodTypeGroupView.fetchData("${ApiClient.HOST}beautyFoodTypesAll")
+            beautyFoodTypeGroupView.fetchData("${ApiClient.getHost()}beautyFoodTypesAll")
             beautyFoodTypeGroupView.setDefaultText(taskItem.beautyFoodType)
             wellBrandNameEditText.visibility = View.VISIBLE
             wellBrandNameEditText.setEditTextContent(taskItem.wellBrandName)

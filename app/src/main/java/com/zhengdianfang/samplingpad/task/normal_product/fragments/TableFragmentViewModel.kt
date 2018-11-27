@@ -5,7 +5,6 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import com.zhengdianfang.samplingpad.App
 import com.zhengdianfang.samplingpad.http.ApiClient
-import com.zhengdianfang.samplingpad.http.ApiClient.HOST
 import com.zhengdianfang.samplingpad.http.AppResponseInterceptor
 import com.zhengdianfang.samplingpad.http.Response
 import com.zhengdianfang.samplingpad.http.UploadInterceptor
@@ -221,7 +220,7 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
 
             try {
                 val response = Retrofit.Builder()
-                    .baseUrl(HOST)
+                    .baseUrl(ApiClient.getHost())
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()

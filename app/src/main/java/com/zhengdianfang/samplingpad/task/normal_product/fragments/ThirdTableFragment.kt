@@ -76,7 +76,7 @@ class ThirdTableFragment: TableFragment() {
         agencyAddressEditText.setEditTextContent(taskItem.agencyAddress)
         agencyContactsEditText.setEditTextContent(taskItem.agencyContacts)
         agencyPhoneEditText.setEditTextContent(taskItem.agencyPhone)
-        resourceSpinnerGroupView.fetchData("${ApiClient.HOST}app/areas/origin")
+        resourceSpinnerGroupView.fetchData("${ApiClient.getHost()}app/areas/origin")
 
     }
 

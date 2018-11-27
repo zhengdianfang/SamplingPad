@@ -70,7 +70,7 @@ class CanotVerifyReasonFragment : BaseFragment() {
         }
 
         regionSpinnerGroup.fetchData()
-        abnormalTypeNameSpinner.fetchData("${ApiClient.HOST}/app/abnormaltypelis")
+        abnormalTypeNameSpinner.fetchData("${ApiClient.getHost()}/app/abnormaltypelis")
         saveAndSubmitButton.setOnClickListener {
             val wantSample = wantSampleEditText.getContent()
             val enterpriseName = enterpriseNameEditText.getContent()

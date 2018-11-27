@@ -1,18 +1,11 @@
 package com.zhengdianfang.samplingpad.user.api
 
-import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.http.Response
 import com.zhengdianfang.samplingpad.user.entities.User
 import retrofit2.Call
 import retrofit2.http.*
 
 interface UserApi {
-
-    companion object {
-        const val VERIFY_CODE_URL = "${ApiClient.HOST}gifCode"
-    }
-
-    @FormUrlEncoded
     @POST("login")
     fun login(
         @Header("codeKey") codeKey: String,
