@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'fir'
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -42,6 +44,12 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    fir {
+        apiToken "1d6dd4023410019b563664c4b8ecee2e"
+        changeLog "更新日志" // 或者file("日志文件路径")
+        upload true
     }
 }
 
