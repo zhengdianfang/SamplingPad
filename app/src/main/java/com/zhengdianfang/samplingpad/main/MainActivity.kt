@@ -12,6 +12,7 @@ import android.provider.Settings
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.text.TextUtils
+import android.widget.Toast
 import com.baidu.trace.LBSTraceClient
 import com.baidu.trace.Trace
 import com.baidu.trace.model.OnTraceListener
@@ -24,6 +25,7 @@ import com.netease.nimlib.sdk.SDKOptions
 import com.netease.nimlib.sdk.auth.AuthService
 import com.netease.nimlib.sdk.auth.LoginInfo
 import com.zhengdianfang.samplingpad.App
+import com.zhengdianfang.samplingpad.BuildConfig
 import com.zhengdianfang.samplingpad.common.BaseActivity
 import com.zhengdianfang.samplingpad.common.entities.OptionItem
 import com.zhengdianfang.samplingpad.common.md5
@@ -50,7 +52,7 @@ class MainActivity : BaseActivity(), OnTraceListener {
         applyLocationPermission()
         loadDataOnBackground()
         fetchThirdSdkId()
-
+        Toast.makeText(this, BuildConfig.HOST, Toast.LENGTH_LONG).show()
     }
 
     override fun onDestroy() {

@@ -1,13 +1,13 @@
 package com.zhengdianfang.samplingpad.http
 
-import android.text.TextUtils
+import android.webkit.URLUtil
 import com.zhengdianfang.samplingpad.BuildConfig
+import okhttp3.Cookie
+import okhttp3.CookieJar
+import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import okhttp3.Cookie
-import okhttp3.HttpUrl
-import okhttp3.CookieJar
 import timber.log.Timber
 
 
@@ -20,7 +20,7 @@ object ApiClient {
     private var okHttpClient: OkHttpClient? = null
     private var retrofit: Retrofit? = null
 
-    fun getHost() = if(TextUtils.isEmpty(BuildConfig.HOST)) DEFAULT_HOST else BuildConfig.HOST
+    fun getHost() = if(URLUtil.isNetworkUrl(BuildConfig.HOST)) DEFAULT_HOST else BuildConfig.HOST
 
     fun getHttpClient(): OkHttpClient {
         if (this.okHttpClient == null) {
