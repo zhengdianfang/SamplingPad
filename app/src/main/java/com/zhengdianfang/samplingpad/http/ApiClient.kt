@@ -20,7 +20,7 @@ object ApiClient {
     private var okHttpClient: OkHttpClient? = null
     private var retrofit: Retrofit? = null
 
-    fun getHost() = if(URLUtil.isNetworkUrl(BuildConfig.HOST)) DEFAULT_HOST else BuildConfig.HOST
+    fun getHost() = if(URLUtil.isNetworkUrl(BuildConfig.HOST)) BuildConfig.HOST else DEFAULT_HOST
 
     fun getHttpClient(): OkHttpClient {
         if (this.okHttpClient == null) {

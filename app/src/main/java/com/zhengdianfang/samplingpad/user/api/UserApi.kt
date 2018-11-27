@@ -6,6 +6,8 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface UserApi {
+
+    @FormUrlEncoded
     @POST("login")
     fun login(
         @Header("codeKey") codeKey: String,
