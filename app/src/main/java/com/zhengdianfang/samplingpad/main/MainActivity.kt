@@ -34,6 +34,7 @@ import com.zhengdianfang.samplingpad.main.api.MainApi
 import com.zhengdianfang.samplingpad.main.fragments.MainFragment
 import org.jetbrains.anko.defaultSharedPreferences
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import timber.log.Timber
 
 
@@ -52,7 +53,6 @@ class MainActivity : BaseActivity(), OnTraceListener {
         applyLocationPermission()
         loadDataOnBackground()
         fetchThirdSdkId()
-        Toast.makeText(this, BuildConfig.HOST, Toast.LENGTH_LONG).show()
     }
 
     override fun onDestroy() {
@@ -170,7 +170,7 @@ class MainActivity : BaseActivity(), OnTraceListener {
         }
     }
 
-    private fun initBaiduTrace(serviceId: String) {
+    private fun initBaiduTrace(entityName: String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val packageName = this.packageName
             val isIgnoring = (getSystemService(Context.POWER_SERVICE) as PowerManager).isIgnoringBatteryOptimizations(packageName)
@@ -186,10 +186,8 @@ class MainActivity : BaseActivity(), OnTraceListener {
 
             }
         }
-        val serviceId: Long = serviceId.toLong()
-        val entityName = "${App.INSTANCE.user?.userName1}"
         val isNeedObjectStorage = false
-        trace = Trace(serviceId, entityName, isNeedObjectStorage)
+        trace = Trace(205477, entityName, isNeedObjectStorage)
         traceClient = LBSTraceClient(applicationContext)
         // 定位周期(单位:秒)
         val gatherInterval = 5
@@ -225,8 +223,10 @@ class MainActivity : BaseActivity(), OnTraceListener {
                 .execute()
             val body = response.body()
             if (body != null) {
-                initBaiduTrace(body.data?.get("serviceId") ?: "")
-                loginVideoSDK(body.data?.get("accid") ?: "", body.data?.get("password") ?: "")
+                uiThread {
+                    initBaiduTrace(body.data?.get("serviceId") ?: "")
+                    loginVideoSDK(body.data?.get("accId") ?: "", body.data?.get("tokenWangyi") ?: "")
+                }
             }
         }
     }
