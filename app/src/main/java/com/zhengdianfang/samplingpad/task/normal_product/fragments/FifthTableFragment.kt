@@ -88,7 +88,7 @@ open class FifthTableFragment: TableFragment() {
     }
 
     private fun fetchAttachment() {
-        tableFragmentViewModel.fetchAttachmentIdsBySampleId(this.taskItem.id)
+        tableFragmentViewModel.fetchAttachmentIdsBySampleId(this.taskItem.attachmentUnitId ?: this.taskItem.id)
         if (taskItem.sampleReportAttachmentId != null) {
             tableFragmentViewModel.fetchPdfById(taskItem.sampleReportAttachmentId!!)
         }
