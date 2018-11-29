@@ -86,5 +86,6 @@ class NavigationFragment : BaseFragment() {
                     .show()
             }
         })
+        navigationFragmentViewModel.fetchAppVersion()
     }
 }
