@@ -121,6 +121,7 @@ open class FourthTableFragment: TableFragment() {
         taskItem.sampleInspectAmountUnit = sampleInspectAmountUnitEditText.getContent()
         taskItem.samplePreparationUnit = samplePreparationUnitEditText.getContent()
         taskItem.beautyFoodType = beautyFoodTypeGroupView.getSelectedOption()?.name
+        taskItem.beautyFoodTypeId = beautyFoodTypeGroupView.getSelectedOption()?.id
         taskItem.wellBrandName = wellBrandNameEditText.getContent()
     }
 

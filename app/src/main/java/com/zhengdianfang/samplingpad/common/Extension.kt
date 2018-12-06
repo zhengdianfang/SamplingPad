@@ -9,6 +9,7 @@ import android.support.v4.graphics.drawable.DrawableCompat
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.widget.RadioButton
+import com.afollestad.materialdialogs.MaterialDialog
 import com.amap.api.services.core.LatLonPoint
 import com.amap.api.services.core.PoiItem
 import com.amap.api.services.poisearch.PoiResult
@@ -97,4 +98,8 @@ fun String.searchPoiByText(context:Context, resultCallback: (poiItems: MutableLi
         }
 
     })
+}
+
+fun MaterialDialog.setItems(items: MutableList<Any?>) {
+
 }

@@ -24,6 +24,8 @@ class CategorySpinnerComponent: BaseComponent {
     private val level4NameSpinner by lazy { findViewById<TextView>(R.id.level4NameSpinner) }
     private lateinit var levelNameViews: Array<TextView>
     private var categorys = mutableListOf<Category>()
+    private val eachLevelCategorys = arrayOfNulls<List<Category>>(4)
+    private val selectedLevelCategory = arrayOfNulls<Category>(4)
     private lateinit var categorySpinnerDialogs: Array<MaterialDialog>
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
@@ -57,10 +59,15 @@ class CategorySpinnerComponent: BaseComponent {
     }
 
     fun mergeSelectedValuesToTaskItem(taskItem: TaskItem) {
-        taskItem.level1Name = level1NameSpinner.text.toString()
-        taskItem.level2Name = level2NameSpinner.text.toString()
-        taskItem.level3Name = level3NameSpinner.text.toString()
-        taskItem.level4Name = level4NameSpinner.text.toString()
+        taskItem.level1Name = selectedLevelCategory[0]?.name
+        taskItem.level2Name = selectedLevelCategory[1]?.name
+        taskItem.level3Name = selectedLevelCategory[2]?.name
+        taskItem.level4Name = selectedLevelCategory[3]?.name
+
+        taskItem.level1Id = selectedLevelCategory[0]?.id
+        taskItem.level2Id = selectedLevelCategory[1]?.id
+        taskItem.level3Id = selectedLevelCategory[2]?.id
+        taskItem.level4Id = selectedLevelCategory[3]?.id
     }
 
     private fun createSpinnerDialogForAllLevelCategory() {
@@ -99,16 +106,18 @@ class CategorySpinnerComponent: BaseComponent {
 
     private fun reFillSpinnerItems(level: Int) {
         if (level == 0) {
+            eachLevelCategorys[0] = categorys.filter { it.parentId == 0 && it.level == level + 1 }
             categorySpinnerDialogs[level]
-                .setItems(*categorys.filter { it.parentId == 0 && it.level == level + 1 }.map { it.name }.toTypedArray())
+                .setItems(*eachLevelCategorys[0]!!.map { it.name }.toTypedArray())
         } else {
 
             val levelText = levelNameViews[level - 1].text.toString()
             if (TextUtils.isEmpty(levelText).not()) {
                 val category = categorys.find { it.name == levelText && it.level == level }
                 if (category != null) {
+                    eachLevelCategorys[level] = categorys.filter { it.parentId == category.id && it.level == level + 1 }
                     categorySpinnerDialogs[level]
-                        .setItems(*categorys.filter { it.parentId == category.id && it.level == level + 1 }.map { it.name }.toTypedArray())
+                        .setItems(*eachLevelCategorys[level]!!.map { it.name }.toTypedArray())
                 }
             }
         }
@@ -137,9 +146,11 @@ class CategorySpinnerComponent: BaseComponent {
         override fun onSelection(dialog: MaterialDialog?, itemView: View?, position: Int, text: CharSequence?) {
             val category = categorys.find { it.name == text && it.level == levelId }
             if (category != null) {
+                selectedLevelCategory[levelId - 1] = category
                 if (levelId != 4) {
                     val dialog = categorySpinnerDialogs[levelId]
-                    dialog.setItems(*categorys.filter { it.parentId == category.id && it.level == levelId + 1 }.map { it.name }.toTypedArray())
+                    eachLevelCategorys[levelId] = categorys.filter { it.parentId == category.id && it.level == levelId + 1 }
+                    dialog.setItems(*eachLevelCategorys[levelId]!!.map { it.name }.toTypedArray())
                 }
                 levelNameViews[levelId - 1].text = category.name
             }
