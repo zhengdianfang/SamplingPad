@@ -69,6 +69,7 @@ class SpinnerComponent: BaseComponent {
 
     fun setOptionItem(optionItem: OptionItem) {
         this.selectedOption = optionItem
+        this.spinnerTextView.text = optionItem.name
     }
 
     override fun clear() {
@@ -76,7 +77,7 @@ class SpinnerComponent: BaseComponent {
     }
 
     override fun checkFieldHasValue(): Boolean {
-        return TextUtils.isEmpty(spinnerTextView.text.toString()).not()
+        return this.selectedOption != null
     }
 
     private fun setupViews(context: Context, attributeSet: AttributeSet) {
