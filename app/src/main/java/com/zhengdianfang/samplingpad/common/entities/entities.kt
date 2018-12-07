@@ -4,9 +4,9 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class OptionItem(val id: Int, val name: String, val level: Int): Parcelable {
+data class OptionItem(val id: Int?, val name: String?, val level: Int = 0): Parcelable {
     override fun toString(): String {
-        return name
+        return name ?: ""
     }
 }
 

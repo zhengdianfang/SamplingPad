@@ -25,7 +25,7 @@ class CategorySpinnerComponent: BaseComponent {
     private lateinit var levelNameViews: Array<TextView>
     private var categorys = mutableListOf<Category>()
     private val eachLevelCategorys = arrayOfNulls<List<Category>>(4)
-    private val selectedLevelCategory = arrayOfNulls<Category>(4)
+    val selectedLevelCategory = arrayOfNulls<Category>(4)
     private lateinit var categorySpinnerDialogs: Array<MaterialDialog>
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
@@ -52,23 +52,16 @@ class CategorySpinnerComponent: BaseComponent {
     }
 
     fun setDefaultValues(taskItem: TaskItem) {
+        selectedLevelCategory[0] = Category(taskItem.level1Id, taskItem.level1Name)
+        selectedLevelCategory[1] = Category(taskItem.level2Id, taskItem.level2Name)
+        selectedLevelCategory[2] = Category(taskItem.level3Id, taskItem.level3Name)
+        selectedLevelCategory[3] = Category(taskItem.level4Id, taskItem.level4Name)
         level1NameSpinner.text = taskItem.level1Name
         level2NameSpinner.text = taskItem.level2Name
         level3NameSpinner.text = taskItem.level3Name
         level4NameSpinner.text = taskItem.level4Name
     }
 
-    fun mergeSelectedValuesToTaskItem(taskItem: TaskItem) {
-        taskItem.level1Name = selectedLevelCategory[0]?.name
-        taskItem.level2Name = selectedLevelCategory[1]?.name
-        taskItem.level3Name = selectedLevelCategory[2]?.name
-        taskItem.level4Name = selectedLevelCategory[3]?.name
-
-        taskItem.level1Id = selectedLevelCategory[0]?.id
-        taskItem.level2Id = selectedLevelCategory[1]?.id
-        taskItem.level3Id = selectedLevelCategory[2]?.id
-        taskItem.level4Id = selectedLevelCategory[3]?.id
-    }
 
     private fun createSpinnerDialogForAllLevelCategory() {
 

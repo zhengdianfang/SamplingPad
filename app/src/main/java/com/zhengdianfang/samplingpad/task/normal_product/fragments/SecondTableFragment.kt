@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.TableFragment
+import com.zhengdianfang.samplingpad.common.entities.OptionItem
 import com.zhengdianfang.samplingpad.common.searchPoiByText
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
@@ -55,7 +56,7 @@ open class SecondTableFragment: TableFragment() {
         enterpriseLinkNameRadioGroup.radioButtonCheckCallback  = { _, option ->
             fetchEnterprisePlaceName(option.id)
         }
-        enterprisePlaceNameSpinner.setDefaultText(taskItem.enterprisePlaceName)
+        enterprisePlaceNameSpinner.setOptionItem(OptionItem(taskItem.enterprisePlaceId, taskItem.enterprisePlaceName))
         enterpriseAddressEditText.setEditTextContent(taskItem.enterpriseAddress)
         val certificates = resources.getStringArray(R.array.licence_type_array)
         when(taskItem.enterpriseMOrP) {

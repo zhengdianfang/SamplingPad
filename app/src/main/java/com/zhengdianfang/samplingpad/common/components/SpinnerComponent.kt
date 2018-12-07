@@ -67,10 +67,8 @@ class SpinnerComponent: BaseComponent {
         return this.selectedOption
     }
 
-    fun setDefaultText(text: String?) {
-        if (TextUtils.isEmpty(text).not()) {
-            spinnerTextView.text = text
-        }
+    fun setOptionItem(optionItem: OptionItem) {
+        this.selectedOption = optionItem
     }
 
     override fun clear() {

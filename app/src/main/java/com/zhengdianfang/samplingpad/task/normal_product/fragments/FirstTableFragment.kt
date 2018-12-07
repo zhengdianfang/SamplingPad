@@ -23,7 +23,7 @@ open class FirstTableFragment: TableFragment() {
 
     override fun assembleSubmitTaskData() {
         taskItem.setInspectionKindOption(inspectionKindNameRadioGroup.getCheckedOption())
-        categorySpinnerGroup.mergeSelectedValuesToTaskItem(taskItem)
+        taskItem.mergeSelectedValuesToTaskItem(categorySpinnerGroup.selectedLevelCategory)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

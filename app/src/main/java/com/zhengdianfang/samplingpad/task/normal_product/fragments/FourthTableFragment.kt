@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.fragment_fourth_normal_table_layout.*
 import java.util.*
 import io.github.xudaojie.qrcodelib.CaptureActivity
 import android.content.Intent
+import com.zhengdianfang.samplingpad.common.entities.OptionItem
 import com.zhengdianfang.samplingpad.http.ApiClient
 
 
@@ -84,7 +85,7 @@ open class FourthTableFragment: TableFragment() {
         if (taskItem.enterpriseLinkId == 2 || taskItem.enterpriseLinkId == 3) {
             beautyFoodTypeGroupView.visibility = View.VISIBLE
             beautyFoodTypeGroupView.fetchData("${ApiClient.getHost()}beautyFoodTypesAll")
-            beautyFoodTypeGroupView.setDefaultText(taskItem.beautyFoodType)
+            beautyFoodTypeGroupView.setOptionItem(OptionItem(taskItem.beautyFoodTypeId, taskItem.beautyFoodType))
             wellBrandNameEditText.visibility = View.VISIBLE
             wellBrandNameEditText.setEditTextContent(taskItem.wellBrandName)
         } else {

@@ -2,6 +2,7 @@ package com.zhengdianfang.samplingpad.task.entities
 
 import android.os.Parcelable
 import com.chad.library.adapter.base.entity.MultiItemEntity
+import com.zhengdianfang.samplingpad.common.entities.Category
 import com.zhengdianfang.samplingpad.common.entities.OptionItem
 import com.zhengdianfang.samplingpad.common.entities.Region
 import kotlinx.android.parcel.Parcelize
@@ -322,6 +323,18 @@ data class TaskItem(
     fun setAgencyOriginArea(optionItem: OptionItem?) {
         agencyOriginAreaName = optionItem?.name
         agencyOriginAreaId = optionItem?.id
+    }
+
+    fun mergeSelectedValuesToTaskItem(selectedLevelCategory: Array<Category?>) {
+        level1Name = selectedLevelCategory[0]?.name
+        level2Name = selectedLevelCategory[1]?.name
+        level3Name = selectedLevelCategory[2]?.name
+        level4Name = selectedLevelCategory[3]?.name
+
+        level1Id = selectedLevelCategory[0]?.id
+        level2Id = selectedLevelCategory[1]?.id
+        level3Id = selectedLevelCategory[2]?.id
+        level4Id = selectedLevelCategory[3]?.id
     }
 }
 data class TaskException(
