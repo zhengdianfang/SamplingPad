@@ -72,6 +72,7 @@ open class ThirdTableFragment: TableFragment() {
         samplePreparationUnitEditText.setEditTextContent(taskItem.samplePreparationUnit)
         sampleDateView.setDefaultDate(Calendar.getInstance())
         sampleProduceDateView.setDefaultDate(Calendar.getInstance())
+        sampleProduceDateView.setDefaultDateType(taskItem.sampleDateKind)
         unitSpinner.text = taskItem.sampleQgpUnit
         sampleQgpEditText.setEditTextContent(taskItem.sampleQgp?.toString())
         unitSpinner.setOnClickListener {
@@ -118,6 +119,7 @@ open class ThirdTableFragment: TableFragment() {
         taskItem.setStoragePlaceForRetest(storagePlaceForRetestRadioGroup.getCheckedOption())
         taskItem.lableStandard = lableStandardEditText.getContent()
         taskItem.sampleDate = sampleDateView.getDate()
+        taskItem.sampleDateKind = sampleProduceDateView.selectedType
         taskItem.sampleProductDate = sampleProduceDateView.getDate()
         taskItem.sampleInspectAmountUnit = sampleInspectAmountUnitEditText.getContent()
         taskItem.samplePreparationUnit = samplePreparationUnitEditText.getContent()

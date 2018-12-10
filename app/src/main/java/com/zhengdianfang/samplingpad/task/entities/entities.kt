@@ -198,7 +198,8 @@ data class TaskItem(
     var enterpriseId: Int?,
     var enterprisePlaceId: Int?,
     var producerId: Int?,
-    var sampleBillId: Int?
+    var sampleBillId: Int?,
+    var sampleDateKind: String?
 ) : Parcelable {
     companion object {
 

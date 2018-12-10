@@ -74,6 +74,7 @@ class SpinnerComponent: BaseComponent {
 
     override fun clear() {
         spinnerTextView.text = null
+        this.selectedOption = null
     }
 
     override fun checkFieldHasValue(): Boolean {

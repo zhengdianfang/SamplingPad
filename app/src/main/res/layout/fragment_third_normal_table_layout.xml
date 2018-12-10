@@ -119,13 +119,11 @@
                 app:radio_data_key="samplepackagelisOptions"
                 app:radio_label="*样品包装：" />
 
-            <com.zhengdianfang.samplingpad.common.components.DateComponent
+            <com.zhengdianfang.samplingpad.common.components.ProduceDateComponent
                 android:id="@+id/sampleProduceDateView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:date_hint="请选择生产日期"
-                app:date_label="*生产日期：" />
+                android:layout_marginTop="16dp" />
 
             <com.zhengdianfang.samplingpad.common.components.EditComponent
                 android:id="@+id/sampleBatchNoEditText"

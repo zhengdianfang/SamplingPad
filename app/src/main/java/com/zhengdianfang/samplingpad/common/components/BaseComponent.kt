@@ -28,4 +28,6 @@ abstract class BaseComponent: LinearLayout {
 
     abstract fun checkFieldHasValue(): Boolean
 
+    open fun noValueTip() = ""
+
 }
