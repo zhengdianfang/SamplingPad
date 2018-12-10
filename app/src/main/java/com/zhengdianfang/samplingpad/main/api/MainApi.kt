@@ -18,6 +18,6 @@ interface MainApi {
     fun fetchAppVersion(): Call<Response<Map<String, String>>>
 
     @GET("getAccount/{id}")
-    fun fetchAcountId(@Path("id") id: String): Call<Response<Map<String, String>>>
+    fun fetchAcountId(@Path("id") id: Int?): Call<Response<Map<String, String>>>
 }
 

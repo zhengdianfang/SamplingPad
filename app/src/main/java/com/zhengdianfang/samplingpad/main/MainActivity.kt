@@ -231,7 +231,7 @@ class MainActivity : BaseActivity(), OnTraceListener {
         doAsync {
             val response = ApiClient.getRetrofit()
                 .create(MainApi::class.java)
-                .fetchAcountId(App.INSTANCE.user?.id ?: "")
+                .fetchAcountId(App.INSTANCE.user?.id)
                 .execute()
             val body = response.body()
             if (body != null) {

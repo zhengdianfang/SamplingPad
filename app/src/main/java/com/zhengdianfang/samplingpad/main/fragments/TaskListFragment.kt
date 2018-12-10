@@ -49,11 +49,9 @@ class TaskListFragment : BaseFragment() {
 
     private fun bindViewModel() {
         taskListFragmentViewModel.taskListLiveData.observe(this, Observer { data ->
-            taskRecyclerView.adapter.notifyDataSetChanged()
-            taskData.clear()
             if (data != null) {
-                taskData.addAll(data)
-                emptyView.visibility = if (taskData.size == 0) View.VISIBLE else View.GONE
+                searchBar.updateTaskList(data)
+                emptyView.visibility = if (data.size == 0) View.VISIBLE else View.GONE
             }
             refreshFrame.isRefreshing = false
         })
@@ -76,5 +74,11 @@ class TaskListFragment : BaseFragment() {
             }
         }
         taskRecyclerView.adapter = allTaskItemAdapter
+
+        searchBar.filterTaskCallback = {
+            taskData.clear()
+            taskData.addAll(it)
+            allTaskItemAdapter.notifyDataSetChanged()
+        }
     }
 }
