@@ -11,11 +11,19 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:lineSpacingExtra="8dp"
+            android:text="@string/upload_photo_tip"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/imageFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
+            android:layout_marginTop="16dp"
             android:background="@android:color/white"/>
 
         <android.support.v7.widget.RecyclerView

@@ -1,36 +1,20 @@
 package com.zhengdianfang.samplingpad.task.normal_product.fragments
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.afollestad.materialdialogs.MaterialDialog
 import com.zhengdianfang.samplingpad.R
+import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.common.TableFragment
+import com.zhengdianfang.samplingpad.common.components.BaseComponent
+import com.zhengdianfang.samplingpad.common.entities.Region
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import kotlinx.android.synthetic.main.fragment_fourth_normal_table_layout.*
-import java.util.*
-import io.github.xudaojie.qrcodelib.CaptureActivity
-import android.content.Intent
-import com.zhengdianfang.samplingpad.common.entities.OptionItem
-import com.zhengdianfang.samplingpad.http.ApiClient
-
 
 open class FourthTableFragment: TableFragment() {
 
-    private val calendarUnitDialog by lazy {
-        MaterialDialog.Builder(context!!)
-            .items(*context!!.resources.getStringArray(R.array.calendar_unit_array))
-            .itemsCallback { _, _, _, text ->
-                unitSpinner.text = text
-            }
-            .build()
-    }
-
     companion object {
-        const val QR_SCAN_REQUEST = 0x00002
-
         fun newInstance(taskItem: TaskItem?): FourthTableFragment {
             val fragment = FourthTableFragment()
             val bundle = Bundle()
@@ -45,109 +29,145 @@ open class FourthTableFragment: TableFragment() {
 
     override fun setupViews() {
         super.setupViews()
-        producerBarcodeEditText.setEditTextContent(taskItem.producerBarcode)
-        producerBarcodeEditText.search = { code ->
-           tableFragmentViewModel.getGoodsByBarcode(code)
+        updateFrameVisibleStatus()
+        //标称信息
+        producerActiveRadioGroup.radioButtonCheckCallback = { _, option ->
+            taskItem.producerActive = option.id
+            if (option.id == 1) {
+               taskItem.entrustActive = null
+            }
+            updateFrameVisibleStatus()
         }
-        sampleNameEditText.setEditTextContent(taskItem.sampleName)
-        sampleBrandEditText.setEditTextContent(taskItem.sampleBrand)
-        samplePriceEditText.setEditTextContent("${taskItem.samplePrice ?: ""}")
-        sampleTypeRadioGroup.setDefaultCheckedRadioButton(taskItem.sampleType)
-        sampleAttributeRadioGroup.setDefaultCheckedRadioButton(taskItem.sampleAttribute)
-        sampleSourceRadioGroup.setDefaultCheckedRadioButton(taskItem.sampleSource)
-        samplePackageTypeRadioGroup.setDefaultCheckedRadioButton(taskItem.samplePackageType)
-        samplePackagingRadioGroup.setDefaultCheckedRadioButton(taskItem.samplePackaging)
-        sampleBatchNoEditText.setEditTextContent(taskItem.sampleBatchNo)
-        sampleSpecificationEditText.setEditTextContent(taskItem.sampleSpecification)
-        sampleQualityLevelEditText.setEditTextContent(taskItem.sampleQualityLevel)
-        sampleModeRadioGroup.setDefaultCheckedRadioButton(taskItem.sampleMode)
-        sampleFormRadioGroup.setDefaultCheckedRadioButton(taskItem.sampleForm)
-        sampleAmountEditText.setEditTextContent("${taskItem.sampleAmount ?: ""}")
-        sampleAmountForTestEditText.setEditTextContent("${taskItem.sampleAmountForTest ?: ""}")
-        sampleAmountForRetestEditText.setEditTextContent("${taskItem.sampleAmountForRetest ?: ""}")
-        sampleStorageEnvironmentRadioGroup.setDefaultCheckedRadioButton(taskItem.sampleStorageEnvironment)
-        storagePlaceForRetestRadioGroup.setDefaultCheckedRadioButton(taskItem.storagePlaceForRetest)
-        lableStandardEditText.setEditTextContent(taskItem.lableStandard)
-        sampleInspectAmountUnitEditText.setEditTextContent(taskItem.sampleInspectAmountUnit)
-        samplePreparationUnitEditText.setEditTextContent(taskItem.samplePreparationUnit)
-        sampleDateView.setDefaultDate(Calendar.getInstance())
-        sampleProduceDateView.setDefaultDate(Calendar.getInstance())
-        unitSpinner.text = taskItem.sampleQgpUnit
-        sampleQgpEditText.setEditTextContent(taskItem.sampleQgp?.toString())
-        unitSpinner.setOnClickListener {
-            calendarUnitDialog.show()
-        }
+        producerActiveRadioGroup.setDefaultCheckedRadioButton(taskItem.producerActive)
+        produceCsNoEditText.setEditTextContent(taskItem.producerCsNo)
+        produceNameEditText.setEditTextContent(taskItem.producerName)
+        produceAddressEditText.setEditTextContent(taskItem.producerAddress)
+        produceContactsEditText.setEditTextContent(taskItem.producerContacts)
+        producePhoneEditText.setEditTextContent(taskItem.producerPhone)
+        addressSpinner.labelTextView.text = "*生产所在地："
+        addressSpinner.fetchData()
+        addressSpinner.setDefault(
+            Region(taskItem.producerProvincialId, taskItem.producerProvincialName),
+            Region(taskItem.producerTownId, taskItem.producerTownName),
+            Region(taskItem.producerCountyId, taskItem.producerCountyName))
 
-        qrScanButton.setOnClickListener {
-            val i = Intent(context, CaptureActivity::class.java)
-            startActivityForResult(i, QR_SCAN_REQUEST)
+        entrustActiveRadioGroup.radioButtonCheckCallback = { _, option ->
+            taskItem.entrustActive = option.id
+            updateFrameVisibleStatus()
         }
-        if (taskItem.enterpriseLinkId == 2 || taskItem.enterpriseLinkId == 3) {
-            beautyFoodTypeGroupView.visibility = View.VISIBLE
-            beautyFoodTypeGroupView.fetchData("${ApiClient.getHost()}beautyFoodTypesAll")
-            beautyFoodTypeGroupView.setOptionItem(OptionItem(taskItem.beautyFoodTypeId, taskItem.beautyFoodType))
-            wellBrandNameEditText.visibility = View.VISIBLE
-            wellBrandNameEditText.setEditTextContent(taskItem.wellBrandName)
+        entrustActiveRadioGroup.setDefaultCheckedRadioButton(taskItem.entrustActive)
+
+        //委托单位信息
+        entrustCsNoEditText.setEditTextContent(taskItem.entrustCsNo)
+        entrustNameEditText.setEditTextContent(taskItem.entrustName)
+        entrustAddressEditText.setEditTextContent(taskItem.entrustAddress)
+        entrustContactsEditText.setEditTextContent(taskItem.entrustContacts)
+        entrustPhoneEditText.setEditTextContent(taskItem.entrustPhone)
+        addressSpinnerGroupView.labelTextView.text = "*生产所在地："
+        addressSpinnerGroupView.fetchData()
+        addressSpinnerGroupView.setDefault(
+            Region(taskItem.entrustProvincialId, taskItem.entrustProvincialName),
+            Region(taskItem.entrustTownId, taskItem.entrustTownName),
+            Region(taskItem.entrustCountyId, taskItem.entrustCountyName))
+
+        //进口代理商信息
+        agencyNameEditText.setEditTextContent(taskItem.agencyName)
+        agencyAddressEditText.setEditTextContent(taskItem.agencyAddress)
+        agencyContactsEditText.setEditTextContent(taskItem.agencyContacts)
+        agencyPhoneEditText.setEditTextContent(taskItem.agencyPhone)
+        resourceSpinnerGroupView.fetchData("${ApiClient.getHost()}app/areas/origin")
+
+    }
+
+    private fun updateFrameVisibleStatus() {
+        showHideProduceFrame(isShowProducerViews())
+        showHideEntrustFrame(isShowEntrustViews())
+        showHideAgencyFrame(isShowAgencyViews())
+    }
+
+    private fun showHideProduceFrame(visible: Boolean) {
+        for (index in 0 until produceFrame.childCount) {
+            if (index > 1) {
+                val childrenView = produceFrame.getChildAt(index)
+                if (childrenView is BaseComponent) {
+                    if (visible) {
+                        childrenView.visibility = View.VISIBLE
+                    } else {
+                        childrenView.visibility = View.GONE
+                        childrenView.clear()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showHideEntrustFrame(visible: Boolean) {
+        if (visible) {
+            entrustFrame.visibility = View.VISIBLE
         } else {
-            beautyFoodTypeGroupView.visibility = View.GONE
-            wellBrandNameEditText.visibility = View.GONE
+            entrustFrame.visibility = View.GONE
+            for (index in 0 until entrustFrame.childCount) {
+                val childrenView = entrustFrame.getChildAt(index)
+                if (childrenView is BaseComponent) {
+                    childrenView.clear()
+                }
+            }
         }
     }
 
-    override fun assembleSubmitTaskData() {
-        taskItem.producerBarcode = producerBarcodeEditText.getContent()
-        taskItem.sampleName = sampleNameEditText.getContent()
-        taskItem.sampleBrand = sampleBrandEditText.getContent()
-        taskItem.samplePrice = samplePriceEditText.getContent()?.toDoubleOrNull()
-        taskItem.setSampleTypeOption(sampleTypeRadioGroup.getCheckedOption())
-        taskItem.setSampleAttributeOption(sampleAttributeRadioGroup.getCheckedOption())
-        taskItem.setSampleSourceOption(sampleSourceRadioGroup.getCheckedOption())
-        taskItem.setSamplePackageType(samplePackageTypeRadioGroup.getCheckedOption())
-        taskItem.setSamplePackaging(samplePackagingRadioGroup.getCheckedOption())
-        taskItem.sampleBatchNo = sampleBatchNoEditText.getContent()
-        taskItem.sampleQgp = sampleQgpEditText.getContent()?.toIntOrNull()
-        taskItem.sampleQgpUnit = unitSpinner.text.toString()
-        taskItem.sampleSpecification = sampleSpecificationEditText.getContent()
-        taskItem.sampleQualityLevel = sampleQualityLevelEditText.getContent()
-        taskItem.setSampleMode(sampleModeRadioGroup.getCheckedOption())
-        taskItem.setSampleForm(sampleFormRadioGroup.getCheckedOption())
-        taskItem.sampleAmount = sampleAmountEditText.getContent()?.toIntOrNull()
-        taskItem.sampleAmountForTest = sampleAmountForTestEditText.getContent()?.toIntOrNull()
-        taskItem.sampleAmountForRetest = sampleAmountForRetestEditText.getContent()?.toIntOrNull()
-        taskItem.setSampleStorageEnvironment(sampleStorageEnvironmentRadioGroup.getCheckedOption())
-        taskItem.setStoragePlaceForRetest(storagePlaceForRetestRadioGroup.getCheckedOption())
-        taskItem.lableStandard = lableStandardEditText.getContent()
-        taskItem.sampleDate = sampleDateView.getDate()
-        taskItem.sampleProductDate = sampleProduceDateView.getDate()
-        taskItem.sampleInspectAmountUnit = sampleInspectAmountUnitEditText.getContent()
-        taskItem.samplePreparationUnit = samplePreparationUnitEditText.getContent()
-        taskItem.beautyFoodType = beautyFoodTypeGroupView.getSelectedOption()?.name
-        taskItem.beautyFoodTypeId = beautyFoodTypeGroupView.getSelectedOption()?.id
-        taskItem.wellBrandName = wellBrandNameEditText.getContent()
+    private fun showHideAgencyFrame(visible: Boolean) {
+        if (visible) {
+            agencyFrame.visibility = View.VISIBLE
+        } else {
+            agencyFrame.visibility = View.GONE
+            for (index in 0 until agencyFrame.childCount) {
+                val childrenView = agencyFrame.getChildAt(index)
+                if (childrenView is BaseComponent) {
+                    childrenView.clear()
+                }
+            }
+        }
     }
 
-    override fun clear() {
-        super.clear()
-        unitSpinner.text = null
-    }
+
+    private fun isShowProducerViews() =
+        taskItem.producerActive == null || taskItem.producerActive  == 0
+
+    private fun isShowEntrustViews() =
+        (taskItem.producerActive == null || taskItem.producerActive  == 0) && taskItem.entrustActive == 1
+
+    private fun isShowAgencyViews() = taskItem.producerActive == 1
 
     override fun submitSuccessful() {
         start(FifthTableFragment.newInstance(taskItem))
     }
 
-    override fun bindViewModel() {
-        super.bindViewModel()
-        tableFragmentViewModel.goodsLiveData.observe(this, Observer { goods ->
-            if (null != goods) {
-                taskItem.mergeGoods(goods)
-                this.setupViews()
-            }
-        })
+    override fun assembleSubmitTaskData() {
+        //标称信息
+        taskItem.producerActive = producerActiveRadioGroup.getCheckedOption()?.id
+
+        taskItem.producerCsNo = produceCsNoEditText.getContent()
+        taskItem.producerName = produceNameEditText.getContent()
+        taskItem.producerAddress = produceAddressEditText.getContent()
+        taskItem.producerContacts = produceContactsEditText.getContent()
+        taskItem.producerPhone = producePhoneEditText.getContent()
+        taskItem.setProducerAddressInfo(addressSpinner.selectedProvince, addressSpinner.selectedTown, addressSpinner.selectedCounty)
+
+        //委托单位信息
+        taskItem.entrustCsNo = entrustCsNoEditText.getContent()
+        taskItem.entrustName = entrustNameEditText.getContent()
+        taskItem.entrustAddress = entrustAddressEditText.getContent()
+        taskItem.entrustContacts = entrustContactsEditText.getContent()
+        taskItem.entrustPhone = entrustPhoneEditText.getContent()
+        taskItem.entrustActive = entrustActiveRadioGroup.getCheckedOption()?.id
+        taskItem.setEnstrustAddressInfo(addressSpinnerGroupView.selectedProvince, addressSpinnerGroupView.selectedTown, addressSpinnerGroupView.selectedCounty)
+
+        //进口代理商信息
+        taskItem.agencyName = agencyNameEditText.getContent()
+        taskItem.agencyAddress = agencyAddressEditText.getContent()
+        taskItem.agencyContacts = agencyContactsEditText.getContent()
+        taskItem.agencyPhone = agencyPhoneEditText.getContent()
+        taskItem.setAgencyOriginArea(resourceSpinnerGroupView.getSelectedOption())
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == QR_SCAN_REQUEST) {
-            producerBarcodeEditText.setEditTextContent(data?.getStringExtra("result"))
-        }
-    }
 }

@@ -6,11 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
-import com.zhengdianfang.samplingpad.task.normal_product.fragments.FourthTableFragment
-import kotlinx.android.synthetic.main.fragment_first_normal_table_layout.*
-import me.yokeyword.fragmentation.SupportFragment
+import com.zhengdianfang.samplingpad.task.normal_product.fragments.ThirdTableFragment
 
-class SixthTableFragment: FourthTableFragment() {
+class SixthTableFragment: ThirdTableFragment() {
     companion object {
         fun newInstance(taskItem: TaskItem): SixthTableFragment {
             val fragment = SixthTableFragment()
@@ -22,7 +20,7 @@ class SixthTableFragment: FourthTableFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_fourth_normal_table_layout, container, false)
+        return inflater.inflate(R.layout.fragment_third_normal_table_layout, container, false)
     }
 
     override fun submitSuccessful() {

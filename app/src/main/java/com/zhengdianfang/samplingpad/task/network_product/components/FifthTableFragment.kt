@@ -8,8 +8,6 @@ import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.TableFragment
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import kotlinx.android.synthetic.main.fragment_fifth_network_table_layout.*
-import kotlinx.android.synthetic.main.fragment_first_normal_table_layout.*
-import me.yokeyword.fragmentation.SupportFragment
 
 class FifthTableFragment: TableFragment() {
 

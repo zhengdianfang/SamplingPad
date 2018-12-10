@@ -11,7 +11,7 @@ import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.components.BaseComponent
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import com.zhengdianfang.samplingpad.task.normal_product.fragments.TableFragmentViewModel
-import kotlinx.android.synthetic.main.fragment_fourth_normal_table_layout.*
+import kotlinx.android.synthetic.main.fragment_third_normal_table_layout.*
 import timber.log.Timber
 
 abstract class TableFragment: BaseFragment() {

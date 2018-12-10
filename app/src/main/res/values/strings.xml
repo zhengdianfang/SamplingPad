@@ -78,7 +78,7 @@
     <string name="spinner_street_hint">街道</string>
     <string name="agency_origin_area_name_label">*原产地：</string>
     <string name="agency_origin_area_name_hint">选择原产地</string>
-    <string name="food_type">菜系类型</string>
+    <string name="food_type">*菜系类型</string>
     <string name="food_type_hint">请选择菜系类型</string>
     <string name="province_hint">省</string>
     <string name="town_hint">市</string>
@@ -101,4 +101,5 @@
     <string name="only_save_text">仅保存</string>
     <string name="please_select_sample_type">请选择食品大类</string>
     <string name="sample_level1_type_label">食品大类：</string>
+    <string name="upload_photo_tip">抽样过程中须拍摄数码照片：抽样员与被抽样单位负责人和样品合照、营业执照及许可证、被抽样单位门面、封样前及封样后样品、样品摆放区和取样过程照片</string>
 </resources>

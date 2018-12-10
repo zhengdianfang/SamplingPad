@@ -77,7 +77,7 @@ class SpinnerComponent: BaseComponent {
     }
 
     override fun checkFieldHasValue(): Boolean {
-        return this.selectedOption != null
+        return this.selectedOption?.id != null
     }
 
     private fun setupViews(context: Context, attributeSet: AttributeSet) {
