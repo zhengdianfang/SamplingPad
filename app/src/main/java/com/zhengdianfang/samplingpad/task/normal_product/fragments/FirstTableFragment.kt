@@ -24,6 +24,7 @@ open class FirstTableFragment: TableFragment() {
     override fun assembleSubmitTaskData() {
         taskItem.setInspectionKindOption(inspectionKindNameRadioGroup.getCheckedOption())
         taskItem.mergeSelectedValuesToTaskItem(categorySpinnerGroup.selectedLevelCategory)
+        taskItem.enforcePeople = enforcePeopleEditText.getContent()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -45,6 +46,7 @@ open class FirstTableFragment: TableFragment() {
         creatorEmailTextView.setContentText(taskItem.creatorEmail)
         creatorPhoneTextView.setContentText(taskItem.creatorPhone)
         inspectionKindNameRadioGroup.setDefaultCheckedRadioButton(taskItem.inspectionKindName)
+        enforcePeopleEditText.setEditTextContent(taskItem.enforcePeople)
 
 
     }

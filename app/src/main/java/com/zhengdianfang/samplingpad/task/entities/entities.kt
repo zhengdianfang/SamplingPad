@@ -132,6 +132,7 @@ data class TaskItem(
     var producerBarcode: String?,
     var sampleBrand: String?,
     var samplePrice: Double?,
+    var priceUnit: String?,
     var sampleType: String?,
     var sampleAttribute: String?,
     var sampleSource: String?,
@@ -145,9 +146,9 @@ data class TaskItem(
     var sampleQualityLevel: String?,
     var sampleMode: String?,
     var sampleForm: String?,
-    var sampleAmount: Int?,
-    var sampleAmountForTest: Int?,
-    var sampleAmountForRetest: Int?,
+    var sampleAmount: Double?,
+    var sampleAmountForTest: Double?,
+    var sampleAmountForRetest: Double?,
     var sampleStorageEnvironment: String?,
     var storagePlaceForRetest: String?,
     var lableStandard: String?,
@@ -199,7 +200,13 @@ data class TaskItem(
     var enterprisePlaceId: Int?,
     var producerId: Int?,
     var sampleBillId: Int?,
-    var sampleDateKind: String?
+    var sampleDateKind: String?,
+    var nominalDate: String?,
+    var comment: String?,
+    var inspectionPackageNumber: String?,
+    var samplePackingNumber: String?,
+    var enforcePeople: String?,
+    var sampleNcode: String?
 ) : Parcelable {
     companion object {
 

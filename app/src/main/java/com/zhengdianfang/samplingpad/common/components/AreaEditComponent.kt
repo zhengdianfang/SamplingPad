@@ -34,6 +34,13 @@ class AreaEditComponent: BaseComponent {
     override fun checkFieldHasValue(): Boolean {
         return true
     }
+
+    fun getContent() = editTextView.text.toString()
+
+    fun setDefaultContent(text: String?) {
+        editTextView.setText(text)
+    }
+
     private fun initEditTextView(context: Context, attrs: TypedArray) {
         editTextView = EditText(context, null, R.attr.editTextStyle, R.style.AppTheme_EditText).apply {
             setLines(5)

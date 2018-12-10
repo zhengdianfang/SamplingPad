@@ -171,6 +171,9 @@ class MainActivity : BaseActivity(), OnTraceListener {
             val samplereservelisResponse = ApiClient.getRetrofit().create(MainApi::class.java).fetchOptionData("samplereservelis").execute()
             saveOptionData2Perference("samplereservelisOptions", samplereservelisResponse.body()?.data)
 
+            val unitofquantityResponse = ApiClient.getRetrofit().create(MainApi::class.java).fetchUnitofquantityData().execute()
+            saveOptionData2Perference("unitofquantityOptions", unitofquantityResponse.body()?.data)
+
             saveOptionData2Perference("yesOrNo", arrayOf(OptionItem(0, "否", 0), OptionItem(1, "是", 0)))
 
         }

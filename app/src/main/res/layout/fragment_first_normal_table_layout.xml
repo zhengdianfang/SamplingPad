@@ -163,6 +163,13 @@
                     app:text_label="电话：" />
             </LinearLayout>
 
+            <com.zhengdianfang.samplingpad.common.components.EditComponent
+                android:id="@+id/enforcePeopleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:edit_hint="请输入执法人员/随行人员"
+                app:edit_label="*执法人员/随行人员：" />
 
         </LinearLayout>
         <LinearLayout

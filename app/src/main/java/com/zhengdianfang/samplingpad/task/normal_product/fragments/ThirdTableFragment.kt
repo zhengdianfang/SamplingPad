@@ -13,8 +13,14 @@ import kotlinx.android.synthetic.main.fragment_third_normal_table_layout.*
 import java.util.*
 import io.github.xudaojie.qrcodelib.CaptureActivity
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.Path
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.zhengdianfang.samplingpad.common.entities.OptionItem
 import com.zhengdianfang.samplingpad.http.ApiClient
+import com.zhengdianfang.samplingpad.http.Response
+import org.jetbrains.anko.defaultSharedPreferences
 
 
 open class ThirdTableFragment: TableFragment() {
@@ -28,8 +34,51 @@ open class ThirdTableFragment: TableFragment() {
             .build()
     }
 
+    private val priceUnitDialog by lazy {
+        MaterialDialog.Builder(context!!)
+            .items(unitofquantityOptions)
+            .itemsCallback { _, _, _, text ->
+                priceUnitSpinner.text = text
+                sampleInspectAmountUnitSpinner.text = text
+                samplePreparationUnitSpinner.text = text
+            }
+            .build()
+    }
+
+    private val sampleInspectAmountUnitDialog by lazy {
+        MaterialDialog.Builder(context!!)
+            .items(unitofquantityOptions)
+            .itemsCallback { _, _, _, text ->
+                sampleInspectAmountUnitSpinner.text = text
+            }
+            .build()
+    }
+
+    private val samplePreparationUnitDialog by lazy {
+        MaterialDialog.Builder(context!!)
+            .items(unitofquantityOptions)
+            .itemsCallback { _, _, _, text ->
+                samplePreparationUnitSpinner.text = text
+            }
+            .build()
+    }
+
+
+
+    private val unitofquantityOptions by lazy {
+        val unitofquantityOptionsString = context?.defaultSharedPreferences?.getString("unitofquantityOptions", "") ?: ""
+        var options = mutableListOf<OptionItem>()
+        if (unitofquantityOptionsString.isEmpty().not()) {
+                options = Gson().fromJson<MutableList<OptionItem>>(unitofquantityOptionsString, object: TypeToken<MutableList<OptionItem>>(){}.type)
+
+        }
+        options
+    }
+
     companion object {
         const val QR_SCAN_REQUEST = 0x00002
+        const val NCODE_QR_SCAN_REQUEST = 0x00003
+
 
         fun newInstance(taskItem: TaskItem?): ThirdTableFragment {
             val fragment = ThirdTableFragment()
@@ -49,9 +98,14 @@ open class ThirdTableFragment: TableFragment() {
         producerBarcodeEditText.search = { code ->
            tableFragmentViewModel.getGoodsByBarcode(code)
         }
+        sampleNCodeEditText.setEditTextContent(taskItem.sampleNcode)
         sampleNameEditText.setEditTextContent(taskItem.sampleName)
         sampleBrandEditText.setEditTextContent(taskItem.sampleBrand)
         samplePriceEditText.setEditTextContent("${taskItem.samplePrice ?: ""}")
+        priceUnitSpinner.text = taskItem.priceUnit
+        priceUnitSpinner.setOnClickListener {
+            priceUnitDialog.show()
+        }
         sampleTypeRadioGroup.setDefaultCheckedRadioButton(taskItem.sampleType)
         sampleAttributeRadioGroup.setDefaultCheckedRadioButton(taskItem.sampleAttribute)
         sampleSourceRadioGroup.setDefaultCheckedRadioButton(taskItem.sampleSource)
@@ -68,8 +122,14 @@ open class ThirdTableFragment: TableFragment() {
         sampleStorageEnvironmentRadioGroup.setDefaultCheckedRadioButton(taskItem.sampleStorageEnvironment)
         storagePlaceForRetestRadioGroup.setDefaultCheckedRadioButton(taskItem.storagePlaceForRetest)
         lableStandardEditText.setEditTextContent(taskItem.lableStandard)
-        sampleInspectAmountUnitEditText.setEditTextContent(taskItem.sampleInspectAmountUnit)
-        samplePreparationUnitEditText.setEditTextContent(taskItem.samplePreparationUnit)
+        sampleInspectAmountUnitSpinner.text = taskItem.sampleInspectAmountUnit
+        sampleInspectAmountUnitSpinner.setOnClickListener {
+            sampleInspectAmountUnitDialog.show()
+        }
+        samplePreparationUnitSpinner.text = taskItem.samplePreparationUnit
+        samplePreparationUnitSpinner.setOnClickListener {
+            samplePreparationUnitDialog.show()
+        }
         sampleDateView.setDefaultDate(Calendar.getInstance())
         sampleProduceDateView.setDefaultDate(Calendar.getInstance())
         sampleProduceDateView.setDefaultDateType(taskItem.sampleDateKind)
@@ -83,6 +143,11 @@ open class ThirdTableFragment: TableFragment() {
             val i = Intent(context, CaptureActivity::class.java)
             startActivityForResult(i, QR_SCAN_REQUEST)
         }
+
+        ncodeQRScanButton.setOnClickListener {
+            val i = Intent(context, CaptureActivity::class.java)
+            startActivityForResult(i, NCODE_QR_SCAN_REQUEST)
+        }
         if (taskItem.enterpriseLinkId == 3) {
             beautyFoodTypeGroupView.visibility = View.VISIBLE
             beautyFoodTypeGroupView.fetchData("${ApiClient.getHost()}beautyFoodTypesAll")
@@ -93,6 +158,11 @@ open class ThirdTableFragment: TableFragment() {
             beautyFoodTypeGroupView.visibility = View.GONE
             wellBrandNameEditText.visibility = View.GONE
         }
+        samplenominalDateEditText.setEditTextContent(taskItem.nominalDate)
+        sampleCommentEditText.setDefaultContent(taskItem.comment)
+        inspectionPackageNumberEditText.setEditTextContent(taskItem.inspectionPackageNumber)
+        samplePackingNumberEditText.setEditTextContent(taskItem.samplePackingNumber)
+
     }
 
     override fun assembleSubmitTaskData() {
@@ -100,6 +170,7 @@ open class ThirdTableFragment: TableFragment() {
         taskItem.sampleName = sampleNameEditText.getContent()
         taskItem.sampleBrand = sampleBrandEditText.getContent()
         taskItem.samplePrice = samplePriceEditText.getContent()?.toDoubleOrNull()
+        taskItem.priceUnit = priceUnitSpinner.text.toString()
         taskItem.setSampleTypeOption(sampleTypeRadioGroup.getCheckedOption())
         taskItem.setSampleAttributeOption(sampleAttributeRadioGroup.getCheckedOption())
         taskItem.setSampleSourceOption(sampleSourceRadioGroup.getCheckedOption())
@@ -112,20 +183,25 @@ open class ThirdTableFragment: TableFragment() {
         taskItem.sampleQualityLevel = sampleQualityLevelEditText.getContent()
         taskItem.setSampleMode(sampleModeRadioGroup.getCheckedOption())
         taskItem.setSampleForm(sampleFormRadioGroup.getCheckedOption())
-        taskItem.sampleAmount = sampleAmountEditText.getContent()?.toIntOrNull()
-        taskItem.sampleAmountForTest = sampleAmountForTestEditText.getContent()?.toIntOrNull()
-        taskItem.sampleAmountForRetest = sampleAmountForRetestEditText.getContent()?.toIntOrNull()
+        taskItem.sampleAmount = sampleAmountEditText.getContent()?.toDoubleOrNull()
+        taskItem.sampleAmountForTest = sampleAmountForTestEditText.getContent()?.toDoubleOrNull()
+        taskItem.sampleAmountForRetest = sampleAmountForRetestEditText.getContent()?.toDoubleOrNull()
         taskItem.setSampleStorageEnvironment(sampleStorageEnvironmentRadioGroup.getCheckedOption())
         taskItem.setStoragePlaceForRetest(storagePlaceForRetestRadioGroup.getCheckedOption())
         taskItem.lableStandard = lableStandardEditText.getContent()
         taskItem.sampleDate = sampleDateView.getDate()
         taskItem.sampleDateKind = sampleProduceDateView.selectedType
         taskItem.sampleProductDate = sampleProduceDateView.getDate()
-        taskItem.sampleInspectAmountUnit = sampleInspectAmountUnitEditText.getContent()
-        taskItem.samplePreparationUnit = samplePreparationUnitEditText.getContent()
+        taskItem.sampleInspectAmountUnit = sampleInspectAmountUnitSpinner.text.toString()
+        taskItem.samplePreparationUnit = samplePreparationUnitSpinner.text.toString()
         taskItem.beautyFoodType = beautyFoodTypeGroupView.getSelectedOption()?.name
         taskItem.beautyFoodTypeId = beautyFoodTypeGroupView.getSelectedOption()?.id
         taskItem.wellBrandName = wellBrandNameEditText.getContent()
+        taskItem.nominalDate = samplenominalDateEditText.getContent()
+        taskItem.comment = sampleCommentEditText.getContent()
+        taskItem.inspectionPackageNumber = inspectionPackageNumberEditText.getContent()
+        taskItem.samplePackingNumber = samplePackingNumberEditText.getContent()
+        taskItem.sampleNcode = sampleNCodeEditText.getContent()
     }
 
     override fun clear() {
@@ -150,6 +226,8 @@ open class ThirdTableFragment: TableFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == QR_SCAN_REQUEST) {
             producerBarcodeEditText.setEditTextContent(data?.getStringExtra("result"))
+        } else if (requestCode == NCODE_QR_SCAN_REQUEST) {
+            sampleNCodeEditText.setEditTextContent(data?.getStringExtra("result"))
         }
     }
 }
