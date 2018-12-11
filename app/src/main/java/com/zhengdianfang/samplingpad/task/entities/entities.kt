@@ -115,7 +115,7 @@ data class TaskItem(
     var enterprisePlaceName: String?,
     var enterpriseAreaName: String?,
     var enterpriseAreaId: Int?,
-    var producerActive: Int?,
+    var sampleActive: Int?,
     var entrustCsNo: String?,
     var entrustId: Int?,
     var entrustName: String?,
@@ -127,8 +127,10 @@ data class TaskItem(
     var agencyAddress: String?,
     var agencyContacts: String?,
     var agencyPhone: String?,
+    var agentCountyName: String?,
     var agencyOriginAreaName: String?,
     var agencyOriginAreaId: Int?,
+    var sampleSourceArea: String?,
     var producerBarcode: String?,
     var sampleBrand: String?,
     var samplePrice: Double?,
@@ -329,8 +331,7 @@ data class TaskItem(
     }
 
     fun setAgencyOriginArea(optionItem: OptionItem?) {
-        agencyOriginAreaName = optionItem?.name
-        agencyOriginAreaId = optionItem?.id
+        sampleSourceArea = optionItem?.name
     }
 
     fun mergeSelectedValuesToTaskItem(selectedLevelCategory: Array<Category?>) {

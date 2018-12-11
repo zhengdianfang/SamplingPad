@@ -162,7 +162,20 @@ open class ThirdTableFragment: TableFragment() {
         sampleCommentEditText.setDefaultContent(taskItem.comment)
         inspectionPackageNumberEditText.setEditTextContent(taskItem.inspectionPackageNumber)
         samplePackingNumberEditText.setEditTextContent(taskItem.samplePackingNumber)
+        beautyFoodTypeGroupView.setOptionItem(OptionItem(taskItem.beautyFoodTypeId, taskItem.beautyFoodType))
 
+        producerActiveRadioGroup.radioButtonCheckCallback = { _, option ->
+            taskItem.sampleActive = option.id
+            if (taskItem.sampleActive == 1) {
+                resourceSpinnerGroupView.visibility = View.VISIBLE
+            } else {
+                resourceSpinnerGroupView.visibility = View.GONE
+            }
+        }
+        producerActiveRadioGroup.setDefaultCheckedRadioButton(taskItem.sampleActive)
+
+        resourceSpinnerGroupView.fetchData("${ApiClient.getHost()}app/areas/origin")
+        resourceSpinnerGroupView.setOptionItem(OptionItem(1, taskItem.sampleSourceArea ?: "中国"))
     }
 
     override fun assembleSubmitTaskData() {
@@ -202,6 +215,8 @@ open class ThirdTableFragment: TableFragment() {
         taskItem.inspectionPackageNumber = inspectionPackageNumberEditText.getContent()
         taskItem.samplePackingNumber = samplePackingNumberEditText.getContent()
         taskItem.sampleNcode = sampleNCodeEditText.getContent()
+        taskItem.sampleActive = producerActiveRadioGroup.getCheckedOption()?.id
+        taskItem.setAgencyOriginArea(resourceSpinnerGroupView.getSelectedOption())
     }
 
     override fun clear() {

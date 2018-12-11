@@ -8,6 +8,7 @@ import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.common.TableFragment
 import com.zhengdianfang.samplingpad.common.components.BaseComponent
+import com.zhengdianfang.samplingpad.common.entities.OptionItem
 import com.zhengdianfang.samplingpad.common.entities.Region
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import kotlinx.android.synthetic.main.fragment_fourth_normal_table_layout.*
@@ -31,14 +32,6 @@ open class FourthTableFragment: TableFragment() {
         super.setupViews()
         updateFrameVisibleStatus()
         //标称信息
-        producerActiveRadioGroup.radioButtonCheckCallback = { _, option ->
-            taskItem.producerActive = option.id
-            if (option.id == 1) {
-               taskItem.entrustActive = null
-            }
-            updateFrameVisibleStatus()
-        }
-        producerActiveRadioGroup.setDefaultCheckedRadioButton(taskItem.producerActive)
         produceCsNoEditText.setEditTextContent(taskItem.producerCsNo)
         produceNameEditText.setEditTextContent(taskItem.producerName)
         produceAddressEditText.setEditTextContent(taskItem.producerAddress)
@@ -75,7 +68,9 @@ open class FourthTableFragment: TableFragment() {
         agencyAddressEditText.setEditTextContent(taskItem.agencyAddress)
         agencyContactsEditText.setEditTextContent(taskItem.agencyContacts)
         agencyPhoneEditText.setEditTextContent(taskItem.agencyPhone)
-        resourceSpinnerGroupView.fetchData("${ApiClient.getHost()}app/areas/origin")
+
+        agentCountySpinnerGroupView.fetchData("${ApiClient.getHost()}app/areas/origin")
+        agentCountySpinnerGroupView.setOptionItem(OptionItem(1, taskItem.agentCountyName ?: "中国"))
 
     }
 
@@ -131,12 +126,12 @@ open class FourthTableFragment: TableFragment() {
 
 
     private fun isShowProducerViews() =
-        taskItem.producerActive == null || taskItem.producerActive  == 0
+        taskItem.sampleActive == null || taskItem.sampleActive  == 0
 
     private fun isShowEntrustViews() =
-        (taskItem.producerActive == null || taskItem.producerActive  == 0) && taskItem.entrustActive == 1
+        (taskItem.sampleActive == null || taskItem.sampleActive  == 0) && taskItem.entrustActive == 1
 
-    private fun isShowAgencyViews() = taskItem.producerActive == 1
+    private fun isShowAgencyViews() = taskItem.sampleActive == 1
 
     override fun submitSuccessful() {
         start(FifthTableFragment.newInstance(taskItem))
@@ -144,7 +139,6 @@ open class FourthTableFragment: TableFragment() {
 
     override fun assembleSubmitTaskData() {
         //标称信息
-        taskItem.producerActive = producerActiveRadioGroup.getCheckedOption()?.id
 
         taskItem.producerCsNo = produceCsNoEditText.getContent()
         taskItem.producerName = produceNameEditText.getContent()
@@ -167,7 +161,8 @@ open class FourthTableFragment: TableFragment() {
         taskItem.agencyAddress = agencyAddressEditText.getContent()
         taskItem.agencyContacts = agencyContactsEditText.getContent()
         taskItem.agencyPhone = agencyPhoneEditText.getContent()
-        taskItem.setAgencyOriginArea(resourceSpinnerGroupView.getSelectedOption())
+        taskItem.agentCountyName = agentCountySpinnerGroupView.getSelectedOption()?.name
+
     }
 
 }

@@ -37,7 +37,7 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
                             val body = response.body()
                             if (body?.code == 200) {
                                 val user = body.userInfo
-                                user?.token = body?.token
+                                user?.token = body.token
                                 userLiveData.postValue(user)
                             }else{
                                 errorLiveData.postValue(body?.msg)
@@ -70,8 +70,8 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
                         val body = response.body()
                         if (body?.get("code")?.toIntOrNull() == 200) {
                             val user = App.INSTANCE.user
-                            user?.userName1 = body?.get("userName1") ?: ""
-                            user?.userName2 = body?.get("userName2") ?: ""
+                            user?.userName1 = body["userName1"] ?: ""
+                            user?.userName2 = body["userName2"] ?: ""
                             App.INSTANCE.user = user
                             userLiveData.postValue(App.INSTANCE.user)
                         } else {

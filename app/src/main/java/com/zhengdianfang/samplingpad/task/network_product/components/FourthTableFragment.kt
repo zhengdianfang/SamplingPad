@@ -30,8 +30,8 @@ class FourthTableFragment: TableFragment() {
     override fun setupViews() {
         super.setupViews()
         val yesNoArray = resources.getStringArray(R.array.yes_or_no)
-        if (taskItem.producerActive != null) {
-            producerActiveRadioGroup.setDefaultCheckedRadioButton(yesNoArray[taskItem.producerActive!!])
+        if (taskItem.sampleActive != null) {
+            producerActiveRadioGroup.setDefaultCheckedRadioButton(yesNoArray[taskItem.sampleActive!!])
         }
         producerCsNoEditText.setEditTextContent(taskItem.producerCsNo)
         producerNameEditText.setEditTextContent(taskItem.producerName)
@@ -47,7 +47,7 @@ class FourthTableFragment: TableFragment() {
     override fun assembleSubmitTaskData() {
         val yesNoArray = resources.getStringArray(R.array.yes_or_no)
         val index = yesNoArray.indexOf(producerActiveRadioGroup.getCheckedText())
-        taskItem.producerActive = if(index >= 0) index else null
+        taskItem.sampleActive = if(index >= 0) index else null
         taskItem.producerCsNo = producerCsNoEditText.getContent()
         taskItem.producerName = producerNameEditText.getContent()
         taskItem.producerAddress = producerAddressEditText.getContent()
