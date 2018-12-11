@@ -15,6 +15,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "HOST", "\"http://39.104.56.18:8080/inspection/\"")
     }
 
     signingConfigs {
@@ -39,7 +40,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
             matchingFallbacks = ['release']
-            buildConfigField "String", "HOST", "\"http://39.104.56.18:8080/inspection/\""
+            buildConfigField ("String", "HOST", "\"http://39.104.56.18:8080/inspection/\"")
         }
         release {
             ndk {
@@ -48,7 +49,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
-            buildConfigField "String", "HOST", "\"http://118.190.137.152:8080/inspection/\""
+            buildConfigField("String", "HOST", "\"http://118.190.137.152:8080/inspection/\"")
       }
     }
     compileOptions {
