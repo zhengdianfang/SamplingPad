@@ -55,17 +55,19 @@ class TaskSearchBar: LinearLayout, AdapterView.OnItemSelectedListener {
     }
 
     private fun filterTaskItems() {
-        this.filterTaskCallback?.invoke(
-           allTasks
-               .filter {
-                   TextUtils.isEmpty(this.selectedTaskNumber) || it.implPlanCode == this.selectedTaskNumber
-               }
-               .filter {
-                   TextUtils.isEmpty(this.keyword) || it.code == this.keyword
-               }
-               .filter { this.filterMeTaskChecked.not() ||  it.workerOneId == null || it.workerOneId == App.INSTANCE.user?.id || it.workerOneId == App.INSTANCE.user?.id2 }
-               .toMutableList()
-        )
+        if (this.filterTaskCallback != null) {
+            this.filterTaskCallback!!(
+                allTasks
+                    .filter {
+                        TextUtils.isEmpty(this.selectedTaskNumber) || it.implPlanCode == this.selectedTaskNumber
+                    }
+                    .filter {
+                        TextUtils.isEmpty(this.keyword) || it.code == this.keyword
+                    }
+                    .filter { this.filterMeTaskChecked.not() ||  it.workerOneId == null || it.workerOneId == App.INSTANCE.user?.id || it.workerOneId == App.INSTANCE.user?.id2 }
+                    .toMutableList()
+            )
+        }
     }
 
     private fun updateTaskNumbers() {
