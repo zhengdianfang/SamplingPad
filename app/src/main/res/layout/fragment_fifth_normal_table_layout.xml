@@ -18,28 +18,83 @@
             android:lineSpacingExtra="8dp"
             android:text="@string/upload_photo_tip"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@android:color/black"
+            android:text="图片"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/imageFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@android:color/white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@android:color/black"
+            android:text="告知书"/>
+        <ImageView
+            android:id="@+id/notifyReportImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:scaleType="fitStart"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_cloud_upload"
+            android:background="@android:color/white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@android:color/black"
+            android:text="电子抽样单"/>
+
+        <ImageView
+            android:id="@+id/sampleImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:scaleType="fitStart"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_cloud_upload"
+            android:background="@android:color/white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@android:color/black"
+            android:text="视频"/>
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/videoFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@android:color/white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@android:color/black"
+            android:text="己生成抽样单pdf"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/pdfFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@android:color/white"/>
 
 

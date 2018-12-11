@@ -63,7 +63,7 @@ class TaskSearchBar: LinearLayout, AdapterView.OnItemSelectedListener {
                .filter {
                    TextUtils.isEmpty(this.keyword) || it.code == this.keyword
                }
-               .filter { this.filterMeTaskChecked.not() ||  it.workerOneId == null || it.workerOneId == App.INSTANCE.user?.id }
+               .filter { this.filterMeTaskChecked.not() ||  it.workerOneId == null || it.workerOneId == App.INSTANCE.user?.id || it.workerOneId == App.INSTANCE.user?.id2 }
                .toMutableList()
         )
     }
@@ -127,7 +127,7 @@ class TaskSearchBar: LinearLayout, AdapterView.OnItemSelectedListener {
         filterMeTaskCheckBox.text = "仅看指定任务"
         filterMeTaskCheckBox.setOnCheckedChangeListener { _, checked ->
             this.filterMeTaskChecked = checked
-            this.updateTaskNumbers()
+            this.filterTaskItems()
         }
         addView(filterMeTaskCheckBox)
     }

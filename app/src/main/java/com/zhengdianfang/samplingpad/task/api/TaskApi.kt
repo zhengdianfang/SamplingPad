@@ -63,6 +63,12 @@ interface TaskApi {
     @GET("attachments/samplepic/{id}")
     fun fetchAttachmentIdsBySampleId(@Path("id") id: String): Call<Response<Array<AttachmentItem>>>
 
+    @GET("attachments/notification/{id}")
+    fun fetchReportBySampleId(@Path("id") id: String): Call<Response<Array<AttachmentItem>>>
+
+    @GET("attachments/elec/{id}")
+    fun fetchSampleBySampleId(@Path("id") id: String): Call<Response<Array<AttachmentItem>>>
+
 
     @DELETE("attachments/{ids}")
     fun deleteAttachment(@Path("ids") ids: String): Call<Response<String>>

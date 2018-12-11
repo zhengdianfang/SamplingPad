@@ -8,6 +8,5 @@
     android:drawableTop="@drawable/ic_cloud_upload"
     android:drawablePadding="8dp"
     android:gravity="center"
-    android:text="@string/upload_pic_text"
     android:textColor="@android:color/black"
     android:textSize="@dimen/middle" />

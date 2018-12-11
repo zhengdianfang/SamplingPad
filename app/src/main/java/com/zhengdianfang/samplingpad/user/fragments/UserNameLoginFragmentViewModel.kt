@@ -72,6 +72,7 @@ class UserNameLoginFragmentViewModel(application: Application): AndroidViewModel
                             val user = App.INSTANCE.user
                             user?.userName1 = body["userName1"] ?: ""
                             user?.userName2 = body["userName2"] ?: ""
+                            user?.id2 = body["id"]?.toIntOrNull() ?: 0
                             App.INSTANCE.user = user
                             userLiveData.postValue(App.INSTANCE.user)
                         } else {

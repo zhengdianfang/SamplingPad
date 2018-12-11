@@ -29,8 +29,6 @@ class AttachmentAdapter(data: List<MultiItemEntity>, private val type: Int) : Ba
                     .apply(RequestOptions().placeholder(R.drawable.verify_code_default_pic))
                     .into(helper.itemView as ImageView)
             }
-        } else if(item.itemType == 1) {
-            (helper.itemView as TextView).text = if (type == 0) "上传图片" else "上传视频"
         }
     }
 

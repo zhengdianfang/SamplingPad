@@ -33,6 +33,8 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     val uploadVideoResponseLiveData = MutableLiveData<AttachmentIds>()
     val uploadErrorResponseLiveData = MutableLiveData<String>()
     val attachmentIdsLiveData = MutableLiveData<Array<AttachmentItem>>()
+    val reportLiveData = MutableLiveData<Array<AttachmentItem>>()
+    val sampleImageLiveData = MutableLiveData<Array<AttachmentItem>>()
     val deleteAttachmentLiveData = MutableLiveData<Boolean>()
     val generatePdfLiveData = MutableLiveData<Map<String, String>>()
     val pdfHistoryLiveData = MutableLiveData<Map<String, String>>()
@@ -192,6 +194,34 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
             uiThread {
                 if (ids != null) {
                     attachmentIdsLiveData.postValue(ids)
+                }
+            }
+        }
+    }
+
+    fun fetchReportBySampleId(id: String) {
+        doAsync {
+            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
+                .fetchReportBySampleId(id)
+                .execute()
+            val ids = response.body()?.data
+            uiThread {
+                if (ids != null) {
+                    reportLiveData.postValue(ids)
+                }
+            }
+        }
+    }
+
+    fun fetchSampleImageBySampleId(id: String) {
+        doAsync {
+            val response = ApiClient.getRetrofit().create(TaskApi::class.java)
+                .fetchSampleBySampleId(id)
+                .execute()
+            val ids = response.body()?.data
+            uiThread {
+                if (ids != null) {
+                    sampleImageLiveData.postValue(ids)
                 }
             }
         }
