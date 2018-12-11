@@ -21,11 +21,4 @@
         android:layout_gravity="start"
         android:name="com.zhengdianfang.samplingpad.main.fragments.NavigationFragment"/>
 
-    <fragment
-        android:id="@+id/loggingFragment"
-        android:layout_width="@dimen/navigation_width"
-        android:layout_height="match_parent"
-        tools:layout="@layout/fragment_logging"
-        android:layout_gravity="end"
-        android:name="com.zhengdianfang.samplingpad.main.fragments.LoggingFragment"/>
 </android.support.v4.widget.DrawerLayout>

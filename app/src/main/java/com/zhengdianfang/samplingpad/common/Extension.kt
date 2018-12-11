@@ -100,6 +100,3 @@ fun String.searchPoiByText(context:Context, resultCallback: (poiItems: MutableLi
     })
 }
 
-fun MaterialDialog.setItems(items: MutableList<Any?>) {
-
-}

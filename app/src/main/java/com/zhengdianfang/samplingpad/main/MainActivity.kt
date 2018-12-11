@@ -26,9 +26,7 @@ import com.zhengdianfang.samplingpad.common.BaseActivity
 import com.zhengdianfang.samplingpad.common.entities.OptionItem
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.main.api.MainApi
-import com.zhengdianfang.samplingpad.main.fragments.LoggingFragment
 import com.zhengdianfang.samplingpad.main.fragments.MainFragment
-import kotlinx.android.synthetic.main.fragment_main.*
 import org.jetbrains.anko.defaultSharedPreferences
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -44,9 +42,6 @@ class MainActivity : BaseActivity(), OnTraceListener {
     var traceClient: LBSTraceClient? = null
     var entityName = ""
     private var trace: Trace? = null
-    private val logginFragment by lazy {
-        findFragment(MainFragment::class.java)?.findChildFragment(LoggingFragment::class.java)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,13 +73,10 @@ class MainActivity : BaseActivity(), OnTraceListener {
 
     override fun onStartGatherCallback(status: Int, message: String?) {
         Timber.d("Baidu gather start : $status======$message")
-        logginFragment?.updateDyamicLogging("开启采集: $message ")
-        logginFragment?.startTimer(this.entityName)
     }
 
     override fun onStopGatherCallback(status: Int, message: String?) {
         Timber.d("Baidu gather stop: $status======$message")
-        logginFragment?.updateDyamicLogging("停止采集: $message ")
     }
 
     override fun onBindServiceCallback(p0: Int, p1: String?) {
@@ -103,12 +95,10 @@ class MainActivity : BaseActivity(), OnTraceListener {
             traceClient!!.startGather(this)
         }
         Timber.d("Baidu trace start : $status======$message")
-        logginFragment?.updateDyamicLogging("开启服务: $message ")
     }
 
     override fun onStopTraceCallback(status: Int, message: String?) {
         Timber.d("Baidu trace stop: $status======$message")
-        logginFragment?.updateDyamicLogging("停止服务: $message ")
     }
 
     private fun applyLocationPermission() {
@@ -204,11 +194,6 @@ class MainActivity : BaseActivity(), OnTraceListener {
         val packInterval = 10
         traceClient!!.setInterval(gatherInterval, packInterval)
         traceClient!!.startTrace(trace, this)
-        updateLogging(entityName)
-    }
-
-    private fun updateLogging(entityName: String) {
-        logginFragment?.updateBaiduStaticLogging(entityName)
     }
 
     private fun loginVideoSDK(account: String, password: String) {
