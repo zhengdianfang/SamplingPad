@@ -59,7 +59,7 @@ android {
 
     fir {
         apiTokens([
-                qa: "1d6dd4023410019b563664c4b8ecee2e",
+                qa: "", //1d6dd4023410019b563664c4b8ecee2e
                 release: ""
         ])
         changeLog "更新日志" // 或者file("日志文件路径")
