@@ -15,7 +15,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "HOST", "\"${System.env.HOST}\"")
     }
 
     signingConfigs {
@@ -32,6 +31,16 @@ android {
     }
 
     buildTypes {
+        qa {
+            ndk {
+                abiFilters 'armeabi', 'arm64-v8a'
+            }
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            matchingFallbacks = ['release']
+            buildConfigField "String", "HOST", "\"http://39.104.56.18:8080/inspection/\""
+        }
         release {
             ndk {
                 abiFilters 'armeabi', 'arm64-v8a'
@@ -39,7 +48,8 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
-        }
+            buildConfigField "String", "HOST", "\"http://118.190.137.152:8080/inspection/\""
+      }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -47,7 +57,10 @@ android {
     }
 
     fir {
-        apiToken "1d6dd4023410019b563664c4b8ecee2e"
+        apiTokens([
+                qa: "1d6dd4023410019b563664c4b8ecee2e",
+                release: ""
+        ])
         changeLog "更新日志" // 或者file("日志文件路径")
         upload true
     }
