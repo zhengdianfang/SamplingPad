@@ -39,15 +39,32 @@
             android:layout_marginTop="16dp"
             android:textColor="@android:color/black"
             android:text="告知书"/>
-        <ImageView
-            android:id="@+id/notifyReportImage"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:scaleType="fitStart"
             android:layout_marginTop="16dp"
-            android:src="@drawable/ic_cloud_upload"
-            android:background="@android:color/white"/>
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/notifyReportImage"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:scaleType="centerCrop"
+                android:padding="8dp" />
+
+
+            <ImageButton
+                android:id="@+id/uploadNotifyReportImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:scaleType="fitStart"
+                android:background="@android:color/white"
+                android:src="@drawable/ic_cloud_upload" />
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -56,15 +73,30 @@
             android:textColor="@android:color/black"
             android:text="电子抽样单"/>
 
-        <ImageView
-            android:id="@+id/sampleImage"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:scaleType="fitStart"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/ic_cloud_upload"
-            android:background="@android:color/white"/>
+            android:layout_marginTop="16dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/sampleImage"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:scaleType="centerCrop"
+                android:padding="8dp" />
+
+
+            <ImageButton
+                android:id="@+id/uploadSampleImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:background="@android:color/white"
+                android:src="@drawable/ic_cloud_upload" />
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"

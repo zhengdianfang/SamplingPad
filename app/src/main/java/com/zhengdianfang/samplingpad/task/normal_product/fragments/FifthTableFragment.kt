@@ -34,7 +34,6 @@ import com.zhengdianfang.samplingpad.task.entities.UploadItem
 import kotlinx.android.synthetic.main.fragment_fifth_normal_table_layout.*
 import timber.log.Timber
 import java.io.File
-import java.util.*
 
 open class FifthTableFragment: TableFragment() {
 
@@ -49,6 +48,9 @@ open class FifthTableFragment: TableFragment() {
     private val imageAttachments = mutableListOf<MultiItemEntity>()
     private val videoAttachments = mutableListOf<MultiItemEntity>()
     private val pdfAttachments = mutableListOf<MultiItemEntity>()
+
+    private var sampleImageId = 0
+    private var notifyReportImageId = 0
 
     companion object {
 
@@ -124,10 +126,6 @@ open class FifthTableFragment: TableFragment() {
             tableFragmentViewModel.fetchPdfById(taskItem.sampleReportAttachmentId!!)
         }
     }
-    override fun onFragmentResult(requestCode: Int, resultCode: Int, data: Bundle?) {
-        super.onFragmentResult(requestCode, resultCode, data)
-        fetchAttachment()
-    }
 
 
     override fun setupViews() {
@@ -147,18 +145,29 @@ open class FifthTableFragment: TableFragment() {
         generateButton.setOnClickListener {
             tableFragmentViewModel.generatePdf(taskItem)
         }
-        notifyReportImage.setOnClickListener {
+        uploadNotifyReportImage.setOnClickListener {
             val intent = Intent(context, ImagePickActivity::class.java)
             intent.putExtra(IS_NEED_CAMERA, true)
             intent.putExtra(Constant.MAX_NUMBER, 1)
             startActivityForResult(intent, SELECT_REPORT_REQUEST)
         }
 
-        sampleImage.setOnClickListener {
+        uploadSampleImage.setOnClickListener {
             val intent = Intent(context, ImagePickActivity::class.java)
             intent.putExtra(IS_NEED_CAMERA, true)
             intent.putExtra(Constant.MAX_NUMBER, 1)
             startActivityForResult(intent, SELECT_SAMPLE_REQUEST)
+        }
+        notifyReportImage.setOnClickListener {
+            if (this.notifyReportImageId != 0) {
+                startForResult(PhotoPreviewFragment.newInstance(this.notifyReportImageId), 0x0001)
+            }
+        }
+
+        sampleImage.setOnClickListener {
+            if (this.sampleImageId != 0) {
+                startForResult(PhotoPreviewFragment.newInstance(this.sampleImageId), 0x0001)
+            }
         }
         renderImageFrame()
         renderVideoFrame()
@@ -181,22 +190,21 @@ open class FifthTableFragment: TableFragment() {
         })
         tableFragmentViewModel.reportLiveData.observe(this, Observer { attachments ->
             if (attachments != null && attachments.isNotEmpty()) {
+                this.notifyReportImageId = attachments.last().id
                 Glide.with(this)
-                    .load("${ApiClient.getHost()}${TaskApi.ATTACHMENT_URL}${attachments.last().id}")
-                    .apply(RequestOptions().placeholder(R.drawable.verify_code_default_pic))
+                    .load("${ApiClient.getHost()}${TaskApi.ATTACHMENT_URL}${this.notifyReportImageId}")
+                    .apply(RequestOptions().error(R.drawable.verify_code_default_pic))
                     .into(notifyReportImage)
-
-                fetchAttachment()
             }
         })
 
         tableFragmentViewModel.sampleImageLiveData.observe(this, Observer { attachments ->
             if (attachments != null && attachments.isNotEmpty()) {
+                this.sampleImageId = attachments.last().id
                 Glide.with(this)
-                    .load("${ApiClient.getHost()}${TaskApi.ATTACHMENT_URL}${attachments.last().id}")
-                    .apply(RequestOptions().placeholder(R.drawable.verify_code_default_pic))
+                    .load("${ApiClient.getHost()}${TaskApi.ATTACHMENT_URL}${this.sampleImageId}")
+                    .apply(RequestOptions().error(R.drawable.verify_code_default_pic))
                     .into(sampleImage)
-                fetchAttachment()
             }
         })
         tableFragmentViewModel.isLoadingLiveData.observe(this, Observer { isLoading ->

@@ -267,10 +267,10 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
                 uiThread {
                     if (body != null && body.code == 200 ) {
                         Timber.d("upload result ${response.body()?.data.toString()}")
-                        if (attachmentType == "1") {
-                            uploadImageResponseLiveData.postValue(response.body()!!.data)
-                        } else if (attachmentType == "4") {
+                        if (attachmentType == "4") {
                             uploadVideoResponseLiveData.postValue(response.body()!!.data)
+                        } else {
+                            uploadImageResponseLiveData.postValue(response.body()!!.data)
                         }
                     } else {
                         uploadErrorResponseLiveData.postValue(body?.msg ?: "")
@@ -278,8 +278,6 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-            } finally {
-                uploadErrorResponseLiveData.postValue("")
             }
 
         }

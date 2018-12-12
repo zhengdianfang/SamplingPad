@@ -205,13 +205,6 @@
                 app:edit_hint="请输入联系电话"
                 app:edit_label="*电话：" />
 
-            <com.zhengdianfang.samplingpad.common.components.SpinnerComponent
-                android:id="@+id/agentCountySpinnerGroupView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:spinner_hint="@string/agency_origin_area_name_hint1"
-                app:spinner_label="@string/agency_origin_area_name_label1" />
 
         </LinearLayout>
 

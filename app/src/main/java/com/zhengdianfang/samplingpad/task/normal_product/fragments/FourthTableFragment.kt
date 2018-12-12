@@ -48,7 +48,7 @@ open class FourthTableFragment: TableFragment() {
             taskItem.entrustActive = option.id
             updateFrameVisibleStatus()
         }
-        entrustActiveRadioGroup.setDefaultCheckedRadioButton(taskItem.entrustActive)
+        entrustActiveRadioGroup.setDefaultCheckedRadioButton(if(taskItem.sampleActive == 1) 0 else  taskItem.entrustActive)
 
         //委托单位信息
         entrustCsNoEditText.setEditTextContent(taskItem.entrustCsNo)
@@ -68,9 +68,6 @@ open class FourthTableFragment: TableFragment() {
         agencyAddressEditText.setEditTextContent(taskItem.agencyAddress)
         agencyContactsEditText.setEditTextContent(taskItem.agencyContacts)
         agencyPhoneEditText.setEditTextContent(taskItem.agencyPhone)
-
-        agentCountySpinnerGroupView.fetchData("${ApiClient.getHost()}app/areas/origin")
-        agentCountySpinnerGroupView.setOptionItem(OptionItem(1, taskItem.agentCountyName ?: "中国"))
 
     }
 
@@ -161,7 +158,6 @@ open class FourthTableFragment: TableFragment() {
         taskItem.agencyAddress = agencyAddressEditText.getContent()
         taskItem.agencyContacts = agencyContactsEditText.getContent()
         taskItem.agencyPhone = agencyPhoneEditText.getContent()
-        taskItem.agentCountyName = agentCountySpinnerGroupView.getSelectedOption()?.name
 
     }
 
