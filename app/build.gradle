@@ -56,6 +56,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    fir {
+        apiTokens([
+                qa: "1d6dd4023410019b563664c4b8ecee2e",
+                release: "4e1249eac4fec5e3ad814f86c46bfece"
+        ])
+        changeLog "更新日志" // 或者file("日志文件路径")
+        upload true
+    }
 }
 
 androidExtensions {
