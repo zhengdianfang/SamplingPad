@@ -150,7 +150,7 @@ open class FourthTableFragment: TableFragment() {
         taskItem.entrustAddress = entrustAddressEditText.getContent()
         taskItem.entrustContacts = entrustContactsEditText.getContent()
         taskItem.entrustPhone = entrustPhoneEditText.getContent()
-        taskItem.entrustActive = entrustActiveRadioGroup.getCheckedOption()?.id
+        taskItem.entrustActive = if (taskItem.sampleActive == 1) 0 else  entrustActiveRadioGroup.getCheckedOption()?.id
         taskItem.setEnstrustAddressInfo(addressSpinnerGroupView.selectedProvince, addressSpinnerGroupView.selectedTown, addressSpinnerGroupView.selectedCounty)
 
         //进口代理商信息

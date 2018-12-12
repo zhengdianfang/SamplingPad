@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
-                    app:edit_hint="请输入条形码（散装可不填）"
+                    app:edit_hint=""
                     app:edit_label="*条形码："
                     app:edit_search="true" />
 
@@ -67,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:edit_hint="请输入商标名称（散装可不填）"
+                app:edit_hint=""
                 app:edit_label="*商标：" />
 
 
