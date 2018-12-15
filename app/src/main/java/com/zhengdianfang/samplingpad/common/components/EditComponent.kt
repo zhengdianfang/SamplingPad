@@ -2,7 +2,9 @@ package com.zhengdianfang.samplingpad.common.components
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.inputmethod.EditorInfo
@@ -13,10 +15,11 @@ import com.loc.i
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.LabelView
 
-class EditComponent: BaseComponent {
+class EditComponent: BaseComponent, TextWatcher {
 
     private lateinit var editTextView: EditText
     var search: ((text: String)-> Unit)? = null
+    private var lastTime = System.currentTimeMillis()
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
         this.setupViews(context, attributeSet)
@@ -42,8 +45,25 @@ class EditComponent: BaseComponent {
         editTextView.setText("")
     }
 
+    override fun setDisable(disable: Boolean) {
+        this.editTextView.isEnabled = disable
+    }
+
     override fun checkFieldHasValue(): Boolean {
         return TextUtils.isEmpty(this.editTextView.text.toString()).not()
+    }
+
+    override fun afterTextChanged(editable: Editable) {
+        if (System.currentTimeMillis() - lastTime > 1000) {
+            lastTime = System.currentTimeMillis()
+            this.search?.invoke(editable.toString().trim())
+        }
+    }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+    }
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
     }
 
     private fun setupViews(context: Context, attributeSet: AttributeSet) {
@@ -64,14 +84,7 @@ class EditComponent: BaseComponent {
             }
         }
         if (attrs.getBoolean(R.styleable.AppTheme_EditComponent_edit_search, false)) {
-            this.editTextView.imeOptions = EditorInfo.IME_ACTION_SEARCH
-            this.editTextView.inputType = EditorInfo.TYPE_CLASS_TEXT
-            editTextView.setOnEditorActionListener { _, actionId, _ ->
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    this.search!!.invoke(this.editTextView.text.toString())
-                }
-                true
-            }
+            editTextView.addTextChangedListener(this)
         }
         addView(editTextView)
     }

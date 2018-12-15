@@ -29,11 +29,11 @@ abstract class TableFragment: BaseFragment() {
 
     open fun setupViews() {
         view?.findViewById<Button>(R.id.nextButtonButton)?.setOnClickListener {
-            if (validateRequiredField(tableFrame)) {
+//            if (validateRequiredField(tableFrame)) {
                 assembleSubmitTaskData()
                 Timber.d("save task item : $taskItem")
                 tableFragmentViewModel.saveSample(taskItem)
-            }
+//            }
         }
         view?.findViewById<Button>(R.id.resetButton)?.setOnClickListener {
             this.clear()
@@ -53,6 +53,7 @@ abstract class TableFragment: BaseFragment() {
                 if (childView is BaseComponent) {
                     if (childView.visibility == View.VISIBLE &&
                         childView.isRequired() &&
+                        childView.getDisable().not() &&
                         childView.checkFieldHasValue().not()) {
                         var toastText = childView.noValueTip()
                         if(TextUtils.isEmpty(toastText)) {

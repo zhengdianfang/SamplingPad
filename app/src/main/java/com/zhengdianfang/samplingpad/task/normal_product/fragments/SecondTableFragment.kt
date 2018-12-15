@@ -55,6 +55,11 @@ open class SecondTableFragment: TableFragment() {
         enterpriseLinkNameRadioGroup.setDefaultCheckedRadioButton(taskItem.enterpriseLinkName)
         enterpriseLinkNameRadioGroup.radioButtonCheckCallback  = { _, option ->
             fetchEnterprisePlaceName(option.id)
+            if (option!!.name.equals("生产")) {
+                enterpriseAnnualSalesEditText.visibility = View.VISIBLE
+            } else {
+                enterpriseAnnualSalesEditText.visibility = View.GONE
+            }
         }
         enterprisePlaceNameSpinner.setOptionItem(OptionItem(taskItem.enterprisePlaceId, taskItem.enterprisePlaceName))
         enterpriseAddressEditText.setEditTextContent(taskItem.enterpriseAddress)

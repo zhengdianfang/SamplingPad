@@ -27,21 +27,21 @@ class HomeFragment : BaseFragment() {
     private fun setupViews() {
         val verifyFragment = findChildFragment(VerifyFragment::class.java)
         val taskListFragment = findChildFragment(TaskListFragment::class.java)
-        homeTabBar.setOnCheckedChangeListener { _, buttonId ->
-            when (buttonId) {
-                R.id.verifyTab -> {
-                    verifyTab.active(R.drawable.home_verify_tab_active_background, android.R.color.white)
-                    taskTab.active(R.drawable.transparent, R.color.colorPrimary)
-                    showHideFragment(verifyFragment, taskListFragment)
-                }
-                R.id.taskTab -> {
-                    taskTab.active(R.drawable.home_task_tab_active_background, android.R.color.white)
-                    verifyTab.active(R.drawable.transparent, R.color.colorPrimary)
-                    showHideFragment(taskListFragment, verifyFragment)
-                }
-            }
-        }
-        homeTabBar.check(R.id.verifyTab)
+//        homeTabBar.setOnCheckedChangeListener { _, buttonId ->
+//            when (buttonId) {
+//                R.id.verifyTab -> {
+//                    verifyTab.active(R.drawable.home_verify_tab_active_background, android.R.color.white)
+//                    taskTab.active(R.drawable.transparent, R.color.colorPrimary)
+//                    showHideFragment(verifyFragment, taskListFragment)
+//                }
+//                R.id.taskTab -> {
+//                    taskTab.active(R.drawable.home_task_tab_active_background, android.R.color.white)
+//                    verifyTab.active(R.drawable.transparent, R.color.colorPrimary)
+//                    showHideFragment(taskListFragment, verifyFragment)
+//                }
+//            }
+//        }
+//        homeTabBar.check(R.id.verifyTab)
 
         userSettingButton.setOnClickListener {
             if (parentFragment is MainFragment) {

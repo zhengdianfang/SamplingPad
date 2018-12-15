@@ -62,6 +62,12 @@
                 app:edit_hint="请输入样品名称"
                 app:edit_label="*样品名称：" />
 
+            <com.zhengdianfang.samplingpad.common.components.CategorySpinnerComponent
+                android:id="@+id/categorySpinnerGroup"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <com.zhengdianfang.samplingpad.common.components.EditComponent
                 android:id="@+id/sampleBrandEditText"
                 android:layout_width="match_parent"
@@ -100,6 +106,12 @@
                     android:gravity="center_vertical"
                     android:hint="单位"
                     android:paddingLeft="16dp" />
+
+                <CheckBox
+                    android:id="@+id/freeSupportCheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="无偿提供"/>
             </LinearLayout>
 
             <com.zhengdianfang.samplingpad.common.components.NewRadioGroupComponent

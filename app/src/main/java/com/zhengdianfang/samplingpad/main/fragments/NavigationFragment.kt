@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
 import com.zhengdianfang.samplingpad.App
+import com.zhengdianfang.samplingpad.BuildConfig
 
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
@@ -38,6 +39,12 @@ class NavigationFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         this.setupViews()
         this.bindViewModel()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        navigationFragmentViewModel.fetchAppVersion()
+
     }
 
     private fun setupViews() {
@@ -82,10 +89,10 @@ class NavigationFragment : BaseFragment() {
                     .onPositive { _, _ ->
                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(upgradeInfo?.get("url"))))
                     }
-                    .negativeText("取消")
+                    .cancelable(BuildConfig.DEBUG)
                     .show()
             }
         })
-        navigationFragmentViewModel.fetchAppVersion()
     }
+
 }

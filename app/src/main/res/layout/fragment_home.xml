@@ -25,39 +25,39 @@
             android:background="@drawable/transparent"
             android:src="@drawable/ic_user_setting"/>
 
-        <RadioGroup
-            android:id="@+id/homeTabBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_vertical"
-            android:layout_centerInParent="true"
-            android:background="@drawable/home_tab_bar_background">
+        <!--<RadioGroup-->
+            <!--android:id="@+id/homeTabBar"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:background="@drawable/home_tab_bar_background">-->
 
-            <RadioButton
-                android:id="@+id/verifyTab"
-                style="@style/AppTheme.Home.TabItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/verify_text"
-                />
-            <RadioButton
-                android:id="@+id/taskTab"
-                style="@style/AppTheme.Home.TabItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/task_list_text"
-                />
-        </RadioGroup>
+            <!--<RadioButton-->
+                <!--android:id="@+id/verifyTab"-->
+                <!--style="@style/AppTheme.Home.TabItem"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/verify_text"-->
+                <!--/>-->
+            <!--<RadioButton-->
+                <!--android:id="@+id/taskTab"-->
+                <!--style="@style/AppTheme.Home.TabItem"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/task_list_text"-->
+                <!--/>-->
+        <!--</RadioGroup>-->
 
     </RelativeLayout>
 
-    <fragment
-        android:id="@+id/homeFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.zhengdianfang.samplingpad.main.fragments.VerifyFragment"
-        tools:layout="@layout/fragment_verfiy_layout"/>
+    <!--<fragment-->
+        <!--android:id="@+id/homeFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:name="com.zhengdianfang.samplingpad.main.fragments.VerifyFragment"-->
+        <!--tools:layout="@layout/fragment_verfiy_layout"/>-->
 
     <fragment
         android:id="@+id/taskListFragment"

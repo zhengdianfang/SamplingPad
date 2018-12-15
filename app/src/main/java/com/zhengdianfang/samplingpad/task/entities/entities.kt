@@ -36,7 +36,15 @@ data class Goods(
     val brand: String,
     val packageType: String,
     val specification: String,
-    val description: String?
+    val description: String?,
+    var level1Id: Int?,
+    var level2Id: Int?,
+    var level3Id: Int?,
+    var level4Id: Int?,
+    var level1Name: String?,
+    var level2Name: String?,
+    var level3Name: String?,
+    var level4Name: String?
 )
 
 data class Enterprise(
@@ -226,6 +234,14 @@ data class TaskItem(
         sampleSpecification = goods.specification
         producerBarcode = goods.barCode
         chainBrand = goods.brand
+        level1Id = goods.level1Id
+        level2Id = goods.level2Id
+        level3Id = goods.level3Id
+        level4Id = goods.level4Id
+        level1Name = goods.level1Name
+        level2Name = goods.level2Name
+        level3Name = goods.level3Name
+        level4Name = goods.level4Name
     }
 
     fun mergeEnterprise(enterprise: Enterprise) {

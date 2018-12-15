@@ -11,7 +11,7 @@ import com.zhengdianfang.samplingpad.common.LabelView
 
 abstract class BaseComponent: LinearLayout {
     lateinit var labelTextView: LabelView
-    var disable = false
+    private var disable = false
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet)
 
@@ -23,6 +23,12 @@ abstract class BaseComponent: LinearLayout {
     open fun isRequired(): Boolean {
         return labelTextView.isRequired()
     }
+
+    open fun setDisable(disable: Boolean) {
+        this.disable = disable
+    }
+
+    fun getDisable() = disable
 
     abstract fun clear()
 

@@ -68,19 +68,6 @@
                 app:text_content="9238247564382575"/>
 
 
-            <com.zhengdianfang.samplingpad.common.components.CategorySpinnerComponent
-                android:id="@+id/categorySpinnerGroup"
-                android:layout_marginTop="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <com.zhengdianfang.samplingpad.common.components.NewRadioGroupComponent
-                android:id="@+id/inspectionKindNameRadioGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:radio_data_key="inspectionKindOptions"
-                app:radio_label="*检验类别：" />
 
         </LinearLayout>
 

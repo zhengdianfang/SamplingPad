@@ -22,8 +22,6 @@ open class FirstTableFragment: TableFragment() {
     }
 
     override fun assembleSubmitTaskData() {
-        taskItem.setInspectionKindOption(inspectionKindNameRadioGroup.getCheckedOption())
-        taskItem.mergeSelectedValuesToTaskItem(categorySpinnerGroup.selectedLevelCategory)
         taskItem.enforcePeople = enforcePeopleEditText.getContent()
     }
 
@@ -38,14 +36,12 @@ open class FirstTableFragment: TableFragment() {
         sampleCodeTextView.setContentText(taskItem.code)
         detectionCompanyTextView.setContentText(taskItem.detectionCompanyName)
         implPlanCodeTextView.setContentText(taskItem.implPlanCode)
-        categorySpinnerGroup.setDefaultValues(taskItem)
         createOrgNameTextView.setContentText(taskItem.createOrgName)
         createOrgAddressTextView.setContentText(taskItem.createOrgAddress)
         createOrgAreaNameTextView.setContentText(taskItem.createOrgAreaName)
         createOrgContactsTextView.setContentText(taskItem.createOrgContacts)
         creatorEmailTextView.setContentText(taskItem.creatorEmail)
         creatorPhoneTextView.setContentText(taskItem.creatorPhone)
-        inspectionKindNameRadioGroup.setDefaultCheckedRadioButton(taskItem.inspectionKindName)
         enforcePeopleEditText.setEditTextContent(taskItem.enforcePeople)
 
 

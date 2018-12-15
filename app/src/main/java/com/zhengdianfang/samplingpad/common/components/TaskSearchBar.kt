@@ -124,7 +124,7 @@ class TaskSearchBar: LinearLayout, AdapterView.OnItemSelectedListener {
     }
 
     private fun renderFilterMeTaskCheckbox() {
-        filterMeTaskCheckBox.text = "仅看指定任务"
+        filterMeTaskCheckBox.text = "个人任务"
         filterMeTaskCheckBox.setOnCheckedChangeListener { _, checked ->
             this.filterMeTaskChecked = checked
             this.filterTaskItems()

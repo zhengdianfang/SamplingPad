@@ -1,26 +1,23 @@
 package com.zhengdianfang.samplingpad.task.normal_product.fragments
 
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.afollestad.materialdialogs.MaterialDialog
-import com.zhengdianfang.samplingpad.R
-import com.zhengdianfang.samplingpad.common.TableFragment
-import com.zhengdianfang.samplingpad.task.entities.TaskItem
-import kotlinx.android.synthetic.main.fragment_third_normal_table_layout.*
-import java.util.*
-import io.github.xudaojie.qrcodelib.CaptureActivity
-import android.content.Intent
-import android.content.SharedPreferences
-import android.graphics.Path
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.zhengdianfang.samplingpad.R
+import com.zhengdianfang.samplingpad.common.TableFragment
 import com.zhengdianfang.samplingpad.common.entities.OptionItem
 import com.zhengdianfang.samplingpad.http.ApiClient
-import com.zhengdianfang.samplingpad.http.Response
+import com.zhengdianfang.samplingpad.task.entities.TaskItem
+import io.github.xudaojie.qrcodelib.CaptureActivity
+import kotlinx.android.synthetic.main.fragment_third_normal_table_layout.*
 import org.jetbrains.anko.defaultSharedPreferences
+import java.util.*
 
 
 open class ThirdTableFragment: TableFragment() {
@@ -41,6 +38,7 @@ open class ThirdTableFragment: TableFragment() {
                 priceUnitSpinner.text = text
                 sampleInspectAmountUnitSpinner.text = text
                 samplePreparationUnitSpinner.text = text
+                disable = true
             }
             .build()
     }
@@ -49,7 +47,10 @@ open class ThirdTableFragment: TableFragment() {
         MaterialDialog.Builder(context!!)
             .items(unitofquantityOptions)
             .itemsCallback { _, _, _, text ->
+                priceUnitSpinner.text = text
                 sampleInspectAmountUnitSpinner.text = text
+                samplePreparationUnitSpinner.text = text
+                disable = true
             }
             .build()
     }
@@ -59,6 +60,9 @@ open class ThirdTableFragment: TableFragment() {
             .items(unitofquantityOptions)
             .itemsCallback { _, _, _, text ->
                 samplePreparationUnitSpinner.text = text
+                priceUnitSpinner.text = text
+                sampleInspectAmountUnitSpinner.text = text
+                disable = true
             }
             .build()
     }
@@ -74,6 +78,8 @@ open class ThirdTableFragment: TableFragment() {
         }
         options
     }
+
+    private var disable = false
 
     companion object {
         const val QR_SCAN_REQUEST = 0x00002
@@ -100,11 +106,14 @@ open class ThirdTableFragment: TableFragment() {
         }
         sampleNCodeEditText.setEditTextContent(taskItem.sampleNcode)
         sampleNameEditText.setEditTextContent(taskItem.sampleName)
+        categorySpinnerGroup.setDefaultValues(taskItem)
         sampleBrandEditText.setEditTextContent(taskItem.sampleBrand)
-        samplePriceEditText.setEditTextContent("${taskItem.samplePrice ?: ""}")
+        samplePriceEditText.setEditTextContent(taskItem.samplePrice?.toString() ?: "0")
         priceUnitSpinner.text = taskItem.priceUnit
         priceUnitSpinner.setOnClickListener {
-            priceUnitDialog.show()
+            if (!disable && samplePriceEditText.getDisable().not()) {
+                priceUnitDialog.show()
+            }
         }
         sampleTypeRadioGroup.setDefaultCheckedRadioButton(taskItem.sampleType)
         sampleAttributeRadioGroup.setDefaultCheckedRadioButton(taskItem.sampleAttribute)
@@ -124,11 +133,15 @@ open class ThirdTableFragment: TableFragment() {
         lableStandardEditText.setEditTextContent(taskItem.lableStandard)
         sampleInspectAmountUnitSpinner.text = taskItem.sampleInspectAmountUnit
         sampleInspectAmountUnitSpinner.setOnClickListener {
-            sampleInspectAmountUnitDialog.show()
+            if (!disable) {
+                sampleInspectAmountUnitDialog.show()
+            }
         }
         samplePreparationUnitSpinner.text = taskItem.samplePreparationUnit
         samplePreparationUnitSpinner.setOnClickListener {
-            samplePreparationUnitDialog.show()
+            if (!disable) {
+                samplePreparationUnitDialog.show()
+            }
         }
         sampleDateView.setDefaultDate(Calendar.getInstance())
         sampleProduceDateView.setDefaultDate(Calendar.getInstance())
@@ -176,11 +189,23 @@ open class ThirdTableFragment: TableFragment() {
 
         resourceSpinnerGroupView.fetchData("${ApiClient.getHost()}app/areas/origin")
         resourceSpinnerGroupView.setOptionItem(OptionItem(1, taskItem.sampleSourceArea ?: "中国"))
+
+        freeSupportCheckbox.isChecked = samplePriceEditText.getContent()?.equals("0") ?: false
+        freeSupportCheckbox.setOnCheckedChangeListener { _, checked ->
+            if (checked) {
+                samplePriceEditText.setEditTextContent("0")
+                samplePriceEditText.setDisable(false)
+            } else {
+                samplePriceEditText.setEditTextContent(taskItem?.samplePrice?.toString() ?: "0")
+                samplePriceEditText.setDisable(true)
+            }
+        }
     }
 
     override fun assembleSubmitTaskData() {
         taskItem.producerBarcode = producerBarcodeEditText.getContent()
         taskItem.sampleName = sampleNameEditText.getContent()
+        taskItem.mergeSelectedValuesToTaskItem(categorySpinnerGroup.selectedLevelCategory)
         taskItem.sampleBrand = sampleBrandEditText.getContent()
         taskItem.samplePrice = samplePriceEditText.getContent()?.toDoubleOrNull()
         taskItem.priceUnit = priceUnitSpinner.text.toString()

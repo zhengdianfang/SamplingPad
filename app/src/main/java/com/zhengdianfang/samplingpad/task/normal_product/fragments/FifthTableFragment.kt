@@ -174,6 +174,11 @@ open class FifthTableFragment: TableFragment() {
         renderPdfFrame()
     }
 
+    override fun onFragmentResult(requestCode: Int, resultCode: Int, data: Bundle?) {
+        super.onFragmentResult(requestCode, resultCode, data)
+        fetchAttachment()
+    }
+
     override fun bindViewModel() {
         tableFragmentViewModel.attachmentIdsLiveData.observe(this, Observer { attachments ->
             if (null != attachments) {

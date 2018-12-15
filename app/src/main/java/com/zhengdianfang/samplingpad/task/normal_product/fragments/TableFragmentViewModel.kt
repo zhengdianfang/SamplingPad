@@ -122,7 +122,6 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
     }
 
     fun getGoodsByBarcode(code: String) {
-        isLoadingLiveData.postValue(true)
         doAsync {
             try {
                 val response = ApiClient.getRetrofit().create(TaskApi::class.java)
@@ -136,14 +135,11 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-            }  finally {
-                isLoadingLiveData.postValue(false)
             }
         }
     }
 
     fun fetchEnterpriseByLincenseCode(licenseNumber: String) {
-        isLoadingLiveData.postValue(true)
         doAsync {
             try {
                 val response = ApiClient.getRetrofit().create(TaskApi::class.java)
@@ -157,15 +153,12 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-            } finally {
-                isLoadingLiveData.postValue(false)
             }
 
         }
     }
 
     fun fetchEntrustByCsNo(code: String) {
-        isLoadingLiveData.postValue(true)
         doAsync {
             try {
                 val response = ApiClient.getRetrofit().create(TaskApi::class.java)
@@ -179,8 +172,6 @@ class TableFragmentViewModel(application: Application) : AndroidViewModel(applic
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-            } finally {
-                isLoadingLiveData.postValue(false)
             }
         }
     }
