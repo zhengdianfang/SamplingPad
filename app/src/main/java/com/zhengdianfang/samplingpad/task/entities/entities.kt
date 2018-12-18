@@ -29,6 +29,12 @@ enum class Task_Type(val value: Int) {
     NETWORK_TASK(3)
 }
 
+enum class Purpose_Type(val value: Int) {
+    SUPERVISION(1),
+    RISK(2),
+    EVALUATE(3)
+}
+
 data class Goods(
     val id: String,
     val name: String,
@@ -216,7 +222,8 @@ data class TaskItem(
     var inspectionPackageNumber: String?,
     var samplePackingNumber: String?,
     var enforcePeople: String?,
-    var sampleNcode: String?
+    var sampleNcode: String?,
+    var inspectionPurposeId: Int?
 ) : Parcelable {
     companion object {
 

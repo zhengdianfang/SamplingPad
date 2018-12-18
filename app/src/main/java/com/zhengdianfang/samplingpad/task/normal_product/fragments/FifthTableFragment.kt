@@ -29,6 +29,7 @@ import com.zhengdianfang.samplingpad.common.pdf.PdfPreviewActivity
 import com.zhengdianfang.samplingpad.http.ApiClient
 import com.zhengdianfang.samplingpad.task.api.TaskApi
 import com.zhengdianfang.samplingpad.task.entities.AttachmentItem
+import com.zhengdianfang.samplingpad.task.entities.Purpose_Type
 import com.zhengdianfang.samplingpad.task.entities.TaskItem
 import com.zhengdianfang.samplingpad.task.entities.UploadItem
 import kotlinx.android.synthetic.main.fragment_fifth_normal_table_layout.*
@@ -135,7 +136,7 @@ open class FifthTableFragment: TableFragment() {
         }
 
         submitButton.setOnClickListener {
-            if (imageAttachments.size < MIN_UPLOAD_PHOTO_COUNT) {
+            if (imageAttachments.size < MIN_UPLOAD_PHOTO_COUNT && taskItem.inspectionPurposeId != Purpose_Type.EVALUATE.value) {
                 Toast.makeText(context, "最少上传7张图片", Toast.LENGTH_SHORT).show()
             } else {
                 tableFragmentViewModel.submitSample(taskItem)
