@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:apps="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:orientation="vertical">
 
-    <LinearLayout
+    <include layout="@layout/toolbar_layout" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refreshFrame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/colorLightGray">
+        android:layout_height="match_parent">
 
-        <com.zhengdianfang.samplingpad.common.components.TaskSearchBar
-            android:id="@+id/searchBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/taskRecyclerView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorLightGray"
-            tools:listitem="@layout/task_item_layout"
-            apps:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+            android:orientation="vertical">
 
-        <include layout="@layout/empty_view_layout" />
-    </LinearLayout>
-</android.support.v4.widget.SwipeRefreshLayout>
+            <com.zhengdianfang.samplingpad.common.components.TaskSearchBar
+                android:id="@+id/searchBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/taskRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorLightGray"
+                apps:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                tools:listitem="@layout/task_item_layout" />
+
+            <include layout="@layout/empty_view_layout" />
+        </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>
 

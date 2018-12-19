@@ -78,4 +78,10 @@ interface TaskApi {
 
     @GET("appShowSamplePdf/{sampleReportAttachmentId}")
     fun fetchPdfById(@Path("sampleReportAttachmentId") sampleReportAttachmentId: Int): Call<Response<Map<String, String>>>
+
+    @POST("app/forgoSample/{code}")
+    fun giveUpTask(@Path("code") code: String): Call<Response<Map<String, String>>>
+
+    @POST("app/sampleseize/{code}")
+    fun fetchSampleSeize(@Path("code") code: String): Call<Response<Map<String, String>>>
 }

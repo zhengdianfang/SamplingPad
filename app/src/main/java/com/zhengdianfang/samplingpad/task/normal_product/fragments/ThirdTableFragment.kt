@@ -221,7 +221,7 @@ open class ThirdTableFragment: TableFragment() {
         taskItem.sampleQualityLevel = sampleQualityLevelEditText.getContent()
         taskItem.setSampleMode(sampleModeRadioGroup.getCheckedOption())
         taskItem.setSampleForm(sampleFormRadioGroup.getCheckedOption())
-        taskItem.sampleAmount = sampleAmountEditText.getContent()?.toDoubleOrNull()
+        taskItem.sampleAmount = sampleAmountEditText.getContent()
         taskItem.sampleAmountForTest = sampleAmountForTestEditText.getContent()?.toDoubleOrNull()
         taskItem.sampleAmountForRetest = sampleAmountForRetestEditText.getContent()?.toDoubleOrNull()
         taskItem.setSampleStorageEnvironment(sampleStorageEnvironmentRadioGroup.getCheckedOption())

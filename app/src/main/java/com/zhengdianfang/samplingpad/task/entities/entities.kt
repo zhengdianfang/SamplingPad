@@ -2,6 +2,7 @@ package com.zhengdianfang.samplingpad.task.entities
 
 import android.os.Parcelable
 import com.chad.library.adapter.base.entity.MultiItemEntity
+import com.zhengdianfang.samplingpad.App
 import com.zhengdianfang.samplingpad.common.entities.Category
 import com.zhengdianfang.samplingpad.common.entities.OptionItem
 import com.zhengdianfang.samplingpad.common.entities.Region
@@ -162,7 +163,7 @@ data class TaskItem(
     var sampleQualityLevel: String?,
     var sampleMode: String?,
     var sampleForm: String?,
-    var sampleAmount: Double?,
+    var sampleAmount: String?,
     var sampleAmountForTest: Double?,
     var sampleAmountForRetest: Double?,
     var sampleStorageEnvironment: String?,
@@ -368,6 +369,8 @@ data class TaskItem(
         level3Id = selectedLevelCategory[2]?.id
         level4Id = selectedLevelCategory[3]?.id
     }
+
+    fun isMyTask() = workerOneId == App.INSTANCE.user?.id
 }
 data class TaskException(
     val id: Int?,

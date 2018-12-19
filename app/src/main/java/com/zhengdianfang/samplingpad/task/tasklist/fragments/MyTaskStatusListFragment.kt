@@ -13,6 +13,7 @@ import android.widget.TextView
 import com.zhengdianfang.samplingpad.R
 import com.zhengdianfang.samplingpad.common.BaseFragment
 import com.zhengdianfang.samplingpad.common.tintDrawable
+import com.zhengdianfang.samplingpad.main.fragments.TaskListFragment
 import com.zhengdianfang.samplingpad.task.entities.Task_Status
 import kotlinx.android.synthetic.main.fragment_my_task_status_list.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
@@ -100,7 +101,7 @@ class MyTaskStatusListFragment : BaseFragment() {
                 if (task_Status.equals(Task_Status.CAN_NOT_VERIFY)) {
                    start(TaskListWithExceptionFragment.newInstance())
                 } else {
-                    start(TaskListWithStatusFragment.newInstance(statusNames[index], task_Status))
+                    start(TaskListFragment.newInstance(statusNames[index], task_Status))
                 }
             }
         }
