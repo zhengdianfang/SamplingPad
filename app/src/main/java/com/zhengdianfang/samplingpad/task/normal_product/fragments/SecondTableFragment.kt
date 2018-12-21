@@ -150,6 +150,7 @@ open class SecondTableFragment: TableFragment() {
     override fun bindViewModel() {
         super.bindViewModel()
         tableFragmentViewModel.enterpriseLiveData.observe(this, Observer { enterprise ->
+            this.assembleSubmitTaskData()
             this.taskItem.mergeEnterprise(enterprise!!)
             this.setupViews()
         })

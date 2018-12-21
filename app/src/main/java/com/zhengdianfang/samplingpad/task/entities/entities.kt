@@ -1,6 +1,7 @@
 package com.zhengdianfang.samplingpad.task.entities
 
 import android.os.Parcelable
+import android.text.TextUtils
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.zhengdianfang.samplingpad.App
 import com.zhengdianfang.samplingpad.common.entities.Category
@@ -236,42 +237,115 @@ data class TaskItem(
     }
 
     fun mergeGoods(goods: Goods) {
-        sampleName = goods.name
-        samplePackageType = goods.packageType
-        sampleBrand = goods.brand
-        sampleSpecification = goods.specification
-        producerBarcode = goods.barCode
-        chainBrand = goods.brand
-        level1Id = goods.level1Id
-        level2Id = goods.level2Id
-        level3Id = goods.level3Id
-        level4Id = goods.level4Id
-        level1Name = goods.level1Name
-        level2Name = goods.level2Name
-        level3Name = goods.level3Name
-        level4Name = goods.level4Name
+        if (!TextUtils.isEmpty(goods.name)) {
+            sampleName = goods.name
+        }
+        if (!TextUtils.isEmpty(goods.packageType)) {
+            samplePackageType = goods.packageType
+        }
+        if (!TextUtils.isEmpty(goods.brand)) {
+            sampleBrand = goods.brand
+        }
+        if (!TextUtils.isEmpty(goods.specification)) {
+            sampleSpecification = goods.specification
+        }
+        if (!TextUtils.isEmpty(goods.barCode)) {
+            producerBarcode = goods.barCode
+        }
+        if (!TextUtils.isEmpty(goods.brand)) {
+            chainBrand = goods.brand
+        }
+        if (goods.level1Id != null) {
+            level1Id = goods.level1Id
+        }
+        if (goods.level2Id  != null) {
+            level2Id = goods.level2Id
+        }
+        if (goods.level3Id  != null) {
+            level3Id = goods.level3Id
+        }
+        if (goods.level4Id  != null) {
+            level4Id = goods.level4Id
+        }
+        if (!TextUtils.isEmpty(level1Name)) {
+            level1Name = goods.level1Name
+        }
+        if (!TextUtils.isEmpty(level2Name)) {
+            level2Name = goods.level2Name
+        }
+        if (!TextUtils.isEmpty(level3Name)) {
+            level3Name = goods.level3Name
+        }
+        if (!TextUtils.isEmpty(level4Name)) {
+            level4Name = goods.level4Name
+        }
     }
 
     fun mergeEnterprise(enterprise: Enterprise) {
-        enterpriseName = enterprise.name
-        enterpriseLicenseNumber = enterprise.licenseNumber
-        enterpriseAreaName = enterprise.areaName
-        enterpriseAreaType = enterprise.areaType
-        enterpriseLinkName = enterprise.linkName
-        enterprisePlaceName = enterprise.placeName
-        enterpriseQsNo = enterprise.qsNo
-        enterpriseAddress = enterprise.address
-        enterpriseAnnualSales = enterprise.annualSales
-        enterpriseLegalRep = enterprise.legalRep
-        enterpriseContacts = enterprise.contacts
-        enterprisePhone = enterprise.phone
-        enterpriseFax = enterprise.fax
-        enterpriseChain = enterprise.chainFlag
-        enterpriseMOrP = enterprise.mOrP
-        enterpriseUrl = enterprise.url
-        enterpriseAddressSources = enterprise.addressSources
-        enterpriseZipCode = enterprise.zipCode
-        chainBrand = enterprise.chainBrand
+        if (!TextUtils.isEmpty(enterprise.name)) {
+            enterpriseName = enterprise.name
+        }
+        if (!TextUtils.isEmpty(enterprise.licenseNumber)) {
+            enterpriseLicenseNumber = enterprise.licenseNumber
+        }
+        if (!TextUtils.isEmpty(enterprise.areaName)) {
+            enterpriseAreaName = enterprise.areaName
+        }
+
+        if (!TextUtils.isEmpty(enterprise.areaType)) {
+            enterpriseAreaType = enterprise.areaType
+        }
+
+        if (!TextUtils.isEmpty(enterprise.linkName)) {
+            enterpriseLinkName = enterprise.linkName
+        }
+
+        if (!TextUtils.isEmpty(enterprise.placeName)) {
+            enterprisePlaceName = enterprise.placeName
+        }
+
+        if (!TextUtils.isEmpty(enterprise.qsNo)) {
+            enterpriseQsNo = enterprise.qsNo
+        }
+
+        if (!TextUtils.isEmpty(enterprise.address)) {
+            enterpriseAddress = enterprise.address
+        }
+
+        if (!TextUtils.isEmpty(enterprise.annualSales)) {
+            enterpriseAnnualSales = enterprise.annualSales
+        }
+
+        if (!TextUtils.isEmpty(enterprise.legalRep)) {
+            enterpriseLegalRep = enterprise.legalRep
+        }
+        if (!TextUtils.isEmpty(enterprise.contacts)) {
+            enterpriseContacts = enterprise.contacts
+        }
+        if (!TextUtils.isEmpty(enterprise.phone)) {
+            enterprisePhone = enterprise.phone
+        }
+        if (!TextUtils.isEmpty(enterprise.fax)) {
+            enterpriseFax = enterprise.fax
+        }
+        if (enterprise.chainFlag != null) {
+            enterpriseChain = enterprise.chainFlag
+        }
+        if (enterprise.mOrP != null) {
+            enterpriseMOrP = enterprise.mOrP
+        }
+        if (!TextUtils.isEmpty(enterprise.url)) {
+            enterpriseUrl = enterprise.url
+        }
+        if (enterprise.addressSources != null){
+            enterpriseAddressSources = enterprise.addressSources
+        }
+        if (!TextUtils.isEmpty(enterprise.zipCode)) {
+            enterpriseZipCode = enterprise.zipCode
+        }
+        if (!TextUtils.isEmpty(enterprise.chainBrand)) {
+            chainBrand = enterprise.chainBrand
+        }
     }
 
     fun setInspectionKindOption(optionItem: OptionItem?) {
